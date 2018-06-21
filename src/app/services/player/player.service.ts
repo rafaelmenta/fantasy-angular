@@ -16,6 +16,7 @@ export interface Player {
   player_slug: string;
   default_primary?: string;
   default_secondary?: string;
+  birthdate: string;
   team_info: {
     primary_position: string;
     secondary_position: string;

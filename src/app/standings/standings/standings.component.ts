@@ -3,9 +3,9 @@ import { MatTabChangeEvent } from '@angular/material';
 import { Team, TeamService } from '../../services/team.service';
 import { UserService } from '../../services/user.service';
 import { LeagueService } from '../../services/league/league.service';
-import { League, Conference } from 'typings';
 import { flatTeams } from '../../../lib/utils';
 import { Title } from '@angular/platform-browser';
+import { League, Conference } from '../../../typings';
 
 @Component({
   selector: 'app-standings',

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { TeamInfo } from 'typings';
+import { TeamInfo } from '../../../typings';
 
 @Component({
   selector: 'app-team-ranking',

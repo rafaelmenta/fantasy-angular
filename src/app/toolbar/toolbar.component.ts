@@ -8,6 +8,7 @@ import { MatSidenav } from '@angular/material';
   styleUrls: ['./toolbar.component.css']
 })
 export class ToolbarComponent implements OnInit {
+  @ViewChild('searchOpen') searchOpen: boolean;
   @Input('sidenav') sidenav: MatSidenav;
 
   user: User;

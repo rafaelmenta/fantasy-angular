@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { League } from 'typings';
+import { League } from '../../typings';
 
 export const UPDATE_LEAGUE = 'UPDATE_LEAGUE';
 

@@ -12,9 +12,15 @@ import { MatSidenav } from '@angular/material';
 })
 
 export class AppComponent implements OnInit {
+  @ViewChild('sidenav') sidenav;
+
   title = 'app';
   isPopState = false;
   progressRef: NgProgressRef;
+
+  close() {
+    this.sidenav.close();
+  }
 
   constructor(
     private router: Router,

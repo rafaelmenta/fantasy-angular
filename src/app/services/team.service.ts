@@ -1,5 +1,4 @@
 import { Injectable, Inject } from '@angular/core';
-import { Division } from 'typings';
 import { APP_CONFIG, AppConfig } from '../app.config';
 import { HttpClient } from '@angular/common/http';
 import { Player } from './player/player.service';
@@ -12,6 +11,7 @@ import { Observable } from 'rxjs';
 import { map, take, tap, share } from 'rxjs/operators';
 import { RemoveFreeAgent, REMOVE_FREE_AGENT, AddFreeAgent, ADD_FREE_AGENT } from '../store/free-agents.reducer';
 import { Pick } from './pick/pick.service';
+import { Division } from '../../typings';
 
 export interface Team {
   id_sl: number;

@@ -2,7 +2,6 @@ import { Injectable, Inject } from '@angular/core';
 import { APP_CONFIG, AppConfig } from '../../app.config';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { League, Conference, FreeAgencyHistory } from 'typings';
 import { Team } from '../team.service';
 import { Store, select } from '@ngrx/store';
 import { tap, map, share } from 'rxjs/operators';
@@ -12,6 +11,7 @@ import { UPDATE_FREE_AGENTS, REMOVE_FREE_AGENT, RemoveFreeAgent } from '../../st
 import { ADD_TEAM_PLAYER, AddTeamPlayer } from '../../store/user-team.reducer';
 import { UPDATE_FREE_AGENCY_HISTORY } from '../../store/free-agents-history.reducer';
 import { Angulartics2 } from 'angulartics2';
+import { League, FreeAgencyHistory } from '../../../typings';
 
 interface LeagueState {
   league: League;

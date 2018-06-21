@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Player } from '../services/player/player.service';
 import { Team } from '../services/team.service';
-import { League } from 'typings';
 import { UpdateTeam, UPDATE_TEAM } from '../store/user-team.reducer';
 import { UpdateFreeAgents, UPDATE_FREE_AGENTS } from '../store/free-agents.reducer';
 import { UpdateLeague, UPDATE_LEAGUE } from '../store/league.reducer';
 import { Angulartics2 } from 'angulartics2';
+import { League } from '../../typings';
 
 interface LogoutState {
   freeAgents: Player[];

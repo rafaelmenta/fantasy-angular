@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { FreeAgencyHistory } from 'typings';
+import { FreeAgencyHistory } from '../../typings';
 
 export const UPDATE_FREE_AGENCY_HISTORY = 'UPDATE_FREE_AGENCY_HISTORY';
 export const ADD_FREE_AGENCY_HISTORY = 'ADD_FREE_AGENCY_HISTORY';
