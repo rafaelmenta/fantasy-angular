@@ -4,6 +4,13 @@
   margin-top: 64px;
 }
 
+.loading-image {
+  background-image: url(../../assets/img/misc/player.gif);
+  display: block;
+  width: 28px;
+  height: 51px;
+}
+
 .loading-image,
 .loading-caption {
   flex: 1;
