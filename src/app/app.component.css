@@ -5,6 +5,10 @@ app-footer {
   height: 80px;
 }
 
+mat-sidenav-content {
+  padding-top: 64px;
+}
+
 .progress-bar {
     position: fixed;
     top: 0;
