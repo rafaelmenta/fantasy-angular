@@ -1,0 +1,37 @@
+.player-stat {
+    font-size: 64px;
+}
+
+.divider {
+    color: #E8EAF6;
+}
+
+.player__stat-suffix {
+    color: #999;
+}
+
+.info-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.info-row * {
+    flex: 1;
+}
+
+.info-row app-player-stats {
+    max-width: 344px;
+}
+
+.info-row app-player-next-games {
+    min-width: 408px;
+    flex-grow: 3;
+    margin-right: 32px;
+}
+
+.info-row app-player-chart {
+    margin-top: 32px;
+    flex: 1;
+    height: 320px;
+    margin-bottom: 64px;
+}

@@ -1,0 +1,29 @@
+<h3 class="mat-title">hist&oacute;rico</h3>
+<div *ngIf = "faHistory$ | async as history; else loading">
+  <div *ngFor="let item of history">
+    <mat-card class="history-event">
+      <mat-card-header>
+        <img mat-card-avatar src="http://www.draftbrasil.org/superliga/htdocs/img/team/pico/{{item.team_sl.id_sl}}.png">
+        <img mat-card-avatar src="http://www.draftbrasil.net/superliga/htdocs/img/player/profile/{{item.player.id_player}}.jpg" class="player-photo">
+        <mat-card-title>
+          <a class="link" [routerLink]="['team', item.team_sl.slug]">
+            {{item.team_sl.city}} {{item.team_sl.nickname}}
+          </a>
+        </mat-card-title>
+        <mat-card-subtitle>{{item.event_date | date:'short'}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <span class="mat-body-2 {{item.action}}">
+          {{item.action === 'PICK' ? 'adiciona' : 'dispensa' }}
+        </span>
+        <a class="link" [routerLink]="['player', item.player.player-slug]">
+          {{item.player.first_name}} {{item.player.first_name}}
+        </a> ({{item.player.default_primary}}/{{item.player.default_secondary}})
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

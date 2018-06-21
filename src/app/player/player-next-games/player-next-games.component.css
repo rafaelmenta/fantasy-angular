@@ -1,0 +1,18 @@
+.name-expand {
+  flex-grow: 3;
+}
+
+.mat-title {
+  color: #999;
+}
+
+.mat-caption {
+  color: #999;
+  margin-top: 16px;
+  text-align: right;
+}
+
+.divider::after {
+  margin: 8px;
+  content: '×';
+}

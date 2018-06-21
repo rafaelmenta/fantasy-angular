@@ -1,0 +1,30 @@
+<mat-card>
+  <form [formGroup]="filters">
+    <section>
+      <h3 class="mat-title">posição</h3>
+      <mat-checkbox formNameArray="positions" value="PG" (change)="onPositionChange($event)">PG</mat-checkbox>
+      <mat-checkbox formNameArray="positions" value="SG" (change)="onPositionChange($event)">SG</mat-checkbox>
+      <mat-checkbox formNameArray="positions" value="SF" (change)="onPositionChange($event)">SF</mat-checkbox>
+      <mat-checkbox formNameArray="positions" value="PF" (change)="onPositionChange($event)">PF</mat-checkbox>
+      <mat-checkbox formNameArray="positions" value="C" (change)="onPositionChange($event)">C</mat-checkbox>
+    </section>
+
+    <section>
+      <h3 class="mat-title">time nba</h3>
+      <mat-form-field>
+        <mat-select placeholder="Selecione" formControlName="team">
+          <mat-option>Nenhum</mat-option>
+          <mat-option *ngFor="let team of teams"  [value]="team.id_nba">
+            {{team.city}} {{team.nickname}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </section>
+
+    <section>
+      <h3 class="mat-title">mais</h3>
+      <mat-checkbox formControlName="rookies">Rookies</mat-checkbox>
+      <mat-checkbox formControlName="freeAgents">Free agents</mat-checkbox>
+    </section>
+  </form>
+</mat-card>

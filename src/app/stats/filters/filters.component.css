@@ -1,0 +1,9 @@
+form {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+mat-checkbox {
+  margin-right: 8px;
+}

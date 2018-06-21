@@ -1,0 +1,13 @@
+.columns {
+  display: flex;
+  align-items: center;
+}
+
+.logo-info {
+  margin-left: 32px;
+  flex: 1;
+}
+
+mat-card {
+  margin-top: 16px;
+}

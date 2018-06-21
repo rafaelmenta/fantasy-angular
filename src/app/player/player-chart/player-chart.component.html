@@ -1,0 +1,13 @@
+<h3 class="mat-title">pontua&ccedil;&atilde;o</h3>
+<ngx-charts-line-chart
+  [scheme]="colorScheme"
+  [results]="combinedDatasource"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [legend]="showLegend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  (select)="onSelect($event)">
+</ngx-charts-line-chart>

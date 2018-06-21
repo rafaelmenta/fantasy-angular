@@ -1,0 +1,7 @@
+<div *ngIf="players$ | async as players; else loading;">
+  <app-players-table [players]="players"></app-players-table>
+</div>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

@@ -1,0 +1,177 @@
+<h3 class="mat-title">{{info.city}} {{info.nickname}}</h3>
+
+<mat-table #table [dataSource]="datasource" class="stats-table mat-elevation-z8">
+
+  <ng-container *matHeaderRowDef="displayedColumns">
+    <div class="mat-header-row header-group-row">
+      <div class="mat-header-cell" role="columnheader" class="name-cell"></div>
+      <div class="mat-header-cell header-group" role="columnheader" style="flex: 5">Minutos</div>
+      <div class="mat-header-cell" role="columnheader" style="flex: 3"></div>
+      <div class="mat-header-cell header-group" role="columnheader" style="flex: 2">Rebotes</div>
+      <div class="mat-header-cell" role="columnheader" style="flex: 7"></div>
+      <div class="mat-header-cell header-group" role="columnheader" style="flex: 3">Fps</div>
+    </div>
+    <mat-header-row></mat-header-row>
+  </ng-container>
+
+  <mat-row *matRowDef="let row; columns: displayedColumns; when: isValidGame" class="boxscore-row"></mat-row>
+  <mat-row *matRowDef="let row; columns: dnpColumns; when: !isValidGame"></mat-row>
+  <mat-footer-row *matFooterRowDef="footerColumns"></mat-footer-row>>
+
+  <!-- DNP Column -->
+  <ng-container matColumnDef="dnp">
+    <mat-cell *matCellDef="let stat" class="dnp">DNP</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="total">
+    <mat-footer-cell *matFooterCellDef class="footer-total">Total</mat-footer-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="score">
+    <mat-footer-cell *matFooterCellDef class="footer-score">
+      {{performance.fantasy_points}}
+    </mat-footer-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef class="name-cell">Jogador</mat-header-cell>
+    <mat-cell *matCellDef="let stat" class="name-cell">
+      <a class="link" [routerLink]="['/player', stat.player.player_slug]">
+        {{stat.player.first_name}} {{stat.player.last_name}}
+      </a>
+    </mat-cell>
+    <mat-footer-cell *matFooterCellDef class="name-cell">Minutos restantes</mat-footer-cell>
+  </ng-container>
+
+  <!-- Minutes Column -->
+  <ng-container matColumnDef="minutes-pg">
+    <mat-header-cell *matHeaderCellDef>PG</mat-header-cell>
+    <mat-cell *matCellDef="let stat" class="minutes-cell">{{validMinutes(stat, 'PG')}}</mat-cell>
+    <mat-footer-cell *matFooterCellDef>{{performance.minutes_pg}}</mat-footer-cell>
+  </ng-container>
+
+  <!-- Minutes Column -->
+  <ng-container matColumnDef="minutes-sg">
+    <mat-header-cell *matHeaderCellDef>SG</mat-header-cell>
+    <mat-cell *matCellDef="let stat" class="minutes-cell">{{validMinutes(stat, 'SG')}}</mat-cell>
+    <mat-footer-cell *matFooterCellDef>{{performance.minutes_sg}}</mat-footer-cell>
+  </ng-container>
+
+  <!-- Minutes Column -->
+  <ng-container matColumnDef="minutes-sf">
+    <mat-header-cell *matHeaderCellDef>SF</mat-header-cell>
+    <mat-cell *matCellDef="let stat" class="minutes-cell">{{validMinutes(stat, 'SF')}}</mat-cell>
+    <mat-footer-cell *matFooterCellDef>{{performance.minutes_sf}}</mat-footer-cell>
+  </ng-container>
+
+  <!-- Minutes Column -->
+  <ng-container matColumnDef="minutes-pf">
+    <mat-header-cell *matHeaderCellDef>PF</mat-header-cell>
+    <mat-cell *matCellDef="let stat" class="minutes-cell">{{validMinutes(stat, 'PF')}}</mat-cell>
+    <mat-footer-cell *matFooterCellDef>{{performance.minutes_pf}}</mat-footer-cell>
+  </ng-container>
+
+  <!-- Minutes Column -->
+  <ng-container matColumnDef="minutes-c">
+    <mat-header-cell *matHeaderCellDef>C</mat-header-cell>
+    <mat-cell *matCellDef="let stat" class="minutes-cell">{{validMinutes(stat, 'C')}}</mat-cell>
+    <mat-footer-cell *matFooterCellDef>{{performance.minutes_c}}</mat-footer-cell>
+  </ng-container>
+
+
+  <!-- Minutes Column -->
+  <ng-container matColumnDef="min">
+    <mat-header-cell *matHeaderCellDef>MIN</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.performance.minutes}}</mat-cell>
+  </ng-container>
+
+  <!-- FGA Column -->
+  <ng-container matColumnDef="fga">
+    <mat-header-cell *matHeaderCellDef>FGA</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.performance.field_goal_attempts}}</mat-cell>
+  </ng-container>
+
+  <!-- FTA Column -->
+  <ng-container matColumnDef="fta">
+    <mat-header-cell *matHeaderCellDef>FTA</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.performance.free_throw_attempts}}</mat-cell>
+  </ng-container>
+
+  <!-- ORB Column -->
+  <ng-container matColumnDef="orb">
+    <mat-header-cell *matHeaderCellDef>OFF</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.performance.offensive_rebounds}}</mat-cell>
+  </ng-container>
+
+  <!-- DRB Column -->
+  <ng-container matColumnDef="drb">
+    <mat-header-cell *matHeaderCellDef>DEF</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.performance.defensive_rebounds}}</mat-cell>
+  </ng-container>
+
+  <!-- AST Column -->
+  <ng-container matColumnDef="ast">
+    <mat-header-cell *matHeaderCellDef>AST</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.performance.assists}}</mat-cell>
+  </ng-container>
+
+  <!-- STL Column -->
+  <ng-container matColumnDef="stl">
+    <mat-header-cell *matHeaderCellDef>STL</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.performance.steals}}</mat-cell>
+  </ng-container>
+
+  <!-- BLK Column -->
+  <ng-container matColumnDef="blk">
+    <mat-header-cell *matHeaderCellDef>BLK</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.performance.blocks}}</mat-cell>
+  </ng-container>
+
+  <!-- TO Column -->
+  <ng-container matColumnDef="to">
+    <mat-header-cell *matHeaderCellDef>TO</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.performance.turnovers}}</mat-cell>
+  </ng-container>
+
+  <!-- PF Column -->
+  <ng-container matColumnDef="pf">
+    <mat-header-cell *matHeaderCellDef>PF</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.performance.turnovers}}</mat-cell>
+  </ng-container>
+
+  <!-- WL Column -->
+  <ng-container matColumnDef="wl">
+    <mat-header-cell *matHeaderCellDef>WL</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.performance.win_loss}}</mat-cell>
+  </ng-container>
+
+  <!-- PTS Column -->
+  <ng-container matColumnDef="pts">
+    <mat-header-cell *matHeaderCellDef>PTS</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.performance.points}}</mat-cell>
+  </ng-container>
+
+  <!-- FPM Column -->
+  <ng-container matColumnDef="fpm">
+    <mat-header-cell *matHeaderCellDef class="score-cell">FPM</mat-header-cell>
+    <mat-cell *matCellDef="let stat" class="score-cell">
+      {{(stat.fantasy_points / stat.performance.minutes).toFixed(3)}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- FPS Column -->
+  <ng-container matColumnDef="fps">
+    <mat-header-cell *matHeaderCellDef class="score-cell">Total</mat-header-cell>
+    <mat-cell *matCellDef="let stat" class="score-cell">
+      <p class="mat-body-2">{{stat.fantasy_points.toFixed(2)}}</p>
+    </mat-cell>
+  </ng-container>
+
+  <!-- FPS Column -->
+  <ng-container matColumnDef="fpv">
+    <mat-header-cell *matHeaderCellDef class="score-cell">V&aacute;lidos</mat-header-cell>
+    <mat-cell *matCellDef="let stat" class="score-cell">{{stat.fantasy_points}}</mat-cell>
+  </ng-container>
+
+</mat-table>

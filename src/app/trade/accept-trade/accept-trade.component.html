@@ -1,0 +1,20 @@
+<h1 mat-dialog-title class="mat-headline">Confirmar troca</h1>
+
+<div mat-dialog-content>
+  <p>Voc&ecirc; est&aacute; trocando:</p>
+  <mat-list>
+    <mat-list-item *ngFor="let player of data.trade.sender_players">
+      {{player.first_name}} {{player.last_name}} ({{player.default_primary}}/{{player.default_secondary}})
+    </mat-list-item>
+  </mat-list>
+  <p>por: </p>
+  <mat-list>
+    <mat-list-item *ngFor="let player of data.trade.receiver_players">
+      {{player.first_name}} {{player.last_name}} ({{player.default_primary}}/{{player.default_secondary}})
+    </mat-list-item>
+  </mat-list>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="accent" (click)="onNoClick()">Cancelar</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="true">Confirmar</button>
+</div>

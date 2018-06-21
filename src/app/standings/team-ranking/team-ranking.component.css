@@ -1,0 +1,13 @@
+.mat-column-position {
+    max-width: 32px;
+}
+
+.mat-column-team img {
+    margin-right: 8px;
+}
+.mat-column-win,
+.mat-column-loss,
+.mat-column-fpg {
+    max-width: 128px;
+    text-align: right;
+}

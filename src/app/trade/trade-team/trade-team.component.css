@@ -1,0 +1,16 @@
+.player-name {
+    flex-grow: 3;
+}
+
+.player-photo {
+    margin-right: 8px;
+}
+
+.player-checkbox {
+    max-width: 48px;
+}
+
+.divider {
+    margin-top: 24px;
+    margin-bottom: 24px;
+}

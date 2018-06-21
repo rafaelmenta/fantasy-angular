@@ -1,0 +1,35 @@
+.not-found__content {
+    margin: 32px;
+    display: flex;
+    justify-content: center;
+}
+
+.not-found__card-header {
+    background-image: url('../../assets/img/misc/404.jpg');
+    background-size: cover;
+}
+
+.not-found__card-content * {
+    margin: 24px;
+}
+
+pre {
+    background: rgba(0, 0, 0, 0.03);
+    color: rgba(0, 0, 0, 0.54);
+    padding: 8px 20px;
+    font-size: 1.5rem;
+}
+
+h1  {
+    /* background: rgba(0,0,0, 0.4); */
+    background-image: linear-gradient(rgba(0,0,0,0.4), transparent, rgba(0,0,0,0.4));
+    margin: 0;
+    color: #fff;
+    padding: 96px 40px;
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+}
+
+mat-card {
+    padding: 0;
+    max-width: 800px;
+}

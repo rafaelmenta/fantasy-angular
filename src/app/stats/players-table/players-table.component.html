@@ -1,0 +1,127 @@
+<mat-table #table [dataSource]="datasource" matSort class="stats-table" matSortActive="fantasy_points" matSortDirection="desc">
+
+  <ng-container *matHeaderRowDef="displayedColumns">
+    <div class="mat-header-row header-group-row">
+      <div class="mat-header-cell" role="columnheader" style="flex: 8"></div>
+      <div class="mat-header-cell header-group" role="columnheader" style="flex: 3">Rebotes</div>
+      <div class="mat-header-cell" role="columnheader" style="flex: 7"></div>
+      <div class="mat-header-cell header-group" role="columnheader" style="flex: 2">FPs</div>
+    </div>
+    <mat-header-row></mat-header-row>
+  </ng-container>
+
+  <mat-row *matRowDef="let row; columns: displayedColumns;" class="boxscore-row"></mat-row>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell mat-sort-header *matHeaderCellDef class="name-cell">Jogador</mat-header-cell>
+    <mat-cell *matCellDef="let stat" class="name-cell">
+      <a class="link" [routerLink]="['/player', stat.player.player_slug]">
+        {{stat.player.first_name}} {{stat.player.last_name}} ({{stat.player.default_primary}}/{{stat.player.default_secondary}})
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Minutes Column -->
+  <ng-container matColumnDef="minutes">
+    <mat-header-cell *matHeaderCellDef>MIN</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.minutes?.toFixed(2)}}</mat-cell>
+  </ng-container>
+
+  <!-- Games Column -->
+  <ng-container matColumnDef="games">
+    <mat-header-cell mat-sort-header *matHeaderCellDef>J</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.games}}</mat-cell>
+  </ng-container>
+
+  <!-- FGA Column -->
+  <ng-container matColumnDef="field_goal_attempts">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>FGA</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.field_goal_attempts?.toFixed(2)}}</mat-cell>
+  </ng-container>
+
+  <!-- FTA Column -->
+  <ng-container matColumnDef="free_throw_attempts">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>FTA</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.free_throw_attempts?.toFixed(2)}}</mat-cell>
+  </ng-container>
+
+  <!-- ORB Column -->
+  <ng-container matColumnDef="offensive_rebounds">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>OFF</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.offensive_rebounds?.toFixed(2)}}</mat-cell>
+  </ng-container>
+
+  <!-- DRB Column -->
+  <ng-container matColumnDef="defensive_rebounds">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>DEF</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.defensive_rebounds?.toFixed(2)}}</mat-cell>
+  </ng-container>
+
+  <!-- DRB Column -->
+  <ng-container matColumnDef="total_rebounds">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>TOT</mat-header-cell>
+    <mat-cell *matCellDef="let stat">
+      {{
+        (stat.defensive_rebounds + stat.offensive_rebounds) >= 0 ?
+        (stat.defensive_rebounds + stat.offensive_rebounds).toFixed(2) : ''
+      }}
+    </mat-cell>
+  </ng-container>
+
+  <!-- AST Column -->
+  <ng-container matColumnDef="assists">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>AST</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.assists?.toFixed(2)}}</mat-cell>
+  </ng-container>
+
+  <!-- STL Column -->
+  <ng-container matColumnDef="steals">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>STL</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.steals?.toFixed(2)}}</mat-cell>
+  </ng-container>
+
+  <!-- BLK Column -->
+  <ng-container matColumnDef="blocks">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>BLK</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.blocks?.toFixed(2)}}</mat-cell>
+  </ng-container>
+
+  <!-- TO Column -->
+  <ng-container matColumnDef="turnovers">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>TO</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.turnovers?.toFixed(2)}}</mat-cell>
+  </ng-container>
+
+  <!-- PF Column -->
+  <ng-container matColumnDef="personal_fouls">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>PF</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.personal_fouls?.toFixed(2)}}</mat-cell>
+  </ng-container>
+
+  <!-- PTS Column -->
+  <ng-container matColumnDef="points">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>PTS</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.points?.toFixed(2)}}</mat-cell>
+  </ng-container>
+
+  <!-- FPM Column -->
+  <ng-container matColumnDef="fpm">
+    <mat-header-cell *matHeaderCellDef mat-sort-header class="score-cell">Minuto</mat-header-cell>
+    <mat-cell *matCellDef="let stat" class="score-cell">
+      {{
+        (stat.fantasy_points / stat.minutes) ?
+        (stat.fantasy_points / stat.minutes).toFixed(3) : ''
+      }}
+    </mat-cell>
+  </ng-container>
+
+  <!-- FPG Column -->
+  <ng-container matColumnDef="fantasy_points">
+    <mat-header-cell mat-sort-header *matHeaderCellDef class="score-cell">Jogo</mat-header-cell>
+    <mat-cell *matCellDef="let stat" class="score-cell">
+      <p class="mat-body-2">{{stat.fantasy_points?.toFixed(2)}}</p>
+    </mat-cell>
+  </ng-container>
+
+</mat-table>

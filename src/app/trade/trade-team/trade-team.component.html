@@ -1,0 +1,109 @@
+<h3 *ngIf="team" class="mat-title">{{ team.city}} {{ team.nickname }}</h3>
+<h3 *ngIf="!team" class="mat-title">Selectione uma equipe</h3>
+
+<mat-table *ngIf="team" #table [dataSource]="dataSource" class="clubhouse__roster">
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;" class="boxscore-row"></mat-row>
+
+  <!-- Checkbox Column -->
+  <ng-container matColumnDef="select">
+    <mat-header-cell *matHeaderCellDef class="player-checkbox">
+      <mat-checkbox
+        (change)="$event ? masterToggle() : null"
+        [checked]="selection.hasValue() && isAllSelected()"
+        [indeterminate]="selection.hasValue() && !isAllSelected()">
+      </mat-checkbox>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row" class="player-checkbox">
+      <mat-checkbox
+        (click)="$event.stopPropagation()"
+        (change)="$event ? selection.toggle(row) : null"
+        [checked]="selection.isSelected(row)">
+      </mat-checkbox>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef class="player-name">Nome</mat-header-cell>
+    <mat-cell *matCellDef="let element" class="player-name">
+      <img src="http://www.draftbrasil.net/superliga/htdocs/img/player/profile/{{element.id_player}}.jpg" class="player-avatar player-photo">
+      <a class="link" [routerLink]="['/player', element.player_slug]">{{element.first_name}} {{element.last_name}}</a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- P1 Column -->
+  <ng-container matColumnDef="p1">
+    <mat-header-cell *matHeaderCellDef> P1 </mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.team_info.primary_position}}</mat-cell>
+  </ng-container>
+
+  <!-- P2 Column -->
+  <ng-container matColumnDef="p2">
+    <mat-header-cell *matHeaderCellDef> P2 </mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.team_info.secondary_position}}</mat-cell>
+  </ng-container>
+
+  <!-- FPG Column -->
+  <ng-container matColumnDef="fpg">
+    <mat-header-cell *matHeaderCellDef> FPG </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{element.stats && element.stats.length > 0 ? element.stats[0].fantasy_points.toFixed(3) : 0 }}
+    </mat-cell>
+  </ng-container>
+
+  <!-- FPM Column -->
+  <ng-container matColumnDef="fpm">
+    <mat-header-cell *matHeaderCellDef> FPM </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{element.stats && element.stats.length > 0 ? (element.stats[0].fantasy_points/element.stats[0].minutes).toFixed(3) : 0}}
+    </mat-cell>
+  </ng-container>
+</mat-table>
+
+<mat-divider class="divider"></mat-divider>
+
+<mat-table *ngIf="team" #table [dataSource]="pickSource" class="clubhouse__roster">
+  <mat-header-row *matHeaderRowDef="pickColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: pickColumns;" class="boxscore-row"></mat-row>
+
+  <!-- Checkbox Column -->
+  <ng-container matColumnDef="select">
+    <mat-header-cell *matHeaderCellDef class="player-checkbox">
+      <mat-checkbox (change)="$event ? masterPickToggle() : null" [checked]="pickSelection.hasValue() && isAllSelected()" [indeterminate]="pickSelection.hasValue() && !isAllSelected()">
+      </mat-checkbox>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row" class="player-checkbox">
+      <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? pickSelection.toggle(row) : null" [checked]="pickSelection.isSelected(row)">
+      </mat-checkbox>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Team logo column -->
+  <ng-container matColumnDef="logo">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let pick">
+      <a class="link" [routerLink]="['/team', pick.original.slug]">
+        <img src="http://www.draftbrasil.org/superliga/htdocs/img/team/pico/{{pick.original.id_sl}}.png" alt="">
+      </a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Year column -->
+  <ng-container matColumnDef="year">
+    <mat-header-cell *matHeaderCellDef>Ano</mat-header-cell>
+    <mat-cell *matCellDef="let pick">{{pick.draft.year_draft}}</mat-cell>
+  </ng-container>
+
+  <!-- Round column -->
+  <ng-container matColumnDef="round">
+    <mat-header-cell *matHeaderCellDef>Rodada </mat-header-cell>
+    <mat-cell *matCellDef="let pick">{{pick.round}}</mat-cell>
+  </ng-container>
+
+  <!-- Team column -->
+  <ng-container matColumnDef="team">
+    <mat-header-cell *matHeaderCellDef>Origem</mat-header-cell>
+    <mat-cell *matCellDef="let pick">{{pick.original.symbol}}</mat-cell>
+  </ng-container>
+</mat-table>

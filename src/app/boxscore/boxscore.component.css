@@ -1,0 +1,36 @@
+.game-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  margin-top: 32px;
+  justify-content: center;
+}
+
+.info-row img {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+.info-row .mat-caption {
+  color: #999999;
+}
+
+.score {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.game-stats {
+  display: flex;
+  flex-direction: column;
+}
+
+app-team-score {
+  margin-top: 32px;
+}

@@ -1,0 +1,31 @@
+.player-name {
+    flex-grow: 4;
+}
+
+.player-photo {
+    margin-right: 8px;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.mat-title {
+  color: #999;
+}
+
+.history-column,
+.fa-column {
+    min-width: 300px;
+}
+
+.fa-column {
+    flex: 2;
+    max-width: 784px;
+}
+.history-column {
+    flex: 1;
+    max-width: 384px;
+}

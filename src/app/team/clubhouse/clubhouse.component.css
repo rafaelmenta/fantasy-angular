@@ -1,0 +1,71 @@
+.header__wrapper {
+    background-image: url('../../../assets/img/misc/generic.jpg');
+    background-position: center;
+    background-size: cover;
+    opacity: 1;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    margin-top: 64px;
+}
+
+.header__content {
+    margin: 24px 0;
+}
+
+.header__content-row {
+    flex: 1;
+    align-content: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.header__info-row {
+    justify-content: flex-end;
+}
+
+.clubhouse__content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.clubhouse__content-left {
+    flex: 1;
+}
+
+.clubhouse__content-right {
+    display: flex;
+    flex-direction: column;
+}
+
+.clubhouse__content > * {
+    margin: 24px;
+    flex: 1;
+}
+
+.clubhouse__content-tile {
+    margin-top: 16px;
+}
+
+.clubhouse__content-tile > h3 {
+    color: #999999;
+}
+
+.clubhouse__roster {
+}
+
+.clubhouse__score-tile {
+    display: flex;
+}
+
+.clubhouse__score-tile > * {
+    margin-right: 12px;
+}
+
+.clubhouse__score-suffix {
+    color: #999999;
+}

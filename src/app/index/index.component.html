@@ -1,0 +1,4 @@
+<!-- Public -->
+<app-home *ngIf="!user"></app-home>
+<!-- Auth -->
+<app-clubhouse *ngIf="user" [id]="team.id_sl"></app-clubhouse>

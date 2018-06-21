@@ -1,0 +1,26 @@
+<mat-toolbar color="accent">Trocas</mat-toolbar>
+<nav mat-tab-nav-bar>
+  <!-- <a mat-tab-link [routerLink]="[{outlets: {sub: ['create']}}]" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">Propor troca</a>
+  <a mat-tab-link [routerLink]="[{outlets: {sub: ['received']}}]" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">Recebidas</a>
+  <a mat-tab-link [routerLink]="[{outlets: {sub: ['sent']}}]" routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive">Enviadas</a> -->
+
+  <a mat-tab-link [routerLink]="['create']" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">Propor troca</a>
+  <a mat-tab-link [routerLink]="['received']" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">
+    <span
+      *ngIf="trades | async as data; else loading"
+      matBadgeHidden="{{ data.team.received_trades.length < 1 }}"
+      matBadge="{{ data.team.received_trades.length }}"
+      matBadgeOverlap="false">Recebidas</span>
+      <ng-template #loading>Recebidas</ng-template>
+  </a>
+  <a mat-tab-link [routerLink]="['sent']" routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive">
+    <span
+      *ngIf="trades | async as data; else loading2"
+      matBadgeHidden="{{ data.team.sent_trades.length < 1 }}"
+      matBadge="{{ data.team.sent_trades.length }}"
+      matBadgeOverlap="false">
+      Enviadas</span>
+      <ng-template #loading2>Enviadas</ng-template>
+  </a>
+</nav>
+<router-outlet></router-outlet>

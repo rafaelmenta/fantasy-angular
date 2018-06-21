@@ -1,0 +1,35 @@
+<mat-toolbar color="accent">
+  Classifica&ccedil;&atilde;o
+</mat-toolbar>
+<div class="container" *ngIf="teams; else loading">
+  <div class="standings__filters">
+    <div class="standings__filter-group">
+      <mat-button-toggle-group #group="matButtonToggleGroup" (change)="filterTeams()" aria-label="Tipo de classificação" value="division">
+        <mat-button-toggle selected value="division">Divis&atilde;o</mat-button-toggle>
+        <mat-button-toggle value="conference">Confer&ecirc;ncia</mat-button-toggle>
+        <mat-button-toggle value="league">Liga</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+
+    <div class="standings__filter-group">
+      <mat-button-toggle-group #subgroup="matButtonToggleGroup" (change)="filterTeams()" aria-label="Divisão" value="{{ conferences && conferences[0].divisions[0].name}}">
+        <ng-template ngFor let-conference [ngForOf]="conferences">
+          <mat-button-toggle *ngIf="group.value === 'conference'" value="{{conference.name}}">{{conference.name}}</mat-button-toggle>
+          <ng-template [ngIf]="group.value === 'division'">
+            <mat-button-toggle *ngFor="let division of conference.divisions" value="{{division.name}}">
+              {{division.name}}
+            </mat-button-toggle>
+          </ng-template>
+        </ng-template>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+
+  <div class="standings__content">
+    <app-team-ranking [teams]="teams"></app-team-ranking>
+  </div>
+</div>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

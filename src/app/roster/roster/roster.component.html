@@ -1,0 +1,20 @@
+<mat-toolbar color="accent">
+  Roster
+  <div class="roster__spacer"></div>
+</mat-toolbar>
+<div class="container" *ngIf="players; else loading">
+  <div *ngFor="let player of players; let first = first; let last = last;" class="roster__grid-tile">
+    <app-roster-tile
+    [player]="player"
+    [first]="first"
+    [last]="last"
+    (change)="updatePlayers($event, player)"
+    (swap)="swapPosition($event)"
+    (remove)="openDropDialog($event)"></app-roster-tile>
+  </div>
+  <button mat-fab class="save-button" [disabled]="!dirtyRoster" color="accent" (click)="saveRoster()"><mat-icon>save</mat-icon></button>
+</div>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

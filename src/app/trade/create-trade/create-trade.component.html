@@ -1,0 +1,38 @@
+<div class="container">
+  <mat-card>
+    <div class="teams-wrapper" *ngIf="teams; else loading">
+      <div *ngFor="let team of teams" class="team-card" (click)="selectTeam(team)">
+        <img src="http://www.draftbrasil.net/superliga/htdocs/img/team/logo/{{team.id_sl}}.png">
+        <p class="mat-body-2">{{team.city}} {{team.nickname}}</p>
+        <p class="mat-body-1">{{team.users[0].nickname}}</p>
+      </div>
+    </div>
+  </mat-card>
+
+  <div class="trade-message">
+    <mat-form-field>
+      <textarea matInput [(ngModel)]="proposal.trade_comment" placeholder="Mensagem (opcional)" rows="3"></textarea>
+    </mat-form-field>
+  </div>
+
+  <div class="trade-teams" *ngIf="team">
+    <app-trade-team #sender [team]="team" (change)="updateTeam('sent', $event)"></app-trade-team>
+    <div class="trading-team">
+      <!-- Avoid the loading overlay on empty object. -->
+      <app-trade-team
+        #receiver
+        *ngIf="!tradingTeam || (tradingTeam$ | async); else loading"
+        [team]="tradingTeam"
+        (change)="updateTeam('received', $event)"></app-trade-team>
+    </div>
+  </div>
+
+  <div class="trade-actions">
+    <button mat-fab color="primary" [disabled]="!validTrade" (click)="sendTrade()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+</div>
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

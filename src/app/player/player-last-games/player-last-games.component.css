@@ -1,0 +1,43 @@
+.mat-title {
+  color: #999;
+}
+
+.mat-header-row {
+  min-height: 40px;
+  box-sizing: border-box;
+  align-items: stretch;
+  border: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.mat-header-cell, .mat-cell {
+  padding: 0 10px;
+  justify-content: center;
+}
+
+.mat-header-cell {
+  flex: 1;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.header-group-row {
+  border: none;
+  align-items: stretch;
+}
+.header-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+mat-row {
+  min-height: 32px;
+}
+
+mat-row:nth-child(odd) {
+  background: #f9f9f9;
+}

@@ -1,0 +1,12 @@
+.toolbar__search-field {
+    width: 100%;
+}
+
+.typeahead-option {
+    display: flex;
+    align-items: center;
+}
+
+.typeahead-option :first-child {
+    margin-right: 16px;
+}
