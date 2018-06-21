@@ -15,7 +15,6 @@ export class AppComponent implements OnInit {
   title = 'app';
   isPopState = false;
   progressRef: NgProgressRef;
-  @ViewChild('sidenav') sidenav: MatSidenav;
 
   constructor(
     private router: Router,
