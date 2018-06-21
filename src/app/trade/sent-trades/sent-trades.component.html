@@ -34,7 +34,7 @@
             <img matListAvatar src="http://www.draftbrasil.net/superliga/htdocs/img/player/profile/{{player.id_player}}.jpg">
             <h3 matLine>{{ player.first_name }} {{ player.last_name }}</h3>
             <p matLine>
-              <span>{{ player.default_primary }}/{{ player.default_primary }} </span>
+              <span>{{ player.default_primary }}/{{ player.default_secondary }} </span>
             </p>
           </a>
           <a mat-list-item *ngFor="let pick of trade.sender_picks" routerLink="/team/{{pick.original.slug}}">

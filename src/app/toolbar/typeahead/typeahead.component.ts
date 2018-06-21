@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map, debounce, debounceTime, tap, switchMap } from 'rxjs/operators';
-import { UserService } from '../../services/user.service';
+import { UserService, User } from '../../services/user.service';
 import { TeamService, Team } from '../../services/team.service';
 import { LeagueService } from '../../services/league/league.service';
 import { Player } from '../../services/player/player.service';
@@ -57,17 +57,25 @@ export class TypeaheadComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.autocompleteOptions$ = this.stateForm.get('stateGroup').valueChanges
-      .pipe(
-        startWith(''),
-        debounceTime(150),
-        switchMap(query => query ? this.leagueService.getSearch(1, query) : []),
-        map(res => {
-          return [
-            {letter: 'Jogadores', names: res.search_players, type: 'player'},
-            {letter: 'Equipes', names: res.search_teams, type: 'team'},
-          ];
-        })
-      );
+    let user: User;
+    this.userService.user.subscribe(u => user = u);
+
+    if (user) {
+      const defaultTeam = this.teamService.getDefaultTeam(user.teams);
+      const id = defaultTeam.team.division.conference.league.id_league;
+      this.autocompleteOptions$ = this.stateForm.get('stateGroup').valueChanges
+        .pipe(
+          startWith(''),
+          debounceTime(150),
+          switchMap(query => query ? this.leagueService.getSearch(id, query) : []),
+          map(res => {
+            return [
+              {letter: 'Jogadores', names: res.search_players, type: 'player'},
+              {letter: 'Equipes', names: res.search_teams, type: 'team'},
+            ];
+          })
+        );
+    }
+
   }
 }
