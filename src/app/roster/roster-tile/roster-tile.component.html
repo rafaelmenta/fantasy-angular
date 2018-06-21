@@ -1,0 +1,33 @@
+<mat-card class="roster__tile">
+  <mat-card-header>
+    <mat-card-title>
+      {{player.first_name}} {{player.last_name}}
+    </mat-card-title>
+    <mat-card-subtitle>
+      <h4 class="mat-body-1 roster_tile-stat">
+        {{player.team_info.primary_position}}/{{player.team_info.secondary_position}}
+        •
+        {{ (player.stats && player.stats.length > 0 ? player.stats[0].fantasy_points : 0).toFixed(2)}} fpg
+        •
+        {{ (player.stats && player.stats.length > 0 ? player.stats[0].minutes : 0).toFixed(2)}} mpg
+        •
+        {{ (player.stats && player.stats.length > 0 ? player.stats[0].fantasy_points/player.stats[0].minutes : 0).toFixed(2) }}
+        fpm
+      </h4>
+    </mat-card-subtitle>
+    <img
+      mat-card-avatar
+      src="http://www.draftbrasil.net/superliga/htdocs/img/player/profile/{{player.id_player}}.jpg">
+  </mat-card-header>
+  <mat-card-actions class="roster__tile-actions">
+    <button mat-button color="warn" (click)="dropPlayer()">dispensar</button>
+    <button mat-button color="primary" (click)="swapPosition()">trocar posi&ccedil;&atilde;o</button>
+    <span class="roster__tile-spacer"></span>
+    <button mat-icon-button color="accent" (click)="move('back')" *ngIf="!first">
+      <mat-icon>arrow_upward</mat-icon>
+    </button>
+    <button mat-icon-button color="accent" (click)="move('forward')" *ngIf="!last">
+      <mat-icon>arrow_downward</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

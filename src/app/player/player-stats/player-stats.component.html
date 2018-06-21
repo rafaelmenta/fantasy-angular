@@ -1,0 +1,29 @@
+<mat-table #table [dataSource]="datasource" class="stats-table">
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;" class="boxscore-row"></mat-row>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="points">
+    <mat-header-cell *matHeaderCellDef>Pontos</mat-header-cell>
+    <mat-cell *matCellDef="let stat"><p class="stats-item mat-headline">
+      {{(stat?.points ? stat.points: 0).toFixed(1)}}
+    </p></mat-cell>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="rebounds">
+    <mat-header-cell *matHeaderCellDef>Rebotes</mat-header-cell>
+    <mat-cell *matCellDef="let stat"><p class="stats-item mat-headline">
+      {{(stat?.defensive_rebounds ? stat.defensive_rebounds + stat.offensive_rebounds: 0).toFixed(1)}}
+    </p></mat-cell>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="assists">
+    <mat-header-cell *matHeaderCellDef>Assist&ecirc;ncias</mat-header-cell>
+    <mat-cell *matCellDef="let stat"><p class="stats-item mat-headline">
+      {{(stat?.assists ? stat.assists: 0).toFixed(1)}}
+    </p></mat-cell>
+  </ng-container>
+
+</mat-table>

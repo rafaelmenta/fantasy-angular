@@ -1,0 +1,61 @@
+mat-row {
+  min-height: 32px;
+}
+
+.minutes-cell,
+.mat-title {
+  color: #999;
+}
+
+mat-row:nth-child(odd) {
+  background: #f9f9f9;
+}
+
+.mat-header-row {
+  min-height: 32px;
+  box-sizing: border-box;
+  align-items: stretch;
+  border: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.mat-header-cell, .mat-cell {
+  /* padding: 0 10px; */
+}
+
+.mat-header-cell {
+  flex: 1;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.header-group-row {
+  border: none;
+  align-items: stretch;
+}
+.header-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.header-group:last-child {
+  margin-right: 16px;
+}
+
+.header-group:nth-child(2) {
+  margin-right: 16px;
+}
+
+.name-cell {
+  justify-content: flex-start;
+  padding-left: 24px;
+  flex: 3;
+}
+
+.score-cell {
+  justify-content: flex-end;
+}

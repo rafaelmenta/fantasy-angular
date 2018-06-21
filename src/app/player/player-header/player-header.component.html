@@ -1,0 +1,31 @@
+<header class="header__wrapper" [ngStyle]=" {
+  'background-image' : 'url(http://www.draftbrasil.org/img/player/banner/' + player.id_player + '.jpg), url(../../../assets/img/profile/1000x210/generic-1.jpg)'
+}">
+  <div class="header__content">
+    <div class="header__content-row mat-display-4">
+      <h1>{{player.first_name}} {{player.last_name}}</h1>
+    </div>
+    <div class="header__content-row header__info-row">
+      <p class="mat-title">
+        <span *ngIf="player.team_info; else defaultPosition">
+          {{player.team_info.primary_position}}/{{player.team_info.secondary_position}}
+        </span>
+        <ng-template #defaultPosition>
+          <span>
+            {{player.default_primary}}/{{player.default_secondary}}
+          </span>
+        </ng-template>
+        <span *ngIf="player.team_info">
+          •
+          <a class="link" [routerLink]="['/team', player.team_info.team.slug]">
+            {{player.team_info.team.city}} {{player.team_info.team.nickname}}
+          </a>
+        </span>
+        •
+        <span *ngIf="player.birthdate">{{getAge(player.birthdate)}} anos</span>
+        •
+        <span>{{player.team_nba.city}} {{player.team_nba.nickname}}</span>
+      </p>
+    </div>
+  </div>
+</header>

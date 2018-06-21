@@ -1,0 +1,7 @@
+.player-name {
+    flex-grow: 3;
+}
+
+.player-photo {
+    margin-right: 8px;
+}

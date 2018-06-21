@@ -1,0 +1,17 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.game-event mwl-calendar-event-title a:link {
+  text-decoration: none;
+}
+
+.game-event mwl-calendar-event-title a:hover {
+  text-decoration: none;
+}
+
+mwl-calendar-month-view.lolwtfbbq .cal-open-day-events .game-event mwl-calendar-event-title .cal-event-title {
+  text-decoration: none !important;
+}

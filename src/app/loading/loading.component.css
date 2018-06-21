@@ -1,0 +1,13 @@
+.grid {
+  display: flex;
+  flex-direction: column;
+  margin-top: 64px;
+}
+
+.loading-image,
+.loading-caption {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  margin: 32px auto;
+}

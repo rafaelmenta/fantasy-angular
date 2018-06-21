@@ -1,0 +1,57 @@
+<mat-toolbar color="accent">Free agents</mat-toolbar>
+<div class="container grid" *ngIf="freeAgents$ | async; else loading">
+  <div class="fa-column">
+    <h3 class="mat-title">jogadores dispon&iacute;veis</h3>
+    <mat-table #table [dataSource]="dataSource">
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef class="player-name"> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="player-name">
+          <img src="http://www.draftbrasil.net/superliga/htdocs/img/player/profile/{{element.id_player}}.jpg" class="player-avatar player-photo">
+          <a class="link" [routerLink]="['/player', element.player_slug]">{{element.first_name}} {{element.last_name}}</a>
+        </mat-cell>
+      </ng-container>
+
+      <!-- NBA Column -->
+      <ng-container matColumnDef="nba">
+        <mat-header-cell *matHeaderCellDef>NBA </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <img
+          *ngIf="element.id_nba && element.id_nba !== 31"
+          class="player-avatar"
+          src="http://www.draftbrasil.org/superliga//htdocs/img/team_nba/logo/{{element.id_nba}}.gif">
+        </mat-cell>
+      </ng-container>
+
+      <!-- P1 column -->
+      <ng-container matColumnDef="p1">
+        <mat-header-cell *matHeaderCellDef>P1 </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.default_primary}}</mat-cell>
+      </ng-container>
+
+      <!-- P2 Column -->
+      <ng-container matColumnDef="p2">
+        <mat-header-cell *matHeaderCellDef>P2 </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.default_secondary}}</mat-cell>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef>Ação</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-icon-button color="accent" (click)="addPlayer(element)">
+            <mat-icon aria-label="Example icon-button with a heart icon">person_add</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+    </mat-table>
+  </div>
+  <div class="history-column">
+    <app-free-agency-history></app-free-agency-history>
+  </div>
+</div>
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

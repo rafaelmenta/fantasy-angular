@@ -1,0 +1,59 @@
+<div class="container" *ngIf="trades; else loading">
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let trade of trades">
+      <mat-expansion-panel-header>
+        <mat-panel-title class="trade-header">
+          <img class="team-logo" src="http://www.draftbrasil.net/superliga/htdocs/img/team/pico/{{trade.sender.id_sl}}.png">
+          <p>{{ trade.sender.city }} {{ trade.sender.nickname }}</p>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <h3 class="mat-subheading-2" *ngIf="trade.trade_comment" class="line-braker">
+        <mat-icon>format_quote</mat-icon>
+        <span [innerHTML]="trade.trade_comment"></span>
+      </h3>
+
+      <div>
+        <mat-nav-list>
+          <h3 matSubheader>{{ trade.sender.nickname }}</h3>
+          <a mat-list-item *ngFor="let player of trade.sender_players" routerLink="/player/{{player.player_slug}}">
+            <img matListAvatar src="http://www.draftbrasil.net/superliga/htdocs/img/player/profile/{{player.id_player}}.jpg">
+            <h3 matLine>{{ player.first_name }} {{ player.last_name }}</h3>
+            <p matLine>
+              <span>{{ player.default_primary }}/{{ player.default_secondary }} </span>
+            </p>
+          </a>
+          <a mat-list-item *ngFor="let pick of trade.sender_picks" routerLink="/team/{{pick.original.slug}}">
+            <img matListAvatar src="http://www.draftbrasil.org/superliga/htdocs/img/team/pico/{{pick.original.id_sl}}.png">
+            <h3 matLine>{{ pick.draft.year_draft }}/{{ pick.round }}</h3>
+            <p matLine>
+              <span>({{ pick.original.symbol }})</span>
+            </p>
+          </a>
+          <h3 matSubheader>{{ team.team.nickname }}</h3>
+          <a mat-list-item *ngFor="let player of trade.receiver_players" routerLink="/player/{{player.player_slug}}">
+            <img matListAvatar src="http://www.draftbrasil.net/superliga/htdocs/img/player/profile/{{player.id_player}}.jpg">
+            <h3 matLine>{{ player.first_name }} {{ player.last_name }}</h3>
+            <p matLine>
+              <span>{{ player.default_primary }}/{{ player.default_secondary }} </span>
+            </p>
+          </a>
+          <a mat-list-item *ngFor="let pick of trade.receiver_picks" routerLink="/team/{{pick.original.slug}}">
+            <img matListAvatar src="http://www.draftbrasil.org/superliga/htdocs/img/team/pico/{{pick.original.id_sl}}.png">
+            <h3 matLine>{{ pick.draft.year_draft }}/{{ pick.round }}</h3>
+            <p matLine>
+              <span>({{ pick.original.symbol }})</span>
+            </p>
+          </a>
+        </mat-nav-list>
+      </div>
+      <mat-action-row>
+        <button mat-button color="warn" (click)="revokeTrade(trade)">Recusar</button>
+        <button mat-button color="primary" (click)="openTradeDialog(trade)">Aceitar</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

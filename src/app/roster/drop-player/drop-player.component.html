@@ -1,0 +1,11 @@
+<h1 class="mat-headline">Dispensar jogador</h1>
+<p>
+  Voc&ecirc; est&aacute; removendo 
+  {{data.player.first_name}} {{data.player.last_name}} 
+  ({{data.player.team_info.primary_position}}/{{data.player.team_info.secondary_position}})
+  do seu time.
+</p>
+<div class="actions">
+  <button mat-raised-button color="accent" (click)="onNoClick()">Cancelar</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="true">Dispensar</button>
+</div>

@@ -1,0 +1,16 @@
+<mat-card class="mat-elevation-z8">
+  <form #loginForm="ngForm" class="login-form" (submit)="authUser()">
+    <h2 *ngIf="warn" class="mat-headline" color="warn">&Aacute;rea restrita para usu&aacute;rios</h2>
+    <mat-form-field>
+      <input matInput [(ngModel)]="login" name="login" placeholder="Usuário" required>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input type="password" [(ngModel)]="password" name="password" matInput placeholder="Senha" required>
+    </mat-form-field>
+
+    <mat-error *ngIf="loginFailed" class="login__error">Usuário ou senha inválidos</mat-error>
+    <button mat-raised-button color="primary">Entrar</button>
+  </form>
+  <a *ngIf="register" routerLink="register" class="mat-body-1 link">Criar conta</a>
+</mat-card>

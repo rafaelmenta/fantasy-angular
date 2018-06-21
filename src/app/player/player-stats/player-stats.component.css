@@ -1,0 +1,8 @@
+.stats-table {
+  min-width: 240px;
+  max-width: 640px;
+}
+
+.stats-item {
+  margin-top: 16px;
+}

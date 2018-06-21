@@ -1,0 +1,42 @@
+<mat-nav-list (click)="sidenav.close()" *ngIf="user">
+  <a mat-list-item>
+    <mat-icon mat-list-icon>menu</mat-icon>
+    <!-- <h4 mat-line class="mat-title">Fechar</h4> -->
+  </a>
+  <!-- <mat-divider></mat-divider> -->
+  <a mat-list-item routerLink="">
+    <mat-icon mat-list-icon>home</mat-icon>
+    <h4 class="mat-title" mat-line>Superliga</h4>
+  </a>
+  <mat-divider></mat-divider>
+  <a mat-list-item routerLink="roster">
+    <mat-icon mat-list-icon>people</mat-icon>
+    <h4 class="mat-title" mat-line>Roster</h4>
+  </a>
+  <mat-divider></mat-divider>
+  <a mat-list-item routerLink="schedule">
+    <mat-icon mat-list-icon>calendar_today</mat-icon>
+    <h4 class="mat-title" mat-line>Calend&aacute;rio</h4>
+  </a>
+  <mat-divider></mat-divider>
+  <a mat-list-item routerLink="standings">
+    <mat-icon mat-list-icon>format_list_numbered</mat-icon>
+    <h4 class="mat-title" mat-line>Classifica&ccedil;&atilde;o</h4>
+  </a>
+  <mat-divider></mat-divider>
+  <a mat-list-item routerLink="trade">
+    <mat-icon mat-list-icon>swap_horiz</mat-icon>
+    <h4 class="mat-title" mat-line>Trocas</h4>
+  </a>
+  <mat-divider></mat-divider>
+  <a mat-list-item routerLink="free-agents">
+    <mat-icon mat-list-icon>person_add</mat-icon>
+    <h4 class="mat-title" mat-line>Free agents</h4>
+  </a>
+  <mat-divider></mat-divider>
+  <a mat-list-item routerLink="stats">
+    <mat-icon mat-list-icon>bar_chart</mat-icon>
+    <h4 class="mat-title" mat-line>Stats</h4>
+  </a>
+  <mat-divider></mat-divider>
+</mat-nav-list>

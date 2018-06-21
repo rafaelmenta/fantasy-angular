@@ -1,0 +1,42 @@
+.hero {
+  background-color: #fff;
+  background-image: url('../../../../assets/img/misc/home_bg.jpg');
+  background-repeat: no-repeat;
+  background-position: left -5rem;
+  min-height: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero * {
+  flex: 1;
+  margin: auto 32px;
+}
+
+.title {
+  padding-top: 88px;
+}
+
+.sub-hero {
+  background: #ff4081;
+  display: flex;
+  color: #fff;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.home-card {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.home-card h2,
+.home-card h4 {
+  margin-left: 24px;
+}
+
+.home-card mat-icon,
+.home-card mat-list-item {
+  color: #fff;
+}

@@ -1,0 +1,34 @@
+.toolbar__wrapper {
+    position: fixed;
+    top: 0;
+    z-index: 998;
+    height: unset;
+    min-height: 64px;
+    flex-wrap: wrap;
+}
+
+.toolbar__icon {
+  padding: 0 14px;
+}
+
+.toolbar__spacer {
+  flex: 1 1 auto;
+}
+
+.toolbar__search {
+    margin-left: 12px;
+    flex: 1 1 auto;
+    font-size: 12px;
+}
+
+@media (max-width: 720px) {
+	.hide-mobile {
+		display: none;
+	}
+}
+
+@media (min-width: 721px) {
+	.hide-desktop {
+		display: none;
+	}
+}

@@ -1,0 +1,51 @@
+.teams-wrapper {
+    display: flex;
+    overflow: scroll;
+}
+
+.team-card {
+    margin-right: 16px;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.team-card:hover {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.trade-message {
+    margin-top: 32px;
+}
+
+.trade-message mat-form-field {
+    width: 100%;
+}
+
+.trade-teams {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.trade-teams app-trade-team:first-of-type {
+    /* margin-right: 64px; */
+}
+.trade-teams app-trade-team,
+.trade-teams .trading-team {
+    margin-top: 32px;
+    flex: 1;
+    min-width: 300px;
+    max-width: 568px;
+}
+
+.trade-actions {
+    margin-top: 32px;
+}
+
+.trade-actions button {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 32px;
+    margin-right: 32px;
+}

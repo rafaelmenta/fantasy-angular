@@ -1,0 +1,16 @@
+
+.roster_tile-stat {
+    color: #999;
+}
+
+.roster__tile-actions {
+    display: flex;
+}
+
+.roster__tile-spacer {
+    flex: 1 1 auto;
+}
+
+.roster__tile-number {
+    font-size: 80px;
+}

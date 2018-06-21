@@ -1,0 +1,38 @@
+<div *ngIf="games$ | async as games; else loading" class="container">
+  <ng-template ngFor let-game [ngForOf]="games">
+    <mat-card>
+      <mat-card-content>
+        <div class="columns">
+          <div class="column">
+            <img src="http://www.draftbrasil.net/superliga/htdocs/img/team/small/{{getOpponent(game).id_sl}}.png" alt="">
+          </div>
+          <div class="column logo-info">
+            <p>
+              <span class="mat-headline">
+                <a class="link" [routerLink]="['/team', game.home_team.slug]">
+                  {{game.home_team.city}} {{game.home_team.nickname}}
+                </a>
+              </span>
+              <span class="score mat-headline" *ngIf="game.home_performance else versus">
+                {{game.home_performance.fantasy_points}} × {{game.away_performance.fantasy_points}}
+              </span>
+              <ng-template #versus><span class="mat-headline"> × </span></ng-template>
+              <span class="mat-headline">
+                <a class="link" [routerLink]="['/team', game.away_team.slug]">
+                  {{game.away_team.city}} {{game.away_team.nickname}}
+                </a>
+              </span>
+            </p>
+            <p class="mat-subheading-1">
+              Rodada {{game.round.round_number}} •
+              <a class="link" [routerLink]="['/boxscore', game.id_game]">Ver box</a>
+            </p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </ng-template>
+</div>
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

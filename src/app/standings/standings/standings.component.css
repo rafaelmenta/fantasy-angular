@@ -1,0 +1,15 @@
+.standings__filters {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.standings__filter-group {
+    margin-top: 8px;
+}
+
+.standings__content {
+    margin: 32px auto;
+    max-width: 800px;
+}

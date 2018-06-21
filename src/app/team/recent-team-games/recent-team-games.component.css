@@ -1,0 +1,15 @@
+.games__win {
+    color: #2E7D32;
+}
+
+.games__lose {
+    color: #C62828;
+}
+
+.games__item img {
+    order: 1;
+}
+
+.games__item .line {
+    order: 2;
+}

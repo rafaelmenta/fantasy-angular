@@ -1,0 +1,31 @@
+<div *ngIf="player$ | async as player; else loading" class="player-profile">
+  <app-player-header [player]="player"></app-player-header>
+  <div class="container">
+    <div class="info-row">
+      <p class="player-stat mat-display-4">
+        {{(player.stats[0]?.fantasy_points || 0).toFixed(2)}}<span class="player__stat-suffix">fpg</span>
+        <span class="divider"> • </span>
+        {{((player.stats[0]?.fantasy_points/player.stats[0]?.minutes) || 0)
+          .toFixed(2)}}<span class="player__stat-suffix">fpm</span>
+      </p>
+      <app-player-stats [stats]="player.stats[0]"></app-player-stats>
+    </div>
+    <div class="info-row">
+      <app-player-next-games [games]="nextGames$"></app-player-next-games>
+      <img class="profile-photo" src="http://www.draftbrasil.net/superliga/htdocs/img/player/newProfile/{{player.id_player}}.jpg">
+    </div>
+    <div class="info-row">
+      <app-player-chart
+        [playerName]="player.first_name + ' '  + player.last_name"
+        [roundAverages$]="roundAverages$"
+        [performances$]="performances$"></app-player-chart>
+    </div>
+    <div class="infor-row">
+      <app-player-last-games [performances$]="performances$"></app-player-last-games>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

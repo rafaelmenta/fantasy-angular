@@ -1,0 +1,84 @@
+mat-row {
+  min-height: 32px;
+}
+
+.minutes-cell,
+.mat-title {
+  color: #999;
+}
+
+mat-row:nth-child(odd) {
+  background: #f9f9f9;
+}
+
+.mat-header-row {
+  min-height: 32px;
+  box-sizing: border-box;
+  align-items: stretch;
+  border: none;
+  display: flex;
+  flex-direction: row;
+}
+
+.mat-header-cell, .mat-cell {
+  /* padding: 0 10px; */
+}
+
+.mat-header-cell {
+  flex: 1;
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
+.header-group-row {
+  border: none;
+  align-items: stretch;
+}
+.header-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.header-group:last-child {
+  margin-right: 16px;
+}
+
+.header-group:nth-child(2) {
+  margin-right: 16px;
+}
+
+.name-cell {
+  justify-content: flex-start;
+  padding-left: 24px;
+  flex: 5;
+}
+
+.score-cell {
+  justify-content: flex-end;
+}
+
+mat-footer-row {
+  background: #3f51b5;
+}
+mat-footer-cell {
+  color: #fff;
+}
+
+.footer-score {
+  flex: 3;
+  justify-content: center;
+}
+
+.footer-total {
+  flex: 13;
+  justify-content: flex-end;
+}
+
+.dnp {
+  flex-grow: 19;
+  color: #ff4081;
+  justify-content: center;
+}
