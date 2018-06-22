@@ -3,7 +3,7 @@
 <mat-table #table [dataSource]="datasource" class="stats-table mat-elevation-z8">
 
   <ng-container *matHeaderRowDef="displayedColumns">
-    <div class="mat-header-row header-group-row">
+    <div class="mat-header-row header-group-row" *ngIf="!smallScreen$ | async">
       <div class="mat-header-cell" role="columnheader" style="flex: 4"></div>
       <div class="mat-header-cell header-group" role="columnheader" style="flex: 3">Rebotes</div>
       <div class="mat-header-cell" role="columnheader" style="flex: 7"></div>
@@ -13,7 +13,7 @@
   <!-- <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row> -->
 
   <mat-row *matRowDef="let row; columns: displayedColumns; when: isValidGame" class="boxscore-row"></mat-row>
-  <mat-row *matRowDef="let row; columns: ['rnd', 'dnp']; when: !isValidGame" class="darken"></mat-row>
+  <mat-row *matRowDef="let row; columns: ['rnd', 'dnp']; when: !isValidGame"></mat-row>
 
   <!-- Round Column -->
   <ng-container matColumnDef="dnp">
@@ -88,7 +88,7 @@
 
   <!-- PF Column -->
   <ng-container matColumnDef="pf">
-    <mat-header-cell *matHeaderCellDef>TO</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>PF</mat-header-cell>
     <mat-cell *matCellDef="let stat">{{stat.turnovers}}</mat-cell>
   </ng-container>
 

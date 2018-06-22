@@ -12,7 +12,9 @@
     </div>
     <div class="info-row">
       <app-player-next-games [games]="nextGames$"></app-player-next-games>
-      <img class="profile-photo" src="http://www.draftbrasil.net/superliga/htdocs/img/player/newProfile/{{player.id_player}}.jpg">
+      <div class="profile-photo-wrapper">
+        <img class="profile-photo" src="http://www.draftbrasil.net/superliga/htdocs/img/player/newProfile/{{player.id_player}}.jpg">
+      </div>
     </div>
     <div class="info-row">
       <app-player-chart
