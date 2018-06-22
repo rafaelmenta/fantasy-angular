@@ -55,7 +55,3 @@ mat-row:nth-child(odd) {
   padding-left: 24px;
   flex: 3;
 }
-
-.score-cell {
-  justify-content: flex-end;
-}

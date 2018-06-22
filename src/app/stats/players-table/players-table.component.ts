@@ -6,6 +6,23 @@ import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { compare } from '../../../lib/utils';
 
+const ALL_STATS = [
+  'name', 'games', 'minutes',
+  'field_goal_attempts',
+  'free_throw_attempts',
+  'offensive_rebounds',
+  'defensive_rebounds',
+  'total_rebounds',
+  'assists',
+  'steals',
+  'blocks',
+  'turnovers',
+  'personal_fouls',
+  'points',
+  'fantasy_points',
+  'fpm'
+];
+
 @Component({
   selector: 'app-players-table',
   templateUrl: './players-table.component.html',
@@ -19,26 +36,18 @@ export class PlayersTableComponent implements OnInit {
   filters$: Observable<PlayerFilters>;
 
   datasource: MatTableDataSource<StatPlayer>;
-  displayedColumns = [
-    'name', 'games', 'minutes',
-    'field_goal_attempts',
-    'free_throw_attempts',
-    'offensive_rebounds',
-    'defensive_rebounds',
-    'total_rebounds',
-    'assists',
-    'steals',
-    'blocks',
-    'turnovers',
-    'personal_fouls',
-    'points',
-    'fantasy_points',
-    'fpm'
-  ];
+  displayedColumns = ALL_STATS;
 
   constructor(private filterService: FilterService) { }
 
   updateDatasource(filters: PlayerFilters) {
+    const columns = filters.statColumns && filters.statColumns[0];
+    if (columns && columns.length > 1) {
+      this.displayedColumns = columns;
+    } else {
+      this.displayedColumns = ALL_STATS;
+    }
+
     this.datasource.data = this.players.filter(stat => {
       let valid = true;
       const player = stat.player;

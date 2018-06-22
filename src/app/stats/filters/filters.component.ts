@@ -45,6 +45,24 @@ export class FiltersComponent implements OnInit {
     {'id_nba': 31, 'city': 'Free', 'nickname': 'Agent'},
   ];
 
+  columns = [
+    {id: 'games', name: 'Jogos'},
+    {id: 'minutes', name: 'Minutos'},
+    {id: 'field_goal_attempts', name: 'FGA'},
+    {id: 'free_throw_attempts', name: 'FTA'},
+    {id: 'offensive_rebounds', name: 'Rebotes OFF'},
+    {id: 'defensive_rebounds', name: 'Rebotes DEF'},
+    {id: 'total_rebounds', name: 'Rebotes TOT'},
+    {id: 'assists', name: 'Assists'},
+    {id: 'steals', name: 'Steals'},
+    {id: 'blocks', name: 'Blocks'},
+    {id: 'turnovers', name: 'Turnovers'},
+    {id: 'personal_fouls', name: 'Faltas'},
+    {id: 'points', name: 'Pontos'},
+    {id: 'fantasy_points', name: 'FPG'},
+    {id: 'fpm', name: 'FPM'},
+  ];
+
   constructor(private fb: FormBuilder, private filterSerivce: FilterService) { }
 
   ngOnInit() {
@@ -53,17 +71,27 @@ export class FiltersComponent implements OnInit {
     const team = this.fb.control('');
     const rookies = this.fb.control(false);
     const freeAgents = this.fb.control(false);
+    const statColumns = this.fb.array([]);
 
     this.filters = this.fb.group({
       positions,
       team,
       rookies,
       freeAgents,
+      statColumns,
     });
 
     this.filters.valueChanges.subscribe((val: PlayerFilters) => {
       this.filterSerivce.updateFilters(val);
     });
+  }
+
+  onColumnsChange($event) {
+    const columns = this.filters.get('statColumns') as FormArray;
+    const values = $event.source.value;
+
+    const formControl = new FormControl(['name', ...values]);
+    columns.setControl(0, formControl);
   }
 
   onPositionChange($event) {

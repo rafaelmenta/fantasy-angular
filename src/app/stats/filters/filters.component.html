@@ -10,6 +10,15 @@
     </section>
 
     <section>
+      <h3 class="mat-title">colunas</h3>
+      <mat-form-field>
+        <mat-select placeholder="Selecione" formNameArrray="statColumns" (selectionChange)="onColumnsChange($event)" multiple>
+          <mat-option *ngFor="let col of columns" formNameArray="statColumns" [value]="col.id">{{col.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </section>
+
+    <section>
       <h3 class="mat-title">time nba</h3>
       <mat-form-field>
         <mat-select placeholder="Selecione" formControlName="team">

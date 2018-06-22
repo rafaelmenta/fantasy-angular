@@ -1,12 +1,6 @@
 <mat-table #table [dataSource]="datasource" matSort class="stats-table" matSortActive="fantasy_points" matSortDirection="desc">
 
   <ng-container *matHeaderRowDef="displayedColumns">
-    <div class="mat-header-row header-group-row">
-      <div class="mat-header-cell" role="columnheader" style="flex: 8"></div>
-      <div class="mat-header-cell header-group" role="columnheader" style="flex: 3">Rebotes</div>
-      <div class="mat-header-cell" role="columnheader" style="flex: 7"></div>
-      <div class="mat-header-cell header-group" role="columnheader" style="flex: 2">FPs</div>
-    </div>
     <mat-header-row></mat-header-row>
   </ng-container>
 
@@ -107,7 +101,7 @@
 
   <!-- FPM Column -->
   <ng-container matColumnDef="fpm">
-    <mat-header-cell *matHeaderCellDef mat-sort-header class="score-cell">Minuto</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header class="score-cell">FPM</mat-header-cell>
     <mat-cell *matCellDef="let stat" class="score-cell">
       {{
         (stat.fantasy_points / stat.minutes) ?
@@ -118,7 +112,7 @@
 
   <!-- FPG Column -->
   <ng-container matColumnDef="fantasy_points">
-    <mat-header-cell mat-sort-header *matHeaderCellDef class="score-cell">Jogo</mat-header-cell>
+    <mat-header-cell mat-sort-header *matHeaderCellDef class="score-cell">FPG</mat-header-cell>
     <mat-cell *matCellDef="let stat" class="score-cell">
       <p class="mat-body-2">{{stat.fantasy_points?.toFixed(2)}}</p>
     </mat-cell>

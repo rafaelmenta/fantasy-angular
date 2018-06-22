@@ -6,6 +6,7 @@ export interface PlayerFilters {
   team: number;
   rookies: boolean;
   freeAgents: boolean;
+  statColumns: [string[]];
 }
 
 @Injectable({
