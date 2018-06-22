@@ -1,10 +1,12 @@
-import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter, Inject } from '@angular/core';
 import { Team } from '../../services/team.service';
 import { MatTableDataSource } from '@angular/material';
 import { Player } from '../../services/player/player.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { TradePlayer } from '../../services/trade/trade.service';
 import { Pick } from '../../services/pick/pick.service';
+import { APP_CONFIG, AppConfig } from '../../app.config';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-trade-team',
@@ -18,6 +20,7 @@ export class TradeTeamComponent implements OnChanges, OnInit {
 
   players: Player[];
   picks: Pick[];
+  statAccuracy: number;
 
   displayedColumns = ['select', 'name', 'p1', 'p2', 'fpg', 'fpm'];
   pickColumns = ['select', 'logo', 'year', 'round', 'team'];
@@ -65,9 +68,21 @@ export class TradeTeamComponent implements OnChanges, OnInit {
     this.picks = this.picks.concat(added).filter(pick => removed.indexOf(pick) < 0);
   }
 
-  constructor() { }
+  constructor(
+    @Inject(APP_CONFIG) private config: AppConfig,
+    private breakpoint$: BreakpointObserver
+  ) { }
 
   ngOnInit() {
+
+    this.breakpoint$.observe(this.config.LARGE_MOBILE_QUERY).subscribe(res => {
+      if (res.matches) {
+        this.statAccuracy = 2;
+      } else {
+        this.statAccuracy = 3;
+      }
+    });
+
     this.selection.onChange.subscribe(change => {
       this.updatePlayers(change.added, change.removed);
       this.change.emit({

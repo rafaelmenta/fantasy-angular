@@ -35,10 +35,3 @@
     height: 320px;
     margin-bottom: 64px;
 }
-
-.profile-photo-wrapper {
-    background-image: url(../../../assets/img/profile/375x450/generic-player.jpg);
-    background-repeat: no-repeat;
-    width: 375px;
-    height: 450px;
-}

@@ -48,7 +48,7 @@
   <ng-container matColumnDef="fpg">
     <mat-header-cell *matHeaderCellDef> FPG </mat-header-cell>
     <mat-cell *matCellDef="let element">
-      {{element.stats && element.stats.length > 0 ? element.stats[0].fantasy_points.toFixed(3) : 0 }}
+      {{element.stats && element.stats.length > 0 ? element.stats[0].fantasy_points.toFixed(statAccuracy) : 0 }}
     </mat-cell>
   </ng-container>
 
@@ -56,7 +56,7 @@
   <ng-container matColumnDef="fpm">
     <mat-header-cell *matHeaderCellDef> FPM </mat-header-cell>
     <mat-cell *matCellDef="let element">
-      {{element.stats && element.stats.length > 0 ? (element.stats[0].fantasy_points/element.stats[0].minutes).toFixed(3) : 0}}
+      {{element.stats && element.stats.length > 0 ? (element.stats[0].fantasy_points/element.stats[0].minutes).toFixed(statAccuracy) : 0}}
     </mat-cell>
   </ng-container>
 </mat-table>

@@ -3,7 +3,7 @@
     <!-- Toggle sidenav on mobile -->
     <button class="hide-desktop"
       *ngIf="user"
-      mat-button
+      mat-icon-button
       (click)="sidenav.open()"><mat-icon>menu</mat-icon>
     </button>
 
@@ -48,7 +48,7 @@
         <button mat-icon-button>
           <mat-icon class="toolbar__icon">settings</mat-icon>
         </button> -->
-        <button class="hide-desktop" (click)="searchOpen = !searchOpen" mat-button>
+        <button class="hide-desktop" (click)="searchOpen = !searchOpen" mat-icon-button>
           <mat-icon>{{searchOpen?'close':'search'}}</mat-icon>
         </button>
         <a mat-icon-button routerLink="logout">
