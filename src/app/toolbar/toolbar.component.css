@@ -3,7 +3,6 @@
     top: 0;
     z-index: 998;
     height: unset;
-    min-height: 64px;
     flex-wrap: wrap;
 }
 

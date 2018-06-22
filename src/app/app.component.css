@@ -9,6 +9,12 @@ mat-sidenav-content {
   padding-top: 64px;
 }
 
+@media (max-width: 720px) {
+  mat-sidenav-content {
+    padding-top: 56px;
+  }
+}
+
 .progress-bar {
     position: fixed;
     top: 0;

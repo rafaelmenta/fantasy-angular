@@ -10,33 +10,41 @@
     </mat-cell>
   </ng-container>
 
-  <!-- Weight Column -->
+  <!-- P1P2 Column -->
+  <ng-container matColumnDef="p1p2">
+    <mat-header-cell *matHeaderCellDef> P1 </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{element.team_info.primary_position}}/{{element.team_info.secondary_position}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- P1 Column -->
   <ng-container matColumnDef="p1">
     <mat-header-cell *matHeaderCellDef> P1 </mat-header-cell>
     <mat-cell *matCellDef="let element">{{element.team_info.primary_position}}</mat-cell>
   </ng-container>
 
-  <!-- Weight Column -->
+  <!-- P2 Column -->
   <ng-container matColumnDef="p2">
     <mat-header-cell *matHeaderCellDef> P2 </mat-header-cell>
     <mat-cell *matCellDef="let element">{{element.team_info.secondary_position}}</mat-cell>
   </ng-container>
 
-  <!-- Symbol Column -->
+  <!-- FPG Column -->
   <ng-container matColumnDef="fpg">
     <mat-header-cell *matHeaderCellDef> FPG </mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element.stats[0] ? element.stats[0].fantasy_points.toFixed(3) : 0 }}</mat-cell>
+    <mat-cell *matCellDef="let element">{{element.stats[0] ? element.stats[0].fantasy_points.toFixed(statAccuracy) : 0 }}</mat-cell>
   </ng-container>
 
-  <!-- Symbol Column -->
+  <!-- MIN Column -->
   <ng-container matColumnDef="min">
     <mat-header-cell *matHeaderCellDef> MIN </mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element.stats[0] ? element.stats[0].minutes.toFixed(3): 0}}</mat-cell>
+    <mat-cell *matCellDef="let element">{{element.stats[0] ? element.stats[0].minutes.toFixed(statAccuracy): 0}}</mat-cell>
   </ng-container>
 
-  <!-- Symbol Column -->
+  <!-- FPM Column -->
   <ng-container matColumnDef="fpm">
     <mat-header-cell *matHeaderCellDef> FPM </mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element.stats[0] ? (element.stats[0].fantasy_points/element.stats[0].minutes).toFixed(3) : 0}}</mat-cell>
+    <mat-cell *matCellDef="let element">{{element.stats[0] ? (element.stats[0].fantasy_points/element.stats[0].minutes).toFixed(statAccuracy) : 0}}</mat-cell>
   </ng-container>
 </mat-table>

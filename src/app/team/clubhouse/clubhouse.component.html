@@ -3,11 +3,11 @@
     <div class="header__content">
       <div class="header__content-row mat-display-4">
         <img src="http://www.draftbrasil.org/superliga/htdocs/img/team/logo/{{team.team.id_sl}}.png">
-        <h1>{{team.team.city}} {{team.team.nickname}}</h1>
+        <h1 class="team-name">{{team.team.city}} {{team.team.nickname}}</h1>
       </div>
       <div class="header__content-row header__info-row">
         <p class="mat-title">
-          {{team.team.record.win}} - {{team.team.record.loss}} • Divis&atilde;o {{team.team.division.name}} • Confer&ecirc;ncia {{team.team.division.conference.name}}
+          {{team.team.record.win}} - {{team.team.record.loss}} • {{team.team.division.name}} • {{team.team.division.conference.name}}
           • GM: {{team.team.users[0].nickname}}</p>
       </div>
     </div>
@@ -28,9 +28,15 @@
       <div class="clubhouse__content-tile">
         <h3 class="mat-title">pontuação</h3>
         <div class="clubhouse__score-tile">
-          <span class="mat-display-2">{{team.team.stats.fantasy_points.toFixed(2)}}
+          <span class="mat-display-2 score-value">
+            {{team.team.stats.fantasy_points.toFixed(2)}}
             <span class="clubhouse__score-suffix">fpg</span>
-            • {{(team.team.stats.fantasy_points/48).toFixed(2)}}
+          </span>
+          <span class="mat-display-2 divider">
+            •
+          </span>
+          <span class="mat-display-2 score-value">
+          {{(team.team.stats.fantasy_points/48).toFixed(2)}}
             <span class="clubhouse__score-suffix">fpm</span>
           </span>
         </div>
