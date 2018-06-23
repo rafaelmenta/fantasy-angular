@@ -3,21 +3,21 @@
   <div *ngIf="game$ | async as game; else loading">
     <div class="game-info">
       <div class="info-row">
-        <img src="http://www.draftbrasil.net/superliga/htdocs/img/team/small/{{game.home_team.id_sl}}.png">
-        <span class="mat-headline">
-          <a class="link" [routerLink]="['/team', game.home_team.slug]">
+        <a class="link" [routerLink]="['/team', game.home_team.slug]">
+          <img src="http://www.draftbrasil.net/superliga/htdocs/img/team/small/{{game.home_team.id_sl}}.png">
+          <span class="mat-headline hide-mobile">
             {{game.home_team.city}} {{game.home_team.nickname}}
-          </a>
-        </span>
+          </span>
+        </a>
         <span class="score mat-headline">
           {{game.home_performance.fantasy_points}} × {{game.away_performance.fantasy_points}}
         </span>
-        <span class="mat-headline">
-          <a class="link" [routerLink]="['/team', game.away_team.slug]">
+        <a class="link" [routerLink]="['/team', game.away_team.slug]">
+          <span class="mat-headline hide-mobile">
             {{game.away_team.city}} {{game.away_team.nickname}}
-          </a>
-        </span>
-        <img src="http://www.draftbrasil.net/superliga/htdocs/img/team/small/{{game.away_team.id_sl}}.png">
+          </span>
+          <img src="http://www.draftbrasil.net/superliga/htdocs/img/team/small/{{game.away_team.id_sl}}.png">
+        </a>
       </div>
       <div class="info-row">
         <p class="mat-caption">

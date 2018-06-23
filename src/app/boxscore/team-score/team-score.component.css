@@ -51,13 +51,7 @@ mat-row:nth-child(odd) {
 }
 
 .name-cell {
-  justify-content: flex-start;
-  padding-left: 24px;
-  flex: 5;
-}
-
-.score-cell {
-  justify-content: flex-end;
+  flex: 4;
 }
 
 mat-footer-row {

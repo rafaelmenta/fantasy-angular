@@ -3,14 +3,6 @@
 <mat-table #table [dataSource]="datasource" class="stats-table mat-elevation-z8">
 
   <ng-container *matHeaderRowDef="displayedColumns">
-    <div class="mat-header-row header-group-row">
-      <div class="mat-header-cell" role="columnheader" class="name-cell"></div>
-      <div class="mat-header-cell header-group" role="columnheader" style="flex: 5">Minutos</div>
-      <div class="mat-header-cell" role="columnheader" style="flex: 3"></div>
-      <div class="mat-header-cell header-group" role="columnheader" style="flex: 2">Rebotes</div>
-      <div class="mat-header-cell" role="columnheader" style="flex: 7"></div>
-      <div class="mat-header-cell header-group" role="columnheader" style="flex: 3">Fps</div>
-    </div>
     <mat-header-row></mat-header-row>
   </ng-container>
 
@@ -110,6 +102,12 @@
     <mat-cell *matCellDef="let stat">{{stat.performance.defensive_rebounds}}</mat-cell>
   </ng-container>
 
+  <!-- TRB Column -->
+  <ng-container matColumnDef="trb">
+    <mat-header-cell *matHeaderCellDef>REB</mat-header-cell>
+    <mat-cell *matCellDef="let stat">{{stat.performance.defensive_rebounds + stat.performance.offensive_rebounds}}</mat-cell>
+  </ng-container>
+
   <!-- AST Column -->
   <ng-container matColumnDef="ast">
     <mat-header-cell *matHeaderCellDef>AST</mat-header-cell>
@@ -162,7 +160,7 @@
 
   <!-- FPS Column -->
   <ng-container matColumnDef="fps">
-    <mat-header-cell *matHeaderCellDef class="score-cell">Total</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef class="score-cell">FPS</mat-header-cell>
     <mat-cell *matCellDef="let stat" class="score-cell">
       <p class="mat-body-2">{{stat.fantasy_points.toFixed(2)}}</p>
     </mat-cell>
@@ -170,7 +168,7 @@
 
   <!-- FPS Column -->
   <ng-container matColumnDef="fpv">
-    <mat-header-cell *matHeaderCellDef class="score-cell">V&aacute;lidos</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef class="score-cell">FPV</mat-header-cell>
     <mat-cell *matCellDef="let stat" class="score-cell">{{stat.fantasy_points}}</mat-cell>
   </ng-container>
 
