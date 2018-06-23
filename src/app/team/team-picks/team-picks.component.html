@@ -7,7 +7,9 @@
     <mat-header-cell *matHeaderCellDef class="player-name"></mat-header-cell>
     <mat-cell *matCellDef="let pick" class="player-name">
       <a [routerLink]="['/team', pick.original.slug]">
-        <img src="http://www.draftbrasil.org/superliga/htdocs/img/team/pico/{{pick.original.id_sl}}.png" alt="">
+        <img
+          class="player-avatar"
+          src="https://static.draftbrasil.net/team/logo/{{pick.original.id_sl}}.png" alt="">
       </a>
     </mat-cell>
   </ng-container>

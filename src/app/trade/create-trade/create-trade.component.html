@@ -2,7 +2,7 @@
   <mat-card>
     <div class="teams-wrapper" *ngIf="teams; else loading">
       <div *ngFor="let team of teams" class="team-card" (click)="selectTeam(team)">
-        <img src="http://www.draftbrasil.net/superliga/htdocs/img/team/logo/{{team.id_sl}}.png">
+        <img src="https://static.draftbrasil.net/team/logo/{{team.id_sl}}.png">
         <p class="mat-body-2">{{team.city}} {{team.nickname}}</p>
         <p class="mat-body-1">{{team.users[0].nickname}}</p>
       </div>

@@ -3,7 +3,7 @@
     <mat-expansion-panel *ngFor="let trade of trades">
       <mat-expansion-panel-header>
         <mat-panel-title class="trade-header">
-          <img class="team-logo" src="http://www.draftbrasil.net/superliga/htdocs/img/team/pico/{{trade.receiver.id_sl}}.png">
+          <img class="player-avatar team-logo" src="https://static.draftbrasil.net/team/logo/{{trade.receiver.id_sl}}.png">
           <p>{{ trade.receiver.city }} {{ trade.receiver.nickname }}</p>
         </mat-panel-title>
       </mat-expansion-panel-header>
@@ -16,14 +16,14 @@
         <mat-nav-list>
           <h3 matSubheader>{{ trade.receiver.nickname }}</h3>
           <a mat-list-item *ngFor="let player of trade.receiver_players" routerLink="/player/{{player.player_slug}}">
-            <img matListAvatar src="http://www.draftbrasil.net/superliga/htdocs/img/player/profile/{{player.id_player}}.jpg">
+            <img matListAvatar src="https://static.draftbrasil.net/player/avatar/{{player.id_player}}.jpg">
             <h3 matLine>{{ player.first_name }} {{ player.last_name }}</h3>
             <p matLine>
               <span>{{ player.default_primary }}/{{ player.default_primary }} </span>
             </p>
           </a>
           <a mat-list-item *ngFor="let pick of trade.receiver_picks" routerLink="/team/{{pick.original.slug}}">
-            <img matListAvatar src="http://www.draftbrasil.org/superliga/htdocs/img/team/pico/{{pick.original.id_sl}}.png">
+            <img matListAvatar src="https://static.draftbrasil.net/team/logo/{{pick.original.id_sl}}.png">
             <h3 matLine>{{ pick.draft.year_draft }}/{{ pick.round }}</h3>
             <p matLine>
               <span>({{ pick.original.symbol }})</span>
@@ -31,14 +31,14 @@
           </a>
           <h3 matSubheader>{{ team.team.nickname }}</h3>
           <a mat-list-item *ngFor="let player of trade.sender_players" routerLink="/player/{{player.player_slug}}">
-            <img matListAvatar src="http://www.draftbrasil.net/superliga/htdocs/img/player/profile/{{player.id_player}}.jpg">
+            <img matListAvatar src="https://static.draftbrasil.net/player/avatar/{{player.id_player}}.jpg">
             <h3 matLine>{{ player.first_name }} {{ player.last_name }}</h3>
             <p matLine>
               <span>{{ player.default_primary }}/{{ player.default_secondary }} </span>
             </p>
           </a>
           <a mat-list-item *ngFor="let pick of trade.sender_picks" routerLink="/team/{{pick.original.slug}}">
-            <img matListAvatar src="http://www.draftbrasil.org/superliga/htdocs/img/team/pico/{{pick.original.id_sl}}.png">
+            <img matListAvatar src="https://static.draftbrasil.net/team/logo/{{pick.original.id_sl}}.png">
             <h3 matLine>{{ pick.draft.year_draft }}/{{ pick.round }}</h3>
             <p matLine>
               <span>({{ pick.original.symbol }})</span>

@@ -1,12 +1,12 @@
 <mat-nav-list>
-  <a mat-list-item 
-    *ngFor="let game of games" 
+  <a mat-list-item
+    *ngFor="let game of games"
     [routerLink]="['/boxscore', game.id_game]"
     [ngClass]="{
       'games__win': getTeamPerformance(game) > getOpponentPerformance(game),
       'games__lose': getOpponentPerformance(game) > getTeamPerformance(game)
     }">
-    <img matListAvatar src="http://www.draftbrasil.org/superliga/htdocs/img/team/pico/{{getOpponent(game).id_sl}}.png" alt="">
+    <img matListAvatar src="https://static.draftbrasil.net/team/logo/{{getOpponent(game).id_sl}}.png" alt="">
     <h4 mat-line class="mat-title">{{getOpponent(game).city}} {{getOpponent(game).nickname}}</h4>
     <p mat-line class="mat-body-1">{{game.home_performance.fantasy_points}} x {{game.away_performance.fantasy_points}}</p>
   </a>

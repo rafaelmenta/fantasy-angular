@@ -3,11 +3,11 @@
   <div *ngFor="let item of history">
     <mat-card class="history-event">
       <mat-card-header>
-        <img mat-card-avatar src="http://www.draftbrasil.org/superliga/htdocs/img/team/pico/{{item.team_sl.id_sl}}.png">
+        <img mat-card-avatar src="https://static.draftbrasil.net/team/logo/{{item.team_sl.id_sl}}.png">
         <img
           mat-card-avatar
           onerror="this.src='../../../assets/img/profile/375x450/generic-player-2.jpg'"
-          src="http://www.draftbrasil.net/superliga/htdocs/img/player/profile/{{item.player.id_player}}.jpg"
+          src="https://static.draftbrasil.net/player/avatar/{{item.player.id_player}}.jpg"
           class="player-photo">
         <mat-card-title>
           <a class="link" [routerLink]="['/team', item.team_sl.slug]">

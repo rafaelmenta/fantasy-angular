@@ -7,7 +7,9 @@
   <ng-container matColumnDef="team">
     <mat-header-cell *matHeaderCellDef class="team">Equipe</mat-header-cell>
     <mat-cell *matCellDef="let team" class="team">
-      <img src="http://www.draftbrasil.org/superliga/htdocs/img/team/pico/{{team.id_sl}}.png" alt="">
+      <img
+        class="player-avatar"
+        src="https://static.draftbrasil.net/team/logo/{{team.id_sl}}.png" alt="">
       <a class="link" [routerLink]="['/team', team.slug]">
        {{team.city}} {{team.nickname}}
     </a>
