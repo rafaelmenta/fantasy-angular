@@ -9,6 +9,8 @@ import { UpdateFreeAgents, UPDATE_FREE_AGENTS } from '../store/free-agents.reduc
 import { UpdateLeague, UPDATE_LEAGUE } from '../store/league.reducer';
 import { Angulartics2 } from 'angulartics2';
 import { League } from '../../typings';
+import { UpdateFreeAgencyHistory, UPDATE_FREE_AGENCY_HISTORY } from '../store/free-agents-history.reducer';
+import { UpdateTradeHistory, UPDATE_TRADE_HISTORY } from '../store/trade-history.reducer';
 
 interface LogoutState {
   freeAgents: Player[];
@@ -34,6 +36,8 @@ export class LogoutComponent implements OnInit {
     this.store.dispatch<UpdateTeam>({type: UPDATE_TEAM, payload: undefined});
     this.store.dispatch<UpdateFreeAgents>({type: UPDATE_FREE_AGENTS, payload: undefined});
     this.store.dispatch<UpdateLeague>({type: UPDATE_LEAGUE, payload: undefined});
+    this.store.dispatch<UpdateFreeAgencyHistory>({type: UPDATE_FREE_AGENCY_HISTORY, payload: undefined});
+    this.store.dispatch<UpdateTradeHistory>({type: UPDATE_TRADE_HISTORY, payload: undefined});
     this.userService.setUser(null);
     this.angulartics2.eventTrack.next({
       action: 'click-logout',

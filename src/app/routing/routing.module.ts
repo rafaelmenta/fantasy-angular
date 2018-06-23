@@ -20,6 +20,7 @@ import { ScheduleComponent } from '../schedule/schedule.component';
 import { StatsComponent } from '../stats/stats.component';
 import { TeamStatsComponent } from '../stats/team-stats/team-stats.component';
 import { NbaStatsComponent } from '../stats/nba-stats/nba-stats.component';
+import { TradeHistoryComponent } from '../trade/trade-history/trade-history.component';
 
 const routes: Routes = [
   {
@@ -83,6 +84,12 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: 'create',
+        pathMatch: 'full',
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'history',
+        component: TradeHistoryComponent,
         pathMatch: 'full',
         canActivate: [AuthGuardService],
       },

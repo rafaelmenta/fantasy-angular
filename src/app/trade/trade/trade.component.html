@@ -4,7 +4,8 @@
   <a mat-tab-link [routerLink]="[{outlets: {sub: ['received']}}]" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">Recebidas</a>
   <a mat-tab-link [routerLink]="[{outlets: {sub: ['sent']}}]" routerLinkActive #rla3="routerLinkActive" [active]="rla3.isActive">Enviadas</a> -->
 
-  <a mat-tab-link [routerLink]="['create']" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">Propor troca</a>
+  <a mat-tab-link [routerLink]="['create']" routerLinkActive #rla0="routerLinkActive" [active]="rla0.isActive">Propor troca</a>
+  <a mat-tab-link [routerLink]="['history']" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">Hist&oacute;rico</a>
   <a mat-tab-link [routerLink]="['received']" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">
     <span
       *ngIf="trades | async as data; else loading"

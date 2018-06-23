@@ -20,10 +20,6 @@ mat-row:nth-child(odd) {
   flex-direction: row;
 }
 
-.mat-header-cell, .mat-cell {
-  /* padding: 0 10px; */
-}
-
 .mat-header-cell {
   flex: 1;
   overflow: hidden;

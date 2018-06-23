@@ -77,7 +77,9 @@ import { NbaStatsComponent } from './stats/nba-stats/nba-stats.component';
 import { FiltersComponent } from './stats/filters/filters.component';
 import { PlayersTableComponent } from './stats/players-table/players-table.component';
 import { LoadingComponent } from './loading/loading.component';
+import { TradeHistoryComponent } from './trade/trade-history/trade-history.component';
 import { SidenavComponent } from './toolbar/sidenav/sidenav.component';
+import { tradeHistoryReducer } from './store/trade-history.reducer';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -133,6 +135,7 @@ registerLocaleData(localePt);
     FiltersComponent,
     PlayersTableComponent,
     LoadingComponent,
+    TradeHistoryComponent,
     SidenavComponent,
   ],
   imports: [
@@ -174,6 +177,7 @@ registerLocaleData(localePt);
       league: leagueReducer,
       freeAgents: freeAgentsReducer,
       freeAgencyHistory: freeAgencyHistoryReducer,
+      tradeHistory: tradeHistoryReducer,
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states

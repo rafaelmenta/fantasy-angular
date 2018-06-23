@@ -12,11 +12,14 @@ import { ADD_TEAM_PLAYER, AddTeamPlayer } from '../../store/user-team.reducer';
 import { UPDATE_FREE_AGENCY_HISTORY } from '../../store/free-agents-history.reducer';
 import { Angulartics2 } from 'angulartics2';
 import { League, FreeAgencyHistory } from '../../../typings';
+import { Trade } from '../trade/trade.service';
+import { UPDATE_TRADE_HISTORY } from '../../store/trade-history.reducer';
 
 interface LeagueState {
   league: League;
   freeAgents: Player[];
   freeAgencyHistory: FreeAgencyHistory[];
+  tradeHistory: Trade[];
 }
 
 @Injectable({
@@ -28,6 +31,7 @@ export class LeagueService {
   private userLeague: Observable<League>;
   private freeAgents: Observable<Player[]>;
   private freeAgencyHistory: Observable<FreeAgencyHistory[]>;
+  private tradeHistory: Observable<Trade[]>;
 
   getTeams(leagueId: number): Observable<League>  {
     const url = `${this.config.API_ENDPOINT}${this.resource}/${leagueId}/teams`;
@@ -66,6 +70,17 @@ export class LeagueService {
     }));
   }
 
+  private loadTradeHistory(id: number) {
+    const url = `${this.config.API_ENDPOINT}${this.resource}/${id}/trades/history`;
+    const res = this.http.get<{ league: { trade_history: Trade[] } }>(url)
+      .pipe(share());
+
+    res.subscribe(response => this.store.dispatch({
+      type: UPDATE_TRADE_HISTORY,
+      payload: response.league.trade_history,
+    }));
+  }
+
   getFreeAgents(id: number) {
     let fa;
     this.freeAgents.subscribe(freeAgents => fa = freeAgents);
@@ -85,6 +100,17 @@ export class LeagueService {
     }
 
     return this.freeAgencyHistory;
+  }
+
+  getTradeHistory(id: number) {
+    let th;
+    this.tradeHistory.subscribe(tradeHistory => th = tradeHistory);
+
+    if (!th) {
+      this.loadTradeHistory(id);
+    }
+
+    return this.tradeHistory;
   }
 
   getSearch(id: number, query: string) {
@@ -108,5 +134,6 @@ export class LeagueService {
     this.userLeague = this.store.pipe(select('league'));
     this.freeAgents = this.store.pipe(select('freeAgents'));
     this.freeAgencyHistory = this.store.pipe(select('freeAgencyHistory'));
+    this.tradeHistory = this.store.pipe(select('tradeHistory'));
   }
 }

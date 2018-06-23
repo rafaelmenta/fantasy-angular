@@ -9,7 +9,10 @@
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef class="player-name"> Name </mat-header-cell>
         <mat-cell *matCellDef="let element" class="player-name">
-          <img src="http://www.draftbrasil.net/superliga/htdocs/img/player/profile/{{element.id_player}}.jpg" class="player-avatar player-photo">
+          <img
+            class="player-avatar player-photo"
+            onerror="this.src='../../../assets/img/profile/375x450/generic-player-2.jpg'"
+            src="http://www.draftbrasil.net/superliga/htdocs/img/player/profile/{{element.id_player}}.jpg">
           <a class="link" [routerLink]="['/player', element.player_slug]">{{element.first_name}} {{element.last_name}}</a>
         </mat-cell>
       </ng-container>
