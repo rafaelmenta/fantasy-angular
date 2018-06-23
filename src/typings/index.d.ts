@@ -39,11 +39,11 @@ export type TeamInfo = {
     }
 }
 
-export type FreeAgencyAction = 'ADD'|'DROP';
+export type FreeAgencyAction = 'PICK'|'DROP';
 
 export type FreeAgencyHistory = {
     player: Player;
-    event_date: string;
+    event_date: Date;
     action: FreeAgencyAction;
     team_sl: Team['team'];
 }

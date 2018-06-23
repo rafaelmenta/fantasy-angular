@@ -31,16 +31,19 @@ export class FreeAgentsComponent implements OnInit {
   ) { }
 
   addPlayer(player: Player) {
-    this.teamService.addPlayer(this.defaultTeam.id_sl, player)
+    this.teamService.addPlayer(this.defaultTeam, player)
       .subscribe(res => {
+        const action = res.recruitPlayer ? 'add-player' : 'add-player-fail';
+        const message = res.recruitPlayer ? 'Jogador adicionado' : 'Jogador não disponível';
+
         this.angulartics2.eventTrack.next({
-          action: 'add-player',
+          action,
           properties: {
             category: player.player_slug,
           }
         });
 
-        this.snackbar.open('Jogador adicionado', null, {duration: 3000});
+        this.snackbar.open(message, null, {duration: 3000});
       });
   }
 

@@ -27,7 +27,7 @@
     <div class="clubhouse__content-right">
       <div class="clubhouse__content-tile">
         <h3 class="mat-title">pontuação</h3>
-        <div class="clubhouse__score-tile">
+        <div class="clubhouse__score-tile" *ngIf="team.team.stats">
           <span class="mat-display-2 score-value">
             {{team.team.stats.fantasy_points.toFixed(2)}}
             <span class="clubhouse__score-suffix">fpg</span>

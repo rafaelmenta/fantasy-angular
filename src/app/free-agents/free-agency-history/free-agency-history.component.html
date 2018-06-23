@@ -21,7 +21,7 @@
           {{item.action === 'PICK' ? 'adiciona' : 'dispensa' }}
         </span>
         <a class="link" [routerLink]="['/player', item.player.player_slug]">
-          {{item.player.first_name}} {{item.player.first_name}}
+          {{item.player.first_name}} {{item.player.last_name}}
         </a> ({{item.player.default_primary}}/{{item.player.default_secondary}})
       </mat-card-content>
     </mat-card>

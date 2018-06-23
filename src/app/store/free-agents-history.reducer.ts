@@ -33,8 +33,8 @@ export function freeAgencyHistoryReducer(state: FreeAgencyHistory[], action: Fre
         return state;
       }
       return [
+        action.payload,
         ...state,
-        action.payload
       ];
     }
 

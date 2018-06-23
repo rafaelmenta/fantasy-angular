@@ -39,8 +39,8 @@ export function freeAgentsReducer(state: Player[], action: FreeAgentAction) {
                 return state;
             }
             return [
+                action.payload,
                 ...state,
-                action.payload
             ];
         }
         case REMOVE_FREE_AGENT: {

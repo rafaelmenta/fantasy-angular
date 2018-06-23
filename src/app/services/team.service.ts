@@ -11,7 +11,8 @@ import { Observable } from 'rxjs';
 import { map, take, tap, share } from 'rxjs/operators';
 import { RemoveFreeAgent, REMOVE_FREE_AGENT, AddFreeAgent, ADD_FREE_AGENT } from '../store/free-agents.reducer';
 import { Pick } from './pick/pick.service';
-import { Division } from '../../typings';
+import { Division, FreeAgencyHistory } from '../../typings';
+import { ADD_FREE_AGENCY_HISTORY, AddFreeAgencyHistory } from '../store/free-agents-history.reducer';
 
 export interface Team {
   id_sl: number;
@@ -97,9 +98,9 @@ export class TeamService {
     return this.http.get<{ team: { all_games: Game[]}}>(url).pipe(map(res => res.team.all_games));
   }
 
-  removePlayer(teamId: number, player: Player) {
-    const url = `${this.config.API_ENDPOINT}${this.resource}/${teamId}/roster/${player.id_player}`;
-    const res = this.http.delete<{dumpPlayer: number}>(url);
+  removePlayer(team: Team, player: Player) {
+    const url = `${this.config.API_ENDPOINT}${this.resource}/${team.team.id_sl}/roster/${player.id_player}`;
+    const res = this.http.delete<{dumpPlayer: number}>(url).pipe(share());
 
     res.subscribe(response => {
       if (response.dumpPlayer) {
@@ -111,7 +112,15 @@ export class TeamService {
           default_secondary: player.team_info.secondary_position,
         };
 
+        const history: FreeAgencyHistory = {
+          player,
+          event_date: new Date(),
+          action: 'DROP',
+          team_sl: team.team,
+        };
+
         this.store.dispatch<AddFreeAgent>({type: ADD_FREE_AGENT, payload: freeAgent});
+        this.store.dispatch<AddFreeAgencyHistory>({ type: ADD_FREE_AGENCY_HISTORY, payload: history });
       }
     });
 
@@ -138,19 +147,20 @@ export class TeamService {
     return this.http.get<Team>(url);
   }
 
-  addPlayer(id: number, player: Player) {
-    const url = `${this.config.API_ENDPOINT}${this.resource}/${id}/player`;
+  addPlayer(team: Team, player: Player) {
+    const url = `${this.config.API_ENDPOINT}${this.resource}/${team.id_sl}/player`;
 
     const body = {
       team_info: {
         id_player: player.id_player,
-        id_sl: id,
+        id_sl: team.id_sl,
+        id_league: team.team.division.conference.league.id_league,
         primary_position: player.default_primary,
         secondary_position: player.default_secondary,
       }
     };
 
-    const res = this.http.post<{ recruitPlayer: { id_player: number } }>(url, body);
+    const res = this.http.post<{ recruitPlayer: { id_player: number } }>(url, body).pipe(share());
 
     res.subscribe(response => {
       if (response.recruitPlayer.id_player) {
@@ -162,8 +172,17 @@ export class TeamService {
             order: 999,
           },
         };
+
+        const history: FreeAgencyHistory = {
+          player,
+          event_date: new Date(),
+          action: 'PICK',
+          team_sl: team.team,
+        };
+
         this.store.dispatch<AddTeamPlayer>({ type: ADD_TEAM_PLAYER, payload: teamPlayer });
         this.store.dispatch<RemoveFreeAgent>({ type: REMOVE_FREE_AGENT, payload: player });
+        this.store.dispatch<AddFreeAgencyHistory>({ type: ADD_FREE_AGENCY_HISTORY, payload: history });
       }
     });
 

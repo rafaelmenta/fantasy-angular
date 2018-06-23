@@ -42,7 +42,7 @@ export class RosterComponent implements OnInit {
   }
 
   removePlayer(player: Player) {
-    return this.teamService.removePlayer(this.userTeam.team.id_sl, player);
+    return this.teamService.removePlayer(this.userTeam, player);
   }
 
   swapPosition(player: Player) {
