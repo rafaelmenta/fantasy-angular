@@ -15,7 +15,6 @@ export class TeamPlayersComponent implements OnInit {
 
   displayedColumns = ['name', 'p1', 'p2', 'fpg', 'min', 'fpm'];
   dataSource = new MatTableDataSource<Player>();
-  statAccuracy = 3;
 
   constructor(
     @Inject(APP_CONFIG) private config: AppConfig,
@@ -31,10 +30,8 @@ export class TeamPlayersComponent implements OnInit {
       this.breakpoint$.observe(this.config.LARGE_MOBILE_QUERY).subscribe(res => {
         if (res.matches) {
           this.displayedColumns = ['name', 'p1p2', 'fpg', 'fpm'];
-          this.statAccuracy = 2;
         } else {
           this.displayedColumns = ['name', 'p1', 'p2', 'fpg', 'min', 'fpm'];
-          this.statAccuracy = 3;
       }
     });
   }

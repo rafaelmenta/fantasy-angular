@@ -154,7 +154,7 @@
   <ng-container matColumnDef="fpm">
     <mat-header-cell *matHeaderCellDef class="score-cell">FPM</mat-header-cell>
     <mat-cell *matCellDef="let stat" class="score-cell">
-      {{(stat.fantasy_points / stat.performance.minutes).toFixed(3)}}
+      {{(stat.fantasy_points / stat.performance.minutes).toFixed(2)}}
     </mat-cell>
   </ng-container>
 

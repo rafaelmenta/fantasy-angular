@@ -20,7 +20,6 @@ export class TradeTeamComponent implements OnChanges, OnInit {
 
   players: Player[];
   picks: Pick[];
-  statAccuracy: number;
 
   displayedColumns = ['select', 'name', 'p1', 'p2', 'fpg', 'fpm'];
   pickColumns = ['select', 'logo', 'year', 'round', 'team'];
@@ -74,14 +73,6 @@ export class TradeTeamComponent implements OnChanges, OnInit {
   ) { }
 
   ngOnInit() {
-
-    this.breakpoint$.observe(this.config.LARGE_MOBILE_QUERY).subscribe(res => {
-      if (res.matches) {
-        this.statAccuracy = 2;
-      } else {
-        this.statAccuracy = 3;
-      }
-    });
 
     this.selection.onChange.subscribe(change => {
       this.updatePlayers(change.added, change.removed);

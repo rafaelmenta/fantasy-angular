@@ -28,7 +28,7 @@
 
   <ng-container matColumnDef="fpg">
     <mat-header-cell *matHeaderCellDef>FPG</mat-header-cell>
-    <mat-cell *matCellDef="let team">{{team.stats.fantasy_points.toFixed(3)}}</mat-cell>
+    <mat-cell *matCellDef="let team">{{team.stats.fantasy_points.toFixed(2)}}</mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="rankColumns"></mat-header-row>

@@ -105,7 +105,7 @@
     <mat-cell *matCellDef="let stat" class="score-cell">
       {{
         (stat.fantasy_points / stat.minutes) ?
-        (stat.fantasy_points / stat.minutes).toFixed(3) : ''
+        (stat.fantasy_points / stat.minutes).toFixed(2) : ''
       }}
     </mat-cell>
   </ng-container>
