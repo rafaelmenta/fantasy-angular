@@ -3,7 +3,7 @@ import { TeamService, Team } from '../../services/team.service';
 import { LeagueService } from '../../services/league/league.service';
 import { UserService } from '../../services/user.service';
 import { flatTeams, sortAlphabetically } from '../../../lib/utils';
-import { MatTableDataSource, MatSnackBar } from '@angular/material';
+import { MatTableDataSource, MatSnackBar, MatDialog } from '@angular/material';
 import { Player } from '../../services/player/player.service';
 import { Trade, SentTrade, TradePlayer, TradeService } from '../../services/trade/trade.service';
 import { Pick } from '../../services/pick/pick.service';
@@ -11,6 +11,7 @@ import { TradeTeamComponent } from '../trade-team/trade-team.component';
 import { Observable } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { Angulartics2 } from 'angulartics2';
+import { AcceptTradeComponent } from '../accept-trade/accept-trade.component';
 
 @Component({
   selector: 'app-create-trade',
@@ -56,7 +57,7 @@ export class CreateTradeComponent implements OnInit {
     this.validTrade = validSender && validReceiver;
   }
 
-  sendTrade() {
+  private createTrade(proposal: SentTrade) {
     this.tradeService.createTrade(this.team, this.proposal).subscribe(res => {
       this.resetTrade();
       this.sender.clearSelection();
@@ -68,6 +69,18 @@ export class CreateTradeComponent implements OnInit {
         }
       });
       this.snackbar.open('Troca enviada', null, { duration: 5000 });
+    });
+  }
+
+  sendTrade() {
+    const dialogRef = this.dialog.open(AcceptTradeComponent, {
+      data: { trade: this.proposal },
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this.createTrade(this.proposal);
+      }
     });
   }
 
@@ -93,6 +106,7 @@ export class CreateTradeComponent implements OnInit {
     private tradeService: TradeService,
     private title: Title,
     private angulartics2: Angulartics2,
+    private dialog: MatDialog,
     private leagueService: LeagueService) { }
 
   ngOnInit() {

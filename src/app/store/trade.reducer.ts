@@ -47,6 +47,9 @@ export type TradeActions = UpdateTrade | AddSentTrade | RemoveSentTrade | AddRec
 export function tradeReducer(state: TeamTrades, action: TradeActions) {
   switch (action.type) {
     case UPDATE_TRADE: {
+      if (!action.payload) {
+        return action.payload;
+      }
       return action.payload.teamTrades;
     }
 
