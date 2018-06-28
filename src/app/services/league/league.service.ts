@@ -14,6 +14,7 @@ import { Angulartics2 } from 'angulartics2';
 import { League, FreeAgencyHistory } from '../../../typings';
 import { Trade } from '../trade/trade.service';
 import { UPDATE_TRADE_HISTORY } from '../../store/trade-history.reducer';
+import { DraftOverview, Draft } from '../draft/draft.service';
 
 interface LeagueState {
   league: League;
@@ -123,6 +124,20 @@ export class LeagueService {
     });
     const url = `${this.config.API_ENDPOINT}${this.resource}/${id}/search/${query}`;
     return this.http.get<{search_players: Player[], search_teams: Array<Team['team']>}>(url).pipe(share());
+  }
+
+  getRecentDraft(id: number) {
+    const url = `${this.config.API_ENDPOINT}${this.resource}/${id}/draft`;
+    return this.http.get<{league: {current_draft: DraftOverview}}>(url).pipe(
+      map(res => res.league.current_draft),
+      share());
+  }
+
+  getDrafts(id: number) {
+    const url = `${this.config.API_ENDPOINT}${this.resource}/${id}/drafts`;
+    return this.http.get<{ league: { previous_drafts: Draft[], next_drafts: Draft[]}}>(url).pipe(
+      map(res => res.league),
+      share());
   }
 
   constructor(

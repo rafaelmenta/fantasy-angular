@@ -21,6 +21,7 @@ import { StatsComponent } from '../stats/stats.component';
 import { TeamStatsComponent } from '../stats/team-stats/team-stats.component';
 import { NbaStatsComponent } from '../stats/nba-stats/nba-stats.component';
 import { TradeHistoryComponent } from '../trade/trade-history/trade-history.component';
+import { DraftComponent } from '../draft/draft/draft.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,16 @@ const routes: Routes = [
   {
     path: 'schedule',
     component: ScheduleComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'draft',
+    component: DraftComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'draft/:id',
+    component: DraftComponent,
     canActivate: [AuthGuardService],
   },
   {

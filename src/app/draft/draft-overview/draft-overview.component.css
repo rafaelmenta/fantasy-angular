@@ -1,0 +1,22 @@
+.team {
+  flex: 1;
+}
+
+.order {
+  max-width: 24px;
+}
+
+.deadline {
+  max-width: 208px;
+}
+
+.no-draft {
+  display: flex;
+  flex-direction: column;
+}
+
+.no-draft-image {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}

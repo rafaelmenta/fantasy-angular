@@ -1,0 +1,35 @@
+<mat-card>
+  <h3 class="mat-title">Pr&oacute;xima escolha</h3>
+  <div class="clock-info" *ngIf="next; else noPick">
+    <div class="next-team">
+      <img src="https://static.draftbrasil.net/team/logo/{{next.owner.id_sl}}.png" alt="">
+      <h3 class="mat-title">#{{next.order}} {{next.owner.city}} {{next.owner.nickname}}</h3>
+    </div>
+    <div class="time-left">
+      <span *ngIf="next.owner.id_sl === userTeamId" class="select-panel">
+        <mat-form-field class="player-picker" *ngIf="players$ | async as players">
+          <mat-select  placeholder="Selecione um jogador" [(ngModel)]="selectedPlayer">
+            <mat-option *ngFor="let player of players" [value]="player">
+              {{player.first_name}} {{player.last_name}} ({{player.default_primary}}/{{player.default_secondary}})
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </span>
+      <span *ngIf="next.owner.id_sl === userTeamId">
+        <button
+          class="player-picker"
+          color="primary"
+          mat-raised-button
+          (click)="draftPlayer(selectedPlayer)"
+          [disabled]="!selectedPlayer">escolher</button>
+      </span>
+      <span>
+        Tempo restante: {{countDown | async}}
+      </span>
+    </div>
+  </div>
+</mat-card>
+
+<ng-template #noPick>
+  <h3 class="mat-subheading-2">N&atilde;o h&aacute; mais picks abertas</h3>
+</ng-template>

@@ -1,0 +1,32 @@
+.clock-info {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.next-team {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex: 1;
+}
+
+.next-team .mat-title {
+  margin-bottom: 0;
+}
+
+.time-left {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 200px;
+}
+
+.time-left span {
+  margin-top: 16px;
+}
+
+.player-picker {
+  width: 100%;
+}

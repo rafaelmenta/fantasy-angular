@@ -1,0 +1,9 @@
+.player-lookup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.player-lookup > img {
+  margin-right: 8px;
+}

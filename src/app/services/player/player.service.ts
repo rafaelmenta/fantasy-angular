@@ -78,6 +78,15 @@ export interface StatPlayer {
   player: Player;
 }
 
+export interface PlayerLookup {
+  id_player: number;
+  player_slug: string;
+  first_name: string;
+  last_name: string;
+  default_primary: string;
+  default_secondary: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })

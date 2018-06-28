@@ -35,6 +35,7 @@ import { ProfileComponent } from './player/profile/profile.component';
 import { IndexComponent } from './index/index.component';
 import { APP_CONFIG, AppConfig } from './app.config';
 import { HttpClientModule } from '@angular/common/http';
+
 import { TeamPlayersComponent } from './team/team-players/team-players.component';
 import { NextTeamGamesComponent } from './team/next-team-games/next-team-games.component';
 import { TeamPicksComponent } from './team/team-picks/team-picks.component';
@@ -50,6 +51,7 @@ import { ReceivedTradesComponent } from './trade/received-trades/received-trades
 import { SentTradesComponent } from './trade/sent-trades/sent-trades.component';
 import { TradeTeamComponent } from './trade/trade-team/trade-team.component';
 import { tradeReducer } from './store/trade.reducer';
+
 import { userTeamReducer } from './store/user-team.reducer';
 import { leagueReducer } from './store/league.reducer';
 import { FreeAgentsComponent } from './free-agents/free-agents/free-agents.component';
@@ -66,6 +68,7 @@ import { PlayerLastGamesComponent } from './player/player-last-games/player-last
 import { BoxscoreComponent } from './boxscore/boxscore.component';
 import { TeamScoreComponent } from './boxscore/team-score/team-score.component';
 import { ScheduleComponent } from './schedule/schedule.component';
+
 import { TeamScheduleComponent } from './schedule/team-schedule/team-schedule.component';
 import { NbaScheduleComponent } from './schedule/nba-schedule/nba-schedule.component';
 import { freeAgencyHistoryReducer } from './store/free-agents-history.reducer';
@@ -75,11 +78,19 @@ import { StatsComponent } from './stats/stats.component';
 import { TeamStatsComponent } from './stats/team-stats/team-stats.component';
 import { NbaStatsComponent } from './stats/nba-stats/nba-stats.component';
 import { FiltersComponent } from './stats/filters/filters.component';
+
 import { PlayersTableComponent } from './stats/players-table/players-table.component';
 import { LoadingComponent } from './loading/loading.component';
 import { TradeHistoryComponent } from './trade/trade-history/trade-history.component';
-import { SidenavComponent } from './toolbar/sidenav/sidenav.component';
 import { tradeHistoryReducer } from './store/trade-history.reducer';
+import { SidenavComponent } from './toolbar/sidenav/sidenav.component';
+import { DraftComponent } from './draft/draft/draft.component';
+import { DraftOverviewComponent } from './draft/draft-overview/draft-overview.component';
+import { DraftListComponent } from './draft/draft-list/draft-list.component';
+import { OnTheClockComponent } from './draft/on-the-clock/on-the-clock.component';
+
+import { MomentModule } from 'ngx-moment';
+import { PlayerLookupComponent } from './common/player-lookup/player-lookup.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -137,6 +148,11 @@ registerLocaleData(localePt);
     LoadingComponent,
     TradeHistoryComponent,
     SidenavComponent,
+    DraftComponent,
+    DraftOverviewComponent,
+    DraftListComponent,
+    OnTheClockComponent,
+    PlayerLookupComponent,
   ],
   imports: [
     BrowserModule,
@@ -171,6 +187,7 @@ registerLocaleData(localePt);
     MatSidenavModule,
     RoutingModule,
     MatCheckboxModule,
+    MomentModule,
     StoreModule.forRoot({
       trades: tradeReducer,
       userTeam: userTeamReducer,

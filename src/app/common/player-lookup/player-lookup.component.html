@@ -1,0 +1,12 @@
+<div class="player-lookup">
+  <img
+    onerror="this.src='../../../assets/img/profile/375x450/generic-player-2.jpg'"
+    src="https://static.draftbrasil.net/player/avatar/{{player.id_player}}.jpg"
+    class="player-avatar player-photo">
+  <a class="link" *ngIf="!noUrl" [routerLink]="['/player', player.player_slug]">
+    {{player.first_name}} {{player.last_name}} ({{player.default_primary}}/{{player.default_secondary}})
+  </a>
+  <span *ngIf="noUrl">
+     {{player.first_name}} {{player.last_name}} ({{player.default_primary}}/{{player.default_secondary}})
+  </span>
+</div>

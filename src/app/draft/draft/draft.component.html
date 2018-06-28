@@ -1,0 +1,39 @@
+<mat-toolbar color="accent">Draft</mat-toolbar>
+<div class="container" *ngIf="draft; else loading">
+  <ng-container *ngIf="draft.id_draft">
+    <mat-card class="draft-info">
+      <h1 class="mat-headline">Draft {{draft.year_draft}}</h1>
+      <div class="draft-info-list">
+        <div class="mat-body-1">Status:
+          <span class="draft-status-{{draft.status_draft}}">
+            <mat-icon>
+              {{ draft.status_draft === '0' ? 'close' :
+                draft.status_draft === '1' ? 'fiber_manual_record' : 'check' }}
+            </mat-icon>
+            {{getStatus(draft.status_draft)}}
+          </span>
+        </div>
+        <div class="mat-body-1">Temporada: {{draft.season.year}}</div>
+        <div class="mat-body-1">Tipo de draft: {{getDraftType(draft.draft_type)}}</div>
+        <div class="mat-body-1">In&iacute;cio: {{getStartDate(draft.picks) | date:'short'}}</div>
+        <div class="mat-body-1">Fim: {{getEndDate(draft.picks) | date:'short'}}</div>
+      </div>
+      <!-- <h2 class="mat-body-2"></h2> -->
+      <h2 class="mat-subheading-2"></h2>
+    </mat-card>
+    <app-on-the-clock
+      *ngIf="isOpen(draft.status_draft)"
+      [draft]="draft"
+      [picks]="draft.picks"
+      (expired)="refreshPicks()"></app-on-the-clock>
+  </ng-container>
+
+  <div class="draft-container">
+    <app-draft-overview [picks]="draft.picks"></app-draft-overview>
+    <app-draft-list></app-draft-list>
+  </div>
+</div>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

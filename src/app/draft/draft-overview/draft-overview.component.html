@@ -1,0 +1,56 @@
+<mat-accordion *ngIf="groups">
+  <mat-expansion-panel [expanded]="first" *ngFor="let group of groups; let first = first;">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Rodada {{group.round}}</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-table #table [dataSource]="group.picks">
+      <mat-header-row *matHeaderRowDef="displayedColumns;"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+      <!-- Order column -->
+      <ng-container matColumnDef="order">
+        <mat-header-cell *matHeaderCellDef class="order">#</mat-header-cell>
+        <mat-cell *matCellDef="let pick" class="order">{{pick.order}}</mat-cell>
+      </ng-container>
+
+      <!-- Owner column -->
+      <ng-container matColumnDef="owner">
+        <mat-header-cell *matHeaderCellDef class="team">Equipe</mat-header-cell>
+        <mat-cell *matCellDef="let pick" class="team">
+          <img class="player-avatar hide-mobile" src="https://static.draftbrasil.net/team/logo/{{pick.owner.id_sl}}.png" alt="">
+          &nbsp;<a class="link" [routerLink]="['/team', pick.owner.slug]">
+            {{pick.owner.city}} {{pick.owner.nickname}}
+          </a>
+          <span *ngIf="pick.owner.id_sl !== pick.original.id_sl">
+            &nbsp;(via <a class="link" [routerLink]="['/team', pick.original.slug]">{{pick.original.symbol}}</a>)
+          </span>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Deadline column -->
+      <ng-container matColumnDef="deadline">
+        <mat-header-cell *matHeaderCellDef class="deadline">Escolha</mat-header-cell>
+        <mat-cell *matCellDef="let pick" class="deadline">
+          <span *ngIf="pick.player"><app-player-lookup [player]="pick.player"></app-player-lookup></span>
+          <span *ngIf="!pick.id_player">{{getPickOutput(pick)}}</span>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Used column -->
+      <ng-container matColumnDef="used">
+        <mat-header-cell *matHeaderCellDef>Jogador selecionado</mat-header-cell>
+        <mat-cell *matCellDef="let pick">
+        </mat-cell>
+      </ng-container>
+    </mat-table>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<ng-container *ngIf="!groups">
+  <mat-card class="no-draft">
+    <h1 class="mat-display-1">Não há draft criado para essa temporada</h1>
+    <div class="no-draft-image">
+      <img src="../../../assets/img/misc/bench.png" alt="">
+    </div>
+  </mat-card>
+</ng-container>
