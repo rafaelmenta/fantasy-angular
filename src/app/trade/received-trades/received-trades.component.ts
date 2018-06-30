@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { UserService, UserTeam } from '../../services/user.service';
 import { TeamService, Team } from '../../services/team.service';
 import { ReceivedTrade, Trade, TradeService, TeamTrades } from '../../services/trade/trade.service';
 import { MatSnackBar, MatDialog } from '@angular/material';
@@ -17,7 +17,7 @@ import { select, Store } from '@ngrx/store';
 })
 export class ReceivedTradesComponent implements OnInit {
 
-  team: Team;
+  team: UserTeam;
   trades: ReceivedTrade[];
 
   constructor(

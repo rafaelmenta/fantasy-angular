@@ -25,11 +25,11 @@ export class TeamRankingComponent implements OnInit, OnChanges {
           return 1;
         }
 
-        if (a.stats.fantasy_points > b.stats.fantasy_points) {
+        if (a.stats && b.stats && a.stats.fantasy_points > b.stats.fantasy_points) {
           return -1;
         }
 
-        if (b.stats.fantasy_points > a.stats.fantasy_points) {
+        if (a.stats && b.stats && b.stats.fantasy_points > a.stats.fantasy_points) {
           return 1;
         }
 

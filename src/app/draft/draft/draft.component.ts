@@ -101,8 +101,10 @@ export class DraftComponent implements OnInit {
     let draftId;
     this.route.paramMap.subscribe(paramMap => {
       draftId = paramMap.get('id');
-      this.draft$ = this.draftService.getDraftOverview(draftId);
-      this.refreshPicks();
+      if (draftId) {
+        this.draft$ = this.draftService.getDraftOverview(draftId);
+        this.refreshPicks();
+      }
     });
 
     if (!draftId) {

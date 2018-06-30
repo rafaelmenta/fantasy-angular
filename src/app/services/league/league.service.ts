@@ -36,7 +36,7 @@ export class LeagueService {
 
   getTeams(leagueId: number): Observable<League>  {
     const url = `${this.config.API_ENDPOINT}${this.resource}/${leagueId}/teams`;
-    return this.http.get<{league: League}>(url).pipe(map(res => res.league));
+    return this.http.get<{league_overview: League}>(url).pipe(map(res => res.league_overview));
   }
 
   getUserLeague(id: number) {
@@ -123,7 +123,7 @@ export class LeagueService {
       }
     });
     const url = `${this.config.API_ENDPOINT}${this.resource}/${id}/search/${query}`;
-    return this.http.get<{search_players: Player[], search_teams: Array<Team['team']>}>(url).pipe(share());
+    return this.http.get<{search_players: Player[], search_teams: Array<Team['team_overview']>}>(url).pipe(share());
   }
 
   getRecentDraft(id: number) {

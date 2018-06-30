@@ -46,7 +46,7 @@ export class RosterComponent implements OnInit {
   }
 
   swapPosition(player: Player) {
-    this.teamService.swapPosition(this.userTeam.team.id_sl, player.id_player).subscribe(res => {
+    this.teamService.swapPosition(this.userTeam.team_overview.id_sl, player.id_player).subscribe(res => {
       const swap = player.team_info.primary_position;
       player.team_info.primary_position = player.team_info.secondary_position;
       player.team_info.secondary_position = swap;
@@ -64,18 +64,18 @@ export class RosterComponent implements OnInit {
     const roster = this.players.map(player => {
       return {
         id_player: player.id_player,
-        id_sl: this.userTeam.team.id_sl,
+        id_sl: this.userTeam.team_overview.id_sl,
         order: player.team_info.order,
         primary_position: player.team_info.primary_position,
         secondary_position: player.team_info.secondary_position,
       };
     });
-    this.teamService.saveRoster(this.userTeam.team.id_sl, roster).subscribe(res => {
+    this.teamService.saveRoster(this.userTeam.team_overview.id_sl, roster).subscribe(res => {
       this.dirtyRoster = false;
       this.angulartics2.eventTrack.next({
         action: 'update-roster',
         properties: {
-          category: this.userTeam.team.slug,
+          category: this.userTeam.team_overview.slug,
         }
       });
       this.snackbar.open('Roster atualizado', null, { duration: 3000 });
@@ -126,7 +126,7 @@ export class RosterComponent implements OnInit {
         const defaultTeam = this.teamService.getDefaultTeam(user.teams);
         this.teamService.getTeam(defaultTeam.id_sl, true).subscribe(team => {
           if (team) {
-            this.players = this.getSortedPlayers(team.team.players);
+            this.players = this.getSortedPlayers(team.team_overview.players);
             this.userTeam = team;
           }
         });

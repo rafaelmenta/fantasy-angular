@@ -41,7 +41,7 @@ function sortPlayers(a: Player, b: Player) {
 
 }
 
-function sortAlphabetically(a: Team['team'], b: Team['team']) {
+function sortAlphabetically(a: Team['team_overview'], b: Team['team_overview']) {
     if (a.city < b.city) {
         return -1;
     }

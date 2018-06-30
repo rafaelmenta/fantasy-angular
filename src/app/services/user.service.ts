@@ -3,11 +3,22 @@ import { Team } from './team.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
+export interface UserTeam {
+  id_sl: number;
+  default_team: boolean;
+  team: {
+    city: string;
+    nickname: string;
+    slug: string;
+    division: { conference: { league: { id_league: number; } } }
+  };
+}
+
 export interface User {
   id_user: number;
   login: string;
   nickname: string;
-  teams?: Team[];
+  teams?: UserTeam[];
   token: string;
 }
 

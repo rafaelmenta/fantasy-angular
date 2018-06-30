@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Game } from '../../services/game/game.service';
 import { TeamService, Team } from '../../services/team.service';
 import { Title } from '@angular/platform-browser';
+import { UserTeam } from '../../services/user.service';
 
 @Component({
   selector: 'app-team-schedule',
@@ -11,7 +12,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class TeamScheduleComponent implements OnInit {
 
-  @Input() team: Team;
+  @Input() team: UserTeam;
   games$: Observable<Game[]>;
 
   constructor(private teamService: TeamService, private title: Title) { }

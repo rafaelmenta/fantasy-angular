@@ -42,7 +42,7 @@ export class TeamStatsComponent implements OnInit {
   }
 
   formatStats(res: Team): StatPlayer[] {
-    const players = res.team.players;
+    const players = res.team_overview.players;
     return players.map(this.formatPlayerStat);
   }
 }

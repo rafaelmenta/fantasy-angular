@@ -36,7 +36,7 @@ export class ClubhouseComponent implements OnInit {
     this.team$ = this.teamService.getTeam(id, useCache);
     this.team$.subscribe(team => {
       if (team) {
-        const title = `Superliga - ${team.team.city} ${team.team.nickname}`;
+        const title = `Superliga - ${team.team_overview.city} ${team.team_overview.nickname}`;
         this.title.setTitle(title);
       }
     });

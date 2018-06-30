@@ -22,7 +22,7 @@ export class MinutesChartComponent implements OnChanges {
     domain: ['#283593', '#5C6BC0', '#E8EAF6', '#EC407A', '#AD1457'],
   };
 
-  @Input() stats: Team['team']['stats'];
+  @Input() stats: Team['team_overview']['stats'];
   chartData: {name: string, value: number}[];
 
   constructor() {

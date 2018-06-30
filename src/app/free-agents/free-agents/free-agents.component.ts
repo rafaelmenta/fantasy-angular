@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Player } from '../../services/player/player.service';
 import { sortPlayers, compare } from '../../../lib/utils';
 import { MatTableDataSource, Sort, MatSort, MatSortable, MatSnackBar } from '@angular/material';
-import { UserService } from '../../services/user.service';
+import { UserService, UserTeam } from '../../services/user.service';
 import { TeamService, Team } from '../../services/team.service';
 import { Title } from '@angular/platform-browser';
 import { Angulartics2 } from 'angulartics2';
@@ -19,7 +19,7 @@ export class FreeAgentsComponent implements OnInit {
   dataSource = new MatTableDataSource<Player>();
 
   freeAgents$: Observable<Player[]>;
-  defaultTeam: Team;
+  defaultTeam: UserTeam;
 
   constructor(
     private leagueService: LeagueService,

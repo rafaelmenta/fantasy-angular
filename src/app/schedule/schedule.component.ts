@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService, User } from '../services/user.service';
+import { UserService, User, UserTeam } from '../services/user.service';
 import { TeamService, Team } from '../services/team.service';
 import { Title } from '@angular/platform-browser';
 
@@ -10,7 +10,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class ScheduleComponent implements OnInit {
 
-  team: Team;
+  team: UserTeam;
 
   constructor(
     private userService: UserService,

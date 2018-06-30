@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User, UserService } from '../services/user.service';
+import { User, UserService, UserTeam } from '../services/user.service';
 import { Team } from '../services/team.service';
 import { Title } from '@angular/platform-browser';
 
@@ -11,9 +11,9 @@ import { Title } from '@angular/platform-browser';
 export class IndexComponent implements OnInit {
 
   public user: User;
-  public team: Team;
+  public team: UserTeam;
 
-  getDefaultTeam(teams: Team[]) {
+  getDefaultTeam(teams: UserTeam[]) {
     return teams.find(team => team.default_team);
   }
 

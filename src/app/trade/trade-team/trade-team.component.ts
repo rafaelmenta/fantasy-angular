@@ -15,7 +15,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 })
 export class TradeTeamComponent implements OnChanges, OnInit {
 
-  @Input() team: Team['team'];
+  @Input() team: Team['team_overview'];
   @Output() change: EventEmitter<{ players: Player[], picks: Pick[] }> = new EventEmitter();
 
   players: Player[];

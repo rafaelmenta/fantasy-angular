@@ -2,13 +2,13 @@
   <header class="header__wrapper">
     <div class="header__content">
       <div class="header__content-row mat-display-4">
-        <img src="https://static.draftbrasil.net/team/logo/{{team.team.id_sl}}.png">
-        <h1 class="team-name">{{team.team.city}} {{team.team.nickname}}</h1>
+        <img src="https://static.draftbrasil.net/team/logo/{{team.team_overview.id_sl}}.png">
+        <h1 class="team-name">{{team.team_overview.city}} {{team.team_overview.nickname}}</h1>
       </div>
       <div class="header__content-row header__info-row">
         <p class="mat-title">
-          {{team.team.record.win}} - {{team.team.record.loss}} • {{team.team.division.name}} • {{team.team.division.conference.name}}
-          • GM: {{team.team.users[0].nickname}}</p>
+          {{team.team_overview.record.win}} - {{team.team_overview.record.loss}} • {{team.team_overview.division.name}} • {{team.team_overview.division.conference.name}}
+          • GM: {{team.team_overview.users[0].nickname}}</p>
       </div>
     </div>
   </header>
@@ -17,41 +17,41 @@
     <div class="clubhouse__content-left">
       <div class="clubhouse__content-tile">
         <h3 class="mat-title">roster</h3>
-        <app-team-players [players]="team.team.players"></app-team-players>
+        <app-team-players [players]="team.team_overview.players"></app-team-players>
       </div>
       <div class="clubhouse__content-tile">
         <h3 class="mat-title">draft</h3>
-        <app-team-picks [picks]="team.team.picks"></app-team-picks>
+        <app-team-picks [picks]="team.team_overview.picks"></app-team-picks>
       </div>
     </div>
     <div class="clubhouse__content-right">
       <div class="clubhouse__content-tile">
         <h3 class="mat-title">pontuação</h3>
-        <div class="clubhouse__score-tile" *ngIf="team.team.stats">
+        <div class="clubhouse__score-tile" *ngIf="team.team_overview.stats">
           <span class="mat-display-2 score-value">
-            {{team.team.stats.fantasy_points.toFixed(2)}}
+            {{team.team_overview.stats.fantasy_points.toFixed(2)}}
             <span class="clubhouse__score-suffix">fpg</span>
           </span>
           <span class="mat-display-2 divider">
             •
           </span>
           <span class="mat-display-2 score-value">
-          {{(team.team.stats.fantasy_points/48).toFixed(2)}}
+          {{(team.team_overview.stats.fantasy_points/48).toFixed(2)}}
             <span class="clubhouse__score-suffix">fpm</span>
           </span>
         </div>
       </div>
       <div class="clubhouse__content-tile">
         <h3 class="mat-title">minutos restantes</h3>
-        <app-minutes-chart [stats]="team.team.stats"></app-minutes-chart>
+        <app-minutes-chart [stats]="team.team_overview.stats"></app-minutes-chart>
       </div>
       <div class="clubhouse__content-tile">
         <h3 class="mat-title">jogos recentes</h3>
-        <app-recent-team-games [games]="team.team.recent_games" [team]="team"></app-recent-team-games>
+        <app-recent-team-games [games]="team.team_overview.recent_games" [team]="team"></app-recent-team-games>
       </div>
       <div class="clubhouse__content-tile">
         <h3 class="mat-title">pr&oacute;ximos jogos</h3>
-        <app-next-team-games [games]="team.team.next_games" [team]="team"></app-next-team-games>
+        <app-next-team-games [games]="team.team_overview.next_games" [team]="team"></app-next-team-games>
       </div>
     </div>
   </div>

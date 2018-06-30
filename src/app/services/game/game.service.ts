@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Team } from '../team.service';
+import { Team, TeamLookup } from '../team.service';
 import { APP_CONFIG, AppConfig } from '../../app.config';
 import { HttpClient } from '@angular/common/http';
 import { map, share } from 'rxjs/operators';
@@ -13,11 +13,11 @@ export interface Game {
   round: {
     round_number: number;
   };
-  home_team: Team;
+  home_team: TeamLookup;
   home_performance: {
     fantasy_points: number;
   };
-  away_team: Team;
+  away_team: TeamLookup;
   away_performance: {
     fantasy_points: number;
   };

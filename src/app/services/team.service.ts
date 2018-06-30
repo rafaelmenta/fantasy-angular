@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { APP_CONFIG, AppConfig } from '../app.config';
 import { HttpClient } from '@angular/common/http';
 import { Player } from './player/player.service';
-import { User } from './user.service';
+import { User, UserTeam } from './user.service';
 import { Game } from './game/game.service';
 import { TeamTrades } from './trade/trade.service';
 import { Store, select } from '@ngrx/store';
@@ -15,9 +15,7 @@ import { Division, FreeAgencyHistory } from '../../typings';
 import { ADD_FREE_AGENCY_HISTORY, AddFreeAgencyHistory } from '../store/free-agents-history.reducer';
 
 export interface Team {
-  id_sl: number;
-  default_team: boolean;
-  team: {
+  team_overview: {
     id_sl: number;
     slug: string;
     city: string;
@@ -43,6 +41,16 @@ export interface Team {
   };
 }
 
+export interface TeamLookup {
+  id_sl: number;
+  city: string;
+  nickname: string;
+  primary_color: string;
+  secondary_color: string;
+  slug: string;
+  symbol: string;
+}
+
 export interface TeamPlayer {
   id_player: number;
   id_sl: number;
@@ -63,7 +71,7 @@ export class TeamService {
   private resource = 'teams';
   private userTeam: Observable<Team>;
 
-  getDefaultTeam(teams: Team[]) {
+  getDefaultTeam(teams: UserTeam[]) {
     return teams.find(team => team.default_team);
   }
 
@@ -75,7 +83,7 @@ export class TeamService {
 
   getTeamRoster(id: number) {
     const url = `${this.config.API_ENDPOINT}${this.resource}/${id}/roster`;
-    return this.http.get<Team>(url);
+    return this.http.get<{team: Team['team_overview']}>(url).pipe(map(res => ({team_overview: res.team}) ));
   }
 
   getTeam(id: number, useCache?: boolean): Observable<Team> {
@@ -99,7 +107,7 @@ export class TeamService {
   }
 
   removePlayer(team: Team, player: Player) {
-    const url = `${this.config.API_ENDPOINT}${this.resource}/${team.team.id_sl}/roster/${player.id_player}`;
+    const url = `${this.config.API_ENDPOINT}${this.resource}/${team.team_overview.id_sl}/roster/${player.id_player}`;
     const res = this.http.delete<{dumpPlayer: number}>(url).pipe(share());
 
     res.subscribe(response => {
@@ -116,7 +124,7 @@ export class TeamService {
           player,
           event_date: new Date(),
           action: 'DROP',
-          team_sl: team.team,
+          team_sl: team.team_overview as UserTeam['team'],
         };
 
         this.store.dispatch<AddFreeAgent>({type: ADD_FREE_AGENT, payload: freeAgent});
@@ -147,7 +155,7 @@ export class TeamService {
     return this.http.get<Team>(url);
   }
 
-  addPlayer(team: Team, player: Player) {
+  addPlayer(team: UserTeam, player: Player) {
     const url = `${this.config.API_ENDPOINT}${this.resource}/${team.id_sl}/player`;
 
     const body = {
@@ -179,6 +187,8 @@ export class TeamService {
           action: 'PICK',
           team_sl: team.team,
         };
+
+        console.warn('add history', history, team);
 
         this.store.dispatch<AddTeamPlayer>({ type: ADD_TEAM_PLAYER, payload: teamPlayer });
         this.store.dispatch<RemoveFreeAgent>({ type: REMOVE_FREE_AGENT, payload: player });

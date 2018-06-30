@@ -1,5 +1,6 @@
 import { Player } from "src/app/services/player/player.service";
-import { Team } from "src/app/services/team.service";
+import { Team, TeamLookup } from "src/app/services/team.service";
+import { UserTeam } from "../app/services/user.service";
 
 export type League = {
     id_league?: number;
@@ -45,5 +46,5 @@ export type FreeAgencyHistory = {
     player: Player;
     event_date: Date;
     action: FreeAgencyAction;
-    team_sl: Team['team'];
+    team_sl: UserTeam['team'];
 }

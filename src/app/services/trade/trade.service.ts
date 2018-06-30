@@ -104,7 +104,7 @@ export class TradeService {
     return res;
   }
 
-  createTrade(team: Team['team'], trade: SentTrade) {
+  createTrade(team: Team['team_overview'], trade: SentTrade) {
     const url = `${this.config.API_ENDPOINT}${this.resource}`;
 
     const proposal = this.tradeToProposal(team, trade);
@@ -120,7 +120,7 @@ export class TradeService {
     return res;
   }
 
-  private tradeToProposal(team: Team['team'], trade: SentTrade): Proposal {
+  private tradeToProposal(team: Team['team_overview'], trade: SentTrade): Proposal {
     return {
       trade_comment: trade.trade_comment,
       sender: team.id_sl,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { UserService, UserTeam } from '../../services/user.service';
 import { Team, TeamService } from '../../services/team.service';
 import { Observable } from 'rxjs';
 import { LeagueService } from '../../services/league/league.service';
@@ -12,7 +12,7 @@ import { FreeAgencyHistory } from '../../../typings';
 })
 export class FreeAgencyHistoryComponent implements OnInit {
 
-  defaultTeam: Team;
+  defaultTeam: UserTeam;
   faHistory$: Observable<FreeAgencyHistory[]>;
 
   constructor(

@@ -13,21 +13,21 @@ export class RecentTeamGamesComponent implements OnInit {
   @Input() team: Team;
 
   getOpponent(game: Game) {
-    if (this.team.team.id_sl === game.home_team.id_sl) {
+    if (this.team.team_overview.id_sl === game.home_team.id_sl) {
       return game.away_team;
     }
     return game.home_team;
   }
 
   getTeamPerformance(game: Game) {
-    if (this.team.team.id_sl === game.home_team.id_sl) {
+    if (this.team.team_overview.id_sl === game.home_team.id_sl) {
       return game.home_performance.fantasy_points;
     }
     return game.away_performance.fantasy_points;
   }
 
   getOpponentPerformance(game: Game) {
-    if (this.team.team.id_sl === game.home_team.id_sl) {
+    if (this.team.team_overview.id_sl === game.home_team.id_sl) {
       return game.away_performance.fantasy_points;
     }
     return game.home_performance.fantasy_points;

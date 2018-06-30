@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { UserService, UserTeam } from '../../services/user.service';
 import { TeamService, Team } from '../../services/team.service';
 import { SentTrade, Trade, TradeService } from '../../services/trade/trade.service';
 import { MatSnackBar } from '@angular/material';
@@ -14,7 +14,7 @@ import { Angulartics2 } from 'angulartics2';
 export class SentTradesComponent implements OnInit {
 
   trades: SentTrade[];
-  team: Team;
+  team: UserTeam;
 
   constructor(
     private userService: UserService,

@@ -24,8 +24,8 @@ export class CreateTradeComponent implements OnInit {
   @ViewChild('receiver') receiver: TradeTeamComponent;
 
   teams: Team[];
-  team: Team['team'];
-  tradingTeam: Team['team'];
+  team: Team['team_overview'];
+  tradingTeam: Team['team_overview'];
   tradingTeam$: Observable<Team>;
   teamDatasource = new MatTableDataSource<Player>();
   validTrade: boolean;
@@ -84,17 +84,17 @@ export class CreateTradeComponent implements OnInit {
     });
   }
 
-  selectTeam(team: Team['team']) {
+  selectTeam(team: Team['team_overview']) {
     this.tradingTeam$ = this.teamService.getTeamRoster(team.id_sl);
     this.tradingTeam$.subscribe(leagueTeam => {
-      this.tradingTeam = leagueTeam.team;
+      this.tradingTeam = leagueTeam.team_overview;
       this.proposal.receiver_players = [];
       this.proposal.receiver_picks = [];
       this.proposal.receiver = {
-        id_sl: leagueTeam.team.id_sl,
-        city: leagueTeam.team.city,
-        nickname: leagueTeam.team.nickname,
-        slug: leagueTeam.team.slug,
+        id_sl: leagueTeam.team_overview.id_sl,
+        city: leagueTeam.team_overview.city,
+        nickname: leagueTeam.team_overview.nickname,
+        slug: leagueTeam.team_overview.slug,
       };
     });
   }
@@ -120,8 +120,8 @@ export class CreateTradeComponent implements OnInit {
           if (!userTeam) {
             return;
           }
-          this.team = userTeam.team;
-          this.teamDatasource.data = userTeam.team.players;
+          this.team = userTeam.team_overview;
+          this.teamDatasource.data = userTeam.team_overview.players;
         });
 
         this.leagueService.getUserLeague(id).subscribe(res => {
@@ -129,7 +129,7 @@ export class CreateTradeComponent implements OnInit {
             return;
           }
           this.teams = flatTeams(res)
-            .filter((leagueTeam: Team['team']) => team.id_sl !== leagueTeam.id_sl)
+            .filter((leagueTeam: Team['team_overview']) => team.id_sl !== leagueTeam.id_sl)
             .sort(sortAlphabetically);
         });
       }

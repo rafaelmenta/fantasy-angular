@@ -39,9 +39,9 @@ export function userTeamReducer(state: Team, action: UserTeamAction) {
         return state;
       }
       return {
-        team: {
-          ...state.team,
-          players: state.team.players.concat(action.payload),
+        team_overview: {
+          ...state.team_overview,
+          players: state.team_overview.players.concat(action.payload),
         }
       };
     }
@@ -51,9 +51,9 @@ export function userTeamReducer(state: Team, action: UserTeamAction) {
         return state;
       }
       return {
-        team: {
-          ...state.team,
-          players: state.team.players.filter(player => player.id_player !== action.payload.id),
+        team_overview: {
+          ...state.team_overview,
+          players: state.team_overview.players.filter(player => player.id_player !== action.payload.id),
         },
       };
     }
@@ -63,9 +63,9 @@ export function userTeamReducer(state: Team, action: UserTeamAction) {
         return state;
       }
       return {
-        team: {
-          ...state.team,
-          players: state.team.players
+        team_overview: {
+          ...state.team_overview,
+          players: state.team_overview.players
             .filter(player => player.id_player !== action.payload.id_player)
             .push(action.payload),
         }
