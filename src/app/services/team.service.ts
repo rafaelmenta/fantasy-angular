@@ -197,8 +197,6 @@ export class TeamService {
           team_sl: team.team,
         };
 
-        console.warn('add history', history, team);
-
         this.store.dispatch<AddTeamPlayer>({ type: ADD_TEAM_PLAYER, payload: teamPlayer });
         this.store.dispatch<RemoveFreeAgent>({ type: REMOVE_FREE_AGENT, payload: player });
         this.store.dispatch<AddFreeAgencyHistory>({ type: ADD_FREE_AGENCY_HISTORY, payload: history });

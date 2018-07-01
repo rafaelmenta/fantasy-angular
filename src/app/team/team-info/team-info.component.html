@@ -1,0 +1,16 @@
+<mat-card >
+  <h3 class="mat-title">Campanha</h3>
+  <div class="info-grid">
+    <ngx-charts-bar-horizontal-stacked
+      [scheme]="colors"
+      [results]="results"
+      [gradient]="false"
+      [xAxis]="true"
+      [yAxis]="false"
+      [legend]="false"
+      [showXAxisLabel]="true"
+      [xAxisLabel]="'Jogos'"
+      [showYAxisLabel]="false">
+    </ngx-charts-bar-horizontal-stacked>
+  </div>
+</mat-card>

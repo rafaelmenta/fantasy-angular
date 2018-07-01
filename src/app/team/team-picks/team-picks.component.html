@@ -1,36 +1,39 @@
-<mat-table #table [dataSource]="dataSource" matSort class="clubhouse__roster">
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;" class="boxscore-row"></mat-row>
+<mat-card>
+  <h3 class="mat-title">Draft</h3>
+  <mat-table #table [dataSource]="dataSource" matSort class="clubhouse__roster">
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="boxscore-row"></mat-row>
 
-  <!-- Original logo Column -->
-  <ng-container matColumnDef="original-logo">
-    <mat-header-cell *matHeaderCellDef class="player-name"></mat-header-cell>
-    <mat-cell *matCellDef="let pick" class="player-name">
-      <a [routerLink]="['/team', pick.original.slug]">
-        <img
-          class="player-avatar"
-          src="https://static.draftbrasil.net/team/logo/{{pick.original.id_sl}}.png" alt="">
-      </a>
-    </mat-cell>
-  </ng-container>
+    <!-- Original logo Column -->
+    <ng-container matColumnDef="original-logo">
+      <mat-header-cell *matHeaderCellDef class="player-name"></mat-header-cell>
+      <mat-cell *matCellDef="let pick" class="player-name">
+        <a [routerLink]="['/team', pick.original.slug]">
+          <img
+            class="player-avatar"
+            src="https://static.draftbrasil.net/team/logo/{{pick.original.id_sl}}.png" alt="">
+        </a>
+      </mat-cell>
+    </ng-container>
 
-  <!-- Year Column -->
-  <ng-container matColumnDef="year">
-    <mat-header-cell *matHeaderCellDef>Ano</mat-header-cell>
-    <mat-cell *matCellDef="let pick">{{pick.draft.year_draft}}</mat-cell>
-  </ng-container>
+    <!-- Year Column -->
+    <ng-container matColumnDef="year">
+      <mat-header-cell *matHeaderCellDef>Ano</mat-header-cell>
+      <mat-cell *matCellDef="let pick">{{pick.draft.year_draft}}</mat-cell>
+    </ng-container>
 
-  <!-- Round Column -->
-  <ng-container matColumnDef="round">
-    <mat-header-cell *matHeaderCellDef>Rodada</mat-header-cell>
-    <mat-cell *matCellDef="let pick">{{pick.round}}</mat-cell>
-  </ng-container>
+    <!-- Round Column -->
+    <ng-container matColumnDef="round">
+      <mat-header-cell *matHeaderCellDef>Rodada</mat-header-cell>
+      <mat-cell *matCellDef="let pick">{{pick.round}}</mat-cell>
+    </ng-container>
 
-  <!-- Original Column -->
-  <ng-container matColumnDef="original">
-    <mat-header-cell *matHeaderCellDef>Origem</mat-header-cell>
-    <mat-cell *matCellDef="let pick"><a [routerLink]="['/team', pick.original.slug]" class="link">
-      {{pick.original.symbol}}
-    </a></mat-cell>
-  </ng-container>
-</mat-table>
+    <!-- Original Column -->
+    <ng-container matColumnDef="original">
+      <mat-header-cell *matHeaderCellDef>Origem</mat-header-cell>
+      <mat-cell *matCellDef="let pick"><a [routerLink]="['/team', pick.original.slug]" class="link">
+        {{pick.original.symbol}}
+      </a></mat-cell>
+    </ng-container>
+  </mat-table>
+</mat-card>

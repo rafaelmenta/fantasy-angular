@@ -7,51 +7,55 @@
       </div>
       <div class="header__content-row header__info-row">
         <p class="mat-title">
-          {{team.team_overview.record.win}} - {{team.team_overview.record.loss}} • {{team.team_overview.division.name}} • {{team.team_overview.division.conference.name}}
+          {{team.team_overview.division.conference.name}}
           • GM: {{team.team_overview.users[0].nickname}}</p>
       </div>
     </div>
   </header>
-
-  <div class="container clubhouse__content">
-    <div class="clubhouse__content-left">
-      <div class="clubhouse__content-tile">
-        <h3 class="mat-title">roster</h3>
-        <app-team-players [players]="team.team_overview.players"></app-team-players>
-      </div>
-      <div class="clubhouse__content-tile">
-        <h3 class="mat-title">draft</h3>
-        <app-team-picks [picks]="team.team_overview.picks"></app-team-picks>
-      </div>
+  <div class="container">
+    <div class="clubhouse__content-row">
+      <app-team-info [team]="team"></app-team-info>
     </div>
-    <div class="clubhouse__content-right">
-      <div class="clubhouse__content-tile">
-        <h3 class="mat-title">pontuação</h3>
-        <div class="clubhouse__score-tile" *ngIf="team.team_overview.stats">
-          <span class="mat-display-2 score-value">
-            {{team.team_overview.stats.fantasy_points.toFixed(2)}}
-            <span class="clubhouse__score-suffix">fpg</span>
-          </span>
-          <span class="mat-display-2 divider">
-            •
-          </span>
-          <span class="mat-display-2 score-value">
-          {{(team.team_overview.stats.fantasy_points/48).toFixed(2)}}
-            <span class="clubhouse__score-suffix">fpm</span>
-          </span>
+    <div class="clubhouse__content">
+      <div class="clubhouse__content-left">
+        <div class="clubhouse__content-tile">
+          <app-team-players [players]="team.team_overview.players"></app-team-players>
+        </div>
+        <div class="clubhouse__content-tile">
+          <app-team-picks [picks]="team.team_overview.picks"></app-team-picks>
         </div>
       </div>
-      <div class="clubhouse__content-tile">
-        <h3 class="mat-title">minutos restantes</h3>
-        <app-minutes-chart [stats]="team.team_overview.stats"></app-minutes-chart>
-      </div>
-      <div class="clubhouse__content-tile">
-        <h3 class="mat-title">jogos recentes</h3>
-        <app-recent-team-games [games]="team.team_overview.recent_games" [team]="team"></app-recent-team-games>
-      </div>
-      <div class="clubhouse__content-tile">
-        <h3 class="mat-title">pr&oacute;ximos jogos</h3>
-        <app-next-team-games [games]="team.team_overview.next_games" [team]="team"></app-next-team-games>
+      <div class="clubhouse__content-right">
+        <div class="clubhouse__content-tile" *ngIf="team.team_overview.stats">
+          <mat-card>
+            <h3 class="mat-title">Pontuação</h3>
+            <div class="clubhouse__score-tile">
+              <span class="mat-display-2 score-value">
+                {{team.team_overview.stats.fantasy_points.toFixed(2)}}
+                <span class="clubhouse__score-suffix">fpg</span>
+              </span>
+              <span class="mat-display-2 divider">
+                •
+              </span>
+              <span class="mat-display-2 score-value">
+                {{(team.team_overview.stats.fantasy_points/48).toFixed(2)}}
+                <span class="clubhouse__score-suffix">fpm</span>
+              </span>
+            </div>
+          </mat-card>
+        </div>
+        <div class="clubhouse__content-tile">
+          <app-standings-widget [team]="team"></app-standings-widget>
+        </div>
+        <div class="clubhouse__content-tile" *ngIf="team.team_overview.stats">
+          <app-minutes-chart [stats]="team.team_overview.stats"></app-minutes-chart>
+        </div>
+        <div class="clubhouse__content-tile" *ngIf="team.team_overview.recent_games.length > 0">
+          <app-recent-team-games [games]="team.team_overview.recent_games" [team]="team"></app-recent-team-games>
+        </div>
+        <div class="clubhouse__content-tile" *ngIf="team.team_overview.next_games.length > 0">
+          <app-next-team-games [games]="team.team_overview.next_games" [team]="team"></app-next-team-games>
+        </div>
       </div>
     </div>
   </div>

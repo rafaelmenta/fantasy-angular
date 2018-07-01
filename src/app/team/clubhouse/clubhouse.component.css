@@ -48,6 +48,20 @@
   .header__info-row p {
     text-align: center;
   }
+
+  .clubhouse__content {
+    flex-direction: column-reverse;
+  }
+}
+
+@media (min-width: 721px) {
+  .clubhouse__content-left {
+    max-width: 584px;
+  }
+
+  .clubhouse__content-right {
+    max-width: 584px;
+  }
 }
 
 .header__info-row {
@@ -57,6 +71,7 @@
 .clubhouse__content {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .clubhouse__content-left {
@@ -70,7 +85,6 @@
 }
 
 .clubhouse__content > * {
-  margin: 24px;
 }
 
 .clubhouse__content-tile {
@@ -91,6 +105,7 @@
 
 .clubhouse__score-tile > * {
   margin-right: 12px;
+  margin-bottom: 24px;
 }
 
 .clubhouse__score-suffix {

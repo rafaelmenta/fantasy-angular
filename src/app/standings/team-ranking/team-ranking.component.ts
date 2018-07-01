@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { TeamInfo } from '../../../typings';
+import { Team } from '../../services/team.service';
 
 @Component({
   selector: 'app-team-ranking',
@@ -8,9 +9,12 @@ import { TeamInfo } from '../../../typings';
 })
 export class TeamRankingComponent implements OnInit, OnChanges {
 
-  rankColumns = ['position', 'team', 'win', 'loss', 'fpg'];
   @Input() teams: TeamInfo[];
+  @Input() highlightTeam: Team;
+  @Input() elevate: boolean;
+
   sortedTeams: TeamInfo[];
+  rankColumns = ['position', 'team', 'win', 'loss', 'fpg'];
 
   constructor() { }
 
