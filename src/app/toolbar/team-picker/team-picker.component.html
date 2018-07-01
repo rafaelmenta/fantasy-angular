@@ -1,0 +1,15 @@
+<button mat-raised-button [matMenuTriggerFor]="menu" class="hide-mobile default-team">
+    <img class="player-avatar" src="https://static.draftbrasil.net/team/logo/{{defaultTeam.id_sl}}.png" alt="">
+    {{defaultTeam.team.city}} {{defaultTeam.team.nickname}}
+</button>
+
+<button mat-icon-button class="hide-desktop" [matMenuTriggerFor]="menu">
+  <img class="player-avatar" src="https://static.draftbrasil.net/team/logo/{{defaultTeam.id_sl}}.png" alt="">
+</button>
+
+<mat-menu #menu="matMenu">
+  <button *ngFor="let userTeam of teams" (click)="selectTeam(userTeam)" mat-menu-item>
+    <img class="player-avatar" src="https://static.draftbrasil.net/team/logo/{{userTeam.id_sl}}.png" alt="">
+    {{userTeam.team.city}} {{userTeam.team.nickname}}
+  </button>
+</mat-menu>

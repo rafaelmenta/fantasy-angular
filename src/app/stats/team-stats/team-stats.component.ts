@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService, User } from '../../services/user.service';
-import { TeamService, Team } from '../../services/team.service';
+import { TeamService, Team, StatsTeam } from '../../services/team.service';
 import { Observable } from 'rxjs';
 import { StatPlayer, Player } from '../../services/player/player.service';
 import { map } from 'rxjs/operators';
@@ -23,10 +23,11 @@ export class TeamStatsComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle(`Superliga - Estatísticas da equipe`);
-    let user: User;
-    this.userService.user.subscribe(u => user = u);
-    const defaultTeam = this.teamService.getDefaultTeam(user.teams);
-    this.players$ = this.teamService.getRosterStats(defaultTeam.id_sl).pipe(map(this.formatStats.bind(this)));
+
+    this.userService.user.subscribe(user => {
+      const defaultTeam = this.teamService.getDefaultTeam(user.teams);
+      this.players$ = this.teamService.getRosterStats(defaultTeam.id_sl).pipe(map(this.formatStats.bind(this)));
+    });
   }
 
   formatPlayerStat(player: Player): StatPlayer {
@@ -41,8 +42,8 @@ export class TeamStatsComponent implements OnInit {
     };
   }
 
-  formatStats(res: Team): StatPlayer[] {
-    const players = res.team_overview.players;
+  formatStats(res: StatsTeam): StatPlayer[] {
+    const players = res.team.players;
     return players.map(this.formatPlayerStat);
   }
 }

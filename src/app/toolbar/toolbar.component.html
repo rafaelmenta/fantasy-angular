@@ -22,17 +22,8 @@
         <a mat-menu-item routerLink="stats">Stats</a>
         <a mat-menu-item routerLink="draft">Draft</a>
       </mat-menu>
-
-      <!-- Team picker -->
-      <!-- <button mat-raised-button [matMenuTriggerFor]="menu"><mat-icon>face</mat-icon> Viçosa Bytes</button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item><mat-icon>face</mat-icon> Viçosa Bytes</button>
-          <button mat-menu-item><mat-icon>important_devices</mat-icon> Viçosa Megabytes</button>
-        </mat-menu> -->
-
-        <!-- Search -->
-        <app-typeahead class="hide-mobile toolbar__search"></app-typeahead>
-
+      <!-- Search -->
+      <app-typeahead class="hide-mobile toolbar__search"></app-typeahead>
       </ng-container>
 
       <!-- Public -->
@@ -42,6 +33,9 @@
       <ng-container *ngIf="user">
         <!-- Spacer -->
         <span class="toolbar__spacer"></span>
+
+        <!-- Team picker -->
+        <app-team-picker *ngIf="user.teams.length > 1"></app-team-picker>
 
         <!-- <button mat-icon-button>
           <mat-icon class="toolbar__icon">message</mat-icon>

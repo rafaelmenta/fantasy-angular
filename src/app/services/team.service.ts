@@ -59,6 +59,15 @@ export interface TeamPlayer {
   secondary_position: string;
 }
 
+export interface StatsTeam {
+  team: {
+    city: string;
+    nickname: string;
+    slug: string;
+    players: Player[];
+  };
+}
+
 interface TeamState {
   team: Team;
 }
@@ -86,7 +95,7 @@ export class TeamService {
     return this.http.get<{team_roster: Team['team_overview']}>(url).pipe(map(res => ({team_overview: res.team_roster}) ));
   }
 
-  getTeam(id: number, useCache?: boolean): Observable<Team> {
+  getTeam(id: number|string, useCache?: boolean): Observable<Team> {
     if (useCache && this.isTeamDefined()) {
       return this.userTeam;
     }
@@ -152,7 +161,7 @@ export class TeamService {
 
   getRosterStats(teamId: number) {
     const url = `${this.config.API_ENDPOINT}${this.resource}/${teamId}/roster/stats`;
-    return this.http.get<Team>(url);
+    return this.http.get<StatsTeam>(url);
   }
 
   addPlayer(team: UserTeam, player: Player) {

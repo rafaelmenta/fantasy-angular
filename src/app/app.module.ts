@@ -91,6 +91,7 @@ import { OnTheClockComponent } from './draft/on-the-clock/on-the-clock.component
 
 import { MomentModule } from 'ngx-moment';
 import { PlayerLookupComponent } from './common/player-lookup/player-lookup.component';
+import { TeamPickerComponent } from './toolbar/team-picker/team-picker.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -153,6 +154,7 @@ registerLocaleData(localePt);
     DraftListComponent,
     OnTheClockComponent,
     PlayerLookupComponent,
+    TeamPickerComponent,
   ],
   imports: [
     BrowserModule,
