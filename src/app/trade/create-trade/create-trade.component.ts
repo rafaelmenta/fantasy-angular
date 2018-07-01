@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { TeamService, Team } from '../../services/team.service';
 import { LeagueService } from '../../services/league/league.service';
 import { UserService } from '../../services/user.service';
@@ -12,6 +12,8 @@ import { Observable } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { Angulartics2 } from 'angulartics2';
 import { AcceptTradeComponent } from '../accept-trade/accept-trade.component';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { APP_CONFIG, AppConfig } from '../../app.config';
 
 @Component({
   selector: 'app-create-trade',
@@ -29,6 +31,7 @@ export class CreateTradeComponent implements OnInit {
   tradingTeam$: Observable<Team>;
   teamDatasource = new MatTableDataSource<Player>();
   validTrade: boolean;
+  mobileBreakpoint: boolean;
 
   proposal = this.getNewTrade();
 
@@ -107,6 +110,8 @@ export class CreateTradeComponent implements OnInit {
     private title: Title,
     private angulartics2: Angulartics2,
     private dialog: MatDialog,
+    @Inject(APP_CONFIG) private config: AppConfig,
+    private breakpoint$: BreakpointObserver,
     private leagueService: LeagueService) { }
 
   ngOnInit() {
@@ -134,6 +139,9 @@ export class CreateTradeComponent implements OnInit {
         });
       }
     });
+
+    this.breakpoint$.observe(this.config.LARGE_MOBILE_QUERY)
+      .subscribe(res => this.mobileBreakpoint = res.matches);
   }
 
   resetTrade() {

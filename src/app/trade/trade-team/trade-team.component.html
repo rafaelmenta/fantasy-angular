@@ -64,8 +64,6 @@
   </ng-container>
 </mat-table>
 
-<mat-divider class="divider"></mat-divider>
-
 <mat-table *ngIf="team" #table [dataSource]="pickSource" class="clubhouse__roster">
   <mat-header-row *matHeaderRowDef="pickColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: pickColumns;" class="boxscore-row"></mat-row>

@@ -1,12 +1,28 @@
 .teams-wrapper {
     display: flex;
-    overflow: scroll;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .team-card {
-    margin-right: 16px;
     cursor: pointer;
     padding: 8px;
+    width: 208px;
+    margin-top: 8px;
+    height: 64px;
+}
+
+.mobile-teams-wrapper {
+    display: flex;
+    overflow-x: scroll;
+}
+
+.mobile-teams-wrapper .team-card {
+    height: unset;
+}
+
+.trade-panel {
+    margin-top: 16px;
 }
 
 .team-card:hover {

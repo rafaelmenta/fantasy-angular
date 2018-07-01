@@ -83,7 +83,7 @@ export class TeamService {
 
   getTeamRoster(id: number) {
     const url = `${this.config.API_ENDPOINT}${this.resource}/${id}/roster`;
-    return this.http.get<{team: Team['team_overview']}>(url).pipe(map(res => ({team_overview: res.team}) ));
+    return this.http.get<{team_roster: Team['team_overview']}>(url).pipe(map(res => ({team_overview: res.team_roster}) ));
   }
 
   getTeam(id: number, useCache?: boolean): Observable<Team> {
