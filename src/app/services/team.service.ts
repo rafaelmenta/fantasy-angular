@@ -179,6 +179,8 @@ export class TeamService {
 
     const res = this.http.post<{ recruitPlayer: { id_player: number } }>(url, body).pipe(share());
 
+    let userTeam: Team;
+    this.userTeam.subscribe(t => userTeam = t);
     res.subscribe(response => {
       if (response.recruitPlayer.id_player) {
         const teamPlayer: Player = {
@@ -186,7 +188,7 @@ export class TeamService {
           team_info: {
             primary_position: body.team_info.primary_position,
             secondary_position: body.team_info.secondary_position,
-            order: 999,
+            order: userTeam.team_overview.players.length + 1,
           },
         };
 

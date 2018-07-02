@@ -128,6 +128,9 @@ export class RosterComponent implements OnInit {
           if (team) {
             this.players = this.getSortedPlayers(team.team_overview.players);
             this.userTeam = team;
+
+            // normalize order values
+            this.players.forEach((player, idx) => player.team_info.order = idx + 1);
           }
         });
       }
