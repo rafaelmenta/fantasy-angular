@@ -15,7 +15,17 @@
       <a class="hide-mobile" mat-button routerLink="roster">Roster</a>
       <a class="hide-mobile" mat-button routerLink="standings">Classifica&ccedil;&atilde;o</a>
       <a class="hide-mobile" mat-button routerLink="schedule">Calend&aacute;rio</a>
-      <a class="hide-mobile" mat-button routerLink="trade">Trocas</a>
+      <ng-container *ngIf="trades$ | async as data; else noTrade">
+        <a class="hide-mobile"
+        *ngIf="data.team.received_trades.length > 0; else noTrade"
+        [matBadge]="data.team.received_trades.length"
+        matBadgeColor="accent"
+        mat-button
+        routerLink="trade">Trocas</a>
+      </ng-container>
+      <ng-template #noTrade>
+        <a class="hide-mobile" mat-button routerLink="trade">Trocas</a>
+      </ng-template>
       <button class="hide-mobile" mat-button [matMenuTriggerFor]="utils">Utils</button>
       <mat-menu #utils="matMenu">
         <a mat-menu-item routerLink="free-agents">Free agents</a>
@@ -33,6 +43,14 @@
       <ng-container *ngIf="user">
         <!-- Spacer -->
         <span class="toolbar__spacer"></span>
+
+        <mat-chip-list [selectable]="true" class="hide-desktop" style="margin-right: 8px;" *ngIf="trades$ | async as data;">
+          <mat-chip
+            *ngIf="data.team.received_trades.length > 0;"
+            color="accent"
+            selected="true"
+            (click)="loadTrade()">{{data.team.received_trades.length}}</mat-chip>
+        </mat-chip-list>
 
         <!-- Team picker -->
         <app-team-picker *ngIf="user.teams.length > 1"></app-team-picker>

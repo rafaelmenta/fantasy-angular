@@ -164,6 +164,11 @@ export class TeamService {
     return this.http.get<StatsTeam>(url);
   }
 
+  getTradeCount(teamId: number) {
+    const url = `${this.config.API_ENDPOINT}${this.resource}/${teamId}/trade-count`;
+    return this.http.get<{team_trades: number}>(url).pipe(share());
+  }
+
   addPlayer(team: UserTeam, player: Player) {
     const url = `${this.config.API_ENDPOINT}${this.resource}/${team.id_sl}/player`;
 
