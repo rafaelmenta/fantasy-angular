@@ -15,7 +15,28 @@
     flex-wrap: wrap;
 }
 
+.column-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 .info-row * {
+    flex: 1;
+}
+
+.info-row .info-column-left {
+    flex: 2;
+    margin-right: 16px;
+}
+
+@media (max-width: 720px) {
+    .info-row .info-column-left {
+        margin-right: unset;
+    }
+}
+
+.info-row .info-column-right {
     flex: 1;
 }
 
@@ -30,8 +51,8 @@
 }
 
 .info-row app-player-chart {
-    margin-top: 32px;
+    margin-top: 24px;
     flex: 1;
     height: 320px;
-    margin-bottom: 64px;
+    margin-bottom: 120px;
 }

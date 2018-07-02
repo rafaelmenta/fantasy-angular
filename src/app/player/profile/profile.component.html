@@ -1,21 +1,22 @@
 <div *ngIf="player$ | async as player; else loading" class="player-profile">
   <app-player-header [player]="player"></app-player-header>
   <div class="container">
-    <div class="info-row">
-      <p class="player-stat mat-display-4">
-        {{(player.stats[0]?.fantasy_points || 0).toFixed(2)}}<span class="player__stat-suffix">fpg</span>
-        <span class="divider"> • </span>
-        {{((player.stats[0]?.fantasy_points/player.stats[0]?.minutes) || 0)
-          .toFixed(2)}}<span class="player__stat-suffix">fpm</span>
-      </p>
-      <app-player-stats [stats]="player.stats[0]"></app-player-stats>
-    </div>
-    <div class="info-row">
-      <app-player-next-games [games]="nextGames$"></app-player-next-games>
-      <img
-        class="profile-photo"
-        onerror="this.src='../../../assets/img/profile/375x450/generic-player.jpg'"
-        src="https://static.draftbrasil.net/player/profile/{{player.id_player}}.jpg">
+    <div class="info-row column-grid">
+      <div class="info-column-left">
+        <mat-card>
+          <p class="player-stat mat-display-4">
+            {{(player.stats[0]?.fantasy_points || 0).toFixed(2)}}
+            <span class="player__stat-suffix">fpg</span>
+            <span class="divider"> • </span>
+            {{((player.stats[0]?.fantasy_points/player.stats[0]?.minutes) || 0) .toFixed(2)}}
+            <span class="player__stat-suffix">fpm</span>
+          </p>
+        </mat-card>
+        <app-player-next-games [games]="nextGames$"></app-player-next-games>
+      </div>
+      <div class="info-column-right">
+          <app-player-stats [player]="player" [stats]="player.stats[0]"></app-player-stats>
+      </div>
     </div>
     <div class="info-row">
       <app-player-chart
@@ -23,7 +24,7 @@
         [roundAverages$]="roundAverages$"
         [performances$]="performances$"></app-player-chart>
     </div>
-    <div class="infor-row">
+    <div class="info-row">
       <app-player-last-games [performances$]="performances$"></app-player-last-games>
     </div>
   </div>

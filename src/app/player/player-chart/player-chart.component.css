@@ -1,3 +1,4 @@
-.mat-title {
-  color: #999;
+.chart-grid {
+  display: grid;
+  height: 320px;
 }

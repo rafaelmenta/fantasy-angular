@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { PlayerStat } from '../../services/player/player.service';
+import { PlayerStat, Player } from '../../services/player/player.service';
 import { MatTableDataSource } from '@angular/material';
 
 @Component({
@@ -10,6 +10,7 @@ import { MatTableDataSource } from '@angular/material';
 export class PlayerStatsComponent implements OnInit {
 
   @Input() stats: PlayerStat;
+  @Input() player: Player;
 
   datasource = new MatTableDataSource<PlayerStat>();
   displayedColumns = ['points', 'rebounds', 'assists'];

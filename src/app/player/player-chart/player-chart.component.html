@@ -1,12 +1,16 @@
-<h3 class="mat-title">pontua&ccedil;&atilde;o</h3>
-<ngx-charts-line-chart
-  [scheme]="colorScheme"
-  [results]="combinedDatasource"
-  [xAxis]="showXAxis"
-  [yAxis]="showYAxis"
-  [legend]="showLegend"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel">
-</ngx-charts-line-chart>
+<mat-card>
+  <h3 class="mat-title">Pontua&ccedil;&atilde;o</h3>
+  <div class="chart-grid">
+      <ngx-charts-line-chart
+    [scheme]="colorScheme"
+    [results]="combinedDatasource"
+    [xAxis]="showXAxis"
+    [yAxis]="showYAxis"
+    [legend]="showLegend"
+    [showXAxisLabel]="showXAxisLabel"
+    [showYAxisLabel]="showYAxisLabel"
+    [xAxisLabel]="xAxisLabel"
+    [yAxisLabel]="yAxisLabel">
+  </ngx-charts-line-chart>
+  </div>
+</mat-card>

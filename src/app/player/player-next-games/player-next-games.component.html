@@ -1,53 +1,55 @@
-<h3 class="mat-title">pr&oacute;ximos jogos</h3>
+<mat-card>
+  <h3 class="mat-title">Pr&oacute;ximos jogos</h3>
 
-<mat-table #table [dataSource]="datasource" matSort class="mat-elevation-z8">
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;" class="boxscore-row"></mat-row>
+  <mat-table #table [dataSource]="datasource" matSort>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" class="boxscore-row"></mat-row>
 
-  <!-- Home logo Column -->
-  <ng-container matColumnDef="logo-home">
-    <mat-header-cell *matHeaderCellDef>Jogo</mat-header-cell>
-    <mat-cell *matCellDef="let game">
-      <a class="link" [routerLink]="['/club', game.home_team.slug]">
-        <img src="https://static.draftbrasil.net/nba/logo/{{game.home_team.id_nba}}.png">
-      </a>
-    </mat-cell>
-  </ng-container>
+    <!-- Home logo Column -->
+    <ng-container matColumnDef="logo-home">
+      <mat-header-cell *matHeaderCellDef>Jogo</mat-header-cell>
+      <mat-cell *matCellDef="let game">
+        <a class="link" [routerLink]="['/club', game.home_team.slug]">
+          <img src="https://static.draftbrasil.net/nba/logo/{{game.home_team.id_nba}}.png">
+        </a>
+      </mat-cell>
+    </ng-container>
 
-  <!-- Away logo Column -->
-  <ng-container matColumnDef="logo-away">
-    <mat-header-cell *matHeaderCellDef></mat-header-cell>
-    <mat-cell *matCellDef="let game">
-      <a class="link" [routerLink]="['/club', game.away_team.slug]">
-        <img src="https://static.draftbrasil.net/nba/logo/{{game.away_team.id_nba}}.png">
-      </a>
-    </mat-cell>
-  </ng-container>
+    <!-- Away logo Column -->
+    <ng-container matColumnDef="logo-away">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let game">
+        <a class="link" [routerLink]="['/club', game.away_team.slug]">
+          <img src="https://static.draftbrasil.net/nba/logo/{{game.away_team.id_nba}}.png">
+        </a>
+      </mat-cell>
+    </ng-container>
 
-  <!-- Game Column -->
-  <ng-container matColumnDef="game">
-    <mat-header-cell *matHeaderCellDef class="name-expand"></mat-header-cell>
-    <mat-cell *matCellDef="let game" class="name-expand">
-      <a class="link" [routerLink]="['/club', game.home_team.slug]">
-        {{game.home_team.nickname}}
-      </a>
-      <span class="divider"></span>
-      <a class="link" [routerLink]="['/club', game.away_team.slug]">
-        {{game.away_team.nickname}}
-      </a>
-    </mat-cell>
-  </ng-container>
+    <!-- Game Column -->
+    <ng-container matColumnDef="game">
+      <mat-header-cell *matHeaderCellDef class="name-expand"></mat-header-cell>
+      <mat-cell *matCellDef="let game" class="name-expand">
+        <a class="link" [routerLink]="['/club', game.home_team.slug]">
+          {{game.home_team.nickname}}
+        </a>
+        <span class="divider"></span>
+        <a class="link" [routerLink]="['/club', game.away_team.slug]">
+          {{game.away_team.nickname}}
+        </a>
+      </mat-cell>
+    </ng-container>
 
-  <!-- Gametime Column -->
-  <ng-container matColumnDef="gamedate">
-    <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
-    <mat-cell *matCellDef="let game">{{game.game_time | date}}</mat-cell>
-  </ng-container>
+    <!-- Gametime Column -->
+    <ng-container matColumnDef="gamedate">
+      <mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
+      <mat-cell *matCellDef="let game">{{game.game_time | date}}</mat-cell>
+    </ng-container>
 
-  <!-- Time Column -->
-  <ng-container matColumnDef="gametime">
-    <mat-header-cell *matHeaderCellDef>Hor&aacute;rio*</mat-header-cell>
-    <mat-cell *matCellDef="let game">{{game.game_time | date:'shortTime'}}</mat-cell>
-  </ng-container>
-</mat-table>
-<p class="mat-caption">*Hor&aacute;rios da costa leste</p>
+    <!-- Time Column -->
+    <ng-container matColumnDef="gametime">
+      <mat-header-cell *matHeaderCellDef>Hor&aacute;rio*</mat-header-cell>
+      <mat-cell *matCellDef="let game">{{game.game_time | date:'shortTime'}}</mat-cell>
+    </ng-container>
+  </mat-table>
+  <p class="mat-caption">*Hor&aacute;rios da costa leste</p>
+</mat-card>

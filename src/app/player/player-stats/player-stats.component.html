@@ -1,29 +1,56 @@
-<mat-table #table [dataSource]="datasource" class="stats-table">
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;" class="boxscore-row"></mat-row>
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar>
+      <img
+      onerror="this.src='../../../assets/img/profile/375x450/generic-player-2.jpg'"
+      src="https://static.draftbrasil.net/player/avatar/{{player.id_player}}.jpg"
+      class="player-avatar player-photo">
+    </div>
+    <mat-card-title>{{player.first_name}} {{player.last_name}}</mat-card-title>
+    <mat-card-subtitle>
+      <span *ngIf="player.team_info; else defaultPosition">
+        {{player.team_info.primary_position}}/{{player.team_info.secondary_position}}
+      </span>
+      <ng-template #defaultPosition>
+        <span>
+          {{player.default_primary}}/{{player.default_secondary}}
+        </span>
+      </ng-template>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <img
+    class="profile-photo"
+    mat-card-image
+    onerror="this.src='../../../assets/img/profile/375x450/generic-player.jpg'"
+    src="https://static.draftbrasil.net/player/profile/{{player.id_player}}.jpg">
+  <mat-card-content>
+    <mat-table #table [dataSource]="datasource" class="stats-table">
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="boxscore-row"></mat-row>
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="points">
-    <mat-header-cell *matHeaderCellDef>Pontos</mat-header-cell>
-    <mat-cell *matCellDef="let stat"><p class="stats-item mat-headline">
-      {{(stat?.points ? stat.points: 0).toFixed(1)}}
-    </p></mat-cell>
-  </ng-container>
+      <!-- Weight Column -->
+      <ng-container matColumnDef="points">
+        <mat-header-cell *matHeaderCellDef>Pontos</mat-header-cell>
+        <mat-cell *matCellDef="let stat"><p class="stats-item mat-headline">
+          {{(stat?.points ? stat.points: 0).toFixed(1)}}
+        </p></mat-cell>
+      </ng-container>
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="rebounds">
-    <mat-header-cell *matHeaderCellDef>Rebotes</mat-header-cell>
-    <mat-cell *matCellDef="let stat"><p class="stats-item mat-headline">
-      {{(stat?.defensive_rebounds ? stat.defensive_rebounds + stat.offensive_rebounds: 0).toFixed(1)}}
-    </p></mat-cell>
-  </ng-container>
+      <!-- Weight Column -->
+      <ng-container matColumnDef="rebounds">
+        <mat-header-cell *matHeaderCellDef>Rebotes</mat-header-cell>
+        <mat-cell *matCellDef="let stat"><p class="stats-item mat-headline">
+          {{(stat?.defensive_rebounds ? stat.defensive_rebounds + stat.offensive_rebounds: 0).toFixed(1)}}
+        </p></mat-cell>
+      </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="assists">
-    <mat-header-cell *matHeaderCellDef>Assist&ecirc;ncias</mat-header-cell>
-    <mat-cell *matCellDef="let stat"><p class="stats-item mat-headline">
-      {{(stat?.assists ? stat.assists: 0).toFixed(1)}}
-    </p></mat-cell>
-  </ng-container>
-
-</mat-table>
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="assists">
+        <mat-header-cell *matHeaderCellDef>Assist&ecirc;ncias</mat-header-cell>
+        <mat-cell *matCellDef="let stat"><p class="stats-item mat-headline">
+          {{(stat?.assists ? stat.assists: 0).toFixed(1)}}
+        </p></mat-cell>
+      </ng-container>
+    </mat-table>
+  </mat-card-content>
+</mat-card>
