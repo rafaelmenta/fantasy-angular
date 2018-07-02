@@ -39,12 +39,14 @@ export class ToolbarComponent implements OnInit {
   }
 
   onUserChange(user: User) {
-    this.user = user;
-    const team = this.teamService.getDefaultTeam(user.teams);
+    if (user) {
+      this.user = user;
+      const team = this.teamService.getDefaultTeam(user.teams);
 
-    this.teamService.getTrades(team.id_sl).subscribe(teamTrades => {
-      this.store.dispatch<UpdateTrade>({ type: UPDATE_TRADE, payload: { teamTrades } });
-    });
+      this.teamService.getTrades(team.id_sl).subscribe(teamTrades => {
+        this.store.dispatch<UpdateTrade>({ type: UPDATE_TRADE, payload: { teamTrades } });
+      });
+    }
   }
 
   ngOnInit() {
