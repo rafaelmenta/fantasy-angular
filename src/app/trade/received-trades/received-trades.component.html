@@ -1,6 +1,6 @@
 <div class="container" *ngIf="trades; else loading">
   <mat-accordion>
-    <mat-expansion-panel *ngFor="let trade of trades">
+    <mat-expansion-panel *ngFor="let trade of trades" (opened)="logView(trade)">
       <mat-expansion-panel-header>
         <mat-panel-title class="trade-header">
           <img class="player-avatar team-logo" src="https://static.draftbrasil.net/team/logo/{{trade.sender.id_sl}}.png">
@@ -45,6 +45,7 @@
               <span>({{ pick.original.symbol }})</span>
             </p>
           </a>
+          <h3 matSubheader>{{ trade.views }} visualiza&ccedil;&otilde;es</h3>
         </mat-nav-list>
       </div>
       <mat-action-row>

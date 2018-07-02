@@ -14,6 +14,7 @@ import { UpdateTradeHistory, UPDATE_TRADE_HISTORY } from '../store/trade-history
 import { UpdateTrade, UPDATE_TRADE } from '../store/trade.reducer';
 import { Player } from './player/player.service';
 import { League } from '../../typings';
+import { AuthService } from './auth/auth.service';
 
 export interface UserTeam {
   id_sl: number;
@@ -79,10 +80,11 @@ export class UserService {
     const url = `${this.config.API_ENDPOINT}${this.resource}/default-team`;
     const body = { id_sl: userTeam.id_sl };
 
-    return this.http.post<{updateDefaultTeam: number[]}>(url, body).pipe(
+    return this.http.post<{token: string}>(url, body).pipe(
       share(),
       tap(res => {
-        if (res.updateDefaultTeam[0] > 0) {
+        if (res.token) {
+          localStorage.setItem('token', res.token);
           const user = this.userSubject.getValue();
           user.teams.forEach(team => team.default_team = team.id_sl === userTeam.id_sl);
           this.clearCache();
@@ -96,6 +98,7 @@ export class UserService {
     @Inject(APP_CONFIG) private config: AppConfig,
     private http: HttpClient,
     private store: Store<UserState>,
+    private authService: AuthService,
     private jwtHelperService: JwtHelperService) {
     this.loadUser();
   }

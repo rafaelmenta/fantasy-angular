@@ -161,6 +161,7 @@ export class CreateTradeComponent implements OnInit {
       sender_players: [],
       sender_picks: [],
       trade_comment: undefined,
+      views: undefined,
     };
   }
 

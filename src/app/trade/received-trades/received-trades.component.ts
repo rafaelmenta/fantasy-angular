@@ -31,6 +31,16 @@ export class ReceivedTradesComponent implements OnInit {
     private dialog: MatDialog,
   ) {}
 
+  logView(trade: Trade) {
+    this.tradeService.updateView(trade).subscribe();
+    this.angulartics2.eventTrack.next({
+      action: 'view-trade',
+      properties: {
+        category: this.team.team.slug,
+      },
+    });
+  }
+
   revokeTrade(trade: Trade) {
     this.tradeService.cancelTrade(trade.id_trade, 'received').subscribe((res: any) => {
       if (res.removeTrade) {
@@ -39,7 +49,7 @@ export class ReceivedTradesComponent implements OnInit {
           action: 'revoke-trade',
           properties: {
             category: this.team.team.slug,
-          }
+          },
         });
         this.snackbar.open('Troca recusada', null, { duration: 5000 });
       }

@@ -38,6 +38,7 @@ export interface Trade {
   sender_players: TradePlayer[];
   sender_picks: Pick[];
   trade_comment: string;
+  views: number;
 }
 
 export interface SentTrade extends Trade {
@@ -102,6 +103,11 @@ export class TradeService {
     const url = `${this.config.API_ENDPOINT}${this.resource}/${idTrade}`;
     const res = this.http.post<{acceptTrade: number[]}>(url, {}).pipe(share());
     return res;
+  }
+
+  updateView(trade: Trade) {
+    const url = `${this.config.API_ENDPOINT}${this.resource}/${trade.id_trade}/view`;
+    return this.http.post<{updateViewCount: number[]}>(url, {}).pipe(share());
   }
 
   createTrade(team: Team['team_overview'], trade: SentTrade) {
