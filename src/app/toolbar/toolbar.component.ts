@@ -39,8 +39,8 @@ export class ToolbarComponent implements OnInit {
   }
 
   onUserChange(user: User) {
+    this.user = user;
     if (user) {
-      this.user = user;
       const team = this.teamService.getDefaultTeam(user.teams);
 
       this.teamService.getTrades(team.id_sl).subscribe(teamTrades => {
