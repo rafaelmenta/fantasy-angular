@@ -19,7 +19,7 @@
     <!-- Year Column -->
     <ng-container matColumnDef="year">
       <mat-header-cell *matHeaderCellDef>Ano</mat-header-cell>
-      <mat-cell *matCellDef="let pick">{{pick.draft.year_draft}}</mat-cell>
+      <mat-cell *matCellDef="let pick">{{pick.draft && pick.draft.year_draft}}</mat-cell>
     </ng-container>
 
     <!-- Round Column -->

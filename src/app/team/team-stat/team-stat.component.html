@@ -1,0 +1,36 @@
+<mat-table #table [dataSource]="dataSource" matSort>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+  <!-- Season Column -->
+  <ng-container matColumnDef="season">
+    <mat-header-cell *matHeaderCellDef>Temporada</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{element.season}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+  </ng-container>
+
+  <!-- Wins Column -->
+  <ng-container matColumnDef="wins">
+    <mat-header-cell *matHeaderCellDef>Vit&oacute;rias</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.win}}</mat-cell>
+  </ng-container>
+
+  <!-- Losses Column -->
+  <ng-container matColumnDef="losses">
+    <mat-header-cell *matHeaderCellDef>Derrotas</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.loss }}</mat-cell>
+  </ng-container>
+
+  <!-- FPG Column -->
+  <ng-container matColumnDef="fpg">
+    <mat-header-cell *matHeaderCellDef>FPs</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.fantasy_points.toFixed(2)}}</mat-cell>
+  </ng-container>
+</mat-table>

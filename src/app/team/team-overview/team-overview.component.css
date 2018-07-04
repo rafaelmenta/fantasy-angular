@@ -1,0 +1,64 @@
+
+@media (min-width: 721px) {
+  .clubhouse__content-left {
+    max-width: 584px;
+  }
+
+  .clubhouse__content-right {
+    max-width: 584px;
+  }
+}
+
+.clubhouse__content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.clubhouse__content-left {
+  flex: 1;
+}
+
+.clubhouse__content-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.clubhouse__content > * {
+}
+
+.clubhouse__content-tile {
+  margin-top: 16px;
+}
+
+.clubhouse__content-tile > h3 {
+  color: #999999;
+}
+
+.clubhouse__roster {
+}
+
+.clubhouse__score-tile {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.clubhouse__score-tile > * {
+  margin-right: 12px;
+  margin-bottom: 24px;
+}
+
+.clubhouse__score-suffix {
+  color: #999999;
+}
+
+@media (max-width: 720px) {
+  .divider {
+    display: none;
+  }
+
+  .score-value {
+    margin-bottom: 32px;
+  }
+}

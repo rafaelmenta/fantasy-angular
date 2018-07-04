@@ -22,6 +22,8 @@ import { TeamStatsComponent } from '../stats/team-stats/team-stats.component';
 import { NbaStatsComponent } from '../stats/nba-stats/nba-stats.component';
 import { TradeHistoryComponent } from '../trade/trade-history/trade-history.component';
 import { DraftComponent } from '../draft/draft/draft.component';
+import { TeamOverviewComponent } from '../team/team-overview/team-overview.component';
+import { TeamHistoryComponent } from '../team/team-history/team-history.component';
 
 const routes: Routes = [
   {
@@ -123,8 +125,50 @@ const routes: Routes = [
     ],
   },
   {
+    path: 'home',
+    component: ClubhouseComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'overview',
+        pathMatch: 'full',
+      },
+      {
+        path: 'overview',
+        pathMatch: 'full',
+        component: TeamOverviewComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'history',
+        pathMatch: 'full',
+        component: TeamHistoryComponent,
+        canActivate: [AuthGuardService],
+      },
+    ],
+  },
+  {
     path: 'team/:id',
     component: ClubhouseComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'overview',
+        pathMatch: 'full',
+      },
+      {
+        path: 'overview',
+        pathMatch: 'full',
+        component: TeamOverviewComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'history',
+        pathMatch: 'full',
+        component: TeamHistoryComponent,
+        canActivate: [AuthGuardService],
+      },
+    ],
   },
   {
     path: 'login',

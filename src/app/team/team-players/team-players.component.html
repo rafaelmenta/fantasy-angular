@@ -1,6 +1,6 @@
 <mat-card>
   <h3 class="mat-title">Roster</h3>
-  <mat-table #table [dataSource]="dataSource" matSort class="clubhouse__roster">
+  <mat-table #table [dataSource]="dataSource" matSort class="clubhouse__roster" condensed>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" class="boxscore-row"></mat-row>
     <!-- Name Column -->

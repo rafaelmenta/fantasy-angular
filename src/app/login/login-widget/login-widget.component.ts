@@ -38,7 +38,11 @@ export class LoginWidgetComponent {
         });
         localStorage.setItem('token', data.token);
         this.userService.setUser(data);
-        this.router.navigateByUrl(this.previousUrl);
+
+        // Index handles itself. No ned for redirection.
+        if (this.previousUrl !== '/') {
+          this.router.navigateByUrl(this.previousUrl);
+        }
       }
     }, err => {
       this.angulartics2.eventTrack.next({

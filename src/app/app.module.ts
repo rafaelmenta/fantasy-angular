@@ -94,6 +94,9 @@ import { PlayerLookupComponent } from './common/player-lookup/player-lookup.comp
 import { TeamPickerComponent } from './toolbar/team-picker/team-picker.component';
 import { StandingsWidgetComponent } from './team/standings-widget/standings-widget.component';
 import { TeamInfoComponent } from './team/team-info/team-info.component';
+import { TeamOverviewComponent } from './team/team-overview/team-overview.component';
+import { TeamHistoryComponent } from './team/team-history/team-history.component';
+import { TeamStatComponent } from './team/team-stat/team-stat.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -159,6 +162,9 @@ registerLocaleData(localePt);
     TeamPickerComponent,
     StandingsWidgetComponent,
     TeamInfoComponent,
+    TeamOverviewComponent,
+    TeamHistoryComponent,
+    TeamStatComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,7 +8,7 @@ import { TeamTrades } from './trade/trade.service';
 import { Store, select } from '@ngrx/store';
 import { UPDATE_TEAM, AddTeamPlayer, ADD_TEAM_PLAYER, RemoveTeamPlayer, REMOVE_TEAM_PLAYER } from '../store/user-team.reducer';
 import { Observable } from 'rxjs';
-import { map, take, tap, share } from 'rxjs/operators';
+import { map, take, tap, share, debounceTime } from 'rxjs/operators';
 import { RemoveFreeAgent, REMOVE_FREE_AGENT, AddFreeAgent, ADD_FREE_AGENT } from '../store/free-agents.reducer';
 import { Pick } from './pick/pick.service';
 import { Division, FreeAgencyHistory } from '../../typings';

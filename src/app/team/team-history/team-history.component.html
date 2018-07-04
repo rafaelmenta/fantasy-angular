@@ -1,0 +1,10 @@
+<div class="grid" *ngIf="history$ | async as history;">
+  <mat-card>
+    <h3 class="mat-title">Temporada regular</h3>
+    <app-team-stat [stats]="history.regular"></app-team-stat>
+  </mat-card>
+  <mat-card>
+    <h3 class="mat-title">P&oacute;s-temporada</h3>
+    <app-team-stat [stats]="history.playoffs"></app-team-stat>
+  </mat-card>
+</div>

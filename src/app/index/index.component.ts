@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User, UserService, UserTeam } from '../services/user.service';
 import { Team } from '../services/team.service';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-index',
@@ -11,24 +12,24 @@ import { Title } from '@angular/platform-browser';
 export class IndexComponent implements OnInit {
 
   public user: User;
-  public team: UserTeam;
 
   getDefaultTeam(teams: UserTeam[]) {
     return teams.find(team => team.default_team);
   }
 
-  constructor(userService: UserService, private title: Title) {
-    userService.user.subscribe(user => {
-      this.user = user;
-
-      if (user && user.teams) {
-        this.team = this.getDefaultTeam(user.teams);
-      }
-    });
+  constructor(private userService: UserService, private router: Router, private title: Title) {
   }
 
   ngOnInit() {
     this.title.setTitle('Fantasy Superliga');
+
+    this.userService.user.subscribe(user => {
+      this.user = user;
+
+      if (user && user.teams) {
+        this.router.navigateByUrl('home', { skipLocationChange: true });
+      }
+    });
   }
 
 }

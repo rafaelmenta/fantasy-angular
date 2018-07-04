@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Inject, OnChanges } from '@angular/core';
 import { MatSort, MatTableDataSource, MatTab } from '@angular/material';
 import { Team, TeamService } from '../../services/team.service';
 import { Player } from '../../services/player/player.service';
@@ -9,6 +9,7 @@ import { Title } from '@angular/platform-browser';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import { APP_CONFIG, AppConfig } from '../../app.config';
+import { ClubhouseService } from '../../services/clubhouse/clubhouse.service';
 
 @Component({
   selector: 'app-clubhouse',
@@ -25,6 +26,7 @@ export class ClubhouseComponent implements OnInit {
     this.team$ = this.teamService.getTeam(id, useCache);
     this.team$.subscribe(team => {
       if (team) {
+        this.clubhouse.teamSubject.next(team);
         const title = `Superliga - ${team.team_overview.city} ${team.team_overview.nickname}`;
         this.title.setTitle(title);
       }
@@ -37,35 +39,28 @@ export class ClubhouseComponent implements OnInit {
 
     this.title.setTitle(`Superliga - Equipe`);
 
-    if (this.id) {
-      this.userService.user.subscribe(user => {
-        if (user) {
-          const defaultTeam = this.teamService.getDefaultTeam(user.teams);
-          this.loadTeam(defaultTeam.id_sl, true);
-        }
-      });
-    } else {
-      this.route.paramMap.subscribe(paramMap => {
-        const id = paramMap.get('id');
-        if (id) {
-          this.loadTeam(id, false);
-        }
-      });
-    }
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+
+      if (id) {
+        this.loadTeam(id, false);
+      } else {
+        this.userService.user.subscribe(user => {
+          if (user) {
+            const defaultTeam = this.teamService.getDefaultTeam(user.teams);
+            this.loadTeam(defaultTeam.id_sl, true);
+          }
+        });
+      }
+    });
   }
 
   constructor(
     @Inject(APP_CONFIG) private config: AppConfig,
     private teamService: TeamService,
     private userService: UserService,
+    private clubhouse: ClubhouseService,
     private title: Title,
     private breakpointObserver: BreakpointObserver,
     private route: ActivatedRoute) { }
-}
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
 }
