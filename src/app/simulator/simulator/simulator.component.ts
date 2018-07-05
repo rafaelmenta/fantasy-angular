@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Renderer2, Input, Inject, OnDestroy, HostListener } from '@angular/core';
+import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { UserService } from '../../services/user.service';
 import { Player } from '../../services/player/player.service';
