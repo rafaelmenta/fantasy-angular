@@ -24,11 +24,17 @@ import { TradeHistoryComponent } from '../trade/trade-history/trade-history.comp
 import { DraftComponent } from '../draft/draft/draft.component';
 import { TeamOverviewComponent } from '../team/team-overview/team-overview.component';
 import { TeamHistoryComponent } from '../team/team-history/team-history.component';
+import { SimulatorComponent } from '../simulator/simulator/simulator.component';
 
 const routes: Routes = [
   {
     path: 'roster',
     component: RosterComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: 'simulator',
+    component: SimulatorComponent,
     canActivate: [AuthGuardService],
   },
   {

@@ -8,6 +8,8 @@ import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
+import { DragulaModule } from 'ng2-dragula';
+
 import { CalendarModule } from 'angular-calendar';
 
 import { Angulartics2Module } from 'angulartics2';
@@ -97,6 +99,7 @@ import { TeamInfoComponent } from './team/team-info/team-info.component';
 import { TeamOverviewComponent } from './team/team-overview/team-overview.component';
 import { TeamHistoryComponent } from './team/team-history/team-history.component';
 import { TeamStatComponent } from './team/team-stat/team-stat.component';
+import { SimulatorComponent } from './simulator/simulator/simulator.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -165,6 +168,7 @@ registerLocaleData(localePt);
     TeamOverviewComponent,
     TeamHistoryComponent,
     TeamStatComponent,
+    SimulatorComponent,
   ],
   imports: [
     BrowserModule,
@@ -200,6 +204,7 @@ registerLocaleData(localePt);
     RoutingModule,
     MatCheckboxModule,
     MomentModule,
+    DragulaModule,
     StoreModule.forRoot({
       trades: tradeReducer,
       userTeam: userTeamReducer,

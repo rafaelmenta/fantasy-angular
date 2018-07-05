@@ -1,0 +1,20 @@
+.narrow {
+    max-width: 40px;
+}
+
+.player-name {
+    flex: 3;
+}
+
+.player-photo {
+    margin-right: 8px;
+}
+
+.mat-row:hover {
+    background: #E8EAF6;
+    cursor: move;
+}
+
+.mat-row {
+    touch-action: none;
+}

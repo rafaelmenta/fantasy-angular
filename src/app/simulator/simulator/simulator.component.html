@@ -1,0 +1,103 @@
+<mat-toolbar color="accent">Simula&ccedil;&atilde;o</mat-toolbar>
+
+<div class="container" *ngIf="team$ | async as team; else loading">
+  <mat-card>
+    <h3 class="mat-title">Potencial de pontua&ccedil;&atilde;o: {{ teamScore.toFixed(2) }}</h3>
+    <p class="mat-body-1">Mova os jogadores para simular forma&ccedil;&otilde;es e clique na
+      posi&ccedil;&atilde;o para invert&ecirc;-la.
+    </p>
+    <mat-table>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <ng-container matColumnDef="handle">
+          <mat-header-cell *matHeaderCellDef class="narrow"></mat-header-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="number">
+          <mat-header-cell *matHeaderCellDef class="narrow">#</mat-header-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="potential">
+          <mat-header-cell *matHeaderCellDef>Potencial</mat-header-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>Ações</mat-header-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef class="player-name"> Name </mat-header-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="p1p2">
+          <mat-header-cell *matHeaderCellDef> P1 </mat-header-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fpg">
+          <mat-header-cell *matHeaderCellDef> FPG </mat-header-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="min">
+          <mat-header-cell *matHeaderCellDef> MIN </mat-header-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="fpm">
+          <mat-header-cell *matHeaderCellDef> FPM </mat-header-cell>
+        </ng-container>
+
+    </mat-table>
+    <mat-table #table [dataSource]="players" dragula="players-bag" [dragulaModel]="players.data">
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+      <!-- Number column -->
+      <ng-container matColumnDef="handle">
+        <mat-cell *matCellDef="let element" class="narrow"><mat-icon>drag_indicator</mat-icon></mat-cell>
+      </ng-container>
+
+      <!-- Number column -->
+      <ng-container matColumnDef="number">
+        <mat-cell *matCellDef="let element" class="narrow">{{element.team_info.order}}</mat-cell>
+      </ng-container>
+
+      <!-- Potential column -->
+      <ng-container matColumnDef="potential">
+        <mat-cell *matCellDef="let element">{{element.potential.toFixed(2) * 100 }}%</mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-cell *matCellDef="let element" class="player-name">
+          <img onerror="this.src='../../../assets/img/profile/375x450/generic-player-2.jpg'" src="https://static.draftbrasil.net/player/avatar/{{element.id_player}}.jpg"
+            class="player-avatar player-photo">
+          <a class="link" [routerLink]="['/player', element.player_slug]">{{element.first_name}} {{element.last_name}}</a>
+        </mat-cell>
+      </ng-container>
+
+      <!-- P1P2 Column -->
+      <ng-container matColumnDef="p1p2">
+        <mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="swapPosition(element)">
+            {{element.team_info.primary_position}}/{{element.team_info.secondary_position}}
+          </button>
+          <!-- <button mat-icon-button><mat-icon>autorenew</mat-icon></button> -->
+        </mat-cell>
+      </ng-container>
+
+      <!-- FPG Column -->
+      <ng-container matColumnDef="fpg">
+        <mat-cell *matCellDef="let element">{{element.stats && element.stats[0] ? element.stats[0].fantasy_points.toFixed(2) : 0 }}</mat-cell>
+      </ng-container>
+
+      <!-- MIN Column -->
+      <ng-container matColumnDef="min">
+        <mat-cell *matCellDef="let element">{{element.stats && element.stats[0] ? element.stats[0].minutes.toFixed(2): 0}}</mat-cell>
+      </ng-container>
+
+      <!-- FPM Column -->
+      <ng-container matColumnDef="fpm">
+        <mat-cell *matCellDef="let element">{{element.stats && element.stats[0] ? (element.stats[0].fantasy_points/element.stats[0].minutes).toFixed(2) : 0}}</mat-cell>
+      </ng-container>
+    </mat-table>
+  </mat-card>
+</div>
+
+<ng-template #loading><app-loading></app-loading></ng-template>
