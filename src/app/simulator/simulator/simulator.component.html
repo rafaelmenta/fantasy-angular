@@ -60,7 +60,7 @@
 
       <!-- Potential column -->
       <ng-container matColumnDef="potential">
-        <mat-cell *matCellDef="let element">{{element.potential.toFixed(2) * 100 }}%</mat-cell>
+        <mat-cell *matCellDef="let element" [ngClass]="getPotentialClass(element)">{{element.potential.toFixed(2) * 100 }}%</mat-cell>
       </ng-container>
 
       <!-- Name Column -->

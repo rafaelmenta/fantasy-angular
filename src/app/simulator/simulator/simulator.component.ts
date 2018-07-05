@@ -43,6 +43,15 @@ export class SimulatorComponent implements OnInit, OnDestroy {
     return getTeamScore(this.players.data);
   }
 
+  getPotentialClass(player: SimulatedPlayer) {
+    if (player.potential > 0.9) {
+      return 'potential-high';
+    } else if (player.potential > 0.6) {
+      return 'potential-medium';
+    }
+    return 'potential-low';
+  }
+
   swapPosition(player: SimulatedPlayer) {
     const info = player.team_info;
     const p1 = info.primary_position;

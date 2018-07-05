@@ -18,3 +18,15 @@
 .mat-row {
     touch-action: none;
 }
+
+.potential-high {
+    color: #008b00;
+}
+
+.potential-medium {
+    color: #78909c;
+}
+
+.potential-low {
+    color: #e54304;
+}
