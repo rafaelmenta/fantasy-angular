@@ -1,0 +1,23 @@
+.team-info mat-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.team-info mat-form-field {
+  flex: 1;
+}
+
+mat-card {
+  margin-bottom: 16px;
+}
+
+.player-line.mat-line {
+  display: flex;
+  align-items: center;
+}
+
+.actions {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}

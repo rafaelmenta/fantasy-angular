@@ -1,0 +1,21 @@
+<mat-card>
+  <h3 class="mat-title">{{conference.name}}</h3>
+  <mat-form-field>
+    <input matInput #ctrl="ngModel" [(ngModel)]="conference.name" placeholder="Nome da conferência" required>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [(ngModel)]="conference.symbol" placeholder="Sigla da conferência" required>
+  </mat-form-field>
+  <h3 class="mat-title">Divisões</h3>
+  <mat-card class="division-card" *ngFor="let division of conference.divisions">
+    <mat-form-field>
+      <input matInput [(ngModel)]="division.name" placeholder="Nome da divisão" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="division.symbol" placeholder="Sigla da divisão" required>
+    </mat-form-field>
+  </mat-card>
+  <mat-card-actions>
+    <button mat-button color="primary" (click)="onSave(conference)">Salvar</button>
+  </mat-card-actions>
+</mat-card>

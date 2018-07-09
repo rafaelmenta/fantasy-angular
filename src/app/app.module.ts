@@ -27,7 +27,6 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MinutesChartComponent } from './team/minutes-chart/minutes-chart.component';
 import { RecentTeamGamesComponent } from './team/recent-team-games/recent-team-games.component';
-import { RoutingModule } from './routing/routing.module';
 import { RosterComponent } from './roster/roster/roster.component';
 import { ClubhouseComponent } from './team/clubhouse/clubhouse.component';
 import { RosterTileComponent } from './roster/roster-tile/roster-tile.component';
@@ -100,6 +99,8 @@ import { TeamOverviewComponent } from './team/team-overview/team-overview.compon
 import { TeamHistoryComponent } from './team/team-history/team-history.component';
 import { TeamStatComponent } from './team/team-stat/team-stat.component';
 import { SimulatorComponent } from './simulator/simulator/simulator.component';
+import { AdminModule } from './admin/admin.module';
+import { AppRouting } from './app.routing';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -201,10 +202,11 @@ registerLocaleData(localePt);
     MatProgressSpinnerModule,
     MatAutocompleteModule,
     MatSidenavModule,
-    RoutingModule,
+    AppRouting,
     MatCheckboxModule,
     MomentModule,
     DragulaModule,
+    AdminModule,
     StoreModule.forRoot({
       trades: tradeReducer,
       userTeam: userTeamReducer,

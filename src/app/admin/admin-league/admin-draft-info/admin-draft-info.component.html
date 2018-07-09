@@ -1,0 +1,93 @@
+<mat-card>
+  <h3 class="mat-title">Draft {{draft.year_draft}}</h3>
+  <div class="draft-info-edit">
+    <div>
+      <mat-button-toggle-group name="draftStatus" aria-label="Status" [(ngModel)]="draft.status_draft" (change)="onStatusChange(draft)">
+        <mat-button-toggle value="0">Fechado</mat-button-toggle>
+        <mat-button-toggle value="1">Aberto</mat-button-toggle>
+        <mat-button-toggle value="2">Finalizado</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput [(ngModel)]="round" placeholder="Round" type="number" min="1">
+      </mat-form-field>
+      <button mat-button color="primary" [(disabled)]="!validRound" (click)="onCreate(round)">Criar picks</button>
+    </div>
+  </div>
+</mat-card>
+
+<mat-accordion>
+  <mat-expansion-panel [expanded]="first" *ngFor="let group of groups; let first = first;">
+    <mat-expansion-panel-header>
+      <mat-panel-title>Rodada {{group.round}}</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-table #table [dataSource]="group.picks">
+      <mat-header-row *matHeaderRowDef="displayedColumns;"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+      <!-- Order column -->
+      <ng-container matColumnDef="order">
+        <mat-header-cell *matHeaderCellDef class="narrow">#</mat-header-cell>
+        <mat-cell *matCellDef="let pick" class="narrow">
+          <mat-form-field class="order-input">
+            <input type="number" matInput min="1" [(ngModel)]="pick.order">
+          </mat-form-field>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Owner column -->
+      <ng-container matColumnDef="owner">
+        <mat-header-cell *matHeaderCellDef class="team">Equipe</mat-header-cell>
+        <mat-cell *matCellDef="let pick" class="team">
+          <mat-select placeholder="Equipe" [(ngModel)]="pick.owner.id_sl">
+            <mat-option>Selecione</mat-option>
+            <mat-option *ngFor="let team of teams" [value]="team.id_sl">{{team.city}} {{team.nickname}}</mat-option>
+          </mat-select>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Original -->
+      <ng-container matColumnDef="original">
+        <mat-header-cell *matHeaderCellDef class="team">Origem</mat-header-cell>
+        <mat-cell *matCellDef="let pick" class="team">
+          {{pick.original.city}} {{pick.original.nickname}}
+        </mat-cell>
+      </ng-container>
+
+      <!-- Date column -->
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef class="date-col">Data</mat-header-cell>
+        <mat-cell *matCellDef="let pick" class="date-col">
+          <mat-form-field class="date">
+            <input matInput [matDatepicker]="picker" placeholder="Data" [(ngModel)]="pick.date" disabled>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker disabled="false"></mat-datepicker>
+          </mat-form-field>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Time column -->
+      <ng-container matColumnDef="time">
+        <mat-header-cell *matHeaderCellDef class="date-col">Horário</mat-header-cell>
+        <mat-cell *matCellDef="let pick" class="date-col">
+          <mat-form-field class="date">
+            <input matInput placeholder="Horário" type="time" [(ngModel)]="pick.time">
+          </mat-form-field>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Action column -->
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef class="save">Ações</mat-header-cell>
+        <mat-cell *matCellDef="let pick; let first = first; let last = last;" class="save">
+          <button mat-icon-button color="primary" (click)="onSavePick(pick)"><mat-icon>save</mat-icon></button>
+        </mat-cell>
+      </ng-container>
+
+    </mat-table>
+    <mat-action-row>
+      <button mat-button color="warn" (click)="onDeleteRound(draft, group.round)">Deletar round</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

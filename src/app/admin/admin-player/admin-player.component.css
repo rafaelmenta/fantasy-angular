@@ -1,0 +1,22 @@
+.grid {
+  display: flex;
+}
+
+.left {
+  flex: 1;
+}
+
+.right {
+  flex: 3;
+  margin-left: 16px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-radio-group {
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 16px;
+}

@@ -1,0 +1,17 @@
+<mat-card>
+  <h3 class="mat-title">Informações</h3>
+  <fieldset>
+    <mat-form-field>
+      <input matInput [(ngModel)]="league.name" placeholder="Nome da liga" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="league.symbol" placeholder="Sigla da liga" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="league.number_of_teams" placeholder="Número de equipes" required type="number">
+    </mat-form-field>
+  </fieldset>
+  <mat-card-actions>
+    <button mat-button color="primary" (click)="onSave(league)">Salvar</button>
+  </mat-card-actions>
+</mat-card>

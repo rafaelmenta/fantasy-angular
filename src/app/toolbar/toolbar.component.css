@@ -23,7 +23,11 @@
 @media (max-width: 720px) {
 	.hide-mobile {
 		display: none;
-	}
+  }
+
+  .toolbar__search {
+    font-size: 16px;
+  }
 }
 
 @media (min-width: 721px) {

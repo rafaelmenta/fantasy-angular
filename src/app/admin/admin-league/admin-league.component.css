@@ -1,0 +1,21 @@
+app-league-game,
+app-admin-draft-list,
+app-admin-draft-info,
+app-admin-games,
+app-league-info,
+app-league-conference {
+  margin: 16px 4px;
+  display: block;
+}
+
+mat-form-field {
+  margin-right: 16px;
+}
+
+.sub-nav {
+  margin-left: 24px;
+}
+
+.mat-nav-list a.active {
+  background: blue;
+}

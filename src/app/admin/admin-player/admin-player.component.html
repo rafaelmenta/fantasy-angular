@@ -1,0 +1,72 @@
+<div class="grid">
+    <div class="left-nav">
+      <mat-form-field>
+        <input matInput #search (keyup)="onSearchChange(search)" placeholder="Procure jogadores" type="text">
+        <button mat-button *ngIf="search.value" matSuffix mat-icon-button (click)="search.value='';onSearchChange(search)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field *ngIf="nbaTeams$ | async as teams;">
+        <mat-select placeholder="Equipe" [(value)]="search.id_nba" (selectionChange)="onSearchChange(search)">
+          <mat-option>Selecione</mat-option>
+          <mat-option *ngFor="let team of teams" [value]="team.id_nba">{{team.city}} {{team.nickname}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-nav-list *ngIf="players$ | async as players;">
+        <a mat-list-item *ngFor="let player of players" (click)="loadPlayer(player)">{{player.first_name}} {{player.last_name}}</a>
+      </mat-nav-list>
+    </div>
+    <div class="right-content" *ngIf="player$ | async as player; else placeholder;">
+      <mat-card>
+        <h3 class="mat-title">Informações</h3>
+        <form name="playerForm">
+          <mat-card-content>
+            <mat-form-field>
+              <input matInput [(value)]="player.first_name" placeholder="Nome">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput [(value)]="player.last_name" placeholder="Sobrenome">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput [(value)]="player.player_slug" placeholder="Identificador">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" [(value)]="player.birthdate" placeholder="Data de nascimento">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-radio-group name="primary_position" [(ngModel)]="player.default_primary">
+              <mat-radio-button value="PG">PG</mat-radio-button>
+              <mat-radio-button value="SG">SG</mat-radio-button>
+              <mat-radio-button value="SF">SF</mat-radio-button>
+              <mat-radio-button value="PF">PF</mat-radio-button>
+              <mat-radio-button value="C">C</mat-radio-button>
+            </mat-radio-group>
+            <mat-radio-group name="secondary_position" [(ngModel)]="player.default_secondary">
+              <mat-radio-button value="PG">PG</mat-radio-button>
+              <mat-radio-button value="SG">SG</mat-radio-button>
+              <mat-radio-button value="SF">SF</mat-radio-button>
+              <mat-radio-button value="PF">PF</mat-radio-button>
+              <mat-radio-button value="C">C</mat-radio-button>
+            </mat-radio-group>
+            <mat-form-field *ngIf="nbaTeams$ | async as teams;">
+              <mat-select placeholder="Equipe da NBA" [(value)]="player.id_nba">
+                <mat-option *ngFor="let team of teams" [value]="team.id_nba">{{team.city}} {{team.nickname}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button color="warn">Aposentar</button>
+            <button mat-button color="primary">Salvar</button>
+          </mat-card-actions>
+        </form>
+      </mat-card>
+    </div>
+</div>
+
+<ng-template #placeholder>
+  <div class="right-content">
+    <h3 class="mat-title" *ngIf="!player$">Selecione um jogador</h3>
+    <h3 class="mat-title" *ngIf="player$">Carregando...</h3>
+  </div>
+</ng-template>

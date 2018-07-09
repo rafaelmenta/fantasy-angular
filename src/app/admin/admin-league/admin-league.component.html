@@ -1,0 +1,52 @@
+<div class="grid">
+  <div class="left-nav">
+    <mat-nav-list class="hide-mobile" *ngIf="leagues$ | async as leagues;">
+      <ng-container *ngFor="let league of leagues">
+        <a mat-list-item (click)="loadLeague(league)">{{league.name}}</a>
+        <mat-nav-list class="sub-nav" *ngIf="leagueNav[league.id_league]">
+          <a mat-list-item (click)="active='info'">Info</a>
+          <a mat-list-item (click)="active='games'">Jogos</a>
+          <a mat-list-item (click)="active='draft'">Draft</a>
+        </mat-nav-list>
+      </ng-container>
+    </mat-nav-list>
+    <mat-form-field class="hide-desktop" *ngIf="leagues$ | async as leagues;">
+      <mat-select placeholder="Selecione uma liga" [(value)]="selected" (selectionChange)="loadLeague($event.value)">
+        <mat-option *ngFor="let league of leagues" [value]="league">{{league.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+  <div class="right-content">
+    <div *ngIf="combined$ | async as combined;">
+      <div *ngIf="active==='info'">
+        <form class="league-info">
+          <app-league-info [league]="combined[0]" (save)="onSaveInfo(combined[0].id_league, $event)"></app-league-info>
+          <app-league-conference
+            [conference]="conference"
+            (save)="onSaveConference(combined[0].id_league, $event)"
+            *ngFor="let conference of combined[0].conferences"></app-league-conference>
+        </form>
+      </div>
+      <div *ngIf="active==='games'">
+        <div *ngIf="games$ | async as games">
+          <app-league-game [teams]="combined[1]" (save)="onAddGame(combined[0].id_league, $event)"></app-league-game>
+          <app-admin-games [teams]="combined[1]" [games]="games" (delete)="onRemoveGame(combined[0].id_league, $event)"></app-admin-games>
+        </div>
+      </div>
+      <div *ngIf="active==='draft'">
+        <div *ngIf="drafts$ | async as drafts">
+          <app-admin-draft-list
+            [drafts]="drafts"
+            (creation)="onDraftCreation(combined[0].id_league, $event)"
+            (delete)="onDraftRemove(combined[0].id_league, $event)"
+            (selection)="onSelection($event)"></app-admin-draft-list>
+          <app-admin-draft-info
+            *ngIf="draft$ | async as draft"
+            [teams]="combined[1]"
+            [draft]="draft"></app-admin-draft-info>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

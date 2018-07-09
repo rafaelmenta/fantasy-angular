@@ -65,6 +65,9 @@
         <button class="hide-desktop" (click)="searchOpen = !searchOpen" mat-icon-button>
           <mat-icon>{{searchOpen?'close':'search'}}</mat-icon>
         </button>
+        <a mat-icon-button routerLink="admin">
+          <mat-icon class="toolbar__icon">build</mat-icon>
+        </a>
         <a mat-icon-button routerLink="logout">
           <mat-icon class="toolbar__icon">exit_to_app</mat-icon>
         </a>

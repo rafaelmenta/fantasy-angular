@@ -1,0 +1,31 @@
+.narrow {
+  max-width: 40px;
+}
+
+.draft-info-edit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date {
+  max-width: 120px;
+  margin-top: 1.25em;
+}
+
+.date-col {
+  max-width: 140px;
+}
+
+.save {
+  max-width: 40px;
+}
+
+.order-input {
+  max-width: 24px;
+}
+
+mat-accordion {
+  margin-top: 16px;
+  display: block;
+}

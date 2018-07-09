@@ -10,7 +10,7 @@
       }">
       <img matListAvatar src="https://static.draftbrasil.net/team/logo/{{getOpponent(game).id_sl}}.png" alt="">
       <h4 mat-line class="mat-title">{{getOpponent(game).city}} {{getOpponent(game).nickname}}</h4>
-      <p mat-line class="mat-body-1">{{game.home_performance.fantasy_points}} x {{game.away_performance.fantasy_points}}</p>
+      <p mat-line class="mat-body-1">{{game.home_performance && game.home_performance.fantasy_points}} x {{game.away_performance && game.away_performance.fantasy_points}}</p>
     </a>
   </mat-nav-list>
 </mat-card>

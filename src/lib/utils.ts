@@ -2,7 +2,7 @@ import { Team } from '../app/services/team.service';
 import { Player } from '../app/services/player/player.service';
 import { SimulatedPlayer } from '../app/simulator/simulator/simulator.component';
 
-function flatTeams(league) {
+function flatTeams(league): any[] {
     const teams = league.conferences.reduce(function (leagueTeams, conference) {
         const confTeams = conference.divisions.reduce(function (conferenceTeams, division) {
 
@@ -21,7 +21,12 @@ function flatTeams(league) {
     return teams;
 }
 
-function sortPlayers(a: Player, b: Player) {
+interface PlayerLike {
+    first_name: string;
+    last_name: string;
+}
+
+function sortPlayers(a: PlayerLike, b: PlayerLike) {
     if (a.first_name < b.first_name) {
         return -1;
     }
@@ -42,7 +47,12 @@ function sortPlayers(a: Player, b: Player) {
 
 }
 
-function sortAlphabetically(a: Team['team_overview'], b: Team['team_overview']) {
+interface TeamLike {
+    city: string;
+    nickname: string;
+}
+
+function sortAlphabetically(a: TeamLike, b: TeamLike) {
     if (a.city < b.city) {
         return -1;
     }

@@ -21,16 +21,16 @@ export class RecentTeamGamesComponent implements OnInit {
 
   getTeamPerformance(game: Game) {
     if (this.team.team_overview.id_sl === game.home_team.id_sl) {
-      return game.home_performance.fantasy_points;
+      return game.home_performance && game.home_performance.fantasy_points;
     }
-    return game.away_performance.fantasy_points;
+    return game.away_performance && game.away_performance.fantasy_points;
   }
 
   getOpponentPerformance(game: Game) {
     if (this.team.team_overview.id_sl === game.home_team.id_sl) {
-      return game.away_performance.fantasy_points;
+      return game.away_performance && game.away_performance.fantasy_points;
     }
-    return game.home_performance.fantasy_points;
+    return game.home_performance && game.home_performance.fantasy_points;
   }
 
   constructor() {

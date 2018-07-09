@@ -96,13 +96,13 @@ body {
 
 @media (max-width: 720px) {
 	.hide-mobile {
-		display: none;
+		display: none !important;
 	}
 }
 
 @media (min-width: 721px) {
 	.hide-desktop {
-		display: none;
+		display: none !important;
 	}
 }
 
@@ -139,4 +139,30 @@ body {
 .mat-list-avatar,
 .mat-card-avatar {
 	object-fit: cover;
+}
+
+/* Grid ----------------------------------------------------------------------------------------- */
+
+.grid {
+	display: flex;
+}
+
+@media (max-width: 720px) {
+	.grid {
+		flex-direction: column;
+	}
+}
+
+.left-nav {
+	flex: 1;
+}
+
+@media(min-width: 721px) {
+	.left-nav {
+		margin-right: 16px;
+	}
+}
+
+.right-content {
+	flex: 3;
 }

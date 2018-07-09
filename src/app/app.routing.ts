@@ -1,30 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RosterComponent } from '../roster/roster/roster.component';
-import { ClubhouseComponent } from '../team/clubhouse/clubhouse.component';
-import { CommonModule } from '@angular/common';
-import { StandingsComponent } from '../standings/standings/standings.component';
-import { ProfileComponent } from '../player/profile/profile.component';
-import { IndexComponent } from '../index/index.component';
-import { AuthGuardService } from '../services/auth/auth-guard/auth-guard.service';
-import { LoginComponent } from '../login/login/login.component';
-import { NotFoundComponent } from '../not-found/not-found.component';
-import { LogoutComponent } from '../logout/logout.component';
-import { TradeComponent } from '../trade/trade/trade.component';
-import { CreateTradeComponent } from '../trade/create-trade/create-trade.component';
-import { ReceivedTradesComponent } from '../trade/received-trades/received-trades.component';
-import { SentTradesComponent } from '../trade/sent-trades/sent-trades.component';
-import { FreeAgentsComponent } from '../free-agents/free-agents/free-agents.component';
-import { BoxscoreComponent } from '../boxscore/boxscore.component';
-import { ScheduleComponent } from '../schedule/schedule.component';
-import { StatsComponent } from '../stats/stats.component';
-import { TeamStatsComponent } from '../stats/team-stats/team-stats.component';
-import { NbaStatsComponent } from '../stats/nba-stats/nba-stats.component';
-import { TradeHistoryComponent } from '../trade/trade-history/trade-history.component';
-import { DraftComponent } from '../draft/draft/draft.component';
-import { TeamOverviewComponent } from '../team/team-overview/team-overview.component';
-import { TeamHistoryComponent } from '../team/team-history/team-history.component';
-import { SimulatorComponent } from '../simulator/simulator/simulator.component';
+import { RosterComponent } from './roster/roster/roster.component';
+import { AuthGuardService } from './services/auth/auth-guard/auth-guard.service';
+import { SimulatorComponent } from './simulator/simulator/simulator.component';
+import { StandingsComponent } from './standings/standings/standings.component';
+import { FreeAgentsComponent } from './free-agents/free-agents/free-agents.component';
+import { ScheduleComponent } from './schedule/schedule.component';
+import { DraftComponent } from './draft/draft/draft.component';
+import { StatsComponent } from './stats/stats.component';
+import { TeamStatsComponent } from './stats/team-stats/team-stats.component';
+import { NbaStatsComponent } from './stats/nba-stats/nba-stats.component';
+import { ProfileComponent } from './player/profile/profile.component';
+import { BoxscoreComponent } from './boxscore/boxscore.component';
+import { TradeComponent } from './trade/trade/trade.component';
+import { TradeHistoryComponent } from './trade/trade-history/trade-history.component';
+import { CreateTradeComponent } from './trade/create-trade/create-trade.component';
+import { ReceivedTradesComponent } from './trade/received-trades/received-trades.component';
+import { SentTradesComponent } from './trade/sent-trades/sent-trades.component';
+import { ClubhouseComponent } from './team/clubhouse/clubhouse.component';
+import { TeamOverviewComponent } from './team/team-overview/team-overview.component';
+import { TeamHistoryComponent } from './team/team-history/team-history.component';
+import { LoginComponent } from './login/login/login.component';
+import { LogoutComponent } from './logout/logout.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { IndexComponent } from './index/index.component';
+import { AdminModule } from './admin/admin.module';
 
 const routes: Routes = [
   {
@@ -189,6 +189,10 @@ const routes: Routes = [
     component: NotFoundComponent,
   },
   {
+    path: 'admin',
+    loadChildren: () => AdminModule,
+  },
+  {
     path: '',
     component: IndexComponent,
   },
@@ -207,4 +211,4 @@ const routes: Routes = [
   ],
   declarations: [],
 })
-export class RoutingModule { }
+export class AppRouting { }
