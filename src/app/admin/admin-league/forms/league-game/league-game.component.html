@@ -1,33 +1,36 @@
 <mat-card>
-  <h3 class="mat-title">Adicionar jogo</h3>
-  <mat-form-field>
-    <mat-select placeholder="Mandante" [(ngModel)]="game.home_team">
-      <mat-option>Selecione</mat-option>
-      <mat-option *ngFor="let team of teams" [value]="team.id_sl">{{team.city}} {{team.nickname}}</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <mat-card-title>Adicionar jogo</mat-card-title>
 
-  <mat-form-field>
-    <mat-select placeholder="Visitante" [(ngModel)]="game.away_team">
-      <mat-option>Selecione</mat-option>
-      <mat-option *ngFor="let team of teams" [value]="team.id_sl">{{team.city}} {{team.nickname}}</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-select placeholder="Mandante" [(ngModel)]="game.home_team">
+        <mat-option>Selecione</mat-option>
+        <mat-option *ngFor="let team of teams" [value]="team.id_sl">{{team.city}} {{team.nickname}}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field *ngIf="rounds$ | async as rounds">
-    <mat-select placeholder="Rodada" [(ngModel)]="game.id_round">
-      <mat-option>Selecione</mat-option>
-      <mat-option *ngFor="let round of rounds" [value]="round.id_round">{{round.round_number}}</mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Visitante" [(ngModel)]="game.away_team">
+        <mat-option>Selecione</mat-option>
+        <mat-option *ngFor="let team of teams" [value]="team.id_sl">{{team.city}} {{team.nickname}}</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-select placeholder="Tipo de jogo" [(ngModel)]="game.id_type">
-      <mat-option>Selecione</mat-option>
-      <mat-option [value]="1">Temporada</mat-option>
-      <mat-option [value]="2">Playoff</mat-option>
-    </mat-select>
-  </mat-form-field>
+    <mat-form-field *ngIf="rounds$ | async as rounds">
+      <mat-select placeholder="Rodada" [(ngModel)]="game.id_round">
+        <mat-option>Selecione</mat-option>
+        <mat-option *ngFor="let round of rounds" [value]="round.id_round">{{round.round_number}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select placeholder="Tipo de jogo" [(ngModel)]="game.id_type">
+        <mat-option>Selecione</mat-option>
+        <mat-option [value]="1">Temporada</mat-option>
+        <mat-option [value]="2">Playoff</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-content>
 
   <mat-card-actions>
     <button mat-button color="primary" (click)="onSave()" [(disabled)]="!isValid" >Adicionar</button>

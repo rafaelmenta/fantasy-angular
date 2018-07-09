@@ -1,20 +1,22 @@
 <mat-card>
-  <h3 class="mat-title">Draft {{draft.year_draft}}</h3>
-  <div class="draft-info-edit">
-    <div>
-      <mat-button-toggle-group name="draftStatus" aria-label="Status" [(ngModel)]="draft.status_draft" (change)="onStatusChange(draft)">
-        <mat-button-toggle value="0">Fechado</mat-button-toggle>
-        <mat-button-toggle value="1">Aberto</mat-button-toggle>
-        <mat-button-toggle value="2">Finalizado</mat-button-toggle>
-      </mat-button-toggle-group>
+  <mat-card-title>Draft {{draft.year_draft}}</mat-card-title>
+  <mat-card-content>
+    <div class="draft-info-edit">
+      <div>
+        <mat-button-toggle-group name="draftStatus" aria-label="Status" [(ngModel)]="draft.status_draft" (change)="onStatusChange(draft)">
+          <mat-button-toggle value="0">Fechado</mat-button-toggle>
+          <mat-button-toggle value="1">Aberto</mat-button-toggle>
+          <mat-button-toggle value="2">Finalizado</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput [(ngModel)]="round" placeholder="Round" type="number" min="1">
+        </mat-form-field>
+        <button mat-button color="primary" [(disabled)]="!validRound" (click)="onCreate(round)">Criar picks</button>
+      </div>
     </div>
-    <div>
-      <mat-form-field>
-        <input matInput [(ngModel)]="round" placeholder="Round" type="number" min="1">
-      </mat-form-field>
-      <button mat-button color="primary" [(disabled)]="!validRound" (click)="onCreate(round)">Criar picks</button>
-    </div>
-  </div>
+  </mat-card-content>
 </mat-card>
 
 <mat-accordion>

@@ -1,56 +1,60 @@
 <mat-card>
-  <h3 class="mat-title">Próximos drafts</h3>
+  <mat-card-title>Próximos drafts</mat-card-title>
 
-  <mat-table #table [dataSource]="dataSource">
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    <mat-footer-row *matFooterRowDef="footerColumns"></mat-footer-row>>
+  <mat-card-content>
+    <mat-table #table [dataSource]="dataSource">
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      <mat-footer-row *matFooterRowDef="footerColumns"></mat-footer-row>>
 
-    <!-- Year column -->
-    <ng-container matColumnDef="year">
-      <mat-header-cell *matHeaderCellDef>Ano</mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        <a class="link" (click)="onClick(element)">{{element.year_draft}}</a>
-      </mat-cell>
-    </ng-container>
+      <!-- Year column -->
+      <ng-container matColumnDef="year">
+        <mat-header-cell *matHeaderCellDef>Ano</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <a class="link" (click)="onClick(element)">{{element.year_draft}}</a>
+        </mat-cell>
+      </ng-container>
 
-    <!-- Type column -->
-    <ng-container matColumnDef="type">
-      <mat-header-cell *matHeaderCellDef>Tipo</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{getType(element.draft_type)}}</mat-cell>
-      <mat-footer-cell *matFooterCellDef>
-        <mat-select placeholder="Tipo" [(ngModel)]="type">
-          <mat-option [value]="1">Geral</mat-option>
-          <mat-option [value]="2">Rookies</mat-option>
-        </mat-select>
-      </mat-footer-cell>
-    </ng-container>
+      <!-- Type column -->
+      <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef>Tipo</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{getType(element.draft_type)}}</mat-cell>
+        <mat-footer-cell *matFooterCellDef>
+          <mat-select placeholder="Tipo" [(ngModel)]="type">
+            <mat-option [value]="1">Geral</mat-option>
+            <mat-option [value]="2">Rookies</mat-option>
+          </mat-select>
+        </mat-footer-cell>
+      </ng-container>
 
-    <!-- Remove column -->
-    <ng-container matColumnDef="remove">
-      <mat-header-cell *matHeaderCellDef class="narrow">Remover</mat-header-cell>
-      <mat-cell *matCellDef="let element" class="narrow">
-        <button mat-icon-button color="warn" (click)="onRemove(element)"><mat-icon>delete</mat-icon></button>
-      </mat-cell>
-    </ng-container>
+      <!-- Remove column -->
+      <ng-container matColumnDef="remove">
+        <mat-header-cell *matHeaderCellDef class="narrow">Remover</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="narrow">
+          <button mat-icon-button color="warn" (click)="onRemove(element)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="add-copy">
-      <mat-footer-cell *matFooterCellDef><mat-icon>plus</mat-icon> Adicionar draft</mat-footer-cell>
-    </ng-container>
+      <ng-container matColumnDef="add-copy">
+        <mat-footer-cell *matFooterCellDef>Adicionar draft</mat-footer-cell>
+      </ng-container>
 
-    <!-- Season column -->
-    <ng-container matColumnDef="season">
-      <mat-footer-cell *matFooterCellDef>
-        <mat-select *ngIf="seasons$ | async as seasons" placeholder="Temporada" [(ngModel)]="season">
-          <mat-option *ngFor="let season of seasons" [value]="season">{{season.year}}</mat-option>
-        </mat-select>
-      </mat-footer-cell>
-    </ng-container>
+      <!-- Season column -->
+      <ng-container matColumnDef="season">
+        <mat-footer-cell *matFooterCellDef>
+          <mat-select *ngIf="seasons$ | async as seasons" placeholder="Temporada" [(ngModel)]="season">
+            <mat-option *ngFor="let season of seasons" [value]="season">{{season.year}}</mat-option>
+          </mat-select>
+        </mat-footer-cell>
+      </ng-container>
 
-    <ng-container matColumnDef="create">
-      <mat-footer-cell *matFooterCellDef class="narrow">
-        <button mat-button color="primary" [(disabled)]="!isValid" (click)="onCreate()">Criar</button>
-      </mat-footer-cell>
-    </ng-container>
-  </mat-table>
+      <ng-container matColumnDef="create">
+        <mat-footer-cell *matFooterCellDef class="narrow">
+          <button mat-button color="primary" [(disabled)]="!isValid" (click)="onCreate()">Criar</button>
+        </mat-footer-cell>
+      </ng-container>
+    </mat-table>
+  </mat-card-content>
 </mat-card>
