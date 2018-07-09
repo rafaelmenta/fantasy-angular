@@ -4,11 +4,13 @@ import { AdminOverviewComponent } from './admin-overview/admin-overview.componen
 import { AdminLeagueComponent } from './admin-league/admin-league.component';
 import { AdminTeamComponent } from './admin-team/admin-team.component';
 import { AdminPlayerComponent } from './admin-player/admin-player.component';
+import { AdminAuthGuardService } from './service/admin-auth-guard.service';
 
 const routes: Routes = [
   {
     path: '',
     component: AdminOverviewComponent,
+    canActivate: [AdminAuthGuardService],
     children: [{
       path: 'league',
       component: AdminLeagueComponent,

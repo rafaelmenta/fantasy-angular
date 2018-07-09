@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { UserService, User } from '../services/user.service';
+import { UserService, User, UserPermission } from '../services/user.service';
 import { MatSidenav } from '@angular/material';
 import { TeamService } from '../services/team.service';
 import { Observable } from 'rxjs';
@@ -36,6 +36,10 @@ export class ToolbarComponent implements OnInit {
 
   loadTrade() {
     this.router.navigateByUrl('trade/received');
+  }
+
+  canSeeAdmin(user: User) {
+    return [UserPermission.ADMIN, UserPermission.COMMISSIONER].includes(user.id_permission);
   }
 
   onUserChange(user: User) {

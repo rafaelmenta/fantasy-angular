@@ -27,12 +27,20 @@ export interface UserTeam {
   };
 }
 
+export enum UserPermission {
+  ADMIN = 1,
+  COMMISSIONER = 2,
+  UPDATER = 3,
+  USER = 4,
+}
+
 export interface User {
   id_user: number;
   login: string;
   nickname: string;
   teams?: UserTeam[];
   token: string;
+  id_permission: UserPermission;
 }
 
 interface UserState {
