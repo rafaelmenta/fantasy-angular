@@ -5,3 +5,7 @@ mat-form-field {
 .narrow {
   max-width: 80px;
 }
+
+mat-row {
+  min-height: 40px;
+}
