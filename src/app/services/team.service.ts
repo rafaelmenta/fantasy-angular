@@ -81,7 +81,7 @@ export class TeamService {
   private userTeam: Observable<Team>;
 
   getDefaultTeam(teams: UserTeam[]) {
-    return teams.find(team => team.default_team);
+    return teams.find(team => team.default_team) || teams[0];
   }
 
   isTeamDefined(): boolean {

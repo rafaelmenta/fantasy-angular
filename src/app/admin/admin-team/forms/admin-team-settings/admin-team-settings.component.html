@@ -1,0 +1,35 @@
+<mat-card>
+  <mat-card-title>Informações</mat-card-title>
+  <mat-card-content>
+    <mat-form-field>
+      <input matInput [(ngModel)]="team.city" placeholder="Nome" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="team.nickname" placeholder="Apelido" required>
+    </mat-form-field>
+    <mat-form-field [formGroup]="slugForm">
+      <input
+        formControlName="slug"
+        matInput
+        placeholder="Identificador"
+        required
+        [value]="team.slug">
+      <mat-error *ngIf="slugForm.controls.slug.hasError('notUnique')">
+        <h1>Identificador não disponível</h1>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field *ngIf="divisions$ | async as divisions;">
+      <mat-select placeholder="Divisão" [(ngModel)]="team.division.id_division">
+        <mat-option *ngFor="let division of divisions" [value]="division.id_division">{{division.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="users$ | async as users">
+      <mat-select placeholder="GM" [(ngModel)]="team.users[0].id_user">
+        <mat-option *ngFor="let user of users" [value]="user.id_user">{{user.nickname}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="primary" (click)="onSave()">Salvar</button>
+  </mat-card-actions>
+</mat-card>

@@ -9,7 +9,7 @@ interface BasePlayer {
 export interface AdminTeamPlayer extends BasePlayer {
   team_info: {
     primary_position: string;
-    secondary_postion: string;
+    secondary_position: string;
     order: number;
   }
 }

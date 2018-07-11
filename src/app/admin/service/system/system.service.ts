@@ -43,6 +43,14 @@ export class SystemService {
     );
   }
 
+  getSlugCount(slug: string) {
+    const url = `${this.config.API_ENDPOINT}system/slug/${slug}`;
+    return this.http.get<{ slug_count: number }>(url).pipe(
+      map(res => res.slug_count),
+      share()
+    );
+  }
+
   constructor(
     @Inject(APP_CONFIG) private config: AppConfig,
     private http: HttpClient

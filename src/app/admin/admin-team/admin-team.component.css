@@ -1,23 +1,20 @@
-.team-info mat-card {
-  display: flex;
-  flex-direction: column;
-}
-
-.team-info mat-form-field {
-  flex: 1;
+app-admin-team-settings {
+  margin-bottom: 16px;
+  display: block;
 }
 
 mat-card {
   margin-bottom: 16px;
 }
 
-.player-line.mat-line {
-  display: flex;
-  align-items: center;
+.left-nav {
+  max-height: 64vh;
+  overflow: scroll;
+  background: rgba(0,0,0,.03);
 }
 
-.actions {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
+.left-nav .mat-nav-list .mat-list-item {
+  height: 28px;
+  font-size: 13px;
+  color: rgba(0,0,0,.54);
 }

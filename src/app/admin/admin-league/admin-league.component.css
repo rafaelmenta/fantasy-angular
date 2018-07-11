@@ -19,3 +19,15 @@ mat-form-field {
 .mat-nav-list a.active {
   background: blue;
 }
+
+.left-nav {
+  max-height: 64vh;
+  overflow: scroll;
+  background: rgba(0,0,0,.03);
+}
+
+.left-nav .mat-nav-list .mat-list-item {
+  height: 28px;
+  font-size: 13px;
+  color: rgba(0,0,0,.54);
+}

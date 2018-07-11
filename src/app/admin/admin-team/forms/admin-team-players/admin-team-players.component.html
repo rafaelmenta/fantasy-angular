@@ -1,0 +1,26 @@
+<mat-card>
+  <mat-card-title>Jogadores</mat-card-title>
+  <mat-card-content>
+    <div class="add-player">
+      <mat-form-field>
+        <mat-select placeholder="Adicionar jogador" [(ngModel)]="selected">
+          <mat-option *ngFor="let player of freeAgents" [value]="player">
+            {{player.first_name}} {{player.last_name}} ({{player.default_primary}}/{{player.default_secondary}})
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button type="button" mat-button color="primary" (click)="onAddPlayer(selected)" [(disabled)]="!selected">Adicionar jogador</button>
+    </div>
+    <mat-list>
+      <mat-list-item *ngFor="let player of players">
+        <img matListAvatar src="https://static.draftbrasil.net/player/avatar/{{player.id_player}}.jpg">
+        <div matLine class="player-line">
+          #{{player.team_info.order}} {{player.first_name}} {{player.last_name}} ({{player.team_info.primary_position}}/{{player.team_info.secondary_position}})
+          <div class="actions">
+            <button type="button" mat-button color="error" (click)="onRemovePlayer(player)">Dispensar</button>
+          </div>
+        </div>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

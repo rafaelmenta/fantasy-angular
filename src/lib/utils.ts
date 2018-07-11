@@ -53,19 +53,19 @@ interface TeamLike {
 }
 
 function sortAlphabetically(a: TeamLike, b: TeamLike) {
-    if (a.city < b.city) {
+    if (a.city.toLowerCase() < b.city.toLowerCase()) {
         return -1;
     }
 
-    if (b.city < a.city) {
+    if (b.city.toLowerCase() < a.city.toLowerCase()) {
         return 1;
     }
 
-    if (a.nickname < b.nickname) {
+    if (a.nickname.toLowerCase() < b.nickname.toLowerCase()) {
         return -1;
     }
 
-    if (b.nickname < a.nickname) {
+    if (b.nickname.toLowerCase() < a.nickname.toLowerCase()) {
         return 1;
     }
 

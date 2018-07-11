@@ -1,0 +1,10 @@
+.player-line.mat-line {
+  display: flex;
+  align-items: center;
+}
+
+.actions {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
