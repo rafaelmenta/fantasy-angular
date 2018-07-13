@@ -1,0 +1,55 @@
+<mat-card>
+  <mat-card-title class="card-title">
+    <img
+      mat-card-avatar
+      onerror="this.src='../../../assets/img/profile/375x450/generic-player-2.jpg'"
+      src="https://static.draftbrasil.net/player/avatar/{{player.id_player}}.jpg">
+    <span *ngIf="player.id_player">{{player.first_name}} {{player.last_name}}</span>
+    <span *ngIf="!player.id_player">Adicionar jogador</span>
+  </mat-card-title>
+  <mat-card-content class="player-info">
+    <mat-form-field>
+      <input matInput [(ngModel)]="player.first_name" placeholder="Nome">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="player.last_name" placeholder="Sobrenome">
+    </mat-form-field>
+    <mat-form-field [formGroup]="slugForm">
+      <input formControlName="slug" matInput placeholder="Identificador" required [value]="player.player_slug">
+      <mat-error *ngIf="slugForm.controls.slug.hasError('notUnique')">
+        <h1>Identificador não disponível</h1>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" [(ngModel)]="player.birthdate" placeholder="Data de nascimento">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <div class="position-group">
+      <mat-radio-group name="primary_position" [(ngModel)]="player.default_primary">
+        <mat-radio-button value="PG">PG</mat-radio-button>
+        <mat-radio-button value="SG">SG</mat-radio-button>
+        <mat-radio-button value="SF">SF</mat-radio-button>
+        <mat-radio-button value="PF">PF</mat-radio-button>
+        <mat-radio-button value="C">C</mat-radio-button>
+      </mat-radio-group>
+      <mat-radio-group name="secondary_position" [(ngModel)]="player.default_secondary">
+        <mat-radio-button value="PG">PG</mat-radio-button>
+        <mat-radio-button value="SG">SG</mat-radio-button>
+        <mat-radio-button value="SF">SF</mat-radio-button>
+        <mat-radio-button value="PF">PF</mat-radio-button>
+        <mat-radio-button value="C">C</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <mat-form-field *ngIf="nbaTeams$ | async as teams;">
+      <mat-select placeholder="Equipe da NBA" [(ngModel)]="player.id_nba">
+        <mat-option *ngFor="let team of teams" [value]="team.id_nba">{{team.city}} {{team.nickname}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-checkbox [(ngModel)]="player.rookie">Rookie</mat-checkbox>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="warn" (click)="onRetire(player)">Aposentar</button>
+    <button mat-button color="primary" (click)="onSave(player)">Salvar</button>
+  </mat-card-actions>
+</mat-card>

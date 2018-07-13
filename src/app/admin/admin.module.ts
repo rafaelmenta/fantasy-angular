@@ -4,7 +4,7 @@ import { AdminRoutesModule } from './admin.routing';
 import { MatCardModule, MatToolbarModule, MatTabsModule, MatFormFieldModule, MatSelectModule,
   MatInputModule, MatListModule, MatButtonModule, MatIconModule, MatRadioModule,
   MatDatepickerModule, MatNativeDateModule, MatSidenavModule, MatTableModule, MatSnackBarModule,
-  MatExpansionModule, MatButtonToggleModule, MatDividerModule } from '@angular/material';
+  MatExpansionModule, MatButtonToggleModule, MatDividerModule, MatCheckboxModule } from '@angular/material';
 import { AdminLeagueComponent } from './admin-league/admin-league.component';
 import { CommonModule } from '@angular/common';
 import { AdminTeamComponent } from './admin-team/admin-team.component';
@@ -17,8 +17,9 @@ import { LeagueGameComponent } from './admin-league/forms/league-game/league-gam
 import { AdminDraftListComponent } from './admin-league/admin-draft-list/admin-draft-list.component';
 import { AdminDraftInfoComponent } from './admin-league/admin-draft-info/admin-draft-info.component';
 import { MomentModule } from 'ngx-moment';
-import { AdminTeamSettingsComponent } from './teadmin-team/admin-team-settings/admin-team-settings.component';
 import { AdminTeamPlayersComponent } from './admin-team/forms/admin-team-players/admin-team-players.component';
+import { AdminPlayerSettingsComponent } from './admin-player/forms/admin-player-settings/admin-player-settings.component';
+import { AdminTeamSettingsComponent } from './admin-team/forms/admin-team-settings/admin-team-settings.component';
 
 @NgModule({
   imports: [
@@ -45,9 +46,10 @@ import { AdminTeamPlayersComponent } from './admin-team/forms/admin-team-players
     MatButtonToggleModule,
     MatDividerModule,
     MatFormFieldModule,
+    MatCheckboxModule,
+
     FormsModule,
     ReactiveFormsModule,
-
     MomentModule,
   ],
   declarations: [
@@ -63,6 +65,7 @@ import { AdminTeamPlayersComponent } from './admin-team/forms/admin-team-players
     AdminDraftInfoComponent,
     AdminTeamSettingsComponent,
     AdminTeamPlayersComponent,
+    AdminPlayerSettingsComponent,
   ]
 })
 export class AdminModule { }

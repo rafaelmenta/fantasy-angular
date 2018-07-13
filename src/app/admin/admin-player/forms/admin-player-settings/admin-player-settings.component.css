@@ -1,0 +1,22 @@
+mat-form-field, mat-checkbox, .position-group {
+  margin: 16px 16px 16px 0;
+}
+
+mat-radio-group {
+  width: 100%;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+
+mat-radio-button {
+  margin-right: 8px;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+}
+
+.card-title img {
+  margin-right: 8px;
+}

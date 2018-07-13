@@ -1,13 +1,3 @@
-mat-form-field {
-  width: 100%;
-}
-
-mat-radio-group {
-  width: 100%;
-  display: inline-block;
-  margin-bottom: 16px;
-}
-
 .left-nav {
   max-height: 64vh;
   overflow: scroll;
@@ -18,4 +8,16 @@ mat-radio-group {
   height: 28px;
   font-size: 13px;
   color: rgba(0,0,0,.54);
+}
+
+.search-control {
+  margin-top: 8px;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.add-player {
+  position: fixed;
+  bottom: 56px;
+  right: 56px;
 }

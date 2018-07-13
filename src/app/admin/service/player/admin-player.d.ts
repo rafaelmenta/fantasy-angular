@@ -15,7 +15,6 @@ export interface AdminTeamPlayer extends BasePlayer {
 }
 
 export interface AdminFreeAgent extends BasePlayer {
-  id_nba: number;
   default_primary: string;
   default_secondary: string;
 }

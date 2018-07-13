@@ -27,19 +27,19 @@ interface PlayerLike {
 }
 
 function sortPlayers(a: PlayerLike, b: PlayerLike) {
-    if (a.first_name < b.first_name) {
+    if (a.first_name.toLowerCase() < b.first_name.toLowerCase()) {
         return -1;
     }
 
-    if (b.first_name < a.first_name) {
+    if (b.first_name.toLowerCase() < a.first_name.toLowerCase()) {
         return 1;
     }
 
-    if (a.last_name < b.last_name) {
+    if (a.last_name.toLowerCase() < b.last_name.toLowerCase()) {
         return -1;
     }
 
-    if (b.last_name < a.last_name) {
+    if (b.last_name.toLowerCase() < a.last_name.toLowerCase()) {
         return 1;
     }
 

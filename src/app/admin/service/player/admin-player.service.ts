@@ -29,6 +29,20 @@ export class AdminPlayerService {
     );
   }
 
+  retirePlayer(id: number) {
+    const url = `${this.config.API_ENDPOINT}players/${id}`;
+    return this.http.delete<{ retirePlayer: number[] }>(url).pipe(
+      share()
+    );
+  }
+
+  savePlayer(player: AdminPlayer) {
+    const url = `${this.config.API_ENDPOINT}players/save`;
+    return this.http.post<{ savePlayer: number; }>(url, player).pipe(
+      share()
+    );
+  }
+
   constructor(
     @Inject(APP_CONFIG) private config: AppConfig,
     private http: HttpClient
