@@ -20,6 +20,10 @@ import { MomentModule } from 'ngx-moment';
 import { AdminTeamPlayersComponent } from './admin-team/forms/admin-team-players/admin-team-players.component';
 import { AdminPlayerSettingsComponent } from './admin-player/forms/admin-player-settings/admin-player-settings.component';
 import { AdminTeamSettingsComponent } from './admin-team/forms/admin-team-settings/admin-team-settings.component';
+import { AdminSystemComponent } from './admin-system/admin-system.component';
+import { AdminNbaComponent } from './admin-system/forms/admin-nba/admin-nba.component';
+import { AdminNbaGamesComponent } from './admin-system/forms/admin-nba-games/admin-nba-games.component';
+import { AdminNbaGameComponent } from './admin-system/forms/admin-nba-game/admin-nba-game.component';
 
 @NgModule({
   imports: [
@@ -66,6 +70,10 @@ import { AdminTeamSettingsComponent } from './admin-team/forms/admin-team-settin
     AdminTeamSettingsComponent,
     AdminTeamPlayersComponent,
     AdminPlayerSettingsComponent,
+    AdminSystemComponent,
+    AdminNbaComponent,
+    AdminNbaGamesComponent,
+    AdminNbaGameComponent,
   ]
 })
 export class AdminModule { }

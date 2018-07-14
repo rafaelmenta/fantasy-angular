@@ -1,0 +1,4 @@
+<div *ngIf="games$ | async as games">
+  <app-admin-nba-game (create)="onCreate(games, $event)"></app-admin-nba-game>
+  <app-admin-nba-games [games]="games"></app-admin-nba-games>
+</div>

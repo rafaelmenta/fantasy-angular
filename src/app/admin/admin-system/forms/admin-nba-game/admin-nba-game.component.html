@@ -1,0 +1,51 @@
+<mat-card>
+  <mat-card-title>Adicionar jogo</mat-card-title>
+
+  <mat-card-content>
+    <!-- <form> -->
+      <mat-form-field *ngIf="nbaTeams$ | async as teams">
+        <mat-select name="home" placeholder="Mandante" [(ngModel)]="game.home">
+          <mat-option>Selecione</mat-option>
+          <mat-option *ngFor="let team of teams" [value]="team">{{team.city}} {{team.nickname}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="rounds$ | async as rounds">
+        <mat-select name="round_home" placeholder="Rodada mandante" [(ngModel)]="game.round_home">
+          <mat-option>Selecione</mat-option>
+          <mat-option *ngFor="let round of rounds" [value]="round">{{round.round_number}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="nbaTeams$ | async as teams">
+        <mat-select name="away" placeholder="Visitante" [(ngModel)]="game.away">
+          <mat-option>Selecione</mat-option>
+          <mat-option *ngFor="let team of teams" [value]="team">{{team.city}} {{team.nickname}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="rounds$ | async as rounds">
+        <mat-select name="round_away" placeholder="Rodada visitante" [(ngModel)]="game.round_away">
+          <mat-option>Selecione</mat-option>
+          <mat-option *ngFor="let round of rounds" [value]="round">{{round.round_number}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input name="date" matInput [matDatepicker]="picker" placeholder="Data" [(ngModel)]="game.date" disabled>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker disabled="false"></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input name="time" matInput placeholder="Horário" type="time" [(ngModel)]="game.time">
+        <mat-hint>Horário da costa leste</mat-hint>
+      </mat-form-field>
+    <!-- </form> -->
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-button color="primary" (click)="onSave(game)" [(disabled)]="!isValid">Adicionar</button>
+  </mat-card-actions>
+
+</mat-card>

@@ -1,0 +1,64 @@
+<mat-card>
+  <mat-card-title>Calendário da NBA</mat-card-title>
+  <mat-card-content>
+    <mat-form-field *ngIf="rounds$ | async as rounds;">
+      <mat-select placeholder="Rodada" [(value)]="search.round" (selectionChange)="onSearchChange()">
+        <mat-option>Selecione</mat-option>
+        <mat-option *ngFor="let round of rounds" [value]="round.round_number">{{round.round_number}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field *ngIf="teams$| async as teams;">
+      <mat-select placeholder="Equipe" [(value)]="search.team" (selectionChange)="onSearchChange()">
+        <mat-option>Selecione</mat-option>
+        <mat-option *ngFor="let team of teams" [value]="team.id_nba">{{team.city}} {{team.nickname}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-table #table [dataSource]="dataSource">
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="boxscore-row"></mat-row>
+
+      <!-- Home column -->
+      <ng-container matColumnDef="home">
+        <mat-header-cell *matHeaderCellDef>Mandante</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.home.city}} {{element.home.nickname}}</mat-cell>
+      </ng-container>
+
+      <!-- Away column -->
+      <ng-container matColumnDef="away">
+        <mat-header-cell *matHeaderCellDef>Visitante</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.away.city}} {{element.away.nickname}}</mat-cell>
+      </ng-container>
+
+      <!-- Round column -->
+      <ng-container matColumnDef="round_home">
+        <mat-header-cell *matHeaderCellDef class="narrow">Rodada</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="narrow">{{element.round_home.round_number}}</mat-cell>
+      </ng-container>
+
+      <!-- Round away column -->
+      <ng-container matColumnDef="round_away">
+        <mat-header-cell *matHeaderCellDef class="narrow">Rodada </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="narrow">{{element.round_away.round_number}}</mat-cell>
+      </ng-container>
+
+      <!-- Date column -->
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef>Rodada</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.gametime | amDateFormat:'L LT'}}</mat-cell>
+      </ng-container>
+
+      <!-- Remove column -->
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef class="narrow">Remover</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="narrow">
+          <button mat-icon-button color="warn" (click)="onDelete(element)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+    </mat-table>
+  </mat-card-content>
+</mat-card>

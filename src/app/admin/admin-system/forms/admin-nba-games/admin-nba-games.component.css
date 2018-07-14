@@ -1,0 +1,11 @@
+mat-form-field {
+  margin-right: 16px;
+}
+
+.narrow {
+  max-width: 80px;
+}
+
+mat-row {
+  min-height: 32px;
+}

@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { APP_CONFIG, AppConfig } from '../../../app.config';
 import { HttpClient } from '@angular/common/http';
-import { BaseAdminNBATeam, AdminRound, AdminSeason } from './system';
+import { BaseAdminNBATeam, AdminRound, AdminSeason, AdminGameNBA, AdminGameNBAInput } from './system';
 import { map, share } from 'rxjs/operators';
 import { Observable, ReplaySubject } from 'rxjs';
 
@@ -49,6 +49,24 @@ export class SystemService {
       map(res => res.slug_count),
       share()
     );
+  }
+
+  getNbaGames() {
+    const url = `${this.config.API_ENDPOINT}nba/games/current`;
+    return this.http.get<{ current_games_nba: AdminGameNBA[] }>(url).pipe(
+      map(res => res.current_games_nba),
+      share()
+    );
+  }
+
+  addNbaGame(game: AdminGameNBAInput) {
+    const url = `${this.config.API_ENDPOINT}nba/games`;
+    return this.http.post<{ addNbaGame: number }>(url, game).pipe(share());
+  }
+
+  deleteNbaGame(id: number) {
+    const url = `${this.config.API_ENDPOINT}nba/${id}`;
+    return this.http.delete<{ deleteNbaGame: number }>(url).pipe(share());
   }
 
   constructor(
