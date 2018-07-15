@@ -1,4 +1,5 @@
 import { Moment } from 'moment';
+import { BasePlayer } from '../player/admin-player';
 
 export interface BaseAdminNBATeam {
   id_nba: number;
@@ -41,4 +42,29 @@ export interface AdminGameNBAInput {
   id_round_away: number;
   id_home: number;
   id_away: number;
+}
+
+export interface AdminPlayerPerformance {
+  player: BasePlayer;
+  minutes: number;
+  field_goal_attempts: number;
+  free_throw_attempts: number;
+  points: number;
+  defensive_rebounds: number;
+  offensive_rebounds: number;
+  assists: number;
+  steals: number;
+  blocks: number;
+  turnovers: number;
+  personal_fouls: number;
+  win_loss: number;
+}
+
+export interface AdminGamePerformance {
+  home: BaseAdminNBATeam,
+  away: BaseAdminNBATeam,
+  id_round_home: number;
+  id_round_away: number;
+  home_performances: AdminPlayerPerformance[];
+  away_performances: AdminPlayerPerformance[];
 }

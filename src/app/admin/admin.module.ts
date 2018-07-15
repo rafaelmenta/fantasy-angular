@@ -4,7 +4,7 @@ import { AdminRoutesModule } from './admin.routing';
 import { MatCardModule, MatToolbarModule, MatTabsModule, MatFormFieldModule, MatSelectModule,
   MatInputModule, MatListModule, MatButtonModule, MatIconModule, MatRadioModule,
   MatDatepickerModule, MatNativeDateModule, MatSidenavModule, MatTableModule, MatSnackBarModule,
-  MatExpansionModule, MatButtonToggleModule, MatDividerModule, MatCheckboxModule } from '@angular/material';
+  MatExpansionModule, MatButtonToggleModule, MatDividerModule, MatCheckboxModule, MatSlideToggleModule } from '@angular/material';
 import { AdminLeagueComponent } from './admin-league/admin-league.component';
 import { CommonModule } from '@angular/common';
 import { AdminTeamComponent } from './admin-team/admin-team.component';
@@ -24,6 +24,11 @@ import { AdminSystemComponent } from './admin-system/admin-system.component';
 import { AdminNbaComponent } from './admin-system/forms/admin-nba/admin-nba.component';
 import { AdminNbaGamesComponent } from './admin-system/forms/admin-nba-games/admin-nba-games.component';
 import { AdminNbaGameComponent } from './admin-system/forms/admin-nba-game/admin-nba-game.component';
+import { AdminRoundsComponent } from './admin-system/forms/admin-rounds/admin-rounds.component';
+import { AdminActiveGamesComponent } from './admin-system/forms/admin-active-games/admin-active-games.component';
+import { AdminGamePerformanceComponent } from './admin-system/forms/admin-game-performance/admin-game-performance.component';
+import { AdminTeamBoxscoreComponent } from './admin-system/forms/admin-team-boxscore/admin-team-boxscore.component';
+import { LeagueConfigsComponent } from './admin-league/forms/league-configs/league-configs.component';
 
 @NgModule({
   imports: [
@@ -51,6 +56,7 @@ import { AdminNbaGameComponent } from './admin-system/forms/admin-nba-game/admin
     MatDividerModule,
     MatFormFieldModule,
     MatCheckboxModule,
+    MatSlideToggleModule,
 
     FormsModule,
     ReactiveFormsModule,
@@ -74,6 +80,11 @@ import { AdminNbaGameComponent } from './admin-system/forms/admin-nba-game/admin
     AdminNbaComponent,
     AdminNbaGamesComponent,
     AdminNbaGameComponent,
+    AdminRoundsComponent,
+    AdminActiveGamesComponent,
+    AdminGamePerformanceComponent,
+    AdminTeamBoxscoreComponent,
+    LeagueConfigsComponent,
   ]
 })
 export class AdminModule { }

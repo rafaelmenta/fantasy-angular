@@ -1,0 +1,8 @@
+app-admin-team-boxscore {
+  display: block;
+  margin-bottom: 16px;
+}
+
+.actions > * {
+  margin-right: 8px;
+}

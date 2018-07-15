@@ -7,6 +7,9 @@ import { AdminPlayerComponent } from './admin-player/admin-player.component';
 import { AdminAuthGuardService } from './service/admin-auth-guard.service';
 import { AdminSystemComponent } from './admin-system/admin-system.component';
 import { AdminNbaComponent } from './admin-system/forms/admin-nba/admin-nba.component';
+import { AdminRoundsComponent } from './admin-system/forms/admin-rounds/admin-rounds.component';
+import { AdminActiveGamesComponent } from './admin-system/forms/admin-active-games/admin-active-games.component';
+import { AdminGamePerformanceComponent } from './admin-system/forms/admin-game-performance/admin-game-performance.component';
 
 const routes: Routes = [
   {
@@ -25,6 +28,15 @@ const routes: Routes = [
       children: [{
         path: 'nba',
         component: AdminNbaComponent,
+      }, {
+        path: 'round',
+        component: AdminRoundsComponent,
+      }, {
+        path: 'games',
+        component: AdminActiveGamesComponent,
+      }, {
+        path: 'games/:id',
+        component: AdminGamePerformanceComponent,
       }],
     }, {
       path: 'player',

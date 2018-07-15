@@ -1,0 +1,23 @@
+.card-title {
+  display: flex;
+  align-items: center;
+}
+
+.card-title img {
+  margin-right: 8px;
+}
+
+.narrow {
+  max-width: 40px;
+  margin-right: 16px;
+}
+
+.narrow input {
+  border: solid 1px #ccc;
+  padding: 4px 0 4px 4px;
+  border-radius: 4px;
+}
+
+mat-row, mat-header-row {
+  min-height: 32px;
+}

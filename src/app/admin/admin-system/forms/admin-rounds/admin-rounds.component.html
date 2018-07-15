@@ -1,0 +1,49 @@
+<mat-card>
+  <mat-card-title>Rodadas</mat-card-title>
+  <mat-card-content *ngIf="rounds$ | async as rounds">
+    <mat-table #table [dataSource]="rounds">
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="boxscore-row"></mat-row>
+
+      <!-- Round column -->
+      <ng-container matColumnDef="round">
+        <mat-header-cell *matHeaderCellDef class="narrow">Rodada</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="narrow">{{element.round_number}}</mat-cell>
+      </ng-container>
+
+      <!-- Open date column -->
+      <ng-container matColumnDef="openDate">
+        <mat-header-cell *matHeaderCellDef>Abertura</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.open_date | date:'short'}}</mat-cell>
+      </ng-container>
+
+      <!-- Close date column -->
+      <ng-container matColumnDef="closeDate">
+        <mat-header-cell *matHeaderCellDef>Fechamento</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.close_date | date:'short'}}</mat-cell>
+      </ng-container>
+
+      <!-- Close date column -->
+      <ng-container matColumnDef="processed">
+        <mat-header-cell *matHeaderCellDef class="narrow">Processada</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="narrow">
+          <mat-icon color="primary" *ngIf="element.processed">check</mat-icon>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Actions column -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef class="narrow">Ações</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="narrow">
+          <button mat-icon-button color="warn" (click)="onDelete(element)" [(disabled)]="element.processed">
+            <mat-icon>lock</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="onDelete(element)" [(disabled)]="element.opened">
+            <mat-icon>lock_open</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+    </mat-table>
+  </mat-card-content>
+</mat-card>

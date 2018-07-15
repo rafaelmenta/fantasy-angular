@@ -1,0 +1,9 @@
+<div *ngIf="game$ | async as game">
+  <app-admin-team-boxscore [team]="game.home" [performances]="game.home_performances"></app-admin-team-boxscore>
+  <app-admin-team-boxscore [team]="game.away" [performances]="game.away_performances"></app-admin-team-boxscore>
+
+  <div class="actions">
+    <a mat-raised-button color="accent" routerLink="../">Cancelar</a>
+    <button mat-raised-button color="primary" (click)="onSave(game)">Salvar</button>
+  </div>
+</div>

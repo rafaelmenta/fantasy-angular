@@ -22,6 +22,7 @@
       <div *ngIf="active==='info'">
         <form class="league-info">
           <app-league-info [league]="combined[0]" (save)="onSaveInfo(combined[0].id_league, $event)"></app-league-info>
+          <app-league-configs [league]="combined[0]"></app-league-configs>
           <app-league-conference
             [conference]="conference"
             (save)="onSaveConference(combined[0].id_league, $event)"

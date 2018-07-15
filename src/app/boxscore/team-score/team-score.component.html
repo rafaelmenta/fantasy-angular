@@ -21,7 +21,7 @@
 
   <ng-container matColumnDef="score">
     <mat-footer-cell *matFooterCellDef class="footer-score">
-      {{performance.fantasy_points}}
+      {{performance.fantasy_points.toFixed(3)}}
     </mat-footer-cell>
   </ng-container>
 
@@ -135,7 +135,7 @@
   <!-- PF Column -->
   <ng-container matColumnDef="pf">
     <mat-header-cell *matHeaderCellDef>PF</mat-header-cell>
-    <mat-cell *matCellDef="let stat">{{stat.performance.turnovers}}</mat-cell>
+    <mat-cell *matCellDef="let stat">{{stat.performance.personal_fouls}}</mat-cell>
   </ng-container>
 
   <!-- WL Column -->
@@ -162,14 +162,14 @@
   <ng-container matColumnDef="fps">
     <mat-header-cell *matHeaderCellDef class="score-cell">FPS</mat-header-cell>
     <mat-cell *matCellDef="let stat" class="score-cell">
-      <p class="mat-body-2">{{stat.fantasy_points.toFixed(2)}}</p>
+      <p class="mat-body-2">{{stat.performance.fantasy_points.toFixed(2)}}</p>
     </mat-cell>
   </ng-container>
 
   <!-- FPS Column -->
   <ng-container matColumnDef="fpv">
     <mat-header-cell *matHeaderCellDef class="score-cell">FPV</mat-header-cell>
-    <mat-cell *matCellDef="let stat" class="score-cell">{{stat.fantasy_points}}</mat-cell>
+    <mat-cell *matCellDef="let stat" class="score-cell">{{stat.fantasy_points.toFixed(2)}}</mat-cell>
   </ng-container>
 
 </mat-table>

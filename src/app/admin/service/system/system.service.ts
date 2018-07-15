@@ -1,7 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { APP_CONFIG, AppConfig } from '../../../app.config';
 import { HttpClient } from '@angular/common/http';
-import { BaseAdminNBATeam, AdminRound, AdminSeason, AdminGameNBA, AdminGameNBAInput } from './system';
+import { BaseAdminNBATeam, AdminRound, AdminSeason, AdminGameNBA,
+  AdminGameNBAInput, AdminGamePerformance, AdminPlayerPerformance } from './system';
 import { map, share } from 'rxjs/operators';
 import { Observable, ReplaySubject } from 'rxjs';
 
@@ -51,10 +52,10 @@ export class SystemService {
     );
   }
 
-  getNbaGames() {
-    const url = `${this.config.API_ENDPOINT}nba/games/current`;
-    return this.http.get<{ current_games_nba: AdminGameNBA[] }>(url).pipe(
-      map(res => res.current_games_nba),
+  getNbaGames(active?: boolean) {
+    const url = `${this.config.API_ENDPOINT}nba/games/current${active ? '?active=true' : ''}`;
+    return this.http.get<{ current_games_nba?: AdminGameNBA[], active_games_nba?: AdminGameNBA[] }>(url).pipe(
+      map(res => active ? res.active_games_nba : res.current_games_nba),
       share()
     );
   }
@@ -67,6 +68,18 @@ export class SystemService {
   deleteNbaGame(id: number) {
     const url = `${this.config.API_ENDPOINT}nba/${id}`;
     return this.http.delete<{ deleteNbaGame: number }>(url).pipe(share());
+  }
+
+  getGamePerformance(id: string) {
+    const url = `${this.config.API_ENDPOINT}nba/game/${id}`;
+    return this.http.get<{ game_performance: AdminGamePerformance }>(url).pipe(
+      map(res => res.game_performance),
+      share());
+  }
+
+  savePlayerPerformances(rounds: number[], performances: AdminPlayerPerformance[]) {
+    const url = `${this.config.API_ENDPOINT}nba/game`;
+    return this.http.post<{ saveNbaPerformances: number[][] }>(url, {rounds, performances}).pipe(share());
   }
 
   constructor(

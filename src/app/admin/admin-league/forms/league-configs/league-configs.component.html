@@ -1,0 +1,22 @@
+<mat-card>
+  <mat-card-title>Configurações</mat-card-title>
+  <mat-card-content class="controls">
+    <ng-container *ngFor="let config of league.configs">
+      <ng-container *ngIf="isValid(config.id_config)" [ngSwitch]="getInputType(config.id_config)">
+
+        <!-- case Boolean -->
+        <mat-slide-toggle *ngSwitchCase="'boolean'" [(ngModel)]="config.config_value">
+          {{getPlaceholder(config.id_config)}}
+        </mat-slide-toggle>
+
+        <!-- case Input -->
+        <mat-form-field *ngSwitchDefault>
+          <input  matInput type="number" [placeholder]="getPlaceholder(config.id_config)" [(ngModel)]="config.config_value">
+        </mat-form-field>
+      </ng-container>
+    </ng-container>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="primary" (click)="onSave(league.configs)">Salvar</button>
+  </mat-card-actions>
+</mat-card>

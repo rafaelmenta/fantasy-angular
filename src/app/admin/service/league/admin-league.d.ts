@@ -6,6 +6,12 @@ export interface AdminLeague {
   symbol: string;
   owner: {nickname: string;};
   number_of_teams: number;
+  configs: AdminLeagueConfig[];
+}
+
+export interface AdminLeagueConfig {
+  id_config: string;
+  config_value: string|boolean;
 }
 
 export interface AdminLeagueInfo extends AdminLeague {

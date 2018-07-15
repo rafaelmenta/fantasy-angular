@@ -1,0 +1,121 @@
+<mat-card>
+  <mat-card-title class="card-title">
+    <img
+      mat-card-avatar
+      src="https://static.draftbrasil.net/nba/logo/{{team.id_nba}}.png">
+    <span>{{team.city}} {{team.nickname}}</span>
+  </mat-card-title>
+  <mat-card-content>
+    <mat-form-field>
+      <mat-select placeholder="Resultado" [(ngModel)]="result" (selectionChange)="onResultChange(result)">
+        <mat-option [value]="1">Vitória</mat-option>
+        <mat-option [value]="-1">Derrota</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-table #table [dataSource]="performances">
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+      <!-- Player column -->
+      <ng-container matColumnDef="player">
+        <mat-header-cell *matHeaderCellDef>Jogador</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.player.first_name}} {{element.player.last_name}}</mat-cell>
+      </ng-container>
+
+      <!-- MIN column -->
+      <ng-container matColumnDef="min">
+        <mat-header-cell *matHeaderCellDef class="narrow">MIN</mat-header-cell>
+        <mat-cell *matCellDef="let perf" class="narrow">
+            <input  matInput type="number" [(ngModel)]="perf.minutes">
+        </mat-cell>
+      </ng-container>
+
+      <!-- FGA column -->
+      <ng-container matColumnDef="fga">
+        <mat-header-cell *matHeaderCellDef class="narrow">FGA</mat-header-cell>
+        <mat-cell *matCellDef="let perf" class="narrow">
+            <input  matInput type="number" [(ngModel)]="perf.field_goal_attempts">
+        </mat-cell>
+      </ng-container>
+
+      <!-- FTA column -->
+      <ng-container matColumnDef="fta">
+        <mat-header-cell *matHeaderCellDef class="narrow">FTA</mat-header-cell>
+        <mat-cell *matCellDef="let perf" class="narrow">
+            <input  matInput type="number" [(ngModel)]="perf.field_goal_attempts">
+        </mat-cell>
+      </ng-container>
+
+      <!-- OFF column -->
+      <ng-container matColumnDef="off">
+        <mat-header-cell *matHeaderCellDef class="narrow">OFF</mat-header-cell>
+        <mat-cell *matCellDef="let perf" class="narrow">
+            <input  matInput type="number" [(ngModel)]="perf.offensive_rebounds">
+        </mat-cell>
+      </ng-container>
+
+      <!-- DEF column -->
+      <ng-container matColumnDef="def">
+        <mat-header-cell *matHeaderCellDef class="narrow">DEF</mat-header-cell>
+        <mat-cell *matCellDef="let perf" class="narrow">
+            <input  matInput type="number" [(ngModel)]="perf.defensive_rebounds">
+        </mat-cell>
+      </ng-container>
+
+      <!-- AST column -->
+      <ng-container matColumnDef="ast">
+        <mat-header-cell *matHeaderCellDef class="narrow">AST</mat-header-cell>
+        <mat-cell *matCellDef="let perf" class="narrow">
+            <input  matInput type="number" [(ngModel)]="perf.assists">
+        </mat-cell>
+      </ng-container>
+
+      <!-- PF column -->
+      <ng-container matColumnDef="pf">
+        <mat-header-cell *matHeaderCellDef class="narrow">PF</mat-header-cell>
+        <mat-cell *matCellDef="let perf" class="narrow">
+            <input  matInput type="number" [(ngModel)]="perf.personal_fouls">
+        </mat-cell>
+      </ng-container>
+
+      <!-- STL column -->
+      <ng-container matColumnDef="stl">
+        <mat-header-cell *matHeaderCellDef class="narrow">STL</mat-header-cell>
+        <mat-cell *matCellDef="let perf" class="narrow">
+            <input  matInput type="number" [(ngModel)]="perf.steals">
+        </mat-cell>
+      </ng-container>
+
+      <!-- TO column -->
+      <ng-container matColumnDef="to">
+        <mat-header-cell *matHeaderCellDef class="narrow">TO</mat-header-cell>
+        <mat-cell *matCellDef="let perf" class="narrow">
+            <input  matInput type="number" [(ngModel)]="perf.turnovers">
+        </mat-cell>
+      </ng-container>
+
+      <!-- BLK column -->
+      <ng-container matColumnDef="blk">
+        <mat-header-cell *matHeaderCellDef class="narrow">BLK</mat-header-cell>
+        <mat-cell *matCellDef="let perf" class="narrow">
+            <input  matInput type="number" [(ngModel)]="perf.blocks">
+        </mat-cell>
+      </ng-container>
+
+      <!-- PTS column -->
+      <ng-container matColumnDef="pts">
+        <mat-header-cell *matHeaderCellDef class="narrow">PTS</mat-header-cell>
+        <mat-cell *matCellDef="let perf" class="narrow">
+            <input  matInput type="number" [(ngModel)]="perf.points">
+        </mat-cell>
+      </ng-container>
+
+      <!-- Spacer column -->
+      <ng-container matColumnDef="spacer">
+        <mat-header-cell *matHeaderCellDef class="narrow"></mat-header-cell>
+        <mat-cell *matCellDef="let perf" class="narrow"></mat-cell>
+      </ng-container>
+
+    </mat-table>
+  </mat-card-content>
+</mat-card>
