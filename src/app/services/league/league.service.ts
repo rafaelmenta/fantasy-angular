@@ -15,6 +15,7 @@ import { League, FreeAgencyHistory } from '../../../typings';
 import { Trade } from '../trade/trade.service';
 import { UPDATE_TRADE_HISTORY } from '../../store/trade-history.reducer';
 import { DraftOverview, Draft } from '../draft/draft.service';
+import { AdminLeagueConfig } from '../../admin/service/league/admin-league';
 
 interface LeagueState {
   league: League;
@@ -80,6 +81,14 @@ export class LeagueService {
       type: UPDATE_TRADE_HISTORY,
       payload: response.league.trade_history,
     }));
+  }
+
+  getConfigs(id: number) {
+    const url = `${this.config.API_ENDPOINT}${this.resource}/${id}/configs`;
+    return this.http.get<{ league: { configs: AdminLeagueConfig[]}}>(url).pipe(
+      map(res => res.league.configs),
+      share()
+    );
   }
 
   getFreeAgents(id: number) {

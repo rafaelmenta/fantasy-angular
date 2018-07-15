@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { APP_CONFIG, AppConfig } from '../../../app.config';
 import { HttpClient } from '@angular/common/http';
-import { AdminLeague, AdminLeagueInfo, AdminDivision } from './admin-league';
+import { AdminLeague, AdminLeagueInfo, AdminDivision, AdminLeagueConfig } from './admin-league';
 import { share, map, tap } from 'rxjs/operators';
 import { AdminFreeAgent } from '../player/admin-player';
 import { League, Conference } from '../../../../typings';
@@ -71,6 +71,13 @@ export class AdminLeagueService {
   saveConference(id: number, conference: Conference) {
     const url = `${this.config.API_ENDPOINT}leagues/${id}/conference`;
     return this.http.post<{saveConference: number[]}>(url, conference).pipe(share());
+  }
+
+  saveConfigs(id: number, configs: AdminLeagueConfig[]) {
+    const url = `${this.config.API_ENDPOINT}leagues/${id}/configs`;
+    return this.http.post<{ saveConfigs: number[] }>(url, { configs }).pipe(
+      share()
+    );
   }
 
   constructor(

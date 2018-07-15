@@ -56,5 +56,13 @@
   </div>
 </div>
 <ng-template #loading>
-  <app-loading></app-loading>
+  <app-loading *ngIf="!faLocked"></app-loading>
+  <div *ngIf="faLocked" class="fa-locked container">
+    <mat-card>
+      <mat-card-title>Free agency fechada</mat-card-title>
+      <mat-card-content>
+        <img src="../../../assets/img/misc/no-data.svg" alt="Free agency trancada">
+      </mat-card-content>
+    </mat-card>
+  </div>
 </ng-template>

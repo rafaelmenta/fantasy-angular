@@ -29,3 +29,12 @@
     flex: 1;
     max-width: 384px;
 }
+
+.fa-locked mat-card-content {
+    display: flex;
+    justify-content: center;
+}
+
+.fa-locked img {
+    height: 304px;
+}

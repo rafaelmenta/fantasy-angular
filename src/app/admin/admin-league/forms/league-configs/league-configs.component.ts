@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AdminLeague, AdminLeagueConfig } from '../../../service/league/admin-league';
+import { AdminLeagueService } from '../../../service/league/admin-league.service';
+import { MatSnackBar } from '../../../../../../node_modules/@angular/material';
 
 @Component({
   selector: 'app-league-configs',
@@ -38,10 +40,21 @@ export class LeagueConfigsComponent implements OnInit {
   }
 
   onSave(configs: AdminLeagueConfig[]) {
-    console.warn('saving', configs);
+    const saveConfigs = configs.map(config => {
+      const saveConfig = {...config};
+      if (this.getInputType(config.id_config) === 'boolean') {
+        saveConfig.config_value = config.config_value ? '1' : '0';
+      }
+      return saveConfig;
+    });
+    this.leagueService.saveConfigs(this.league.id_league, saveConfigs).subscribe(res => {
+      if (res.saveConfigs) {
+        this.snackbar.open('Configurações salvas', null, {duration: 3000});
+      }
+    });
   }
 
-  constructor() { }
+  constructor(private leagueService: AdminLeagueService, private snackbar: MatSnackBar) { }
 
   ngOnInit() {
     this.league.configs.forEach(config => {

@@ -20,6 +20,7 @@ export class FreeAgentsComponent implements OnInit {
 
   freeAgents$: Observable<Player[]>;
   defaultTeam: UserTeam;
+  faLocked: boolean;
 
   constructor(
     private leagueService: LeagueService,
@@ -54,10 +55,16 @@ export class FreeAgentsComponent implements OnInit {
         this.defaultTeam = this.teamService.getDefaultTeam(user.teams);
         const id = this.defaultTeam.team.division.conference.league.id_league;
 
-        this.freeAgents$ = this.leagueService.getFreeAgents(id);
-        this.freeAgents$.subscribe(freeAgents => {
-          if (freeAgents) {
-            this.dataSource.data = freeAgents.slice().sort(sortPlayers);
+        this.leagueService.getConfigs(id).subscribe(res => {
+          const faLocked = res.filter(config => config.id_config === 'FREE_AGENCY_LOCKED' && config.config_value === '1');
+          this.faLocked = faLocked.length > 0;
+          if (!this.faLocked) {
+            this.freeAgents$ = this.leagueService.getFreeAgents(id);
+            this.freeAgents$.subscribe(freeAgents => {
+              if (freeAgents) {
+                this.dataSource.data = freeAgents.slice().sort(sortPlayers);
+              }
+            });
           }
         });
       }
