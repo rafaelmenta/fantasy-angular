@@ -202,11 +202,9 @@ registerLocaleData(localePt);
     MatProgressSpinnerModule,
     MatAutocompleteModule,
     MatSidenavModule,
-    AppRouting,
     MatCheckboxModule,
     MomentModule,
     DragulaModule,
-    AdminModule,
     StoreModule.forRoot({
       trades: tradeReducer,
       userTeam: userTeamReducer,
@@ -237,6 +235,10 @@ registerLocaleData(localePt);
     }),
     CalendarModule.forRoot(),
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
+
+    AdminModule,
+
+    AppRouting,
   ],
   entryComponents: [
     DropPlayerComponent,

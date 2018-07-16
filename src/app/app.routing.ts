@@ -190,7 +190,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: () => AdminModule,
+    loadChildren: './admin/admin.module#AdminModule',
   },
   {
     path: '',
