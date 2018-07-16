@@ -20,3 +20,18 @@ mat-radio-button {
 .card-title img {
   margin-right: 8px;
 }
+
+.player-header {
+  margin-bottom: 16px;
+}
+
+.add-header-button {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+}
+
+.player-header img {
+  max-height: 224px;
+  object-fit: cover;
+}

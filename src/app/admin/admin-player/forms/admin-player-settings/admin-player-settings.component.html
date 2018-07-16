@@ -1,9 +1,15 @@
-<mat-card>
+<mat-card class="player-header" *ngIf="player.id_player">
+  <img
+    mat-card-image
+    onerror="this.src='../../../assets/img/profile/1000x210/generic-1.jpg'"
+    src="https://static.draftbrasil.net/player/header/{{player.id_player}}.jpg{{refresh}}" alt="">
   <mat-card-content>
-    <img src="https://static.draftbrasil.net/player/header/{{player.id_player.jpg" alt="">
+    <label for="header-input" class="add-header-button">
+      <button mat-fab (click)="headerInput.click()" color="primary"><mat-icon>add_a_photo</mat-icon></button>
+    </label>
   </mat-card-content>
   <mat-card-actions>
-    <input type="file" name="file" (change)="selectFile($event)" />
+      <input type="file" #headerInput name="file" (change)="selectFile($event)" style="display: none" />
   </mat-card-actions>
 </mat-card>
 

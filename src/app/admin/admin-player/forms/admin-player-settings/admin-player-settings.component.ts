@@ -23,6 +23,8 @@ export class AdminPlayerSettingsComponent implements OnInit {
   slugForm: FormGroup = this.fb.group({ slug: '' });
   nbaTeams$: Observable<BaseAdminNBATeam[]>;
 
+  refresh = '';
+
   onSlugChange() {
     const control = this.slugForm.get('slug');
     control.valueChanges.pipe(
@@ -91,6 +93,7 @@ export class AdminPlayerSettingsComponent implements OnInit {
         console.log('Upload Error:', err);
       }, () => {
         this.snackbar.open('Foto salva', null, {duration: 3000});
+        this.refresh = `?refresh=${Date.now()}`;
       }
     );
   }
