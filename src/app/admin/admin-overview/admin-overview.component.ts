@@ -13,7 +13,7 @@ export class AdminOverviewComponent implements OnInit {
   ngOnInit() {
     this.userService.user.subscribe(nextUser => {
       if (nextUser) {
-        console.warn('user', nextUser);
+        // console.warn('user', nextUser);
       }
     });
   }

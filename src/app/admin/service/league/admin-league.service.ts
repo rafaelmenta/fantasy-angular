@@ -6,7 +6,7 @@ import { share, map, tap } from 'rxjs/operators';
 import { AdminFreeAgent } from '../player/admin-player';
 import { League, Conference } from '../../../../typings';
 import { BaseAdminDraft } from '../draft/admin-draft';
-import { ReplaySubject } from '../../../../../node_modules/rxjs';
+import { ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

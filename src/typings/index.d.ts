@@ -1,5 +1,5 @@
-import { Player } from "src/app/services/player/player.service";
-import { Team, TeamLookup } from "src/app/services/team.service";
+import { Player } from "../app/services/player/player.service";
+import { Team, TeamLookup } from "../app/services/team.service";
 import { UserTeam } from "../app/services/user.service";
 
 export type League = {

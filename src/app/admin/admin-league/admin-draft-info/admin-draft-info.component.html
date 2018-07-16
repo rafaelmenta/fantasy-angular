@@ -13,7 +13,7 @@
         <mat-form-field>
           <input matInput [(ngModel)]="round" placeholder="Round" type="number" min="1">
         </mat-form-field>
-        <button mat-button color="primary" [(disabled)]="!validRound" (click)="onCreate(round)">Criar picks</button>
+        <button mat-button color="primary" [disabled]="!validRound" (click)="onCreate(round)">Criar picks</button>
       </div>
     </div>
   </mat-card-content>

@@ -3,7 +3,7 @@ import { APP_CONFIG, AppConfig } from '../../../app.config';
 import { HttpClient } from '@angular/common/http';
 import { map, share } from 'rxjs/operators';
 import { AdminDraft, AdminDraftInput, BaseAdminDraft, AdminPick } from './admin-draft';
-import { ReplaySubject } from '../../../../../node_modules/rxjs';
+import { ReplaySubject } from 'rxjs';
 
 export enum AdminDraftStatus {
   STATUS_CLOSED = '0',

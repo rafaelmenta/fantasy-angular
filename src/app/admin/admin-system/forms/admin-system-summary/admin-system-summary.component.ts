@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminSystemSummaryComponent implements OnInit {
 
+  activeSchedule: boolean;
+  activeRounds: boolean;
+  activeGames: boolean;
+
   constructor() { }
 
   ngOnInit() {

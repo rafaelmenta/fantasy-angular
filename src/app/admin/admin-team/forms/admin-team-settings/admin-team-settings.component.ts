@@ -10,7 +10,7 @@ import { SystemService } from '../../../service/system/system.service';
 import { AdminDivision } from '../../../service/league/admin-league';
 import { AdminLeagueService } from '../../../service/league/admin-league.service';
 import { AdminTeamService } from '../../../service/team/admin-team.service';
-import { MatSnackBar } from '../../../../../../node_modules/@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-admin-team-settings',

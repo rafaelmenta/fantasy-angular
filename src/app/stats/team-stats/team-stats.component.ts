@@ -25,8 +25,10 @@ export class TeamStatsComponent implements OnInit {
     this.title.setTitle(`Superliga - Estatísticas da equipe`);
 
     this.userService.user.subscribe(user => {
-      const defaultTeam = this.teamService.getDefaultTeam(user.teams);
-      this.players$ = this.teamService.getRosterStats(defaultTeam.id_sl).pipe(map(this.formatStats.bind(this)));
+      if (user) {
+        const defaultTeam = this.teamService.getDefaultTeam(user.teams);
+        this.players$ = this.teamService.getRosterStats(defaultTeam.id_sl).pipe(map(this.formatStats.bind(this)));
+      }
     });
   }
 

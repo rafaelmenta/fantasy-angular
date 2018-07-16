@@ -9,7 +9,7 @@ import { AdminDivision } from '../service/league/admin-league';
 import { AdminFreeAgent, AdminTeamPlayer } from '../service/player/admin-player';
 import { AdminUser } from '../service/user/admin-user';
 import { AdminUserService } from '../service/user/admin-user.service';
-import { MatSnackBar } from '../../../../node_modules/@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-admin-team',

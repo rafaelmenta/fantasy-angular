@@ -1,10 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { AdminGameNBAInput, AdminRound, BaseAdminNBATeam, AdminGameNBA } from '../../../service/system/system';
+import { AdminRound, BaseAdminNBATeam, AdminGameNBA } from '../../../service/system/system';
 import { SystemService } from '../../../service/system/system.service';
 import { Observable } from 'rxjs';
 
 import * as moment from 'moment-timezone';
-import { MatSnackBar } from '../../../../../../node_modules/@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-admin-nba-game',

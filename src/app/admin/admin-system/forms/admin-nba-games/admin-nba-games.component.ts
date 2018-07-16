@@ -1,8 +1,8 @@
 import * as moment from 'moment-timezone';
 import { Component, OnChanges, Input, OnInit } from '@angular/core';
 import { AdminGameNBA, AdminRound, BaseAdminNBATeam } from '../../../service/system/system';
-import { MatTableDataSource, MatSnackBar } from '../../../../../../node_modules/@angular/material';
-import { Observable } from '../../../../../../node_modules/rxjs';
+import { MatTableDataSource, MatSnackBar } from '@angular/material';
+import { Observable } from 'rxjs';
 import { SystemService } from '../../../service/system/system.service';
 import { compare } from '../../../../../lib/utils';
 

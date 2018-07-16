@@ -1,4 +1,4 @@
-<div class="grid" *ngIf="history$ | async as history;">
+<div class="history-grid" *ngIf="history$ | async as history;">
   <mat-card>
     <h3 class="mat-title">Temporada regular</h3>
     <app-team-stat [stats]="history.regular"></app-team-stat>

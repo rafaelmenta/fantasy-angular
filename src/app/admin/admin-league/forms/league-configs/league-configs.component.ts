@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AdminLeague, AdminLeagueConfig } from '../../../service/league/admin-league';
 import { AdminLeagueService } from '../../../service/league/admin-league.service';
-import { MatSnackBar } from '../../../../../../node_modules/@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-league-configs',

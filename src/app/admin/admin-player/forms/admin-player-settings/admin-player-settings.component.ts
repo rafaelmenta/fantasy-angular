@@ -6,7 +6,7 @@ import { SystemService } from '../../../service/system/system.service';
 import { Observable } from 'rxjs';
 import { BaseAdminNBATeam } from '../../../service/system/system';
 import { AdminPlayerService } from '../../../service/player/admin-player.service';
-import { MatSnackBar } from '../../../../../../node_modules/@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-admin-player-settings',

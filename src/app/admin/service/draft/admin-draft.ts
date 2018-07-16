@@ -1,5 +1,5 @@
-import { AdminDraftType, AdminDraftStatus } from "./admin-draft.service";
-import { AdminTeam } from "../team/admin-team";
+import { AdminDraftType, AdminDraftStatus } from './admin-draft.service';
+import { AdminTeam } from '../team/admin-team';
 
 export interface BaseAdminDraft {
   id_draft: number;

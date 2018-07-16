@@ -3,7 +3,6 @@ import { NavigationEnd, Router } from '@angular/router';
 import { LocationStrategy } from '@angular/common';
 import { NgProgress, NgProgressRef } from '@ngx-progressbar/core';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
-import { MatSidenav } from '@angular/material';
 
 @Component({
   selector: 'app-root',
