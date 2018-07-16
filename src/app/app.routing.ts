@@ -24,7 +24,6 @@ import { LoginComponent } from './login/login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { IndexComponent } from './index/index.component';
-import { AdminModule } from './admin/admin.module';
 
 const routes: Routes = [
   {
