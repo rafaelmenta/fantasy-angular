@@ -7,7 +7,7 @@ import { AdminGame } from '../service/game/admin-game';
 import { AdminGameService } from '../service/game/admin-game.service';
 import { SystemService } from '../service/system/system.service';
 import { AdminRound, AdminSeason } from '../service/system/system';
-import { map } from '../../../../node_modules/rxjs/operators';
+import { map, tap } from '../../../../node_modules/rxjs/operators';
 import { flatTeams, sortAlphabetically } from '../../../lib/utils';
 import { AdminTeam } from '../service/team/admin-team';
 import { Conference } from '../../../typings';
@@ -27,6 +27,7 @@ export class AdminLeagueComponent implements OnInit {
   drafts$: Observable<BaseAdminDraft[]>;
   draft$: Observable<AdminDraft>;
   leagueNav: {};
+  leagueSelected: boolean;
 
   loadLeague(leagueRef: AdminLeague) {
     const league$ = this.league.getLeague(leagueRef.id_league);
@@ -39,6 +40,7 @@ export class AdminLeagueComponent implements OnInit {
     this.combined$ = forkJoin(league$, teams$);
     this.leagueNav = {};
     this.leagueNav[leagueRef.id_league] = true;
+    this.leagueSelected = true;
   }
 
   onDraftCreation(id: number, $event: {id_type: AdminDraftType; season: AdminSeason}) {
@@ -108,7 +110,12 @@ export class AdminLeagueComponent implements OnInit {
 
   ngOnInit() {
     this.leagueNav = {};
-    this.leagues$ = this.league.getLeagues();
+    this.leagues$ = this.league.getLeagues().pipe(tap(leagues => {
+      // if (leagues.length === 1) {
+        this.loadLeague(leagues[0]);
+      // }
+      return leagues;
+    }));
   }
 
   constructor(

@@ -29,6 +29,8 @@ import { AdminActiveGamesComponent } from './admin-system/forms/admin-active-gam
 import { AdminGamePerformanceComponent } from './admin-system/forms/admin-game-performance/admin-game-performance.component';
 import { AdminTeamBoxscoreComponent } from './admin-system/forms/admin-team-boxscore/admin-team-boxscore.component';
 import { LeagueConfigsComponent } from './admin-league/forms/league-configs/league-configs.component';
+import { AdminSystemSummaryComponent } from './admin-system/forms/admin-system-summary/admin-system-summary.component';
+import { AdminSummaryComponent } from './admin-summary/admin-summary.component';
 
 @NgModule({
   imports: [
@@ -85,6 +87,8 @@ import { LeagueConfigsComponent } from './admin-league/forms/league-configs/leag
     AdminGamePerformanceComponent,
     AdminTeamBoxscoreComponent,
     LeagueConfigsComponent,
+    AdminSystemSummaryComponent,
+    AdminSummaryComponent,
   ]
 })
 export class AdminModule { }

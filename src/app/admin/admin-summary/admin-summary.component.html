@@ -1,0 +1,45 @@
+<mat-card>
+  <mat-card-content>
+    <p class="mat-body-1">Seja bem vindo à área administrativa do fantasy. Sua permissão atual é
+      de <span class="mat-body-2">{{getUserPermission()}}</span>.
+    </p>
+
+    <p>Confira abaixo um resumo das ações disponiveis:</p>
+
+    <mat-table #table [dataSource]="dataSource">
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" class="boxscore-row"></mat-row>
+
+      <!-- Action column -->
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef>Ação</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.action}}</mat-cell>
+      </ng-container>
+
+      <!-- Admin column -->
+      <ng-container matColumnDef="admin">
+        <mat-header-cell *matHeaderCellDef class="narrow">Admin</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="narrow"><mat-icon color="primary" *ngIf="element.admin">check</mat-icon></mat-cell>
+      </ng-container>
+
+      <!-- Commissioner column -->
+      <ng-container matColumnDef="commissioner">
+        <mat-header-cell *matHeaderCellDef class="narrow">Comissário</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="narrow"><mat-icon color="primary" *ngIf="element.commissioner">check</mat-icon></mat-cell>
+      </ng-container>
+
+      <!-- Updater column -->
+      <ng-container matColumnDef="updater">
+        <mat-header-cell *matHeaderCellDef class="narrow">Atualizador</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="narrow"><mat-icon color="primary" *ngIf="element.updater">check</mat-icon></mat-cell>
+      </ng-container>
+
+      <!-- Updater column -->
+      <ng-container matColumnDef="user">
+        <mat-header-cell *matHeaderCellDef class="narrow">Usuário</mat-header-cell>
+        <mat-cell *matCellDef="let element" class="narrow"><mat-icon color="primary" *ngIf="element.user">check</mat-icon></mat-cell>
+      </ng-container>
+
+    </mat-table>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,26 @@
+<div class="system-cards">
+  <mat-card
+    [class.mat-elevation-z2]="!activeSchedule" [class.mat-elevation-z8]="activeSchedule"
+    routerLink="./nba"
+    (mouseenter)="activeSchedule=true"
+    (mouseleave)="activeSchedule=false">
+    <mat-card-title>Calendário NBA</mat-card-title>
+    <mat-card-content>Gerencie os jogos da temporada regular da NBA</mat-card-content>
+  </mat-card>
+  <mat-card
+    [class.mat-elevation-z2]="!activeRounds" [class.mat-elevation-z8]="activeRounds"
+    routerLink="./round"
+    (mouseenter)="activeRounds=true"
+    (mouseleave)="activeRounds=false">
+    <mat-card-title>Rodadas</mat-card-title>
+    <mat-card-content>Abertura e encerramento das rodadas da NBA</mat-card-content>
+  </mat-card>
+  <mat-card
+    [class.mat-elevation-z2]="!activeGames" [class.mat-elevation-z8]="activeGames"
+    routerLink="./games"
+    (mouseenter)="activeGames=true"
+    (mouseleave)="activeGames=false">
+    <mat-card-title>Jogos</mat-card-title>
+    <mat-card-content>Atualização de jogos das rodas abertas</mat-card-content>
+  </mat-card>
+</div>

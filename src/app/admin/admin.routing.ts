@@ -10,6 +10,8 @@ import { AdminNbaComponent } from './admin-system/forms/admin-nba/admin-nba.comp
 import { AdminRoundsComponent } from './admin-system/forms/admin-rounds/admin-rounds.component';
 import { AdminActiveGamesComponent } from './admin-system/forms/admin-active-games/admin-active-games.component';
 import { AdminGamePerformanceComponent } from './admin-system/forms/admin-game-performance/admin-game-performance.component';
+import { AdminSystemSummaryComponent } from './admin-system/forms/admin-system-summary/admin-system-summary.component';
+import { AdminSummaryComponent } from './admin-summary/admin-summary.component';
 
 const routes: Routes = [
   {
@@ -17,6 +19,9 @@ const routes: Routes = [
     component: AdminOverviewComponent,
     canActivate: [AdminAuthGuardService],
     children: [{
+      path: '',
+      component: AdminSummaryComponent,
+    }, {
       path: 'league',
       component: AdminLeagueComponent,
     }, {
@@ -26,6 +31,9 @@ const routes: Routes = [
       path: 'system',
       component: AdminSystemComponent,
       children: [{
+        path: '',
+        component: AdminSystemSummaryComponent,
+      }, {
         path: 'nba',
         component: AdminNbaComponent,
       }, {

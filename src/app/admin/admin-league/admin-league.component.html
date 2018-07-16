@@ -18,7 +18,7 @@
 
   </div>
   <div class="right-content">
-    <div *ngIf="combined$ | async as combined;">
+    <div *ngIf="combined$ | async as combined; else loading">
       <div *ngIf="active==='info'">
         <form class="league-info">
           <app-league-info [league]="combined[0]" (save)="onSaveInfo(combined[0].id_league, $event)"></app-league-info>
@@ -48,6 +48,38 @@
             [draft]="draft"></app-admin-draft-info>
         </div>
       </div>
+      <div *ngIf="!active" class="league-cards">
+        <mat-card
+          [class.mat-elevation-z2]="!activeInfo" [class.mat-elevation-z8]="activeInfo"
+          (click)="active='info'"
+          (mouseenter)="activeInfo=true"
+          (mouseleave)="activeInfo=false">
+          <mat-card-title>Informações</mat-card-title>
+          <mat-card-content>Gerencie informações gerais da liga como nomes e siglas</mat-card-content>
+        </mat-card>
+        <mat-card
+          [class.mat-elevation-z2]="!activeGames" [class.mat-elevation-z8]="activeGames"
+          (click)="active='games'"
+          (mouseenter)="activeGames=true"
+          (mouseleave)="activeGames=false">
+          <mat-card-title>Jogos</mat-card-title>
+          <mat-card-content>Gerencie o calendário de jogos das equipes da liga</mat-card-content>
+        </mat-card>
+        <mat-card
+          [class.mat-elevation-z2]="!activeDraft" [class.mat-elevation-z8]="activeDraft"
+          (click)="active='draft'"
+          (mouseenter)="activeDraft=true"
+          (mouseleave)="activeDraft=false">
+          <mat-card-title>Draft</mat-card-title>
+          <mat-card-content>Gerencie drafts e picks</mat-card-content>
+        </mat-card>
+      </div>
     </div>
   </div>
 </div>
+<ng-template #loading>
+  <mat-card>
+    <mat-card-title *ngIf="!leagueSelected">Selecione uma liga</mat-card-title>
+    <mat-card-title *ngIf="leagueSelected">Carregando...</mat-card-title>
+  </mat-card>
+</ng-template>
