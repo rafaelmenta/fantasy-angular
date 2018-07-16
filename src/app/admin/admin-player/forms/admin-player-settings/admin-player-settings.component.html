@@ -1,4 +1,13 @@
 <mat-card>
+  <mat-card-content>
+    <img src="https://static.draftbrasil.net/player/header/{{player.id_player.jpg" alt="">
+  </mat-card-content>
+  <mat-card-actions>
+    <input type="file" name="file" (change)="selectFile($event)" />
+  </mat-card-actions>
+</mat-card>
+
+<mat-card>
   <mat-card-title class="card-title">
     <img
       mat-card-avatar

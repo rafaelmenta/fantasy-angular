@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { AdminPlayer } from '../../../service/player/admin-player';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { startWith, debounceTime, switchMap, tap } from 'rxjs/operators';
@@ -7,6 +8,7 @@ import { Observable } from 'rxjs';
 import { BaseAdminNBATeam } from '../../../service/system/system';
 import { AdminPlayerService } from '../../../service/player/admin-player.service';
 import { MatSnackBar } from '@angular/material';
+import { AdminUploadService } from '../../../service/admin-upload.service';
 
 @Component({
   selector: 'app-admin-player-settings',
@@ -65,10 +67,39 @@ export class AdminPlayerSettingsComponent implements OnInit {
     });
   }
 
+  selectFile(event) {
+    this.uploadFile(event.target.files);
+  }
+
+  uploadFile(files: FileList) {
+    if (files.length === 0) {
+      console.log('No file selected!');
+      return;
+    }
+
+    const file: File = files[0];
+    this.upload.uploadFile('headerPhoto', file, `${this.player.id_player}.jpg`).subscribe(
+      (event: any) => {
+        if (event.type === HttpEventType.UploadProgress) {
+          const percentDone = Math.round(100 * event.loaded / event.total);
+          console.log(`File is ${percentDone}% loaded.`);
+        } else if (event instanceof HttpResponse) {
+          console.log('File is completely loaded!');
+        }
+      },
+      (err) => {
+        console.log('Upload Error:', err);
+      }, () => {
+        this.snackbar.open('Foto salva', null, {duration: 3000});
+      }
+    );
+  }
+
   constructor(
     private fb: FormBuilder,
     private system: SystemService,
     private snackbar: MatSnackBar,
+    private upload: AdminUploadService,
     private playerService: AdminPlayerService
   ) { }
 
