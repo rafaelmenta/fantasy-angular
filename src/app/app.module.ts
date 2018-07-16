@@ -236,9 +236,8 @@ registerLocaleData(localePt);
     CalendarModule.forRoot(),
     Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
 
-    AdminModule,
-
     AppRouting,
+    AdminModule,
   ],
   entryComponents: [
     DropPlayerComponent,
