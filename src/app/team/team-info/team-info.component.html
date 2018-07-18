@@ -1,6 +1,7 @@
-<mat-card >
-  <h3 class="mat-title">Campanha</h3>
-  <div class="info-grid">
+<mat-card>
+  <mat-card-title>Campanha</mat-card-title>
+  <mat-card-content>
+    <div class="info-grid" *ngIf="!hideChart">
     <ngx-charts-bar-horizontal-stacked
       [scheme]="colors"
       [results]="results"
@@ -13,4 +14,9 @@
       [showYAxisLabel]="false">
     </ngx-charts-bar-horizontal-stacked>
   </div>
+  <div class="no-game" *ngIf="hideChart">
+    <img src="../../../assets/img/misc/no-game.svg" alt="Free agency trancada">
+    <p class="mat-subheading-1">Aguardando a primeira partida</p>
+  </div>
+  </mat-card-content>
 </mat-card>
