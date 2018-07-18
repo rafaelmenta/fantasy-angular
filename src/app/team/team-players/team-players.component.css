@@ -2,6 +2,14 @@
     flex-grow: 3;
 }
 
-.player-photo {
-    margin-right: 8px;
+.empty-roster {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.empty-roster img {
+    height: 96px;
 }

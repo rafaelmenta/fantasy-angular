@@ -12,17 +12,19 @@ import { DragulaModule } from 'ng2-dragula';
 
 import { CalendarModule } from 'angular-calendar';
 
-import { Angulartics2Module } from 'angulartics2';
-import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
+import {  Angulartics2Module } from 'angulartics2';
+import {  Angulartics2GoogleAnalytics } from 'angulartics2/ga';
 
 import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule, MatCardModule, MatToolbarModule, MatIconModule,
+import {
+  MatButtonModule, MatCheckboxModule, MatCardModule, MatToolbarModule, MatIconModule,
   MatBadgeModule, MatInputModule, MatMenuModule, MatTableModule, MatSortModule, MatExpansionModule,
   MatListModule, MatChipsModule, MatGridListModule, MatTabsModule, MatButtonToggleModule,
   MatDialogModule, MatSnackBarModule, MatProgressBarModule, MatProgressSpinnerModule,
-  MatAutocompleteModule, MatSelectModule, MatSidenavModule} from '@angular/material';
+  MatAutocompleteModule, MatSelectModule, MatSidenavModule
+} from '@angular/material';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MinutesChartComponent } from './team/minutes-chart/minutes-chart.component';
@@ -99,6 +101,9 @@ import { TeamOverviewComponent } from './team/team-overview/team-overview.compon
 import { TeamHistoryComponent } from './team/team-history/team-history.component';
 import { TeamStatComponent } from './team/team-stat/team-stat.component';
 import { SimulatorComponent } from './simulator/simulator/simulator.component';
+import { AvatarComponent } from './common/avatar/avatar.component';
+import { LookupComponent } from './common/lookup/lookup.component';
+
 import { AdminModule } from './admin/admin.module';
 import { AppRouting } from './app.routing';
 
@@ -170,6 +175,8 @@ registerLocaleData(localePt);
     TeamHistoryComponent,
     TeamStatComponent,
     SimulatorComponent,
+    AvatarComponent,
+    LookupComponent,
   ],
   imports: [
     BrowserModule,
@@ -216,7 +223,7 @@ registerLocaleData(localePt);
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       // logOnly: environment.production, // Restrict extension to log-only mode
-    }),    NgProgressModule.forRoot({
+    }), NgProgressModule.forRoot({
       // spinnerPosition: 'left',
       color: '#f71cff',
       thick: true

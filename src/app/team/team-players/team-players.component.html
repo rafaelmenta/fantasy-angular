@@ -1,56 +1,60 @@
 <mat-card>
-  <h3 class="mat-title">Roster</h3>
-  <mat-table #table [dataSource]="dataSource" matSort class="clubhouse__roster" condensed>
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" class="boxscore-row"></mat-row>
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef class="player-name"> Name </mat-header-cell>
-      <mat-cell *matCellDef="let element" class="player-name">
-        <img
-        onerror="this.src='../../../assets/img/profile/375x450/generic-player-2.jpg'"
-        src="https://static.draftbrasil.net/player/avatar/{{element.id_player}}.jpg"
-        class="player-avatar player-photo">
-        <a class="link" [routerLink]="['/player', element.player_slug]">{{element.first_name}} {{element.last_name}}</a>
-      </mat-cell>
-    </ng-container>
+  <mat-card-title>Roster</mat-card-title>
+  <mat-card-content>
+    <mat-table #table [dataSource]="dataSource" matSort *ngIf="players.length > 0">
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
-    <!-- P1P2 Column -->
-    <ng-container matColumnDef="p1p2">
-      <mat-header-cell *matHeaderCellDef> P1 </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        {{element.team_info.primary_position}}/{{element.team_info.secondary_position}}
-      </mat-cell>
-    </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef class="player-name"> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="player-name">
+          <app-lookup [element]="element"></app-lookup>
+        </mat-cell>
+      </ng-container>
 
-    <!-- P1 Column -->
-    <ng-container matColumnDef="p1">
-      <mat-header-cell *matHeaderCellDef> P1 </mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.team_info.primary_position}}</mat-cell>
-    </ng-container>
+      <!-- P1P2 Column -->
+      <ng-container matColumnDef="p1p2">
+        <mat-header-cell *matHeaderCellDef>P</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{element.team_info.primary_position}}/{{element.team_info.secondary_position}}
+        </mat-cell>
+      </ng-container>
 
-    <!-- P2 Column -->
-    <ng-container matColumnDef="p2">
-      <mat-header-cell *matHeaderCellDef> P2 </mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.team_info.secondary_position}}</mat-cell>
-    </ng-container>
+      <!-- P1 Column -->
+      <ng-container matColumnDef="p1">
+        <mat-header-cell *matHeaderCellDef>P1</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.team_info.primary_position}}</mat-cell>
+      </ng-container>
 
-    <!-- FPG Column -->
-    <ng-container matColumnDef="fpg">
-      <mat-header-cell *matHeaderCellDef> FPG </mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.stats && element.stats[0] ? element.stats[0].fantasy_points.toFixed(2) : 0 }}</mat-cell>
-    </ng-container>
+      <!-- P2 Column -->
+      <ng-container matColumnDef="p2">
+        <mat-header-cell *matHeaderCellDef>P2</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.team_info.secondary_position}}</mat-cell>
+      </ng-container>
 
-    <!-- MIN Column -->
-    <ng-container matColumnDef="min">
-      <mat-header-cell *matHeaderCellDef> MIN </mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.stats && element.stats[0] ? element.stats[0].minutes.toFixed(2): 0}}</mat-cell>
-    </ng-container>
+      <!-- FPG Column -->
+      <ng-container matColumnDef="fpg">
+        <mat-header-cell *matHeaderCellDef>FPG</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{getStat(element, 'fantasy_points')}}</mat-cell>
+      </ng-container>
 
-    <!-- FPM Column -->
-    <ng-container matColumnDef="fpm">
-      <mat-header-cell *matHeaderCellDef> FPM </mat-header-cell>
-      <mat-cell *matCellDef="let element">{{element.stats && element.stats[0] ? (element.stats[0].fantasy_points/element.stats[0].minutes).toFixed(2) : 0}}</mat-cell>
-    </ng-container>
-  </mat-table>
+      <!-- MIN Column -->
+      <ng-container matColumnDef="min">
+        <mat-header-cell *matHeaderCellDef>MIN</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{getStat(element, 'minutes')}}</mat-cell>
+      </ng-container>
+
+      <!-- FPM Column -->
+      <ng-container matColumnDef="fpm">
+        <mat-header-cell *matHeaderCellDef>FPM</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{getFpm(element)}}</mat-cell>
+      </ng-container>
+    </mat-table>
+
+    <div class="empty-roster" *ngIf="!players || players.length === 0">
+      <img src="../../../assets/img/misc/no-players.svg" alt="Sem jogadores">
+      <p class="mat-subheading-1">Não há jogadores na equipe</p>
+    </div>
+  </mat-card-content>
 </mat-card>
