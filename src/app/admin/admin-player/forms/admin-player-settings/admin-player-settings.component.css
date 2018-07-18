@@ -35,3 +35,24 @@ mat-radio-button {
   max-height: 224px;
   object-fit: cover;
 }
+
+.player-cards {
+  display: flex;
+}
+
+.player-card-settings {
+  flex: 3; margin-right: 16px;
+}
+
+.player-card-photo {
+  flex: 2;
+}
+
+.player-card-photo img {
+  height: 488px;
+  object-fit: cover;
+}
+
+.avatar-button {
+  margin-left: 8px;
+}

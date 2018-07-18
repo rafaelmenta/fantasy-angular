@@ -11,6 +11,8 @@ import { AdminDivision } from '../../../service/league/admin-league';
 import { AdminLeagueService } from '../../../service/league/admin-league.service';
 import { AdminTeamService } from '../../../service/team/admin-team.service';
 import { MatSnackBar } from '@angular/material';
+import { AdminUploadService } from '../../../service/admin-upload.service';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin-team-settings',
@@ -25,6 +27,8 @@ export class AdminTeamSettingsComponent implements OnInit {
 
   users$: Observable<AdminUser[]>;
   divisions$: Observable<AdminDivision[]>;
+  refresh: string;
+  validImage: boolean;
 
   loadUsers() {
     this.users$ = this.user.getUsers().pipe(
@@ -77,10 +81,63 @@ export class AdminTeamSettingsComponent implements OnInit {
     });
   }
 
+  selectFile(destination, $event) {
+    this.uploadFile(destination, $event.target.files);
+  }
+
+  uploadFile(destination: string, files: FileList) {
+    if (files.length === 0) {
+      console.log('No file selected!');
+      return;
+    }
+
+    this.validImage = true;
+    const file: File = files[0];
+
+    if (file) {
+      const img = new Image();
+      img.src = window.URL.createObjectURL(file);
+      img.onload = () => {
+        const width = img.naturalWidth;
+        const height = img.naturalHeight;
+
+        window.URL.revokeObjectURL(img.src);
+
+        if (width !== 195 || height !== 135) {
+          this.validImage = false;
+        }
+
+        if (file.type !== 'image/png') {
+          this.validImage = false;
+        }
+
+        if (this.validImage) {
+          this.upload.uploadFile(destination, file, `${this.team.id_sl}.png`).subscribe(
+            (event: any) => {
+              if (event.type === HttpEventType.UploadProgress) {
+                const percentDone = Math.round(100 * event.loaded / event.total);
+                console.log(`File is ${percentDone}% loaded.`);
+              } else if (event instanceof HttpResponse) {
+                console.log('File is completely loaded!');
+              }
+            },
+            (err) => {
+              console.log('Upload Error:', err);
+            }, () => {
+              this.snackbar.open('Foto salva', null, { duration: 3000 });
+              this.refresh = `?refresh=${Date.now()}`;
+            }
+          );
+        }
+      };
+    }
+  }
+
   constructor(
     private user: AdminUserService,
     private system: SystemService,
     private snackbar: MatSnackBar,
+    private upload: AdminUploadService,
     private teamService: AdminTeamService,
     private league: AdminLeagueService,
     private fb: FormBuilder) { }

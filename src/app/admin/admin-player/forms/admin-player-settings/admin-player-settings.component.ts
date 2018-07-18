@@ -69,18 +69,18 @@ export class AdminPlayerSettingsComponent implements OnInit {
     });
   }
 
-  selectFile(event) {
-    this.uploadFile(event.target.files);
+  selectFile(destination, $event) {
+    this.uploadFile(destination, $event.target.files);
   }
 
-  uploadFile(files: FileList) {
+  uploadFile(destination: string, files: FileList) {
     if (files.length === 0) {
       console.log('No file selected!');
       return;
     }
 
     const file: File = files[0];
-    this.upload.uploadFile('headerPhoto', file, `${this.player.id_player}.jpg`).subscribe(
+    this.upload.uploadFile(destination, file, `${this.player.id_player}.jpg`).subscribe(
       (event: any) => {
         if (event.type === HttpEventType.UploadProgress) {
           const percentDone = Math.round(100 * event.loaded / event.total);

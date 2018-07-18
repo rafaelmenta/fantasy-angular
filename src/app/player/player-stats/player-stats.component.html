@@ -22,7 +22,7 @@
     class="profile-photo"
     mat-card-image
     onerror="this.src='../../../assets/img/profile/375x450/generic-player.jpg'"
-    src="https://static.draftbrasil.net/player/profile/{{player.id_player}}.jpg">
+    src="https://static.draftbrasil.net/player/profile/{{player.id_player}}.jpg" class="player-card-photo">
   <mat-card-content>
     <mat-table #table [dataSource]="datasource" class="stats-table">
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

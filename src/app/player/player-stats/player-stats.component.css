@@ -6,3 +6,8 @@
 .stats-item {
   margin-top: 16px;
 }
+
+.player-card-photo {
+  height: 488px;
+  object-fit: cover;
+}

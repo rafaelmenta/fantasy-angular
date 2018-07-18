@@ -1,3 +1,26 @@
 mat-form-field {
   margin-right: 16px;
 }
+
+.team-cards {
+  display: flex;
+}
+
+.settings {
+  flex: 3;
+  margin-right: 16px;
+}
+
+.logo {
+  flex: 1;
+}
+
+.add-header-button {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+}
+
+.error {
+  color: red;
+}
