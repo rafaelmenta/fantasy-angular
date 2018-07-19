@@ -103,6 +103,7 @@ import { TeamStatComponent } from './team/team-stat/team-stat.component';
 import { SimulatorComponent } from './simulator/simulator/simulator.component';
 import { AvatarComponent } from './common/avatar/avatar.component';
 import { LookupComponent } from './common/lookup/lookup.component';
+import { TeamPickerCardComponent } from './trade/create-trade/team-picker-card/team-picker-card.component';
 
 import { AdminModule } from './admin/admin.module';
 import { AppRouting } from './app.routing';
@@ -177,6 +178,7 @@ registerLocaleData(localePt);
     SimulatorComponent,
     AvatarComponent,
     LookupComponent,
+    TeamPickerCardComponent,
   ],
   imports: [
     BrowserModule,

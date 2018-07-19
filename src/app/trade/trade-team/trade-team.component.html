@@ -1,9 +1,9 @@
 <h3 *ngIf="team" class="mat-title">{{ team.city}} {{ team.nickname }}</h3>
 <h3 *ngIf="!team" class="mat-title">Selectione uma equipe</h3>
 
-<mat-table *ngIf="team" #table [dataSource]="dataSource" class="clubhouse__roster">
+<mat-table *ngIf="team" #table [dataSource]="dataSource">
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;" class="boxscore-row"></mat-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
   <!-- Checkbox Column -->
   <ng-container matColumnDef="select">
@@ -27,11 +27,7 @@
   <ng-container matColumnDef="name">
     <mat-header-cell *matHeaderCellDef class="player-name">Nome</mat-header-cell>
     <mat-cell *matCellDef="let element" class="player-name">
-      <img
-        onerror="this.src='../../../assets/img/profile/375x450/generic-player-2.jpg'"
-        src="https://static.draftbrasil.net/player/avatar/{{element.id_player}}.jpg"
-        class="player-avatar player-photo">
-      <a class="link" [routerLink]="['/player', element.player_slug]">{{element.first_name}} {{element.last_name}}</a>
+      <app-lookup [element]="element"></app-lookup>
     </mat-cell>
   </ng-container>
 
@@ -66,16 +62,22 @@
 
 <mat-table *ngIf="team" #table [dataSource]="pickSource" class="clubhouse__roster">
   <mat-header-row *matHeaderRowDef="pickColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: pickColumns;" class="boxscore-row"></mat-row>
+  <mat-row *matRowDef="let row; columns: pickColumns;"></mat-row>
 
   <!-- Checkbox Column -->
   <ng-container matColumnDef="select">
     <mat-header-cell *matHeaderCellDef class="player-checkbox">
-      <mat-checkbox (change)="$event ? masterPickToggle() : null" [checked]="pickSelection.hasValue() && isAllSelected()" [indeterminate]="pickSelection.hasValue() && !isAllSelected()">
+      <mat-checkbox
+        (change)="$event ? masterPickToggle() : null"
+        [checked]="pickSelection.hasValue() && isAllSelected()"
+        [indeterminate]="pickSelection.hasValue() && !isAllSelected()">
       </mat-checkbox>
     </mat-header-cell>
     <mat-cell *matCellDef="let row" class="player-checkbox">
-      <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? pickSelection.toggle(row) : null" [checked]="pickSelection.isSelected(row)">
+      <mat-checkbox
+        (click)="$event.stopPropagation()"
+        (change)="$event ? pickSelection.toggle(row) : null"
+        [checked]="pickSelection.isSelected(row)">
       </mat-checkbox>
     </mat-cell>
   </ng-container>

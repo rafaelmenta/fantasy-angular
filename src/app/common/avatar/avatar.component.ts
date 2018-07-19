@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Player } from '../../services/player/player.service';
-import { Team } from '../../services/team.service';
+import { Team, TeamLookup } from '../../services/team.service';
 
 @Component({
   selector: 'app-avatar',
@@ -9,10 +9,14 @@ import { Team } from '../../services/team.service';
 })
 export class AvatarComponent implements OnInit {
 
-  @Input() element: Player|Team;
+  @Input() element: Player|TeamLookup;
 
   get isPlayer() {
     return this.element && (this.element as Player).id_player !== undefined;
+  }
+
+  get isTeam() {
+    return this.element && (this.element as TeamLookup).id_sl !== undefined;
   }
 
   constructor() { }

@@ -1,21 +1,10 @@
 <div class="container">
   <div class="desktop-selector" *ngIf="!mobileBreakpoint">
     <div class="teams-wrapper" *ngIf="teams; else loading">
-      <mat-card *ngFor="let team of teams" class="team-card" (click)="selectTeam(team)">
-        <mat-card-header>
-          <img mat-card-avatar src="https://static.draftbrasil.net/team/logo/{{team.id_sl}}.png">
-          <mat-card-title-group>
-            <mat-card-title>
-               <p class="mat-body-1">
-                 {{team.city}} {{team.nickname}}
-               </p>
-            </mat-card-title>
-            <mat-card-subtitle>
-               <p class="mat-caption">{{team.users[0].nickname}}</p>
-            </mat-card-subtitle>
-          </mat-card-title-group>
-        </mat-card-header>
-      </mat-card>
+      <app-team-picker-card
+        *ngFor="let team of teams"
+        [team]="team"
+        (click)="selectTeam(team)"></app-team-picker-card>
     </div>
   </div>
   <div class="mobile-selector" *ngIf="mobileBreakpoint">
@@ -31,30 +20,33 @@
   </div>
 
   <mat-card class="trade-panel">
-    <h3 class="mat-title">Proposta</h3>
-    <div class="trade-message">
-      <mat-form-field>
-        <textarea matInput [(ngModel)]="proposal.trade_comment" placeholder="Mensagem (opcional)" rows="3"></textarea>
-      </mat-form-field>
-    </div>
+    <mat-card-title>Proposta</mat-card-title>
 
-    <div class="trade-teams" *ngIf="team">
-      <app-trade-team #sender [team]="team" (change)="updateTeam('sent', $event)"></app-trade-team>
-      <div class="trading-team">
-        <!-- Avoid the loading overlay on empty object. -->
-        <app-trade-team
-        #receiver
-        *ngIf="!tradingTeam || (tradingTeam$ | async); else loading"
-        [team]="tradingTeam"
-        (change)="updateTeam('received', $event)"></app-trade-team>
+    <mat-card-content>
+      <div class="trade-teams" *ngIf="team">
+        <app-trade-team #sender [team]="team" (change)="updateTeam('sent', $event)"></app-trade-team>
+        <div class="trading-team">
+          <!-- Avoid the loading overlay on empty object. -->
+          <app-trade-team
+          #receiver
+          *ngIf="!tradingTeam || (tradingTeam$ | async); else loading"
+          [team]="tradingTeam"
+          (change)="updateTeam('received', $event)"></app-trade-team>
+        </div>
       </div>
-    </div>
 
-    <div class="trade-actions">
-      <button mat-fab color="primary" [disabled]="!validTrade" (click)="sendTrade()">
-        <mat-icon>send</mat-icon>
-      </button>
-    </div>
+      <div class="trade-actions">
+        <button mat-fab color="primary" [disabled]="!validTrade" (click)="sendTrade()">
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
+
+      <div class="trade-message">
+        <mat-form-field>
+          <textarea matInput [(ngModel)]="proposal.trade_comment" placeholder="Mensagem (opcional)" rows="3"></textarea>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
   </mat-card>
 </div>
 <ng-template #loading>

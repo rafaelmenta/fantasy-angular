@@ -4,14 +4,6 @@
     justify-content: space-between;
 }
 
-.team-card {
-    cursor: pointer;
-    padding: 8px;
-    width: 208px;
-    margin-top: 8px;
-    height: 64px;
-}
-
 .mobile-teams-wrapper {
     display: flex;
     overflow-x: scroll;
@@ -23,10 +15,6 @@
 
 .trade-panel {
     margin-top: 16px;
-}
-
-.team-card:hover {
-    background: rgba(0, 0, 0, 0.03);
 }
 
 .trade-message {
@@ -43,9 +31,6 @@
     flex-wrap: wrap;
 }
 
-.trade-teams app-trade-team:first-of-type {
-    /* margin-right: 64px; */
-}
 .trade-teams app-trade-team,
 .trade-teams .trading-team {
     margin-top: 32px;

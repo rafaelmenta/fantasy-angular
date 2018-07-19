@@ -1,0 +1,13 @@
+<mat-card
+  class="team-card mat-elevation-z2"
+  [class.mat-elevation-z8]="hoverActive"
+  (mouseenter)="hoverActive=true"
+  (mouseleave)="hoverActive=false">
+  <mat-card-header>
+    <app-avatar mat-card-avatar [element]="team"></app-avatar>
+    <mat-card-title-group>
+      <mat-card-title><p class="mat-body-1">{{team.city}} {{team.nickname}}</p></mat-card-title>
+      <mat-card-subtitle><p class="mat-caption">{{team.users[0].nickname}}</p></mat-card-subtitle>
+    </mat-card-title-group>
+  </mat-card-header>
+</mat-card>
