@@ -5,3 +5,15 @@
 .trade-header {
     align-items: center;
 }
+
+.empty-trade {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 256px;
+}
+
+.empty-trade img {
+    height: 96px;
+}

@@ -17,17 +17,14 @@
         <mat-nav-list>
           <h3 matSubheader>{{ trade.sender.nickname }}</h3>
           <a mat-list-item *ngFor="let player of trade.sender_players" routerLink="/player/{{player.player_slug}}">
-            <img
-              onerror="this.src='../../../assets/img/profile/375x450/generic-player-2.jpg'"
-              matListAvatar
-              src="https://static.draftbrasil.net/player/avatar/{{player.id_player}}.jpg">
+            <app-avatar [element]="player" matListAvatar></app-avatar>
             <h3 matLine>{{ player.first_name }} {{ player.last_name }}</h3>
             <p matLine>
               <span>{{ player.default_primary }}/{{ player.default_secondary }} </span>
             </p>
           </a>
           <a mat-list-item *ngFor="let pick of trade.sender_picks" routerLink="/team/{{pick.original.slug}}">
-            <img matListAvatar src="https://static.draftbrasil.net/team/logo/{{pick.original.id_sl}}.png">
+            <app-avatar [element]="pick.original" matListAvatar></app-avatar>
             <h3 matLine>{{ pick.draft.year_draft }}/{{ pick.round }}</h3>
             <p matLine>
               <span>({{ pick.original.symbol }})</span>
@@ -35,16 +32,14 @@
           </a>
           <h3 matSubheader>{{ team.team.nickname }}</h3>
           <a mat-list-item *ngFor="let player of trade.receiver_players" routerLink="/player/{{player.player_slug}}">
-            <img
-              onerror="this.src='../../../assets/img/profile/375x450/generic-player-2.jpg'"
-              matListAvatar src="https://static.draftbrasil.net/player/avatar/{{player.id_player}}.jpg">
+            <app-avatar [element]="player" matListAvatar></app-avatar>
             <h3 matLine>{{ player.first_name }} {{ player.last_name }}</h3>
             <p matLine>
               <span>{{ player.default_primary }}/{{ player.default_secondary }} </span>
             </p>
           </a>
           <a mat-list-item *ngFor="let pick of trade.receiver_picks" routerLink="/team/{{pick.original.slug}}">
-            <img matListAvatar src="https://static.draftbrasil.net/team/logo/{{pick.original.id_sl}}.png">
+            <app-avatar [element]="pick.original" matListAvatar></app-avatar>
             <h3 matLine>{{ pick.draft.year_draft }}/{{ pick.round }}</h3>
             <p matLine>
               <span>({{ pick.original.symbol }})</span>
@@ -59,6 +54,10 @@
       </mat-action-row>
     </mat-expansion-panel>
   </mat-accordion>
+  <mat-card class="empty-trade" *ngIf="!trades.length > 0">
+    <img src="../../../assets/img/misc/no-trade.svg" alt="Sem trocas">
+    <p class="mat-subheading-1">Nenhuma troca recebida</p>
+  </mat-card>
 </div>
 <ng-template #loading>
   <app-loading></app-loading>
