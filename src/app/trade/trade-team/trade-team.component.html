@@ -1,7 +1,7 @@
 <h3 *ngIf="team" class="mat-title">{{ team.city}} {{ team.nickname }}</h3>
 <h3 *ngIf="!team" class="mat-title">Selectione uma equipe</h3>
 
-<mat-table *ngIf="team" #table [dataSource]="dataSource">
+<mat-table *ngIf="team && dataSource.data.length > 0" #table [dataSource]="dataSource">
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
@@ -60,7 +60,7 @@
   </ng-container>
 </mat-table>
 
-<mat-table *ngIf="team" #table [dataSource]="pickSource" class="clubhouse__roster">
+<mat-table *ngIf="team && pickSource.data.length > 0" #table [dataSource]="pickSource" class="clubhouse__roster">
   <mat-header-row *matHeaderRowDef="pickColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: pickColumns;"></mat-row>
 

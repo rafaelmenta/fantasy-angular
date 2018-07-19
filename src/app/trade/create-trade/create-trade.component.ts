@@ -5,7 +5,7 @@ import { UserService } from '../../services/user.service';
 import { flatTeams, sortAlphabetically } from '../../../lib/utils';
 import { MatTableDataSource, MatSnackBar, MatDialog } from '@angular/material';
 import { Player } from '../../services/player/player.service';
-import { Trade, SentTrade, TradePlayer, TradeService } from '../../services/trade/trade.service';
+import { SentTrade, TradePlayer, TradeService } from '../../services/trade/trade.service';
 import { Pick } from '../../services/pick/pick.service';
 import { TradeTeamComponent } from '../trade-team/trade-team.component';
 import { Observable } from 'rxjs';
@@ -33,7 +33,7 @@ export class CreateTradeComponent implements OnInit {
   validTrade: boolean;
   mobileBreakpoint: boolean;
 
-  proposal = this.getNewTrade();
+  proposal: SentTrade;
 
   updateTeam(type: 'sent'|'received', $event: {players: Player[], picks: Pick[]}) {
     if (type === 'sent') {
@@ -118,6 +118,10 @@ export class CreateTradeComponent implements OnInit {
     this.title.setTitle(`Superliga - Propor troca`);
     this.userService.user.subscribe(user => {
       if (user) {
+        this.proposal = this.getNewTrade();
+        this.tradingTeam$ = null;
+        this.tradingTeam = null;
+
         const team = this.teamService.getDefaultTeam(user.teams);
         const id = team.team.division.conference.league.id_league;
 
