@@ -14,6 +14,8 @@ import {
 } from '../../store/trade.reducer';
 import { Team } from '../team.service';
 import { share } from 'rxjs/operators';
+import { AddTeamPlayer, ADD_TEAM_PLAYER, REMOVE_TEAM_PLAYER, RemoveTeamPlayer, AddTeamPick, ADD_TEAM_PICK, REMOVE_TEAM_PICK, RemoveTeamPick } from '../../store/user-team.reducer';
+import { Player } from '../player/player.service';
 
 export interface TradePlayer {
   id_player: number;
@@ -140,6 +142,27 @@ export class TradeService {
         picks: trade.sender_picks.map(pick => pick.id_pick),
       },
     };
+  }
+
+  processTradeState(trade: Trade) {
+    trade.sender_players.forEach(player => {
+      const teamPlayer: Player = {
+        ...player,
+        team_info: {primary_position: player.default_primary, secondary_position: player.default_secondary},
+      } as Player;
+      this.store.dispatch<AddTeamPlayer>({type: ADD_TEAM_PLAYER, payload: teamPlayer});
+    });
+    trade.receiver_players.forEach(player => {
+      this.store.dispatch<RemoveTeamPlayer>({type: REMOVE_TEAM_PLAYER, payload: {id: player.id_player}});
+    });
+
+    trade.sender_picks.forEach(pick => {
+      this.store.dispatch<AddTeamPick>({type: ADD_TEAM_PICK, payload: pick});
+    });
+
+    trade.receiver_picks.forEach(pick => {
+      this.store.dispatch<RemoveTeamPick>({type: REMOVE_TEAM_PICK, payload: {id: pick.id_pick}});
+    });
   }
 
   constructor(

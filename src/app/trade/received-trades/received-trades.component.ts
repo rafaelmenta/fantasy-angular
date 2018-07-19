@@ -64,17 +64,20 @@ export class ReceivedTradesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: boolean) => {
       if (result) {
         this.tradeService.confirmTrade($event.id_trade).subscribe(res => {
-          this.angulartics2.eventTrack.next({
-            action: 'confirm-trade',
-            properties: {
-              category: this.team.team.slug,
-            }
-          });
-          this.snackbar.open('Troca confirmada', null, { duration: 3000 });
-          this.teamService.getTrades(this.team.id_sl).subscribe(teamTrades => {
-            this.store.dispatch<UpdateTrade>({ type: UPDATE_TRADE, payload: { teamTrades } });
-            this.trades = teamTrades.team.received_trades;
-          });
+          if (res.acceptTrade) {
+            this.angulartics2.eventTrack.next({
+              action: 'confirm-trade',
+              properties: {
+                category: this.team.team.slug,
+              }
+            });
+            this.snackbar.open('Troca confirmada', null, { duration: 3000 });
+            this.teamService.getTrades(this.team.id_sl).subscribe(teamTrades => {
+              this.store.dispatch<UpdateTrade>({ type: UPDATE_TRADE, payload: { teamTrades } });
+              this.trades = teamTrades.team.received_trades;
+            });
+            this.tradeService.processTradeState($event);
+          }
         });
       }
     });
