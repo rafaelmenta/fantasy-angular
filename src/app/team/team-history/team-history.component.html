@@ -1,10 +1,22 @@
 <div class="history-grid" *ngIf="history$ | async as history;">
   <mat-card>
-    <h3 class="mat-title">Temporada regular</h3>
-    <app-team-stat [stats]="history.regular"></app-team-stat>
+    <mat-card-title>Temporada regular</mat-card-title>
+    <mat-card-content>
+      <app-team-stat *ngIf="history.regular.length > 0" [stats]="history.regular"></app-team-stat>
+      <div class="empty-archive" *ngIf="!history.regular.length > 0">
+        <img src="../../../assets/img/misc/no-archive.svg" alt="Sem jogos">
+        <p class="mat-subheading-1">Não há histórico de temporada regular</p>
+      </div>
+    </mat-card-content>
   </mat-card>
   <mat-card>
-    <h3 class="mat-title">P&oacute;s-temporada</h3>
-    <app-team-stat [stats]="history.playoffs"></app-team-stat>
+    <mat-card-title>P&oacute;s-temporada</mat-card-title>
+    <mat-card-content>
+      <app-team-stat *ngIf="history.playoffs.length > 0" [stats]="history.playoffs"></app-team-stat>
+      <div class="empty-archive" *ngIf="!history.regular.length > 0">
+        <img src="../../../assets/img/misc/no-archive.svg" alt="Sem jogos">
+        <p class="mat-subheading-1">Não há histórico de pós-temporada</p>
+      </div>
+    </mat-card-content>
   </mat-card>
 </div>

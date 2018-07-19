@@ -1,3 +1,15 @@
 mat-card {
   margin-bottom: 16px;
 }
+
+.empty-archive {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 128px;
+}
+
+.empty-archive img {
+    height: 96px;
+}
