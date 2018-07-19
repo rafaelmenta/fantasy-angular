@@ -11,3 +11,15 @@
 mat-card {
   margin-top: 16px;
 }
+
+.empty-calendar mat-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 256px;
+}
+
+.empty-calendar img {
+    height: 96px;
+}

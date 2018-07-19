@@ -141,6 +141,16 @@ body {
 	object-fit: cover;
 }
 
+.team-logo {
+  height: 24px;
+}
+
+.gameline {
+	display: flex;
+	align-items: center;
+	display: inline-block;
+}
+
 /* Grid ----------------------------------------------------------------------------------------- */
 
 .grid {

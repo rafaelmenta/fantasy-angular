@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild, TemplateRef, EventEmitter } from '@angular/core';
-import { CalendarEvent, ViewPeriod } from 'calendar-utils';
+import { Component, OnInit } from '@angular/core';
+import { CalendarEvent } from 'calendar-utils';
 import { Subject, Observable } from 'rxjs';
-import { CalendarEventTimesChangedEvent } from 'angular-calendar';
 import {
   startOfMonth, startOfWeek, startOfDay,
   endOfMonth, endOfWeek, endOfDay, addHours, isSameMonth, isSameDay } from 'date-fns';
@@ -57,10 +56,17 @@ export class NbaScheduleComponent implements OnInit {
     const startDate = getStart(this.viewDate);
     const endDate = getEnd(this.viewDate);
     this.events$ = this.nbaService.getGames(startDate, endDate).pipe(map(games => games.map(game => {
+
+      const gameline = `<div class="gameline">
+        <img class="team-logo" src="https://static.draftbrasil.net/nba/logo/${game.home_team.id_nba}.png">
+        ${game.home_team.symbol} x ${game.away_team.symbol}
+        <img class="team-logo" src="https://static.draftbrasil.net/nba/logo/${game.away_team.id_nba}.png">
+      </div>`;
+
       return {
         start: new Date(game.game_time),
         end: new Date(addHours(game.game_time, 3)),
-        title: `${game.home_team.symbol} x ${game.away_team.symbol}`,
+        title: gameline,
         color: colors.red,
         cssClass: 'game-event',
       };

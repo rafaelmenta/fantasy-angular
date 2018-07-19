@@ -1,5 +1,6 @@
 <div class="container">
-  <div class="toolbar">
+  <mat-card>
+    <div class="toolbar">
     <div class="date-controls">
       <button
         mat-button
@@ -60,6 +61,7 @@
         (eventClicked)="handleEvent('Clicked', $event.event)"
         (eventTimesChanged)="eventTimesChanged($event)">
       </mwl-calendar-week-view>
+
       <mwl-calendar-day-view
         *ngSwitchCase="'day'"
         locale="pt"
@@ -71,4 +73,5 @@
       </mwl-calendar-day-view>
     </div>
   </div>
+  </mat-card>
 </div>

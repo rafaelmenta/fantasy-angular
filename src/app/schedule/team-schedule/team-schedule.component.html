@@ -35,6 +35,12 @@
       </mat-card-content>
     </mat-card>
   </ng-template>
+  <div class="empty-calendar" *ngIf="games.length === 0">
+    <mat-card>
+      <img src="../../../assets/img/misc/calendar.svg" alt="Sem jogos">
+      <p class="mat-subheading-1">Não há jogos no calendário da equipe</p>
+    </mat-card>
+  </div>
 </div>
 <ng-template #loading>
   <app-loading></app-loading>
