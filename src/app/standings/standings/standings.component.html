@@ -5,22 +5,31 @@
   <div class="standings__filters">
     <div class="standings__filter-group">
       <mat-button-toggle-group #group="matButtonToggleGroup" (change)="filterTeams()" aria-label="Tipo de classificação" value="division">
-        <mat-button-toggle selected value="division">Divis&atilde;o</mat-button-toggle>
+        <mat-button-toggle value="division">Divis&atilde;o</mat-button-toggle>
         <mat-button-toggle value="conference">Confer&ecirc;ncia</mat-button-toggle>
         <mat-button-toggle value="league">Liga</mat-button-toggle>
       </mat-button-toggle-group>
     </div>
 
     <div class="standings__filter-group">
-      <mat-button-toggle-group #subgroup="matButtonToggleGroup" (change)="filterTeams()" aria-label="Divisão" value="{{ conferences && conferences[0].divisions[0].name}}">
-        <ng-template ngFor let-conference [ngForOf]="conferences">
-          <mat-button-toggle *ngIf="group.value === 'conference'" value="{{conference.name}}">{{conference.name}}</mat-button-toggle>
-          <ng-template [ngIf]="group.value === 'division'">
-            <mat-button-toggle *ngFor="let division of conference.divisions" value="{{division.name}}">
-              {{division.name}}
-            </mat-button-toggle>
-          </ng-template>
-        </ng-template>
+      <mat-button-toggle-group
+        *ngIf="group.value === 'conference'"
+        aria-label="Conferência"
+        [(ngModel)]="conference"
+        (change)="filterTeams()">
+        <mat-button-toggle *ngFor="let conference of conferences" value="{{conference.name}}">
+          {{conference.name}}
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <mat-button-toggle-group
+         *ngIf="group.value === 'division'"
+         aria-label="Divisão"
+         [(ngModel)]="division"
+        (change)="filterTeams()">
+        <mat-button-toggle *ngFor="let division of divisions" value="{{division.name}}">
+          {{division.name}}
+        </mat-button-toggle>
       </mat-button-toggle-group>
     </div>
   </div>
