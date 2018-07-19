@@ -1,18 +1,30 @@
-<mat-toolbar color="accent">
-  Roster
-  <div class="roster__spacer"></div>
-</mat-toolbar>
+<mat-toolbar color="accent">Roster</mat-toolbar>
+
 <div class="container" *ngIf="players; else loading">
   <div *ngFor="let player of players; let first = first; let last = last;" class="roster__grid-tile">
     <app-roster-tile
-    [player]="player"
     [first]="first"
     [last]="last"
+    [player]="player"
     (change)="updatePlayers($event, player)"
     (swap)="swapPosition($event)"
     (remove)="openDropDialog($event)"></app-roster-tile>
   </div>
-  <button mat-fab class="save-button" [disabled]="!dirtyRoster" color="accent" (click)="saveRoster()"><mat-icon>save</mat-icon></button>
+  <button
+    *ngIf="players.length > 0"
+    class="save-button"
+    color="accent"
+    mat-fab
+    [disabled]="!dirtyRoster"
+    (click)="saveRoster()">
+    <mat-icon>save</mat-icon>
+  </button>
+  <div class="empty-roster" *ngIf="players.length === 0">
+    <mat-card>
+      <img src="../../../assets/img/misc/no-players.svg" alt="Sem jogadores">
+      <p class="mat-subheading-1">Não há jogadores na equipe</p>
+    </mat-card>
+  </div>
 </div>
 
 <ng-template #loading>

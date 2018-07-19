@@ -18,3 +18,15 @@
     bottom: 32px;
     right: 32px;
 }
+
+.empty-roster mat-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 256px;
+}
+
+.empty-roster img {
+    height: 96px;
+}

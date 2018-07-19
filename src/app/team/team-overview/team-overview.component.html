@@ -7,7 +7,7 @@
       <div class="clubhouse__content-tile">
         <app-team-players [players]="team.team_overview.players"></app-team-players>
       </div>
-      <div class="clubhouse__content-tile">
+      <div class="clubhouse__content-tile" *ngIf="team.team_overview.picks.length > 0">
         <app-team-picks [picks]="team.team_overview.picks"></app-team-picks>
       </div>
     </div>
