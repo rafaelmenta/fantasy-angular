@@ -1,19 +1,23 @@
 <div *ngIf="drafts$ | async as drafts; else loading">
   <mat-card>
-    <h3 class="mat-title">Arquivo</h3>
-    <mat-nav-list>
-      <a mat-list-item *ngFor="let draft of drafts.previous_drafts" [routerLink]="['/draft', draft.id_draft]">
-        {{draft.year_draft}}
-      </a>
-    </mat-nav-list>
+    <mat-card-title>Arquivo</mat-card-title>
+    <mat-card-content>
+      <mat-nav-list>
+        <a mat-list-item *ngFor="let draft of drafts.previous_drafts" [routerLink]="['/draft', draft.id_draft]">
+          {{draft.year_draft}}
+        </a>
+      </mat-nav-list>
+    </mat-card-content>
   </mat-card>
   <mat-card>
-    <h3 class="mat-title">Pr&oacute;ximos drafts</h3>
-    <mat-nav-list>
-      <a mat-list-item *ngFor="let draft of drafts.next_drafts" [routerLink]="['/draft', draft.id_draft]">
-        {{draft.year_draft}}
-      </a>
-    </mat-nav-list>
+    <mat-card-title>Próximos drafts</mat-card-title>
+    <mat-card-content>
+      <mat-nav-list>
+        <a mat-list-item *ngFor="let draft of drafts.next_drafts" [routerLink]="['/draft', draft.id_draft]">
+          {{draft.year_draft}}
+        </a>
+      </mat-nav-list>
+    </mat-card-content>
   </mat-card>
 </div>
 

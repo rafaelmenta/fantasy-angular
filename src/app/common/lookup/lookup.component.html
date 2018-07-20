@@ -4,4 +4,8 @@
   <a *ngIf="isPlayer" class="link" [routerLink]="['/player', element.player_slug]">
     {{element.first_name}} {{element.last_name}}
   </a>
+
+  <a *ngIf="isTeam" class="link" [routerLink]="['/team', element.slug]">
+    {{element.city}} {{element.nickname}}
+  </a>
 </div>

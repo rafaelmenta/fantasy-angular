@@ -17,10 +17,7 @@
       <ng-container matColumnDef="owner">
         <mat-header-cell *matHeaderCellDef class="team">Equipe</mat-header-cell>
         <mat-cell *matCellDef="let pick" class="team">
-          <img class="player-avatar hide-mobile" src="https://static.draftbrasil.net/team/logo/{{pick.owner.id_sl}}.png" alt="">
-          &nbsp;<a class="link" [routerLink]="['/team', pick.owner.slug]">
-            {{pick.owner.city}} {{pick.owner.nickname}}
-          </a>
+          <app-lookup [element]="pick.owner"></app-lookup>
           <span *ngIf="pick.owner.id_sl !== pick.original.id_sl">
             &nbsp;(via <a class="link" [routerLink]="['/team', pick.original.slug]">{{pick.original.symbol}}</a>)
           </span>
