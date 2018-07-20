@@ -30,3 +30,16 @@
 .potential-low {
     color: #e54304;
 }
+
+
+.empty-roster {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 256px;
+}
+
+.empty-roster img {
+    height: 96px;
+}
