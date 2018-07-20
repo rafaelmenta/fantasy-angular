@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { LeagueService } from '../../services/league/league.service';
 import { Observable } from 'rxjs';
 import { Player } from '../../services/player/player.service';
-import { sortPlayers, compare } from '../../../lib/utils';
-import { MatTableDataSource, Sort, MatSort, MatSortable, MatSnackBar } from '@angular/material';
-import { UserService, UserTeam } from '../../services/user.service';
-import { TeamService, Team } from '../../services/team.service';
+import { UserService, UserTeam, User } from '../../services/user.service';
+import { TeamService } from '../../services/team.service';
 import { Title } from '@angular/platform-browser';
-import { Angulartics2 } from 'angulartics2';
+import { AdminLeagueConfig } from '../../admin/service/league/admin-league';
+import { sortPlayers } from '../../../lib/utils';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-free-agents',
@@ -15,8 +15,6 @@ import { Angulartics2 } from 'angulartics2';
   styleUrls: ['./free-agents.component.css']
 })
 export class FreeAgentsComponent implements OnInit {
-  displayedColumns = ['name', 'nba', 'p1', 'p2', 'action'];
-  dataSource = new MatTableDataSource<Player>();
 
   freeAgents$: Observable<Player[]>;
   defaultTeam: UserTeam;
@@ -27,48 +25,36 @@ export class FreeAgentsComponent implements OnInit {
     private userService: UserService,
     private teamService: TeamService,
     private title: Title,
-    private angulartics2: Angulartics2,
-    private snackbar: MatSnackBar,
   ) { }
 
-  addPlayer(player: Player) {
-    this.teamService.addPlayer(this.defaultTeam, player)
-      .subscribe(res => {
-        const action = res.recruitPlayer ? 'add-player' : 'add-player-fail';
-        const message = res.recruitPlayer ? 'Jogador adicionado' : 'Jogador não disponível';
+  onLeagueConfigLoad(id: number, res: AdminLeagueConfig[], ) {
+    const faLocked = res.filter(config =>
+      config.id_config === 'FREE_AGENCY_LOCKED' && config.config_value === '1');
 
-        this.angulartics2.eventTrack.next({
-          action,
-          properties: {
-            category: player.player_slug,
-          }
-        });
+    this.faLocked = faLocked.length > 0;
+    if (!this.faLocked) {
+      this.freeAgents$ = this.leagueService.getFreeAgents(id).pipe(map(players => {
+        if (players) {
+          return players.slice().sort(sortPlayers);
+        }
+      }));
+    }
+  }
 
-        this.snackbar.open(message, null, {duration: 3000});
-      });
+  onUserLoad(user?: User) {
+    if (user) {
+      this.defaultTeam = this.teamService.getDefaultTeam(user.teams);
+      const id = this.defaultTeam.team.division.conference.league.id_league;
+      this.leagueService.getConfigs(id).subscribe(this.onLeagueConfigLoad.bind(this, id));
+
+      // Force load so team store is initialized
+      this.teamService.getTeam(this.defaultTeam.id_sl, true).subscribe();
+    }
   }
 
   ngOnInit() {
     this.title.setTitle(`Superliga - Free agents`);
-    this.userService.user.subscribe(user => {
-      if (user) {
-        this.defaultTeam = this.teamService.getDefaultTeam(user.teams);
-        const id = this.defaultTeam.team.division.conference.league.id_league;
-
-        this.leagueService.getConfigs(id).subscribe(res => {
-          const faLocked = res.filter(config => config.id_config === 'FREE_AGENCY_LOCKED' && config.config_value === '1');
-          this.faLocked = faLocked.length > 0;
-          if (!this.faLocked) {
-            this.freeAgents$ = this.leagueService.getFreeAgents(id);
-            this.freeAgents$.subscribe(freeAgents => {
-              if (freeAgents) {
-                this.dataSource.data = freeAgents.slice().sort(sortPlayers);
-              }
-            });
-          }
-        });
-      }
-    });
+    this.userService.user.subscribe(this.onUserLoad.bind(this));
   }
 
 }

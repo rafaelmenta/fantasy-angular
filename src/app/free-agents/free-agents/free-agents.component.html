@@ -1,55 +1,14 @@
 <mat-toolbar color="accent">Free agents</mat-toolbar>
-<div class="container grid" *ngIf="freeAgents$ | async; else loading">
+<div class="container grid" *ngIf="freeAgents$ | async as freeAgents; else loading">
   <div class="fa-column">
-    <h3 class="mat-title">jogadores dispon&iacute;veis</h3>
-    <mat-table #table [dataSource]="dataSource">
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef class="player-name"> Name </mat-header-cell>
-        <mat-cell *matCellDef="let element" class="player-name">
-          <img
-            class="player-avatar player-photo"
-            onerror="this.src='../../../assets/img/profile/375x450/generic-player-2.jpg'"
-            src="https://static.draftbrasil.net/player/avatar/{{element.id_player}}.jpg">
-          <a class="link" [routerLink]="['/player', element.player_slug]">{{element.first_name}} {{element.last_name}}</a>
-        </mat-cell>
-      </ng-container>
-
-      <!-- NBA Column -->
-      <ng-container matColumnDef="nba">
-        <mat-header-cell *matHeaderCellDef>NBA </mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <img
-          *ngIf="element.id_nba && element.id_nba !== 31"
-          class="player-avatar"
-          src="https://static.draftbrasil.net/nba/logo/{{element.id_nba}}.png">
-        </mat-cell>
-      </ng-container>
-
-      <!-- P1 column -->
-      <ng-container matColumnDef="p1">
-        <mat-header-cell *matHeaderCellDef>P1 </mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.default_primary}}</mat-cell>
-      </ng-container>
-
-      <!-- P2 Column -->
-      <ng-container matColumnDef="p2">
-        <mat-header-cell *matHeaderCellDef>P2 </mat-header-cell>
-        <mat-cell *matCellDef="let element">{{element.default_secondary}}</mat-cell>
-      </ng-container>
-
-      <!-- Action Column -->
-      <ng-container matColumnDef="action">
-        <mat-header-cell *matHeaderCellDef>Ação</mat-header-cell>
-        <mat-cell *matCellDef="let element">
-          <button mat-icon-button color="accent" (click)="addPlayer(element)">
-            <mat-icon aria-label="Example icon-button with a heart icon">person_add</mat-icon>
-          </button>
-        </mat-cell>
-      </ng-container>
-    </mat-table>
+    <app-free-agency-list *ngIf="freeAgents.length > 0" [players]="freeAgents" [team]="defaultTeam"></app-free-agency-list>
+    <mat-card *ngIf="!freeAgents.length > 0">
+      <mat-card-title>Jogadores</mat-card-title>
+      <mat-card-content class="no-players">
+        <img src="../../../assets/img/misc/no-data.svg" alt="Nenhum free agent disponível">
+        <p class="mat-subheading-1">Nenhum free agent disponível</p>
+      </mat-card-content>
+    </mat-card>
   </div>
   <div class="history-column">
     <app-free-agency-history></app-free-agency-history>
@@ -58,10 +17,11 @@
 <ng-template #loading>
   <app-loading *ngIf="!faLocked"></app-loading>
   <div *ngIf="faLocked" class="fa-locked container">
-    <mat-card>
-      <mat-card-title>Free agency fechada</mat-card-title>
+    <mat-card class="no-game">
+      <mat-card-title>Free agency</mat-card-title>
       <mat-card-content>
-        <img src="../../../assets/img/misc/no-data.svg" alt="Free agency trancada">
+        <img src="../../../assets/img/misc/basketball.svg" alt="Free agency trancada">
+        <p class="mat-subheading-1">Free agency trancada</p>
       </mat-card-content>
     </mat-card>
   </div>

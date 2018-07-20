@@ -1,0 +1,51 @@
+<mat-card>
+  <mat-card-title>Jogadores</mat-card-title>
+  <mat-card-content>
+    <mat-table #table [dataSource]="dataSource">
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef class="player-name"> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element" class="player-name">
+          <app-lookup [element]="element"></app-lookup>
+        </mat-cell>
+      </ng-container>
+
+      <!-- NBA Column -->
+      <ng-container matColumnDef="nba">
+        <mat-header-cell *matHeaderCellDef>NBA </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <img *ngIf="element.id_nba && element.id_nba !== 31" class="player-avatar" src="https://static.draftbrasil.net/nba/logo/{{element.id_nba}}.png">
+        </mat-cell>
+      </ng-container>
+
+      <!-- P1 column -->
+      <ng-container matColumnDef="p1">
+        <mat-header-cell *matHeaderCellDef>P1 </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.default_primary}}</mat-cell>
+      </ng-container>
+
+      <!-- P2 Column -->
+      <ng-container matColumnDef="p2">
+        <mat-header-cell *matHeaderCellDef>P2 </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.default_secondary}}</mat-cell>
+      </ng-container>
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+        <mat-header-cell *matHeaderCellDef>Ação</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-icon-button color="accent" (click)="addPlayer(element)">
+            <mat-icon aria-label="Example icon-button with a heart icon">person_add</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+    </mat-table>
+    <mat-paginator
+      itemsPerPageLabel="Jogadores por página"
+      [pageSizeOptions]="[25, 50, 150, 600, 1000]"
+      showFirstLastButtons></mat-paginator>
+  </mat-card-content>
+</mat-card>

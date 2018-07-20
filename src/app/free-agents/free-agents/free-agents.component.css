@@ -1,19 +1,7 @@
-.player-name {
-    flex-grow: 4;
-}
-
-.player-photo {
-    margin-right: 8px;
-}
-
 .grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-}
-
-.mat-title {
-  color: #999;
 }
 
 .history-column,
@@ -30,11 +18,16 @@
     max-width: 384px;
 }
 
+.no-players,
 .fa-locked mat-card-content {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 256px;
 }
 
+.no-players img,
 .fa-locked img {
-    height: 304px;
+  height: 94px;
 }

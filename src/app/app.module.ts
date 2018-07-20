@@ -23,7 +23,7 @@ import {
   MatBadgeModule, MatInputModule, MatMenuModule, MatTableModule, MatSortModule, MatExpansionModule,
   MatListModule, MatChipsModule, MatGridListModule, MatTabsModule, MatButtonToggleModule,
   MatDialogModule, MatSnackBarModule, MatProgressBarModule, MatProgressSpinnerModule,
-  MatAutocompleteModule, MatSelectModule, MatSidenavModule
+  MatAutocompleteModule, MatSelectModule, MatSidenavModule, MatPaginatorModule, MatPaginatorIntl
 } from '@angular/material';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
@@ -104,9 +104,11 @@ import { SimulatorComponent } from './simulator/simulator/simulator.component';
 import { AvatarComponent } from './common/avatar/avatar.component';
 import { LookupComponent } from './common/lookup/lookup.component';
 import { TeamPickerCardComponent } from './trade/create-trade/team-picker-card/team-picker-card.component';
+import { FreeAgencyListComponent } from './free-agents/free-agency-list/free-agency-list.component';
 
 import { AdminModule } from './admin/admin.module';
 import { AppRouting } from './app.routing';
+import { FreeAgencyPaginator } from './providers/free-agency-paginator';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -179,6 +181,7 @@ registerLocaleData(localePt);
     AvatarComponent,
     LookupComponent,
     TeamPickerCardComponent,
+    FreeAgencyListComponent,
   ],
   imports: [
     BrowserModule,
@@ -212,6 +215,8 @@ registerLocaleData(localePt);
     MatAutocompleteModule,
     MatSidenavModule,
     MatCheckboxModule,
+    MatPaginatorModule,
+
     MomentModule,
     DragulaModule,
     StoreModule.forRoot({
@@ -255,6 +260,7 @@ registerLocaleData(localePt);
   providers: [
     { provide: APP_CONFIG, useValue: AppConfig },
     JwtHelperService,
+    { provide: MatPaginatorIntl, useClass: FreeAgencyPaginator },
   ],
   bootstrap: [AppComponent]
 })

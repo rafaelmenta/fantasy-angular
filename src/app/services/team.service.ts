@@ -186,6 +186,7 @@ export class TeamService {
 
     let userTeam: Team;
     this.userTeam.subscribe(t => userTeam = t);
+
     res.subscribe(response => {
       if (response.recruitPlayer.id_player) {
         const teamPlayer: Player = {
