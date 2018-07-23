@@ -14,20 +14,22 @@
     <div class="clubhouse__content-right">
       <div class="clubhouse__content-tile" *ngIf="team.team_overview.stats">
         <mat-card>
-          <h3 class="mat-title">Pontuação</h3>
-          <div class="clubhouse__score-tile">
-            <span class="mat-display-2 score-value">
-              {{team.team_overview.stats.fantasy_points.toFixed(2)}}
-              <span class="clubhouse__score-suffix">fpg</span>
-            </span>
-            <span class="mat-display-2 divider">
-              •
-            </span>
-            <span class="mat-display-2 score-value">
-              {{(team.team_overview.stats.fantasy_points/48).toFixed(2)}}
-              <span class="clubhouse__score-suffix">fpm</span>
-            </span>
-          </div>
+          <mat-card-title>Pontuação</mat-card-title>
+          <mat-card-content>
+            <div class="clubhouse__score-tile">
+              <span class="mat-display-2 score-value">
+                {{team.team_overview.stats.fantasy_points.toFixed(2)}}
+                <span class="clubhouse__score-suffix">fpg</span>
+              </span>
+              <span class="mat-display-2 divider">
+                •
+              </span>
+              <span class="mat-display-2 score-value">
+                {{(team.team_overview.stats.fantasy_points/48).toFixed(2)}}
+                <span class="clubhouse__score-suffix">fpm</span>
+              </span>
+            </div>
+          </mat-card-content>
         </mat-card>
       </div>
       <div class="clubhouse__content-tile">

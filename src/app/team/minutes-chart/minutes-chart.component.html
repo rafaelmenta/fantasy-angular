@@ -1,17 +1,19 @@
 <mat-card>
-  <h3 class="mat-title">Minutos restantes</h3>
-  <div class="minutes-chart-grid">
-    <ngx-charts-bar-vertical
-      [scheme]="colorScheme"
-      [results]="chartData"
-      [gradient]="gradient"
-      [xAxis]="showXAxis"
-      [yAxis]="showYAxis"
-      [legend]="showLegend"
-      [showXAxisLabel]="showXAxisLabel"
-      [showYAxisLabel]="showYAxisLabel"
-      [xAxisLabel]="xAxisLabel"
-      [yAxisLabel]="yAxisLabel">
-    </ngx-charts-bar-vertical>
-  </div>
+  <mat-card-title>Minutos restantes</mat-card-title>
+  <mat-card-content>
+    <div class="minutes-chart-grid">
+      <ngx-charts-bar-vertical
+        [scheme]="colorScheme"
+        [results]="chartData"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel">
+      </ngx-charts-bar-vertical>
+    </div>
+  </mat-card-content>
 </mat-card>
