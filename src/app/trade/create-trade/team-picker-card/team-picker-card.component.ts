@@ -8,7 +8,9 @@ import { Team } from '../../../services/team.service';
 })
 export class TeamPickerCardComponent implements OnInit {
 
-  @Input() team: Team;
+  @Input() team: Team['team_overview'];
+
+  hoverActive: boolean;
 
   constructor() { }
 
