@@ -19,7 +19,7 @@
             <app-avatar [element]="player" matListAvatar></app-avatar>
             <h3 matLine>{{ player.first_name }} {{ player.last_name }}</h3>
             <p matLine>
-              <span>{{ player.default_primary }}/{{ player.default_primary }} </span>
+              <span>{{ player.default_primary }}/{{ player.default_secondary }} </span>
             </p>
           </a>
           <a mat-list-item *ngFor="let pick of trade.receiver_picks" routerLink="/team/{{pick.original.slug}}">
