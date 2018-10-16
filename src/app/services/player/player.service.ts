@@ -23,6 +23,10 @@ export interface Player {
     order: number;
   };
   stats: PlayerStat[];
+  salary: {
+    contract_salary: number;
+    contract_years: number;
+  };
   team_nba: TeamNba;
   rookie?: boolean;
 }

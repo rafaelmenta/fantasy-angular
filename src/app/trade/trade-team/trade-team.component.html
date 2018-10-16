@@ -4,6 +4,7 @@
 <mat-table *ngIf="team && dataSource.data.length > 0" #table [dataSource]="dataSource">
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  <mat-footer-row *matFooterRowDef="['contract_salary']"></mat-footer-row>
 
   <!-- Checkbox Column -->
   <ng-container matColumnDef="select">
@@ -33,14 +34,8 @@
 
   <!-- P1 Column -->
   <ng-container matColumnDef="p1">
-    <mat-header-cell *matHeaderCellDef> P1 </mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element.team_info.primary_position}}</mat-cell>
-  </ng-container>
-
-  <!-- P2 Column -->
-  <ng-container matColumnDef="p2">
-    <mat-header-cell *matHeaderCellDef> P2 </mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element.team_info.secondary_position}}</mat-cell>
+    <mat-header-cell *matHeaderCellDef> P1/P2 </mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.team_info.primary_position}}/{{element.team_info.secondary_position}}</mat-cell>
   </ng-container>
 
   <!-- FPG Column -->
@@ -56,6 +51,26 @@
     <mat-header-cell *matHeaderCellDef> FPM </mat-header-cell>
     <mat-cell *matCellDef="let element">
       {{element.stats && element.stats.length > 0 ? (element.stats[0].fantasy_points/element.stats[0].minutes).toFixed(2) : 0}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Contract salary Column -->
+  <ng-container matColumnDef="contract_salary">
+    <mat-header-cell *matHeaderCellDef class="player-salary">Salário</mat-header-cell>
+    <mat-cell *matCellDef="let element" class="player-salary">
+      {{element.salary && element.salary.contract_salary | currency}}
+    </mat-cell>
+    <mat-footer-cell *matFooterCellDef>
+      <span>Total de salários:</span>
+      <span class="mat-body-2">{{totalSalary | currency}}</span>
+    </mat-footer-cell>
+  </ng-container>
+
+  <!-- Contract years Column -->
+  <ng-container matColumnDef="contract_years">
+    <mat-header-cell *matHeaderCellDef>Anos</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{element.salary && element.salary.contract_years}}
     </mat-cell>
   </ng-container>
 </mat-table>

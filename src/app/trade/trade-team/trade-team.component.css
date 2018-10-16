@@ -2,6 +2,10 @@
     flex-grow: 3;
 }
 
+.player-salary {
+    flex-grow: 2;
+}
+
 .player-photo {
     margin-right: 8px;
 }
@@ -13,4 +17,13 @@
 .divider {
     margin-top: 24px;
     margin-bottom: 24px;
+}
+
+mat-footer-row {
+  background: #3f51b5;
+}
+mat-footer-cell {
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
 }

@@ -21,7 +21,7 @@ export class TradeTeamComponent implements OnChanges, OnInit {
   players: Player[];
   picks: Pick[];
 
-  displayedColumns = ['select', 'name', 'p1', 'p2', 'fpg', 'fpm'];
+  displayedColumns = ['select', 'name', 'p1', 'fpg', 'fpm', 'contract_salary', 'contract_years'];
   pickColumns = ['select', 'logo', 'year', 'round', 'team'];
 
   dataSource = new MatTableDataSource<Player>();
@@ -29,6 +29,13 @@ export class TradeTeamComponent implements OnChanges, OnInit {
 
   selection = new SelectionModel<Player>(true, []);
   pickSelection = new SelectionModel<Pick>(true, []);
+
+  get totalSalary() {
+    if (this.dataSource.data.length > 0) {
+      return this.dataSource.data.reduce((sum, player) => sum + player.salary.contract_salary, 0);
+    }
+    return 0;
+  }
 
   clearSelection() {
     this.selection.clear();
