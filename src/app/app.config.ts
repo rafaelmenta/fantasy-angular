@@ -1,4 +1,5 @@
 import { InjectionToken } from '@angular/core';
+import { environment } from '../environments/environment';
 
 export let APP_CONFIG = new InjectionToken('app.config');
 
@@ -9,8 +10,7 @@ export interface AppConfig {
 
 export const AppConfig: AppConfig = {
     // TODO add env vars
-    // API_ENDPOINT: 'http://localhost:3000/',
-    API_ENDPOINT: 'https://api.draftbrasil.net/',
+    API_ENDPOINT: environment.apiUrl,
     LARGE_MOBILE_QUERY: '(max-width: 599px)',
 };
 
