@@ -243,6 +243,7 @@ registerLocaleData(localePt);
           // move to env var
           'localhost:3000',
           'api.draftbrasil.net',
+          'api-dev.draftbrasil.net',
         ],
         // blacklistedRoutes: ['localhost:3001/auth/']
       }
