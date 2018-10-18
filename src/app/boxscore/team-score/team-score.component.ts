@@ -29,6 +29,7 @@ export class TeamScoreComponent implements OnInit {
   @Input() info: BoxscoreTeam;
   @Input() performance: BoxscoreTeamPerformance;
   @Input() players: BoxscorePlayer[];
+  @Input() isHome: boolean;
 
   datasource = new MatTableDataSource<BoxscorePlayer>();
   displayedColumns = ALL_STATS;
@@ -47,6 +48,10 @@ export class TeamScoreComponent implements OnInit {
     if (player.secondary_position === position) {
       return player.minutes_secondary;
     }
+  }
+
+  get teamScore() {
+    return this.performance.fantasy_points + (this.isHome ? +3 : -3);
   }
 
   constructor(

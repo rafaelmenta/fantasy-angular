@@ -39,11 +39,13 @@
       <app-team-score
         [info]="game.home_team"
         [performance]="game.home_performance"
+        [isHome]="true"
         [players]="game.home_players"></app-team-score>
 
       <app-team-score
         [info]="game.away_team"
         [performance]="game.away_performance"
+        [isHome]="false"
         [players]="game.away_players"></app-team-score>
     </div>
   </div>
