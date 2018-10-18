@@ -26,7 +26,7 @@ export class AdminTeamPlayersComponent implements OnInit {
       team_info: {
         primary_position: player.default_primary,
         secondary_position: player.default_secondary,
-        order: 0,
+        order: this.players.length + 1,
       },
     };
     this.players.unshift(teamPlayer);

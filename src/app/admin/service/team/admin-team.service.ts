@@ -41,6 +41,7 @@ export class AdminTeamService {
         id_league: team.division.conference.league.id_league,
         primary_position: player.default_primary,
         secondary_position: player.default_secondary,
+        order: team.players.length,
       }
     };
 
