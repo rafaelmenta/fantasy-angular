@@ -20,8 +20,8 @@ export class TeamPlayersComponent implements OnInit {
   dataSource = new MatTableDataSource<Player>();
 
   getStat(player: Player, key: string) {
-    if (player.stats && player.stats[0]) {
-      return player.stats[0][key].toFixed(2);
+    if (player.stats && player.stats.length > 0) {
+      return player.stats[player.stats.length - 1][key].toFixed(2);
     }
 
     return 0;
