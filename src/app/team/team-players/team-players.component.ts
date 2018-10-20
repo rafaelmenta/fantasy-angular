@@ -31,7 +31,7 @@ export class TeamPlayersComponent implements OnInit {
     const fps: number = this.getStat(player, 'fantasy_points');
     const minutes: number = this.getStat(player, 'minutes');
 
-    if (fps !== 0 && minutes !== 0) {
+    if (Number(minutes) !== 0) {
       return (fps / minutes).toFixed(2);
     }
     return 0;
