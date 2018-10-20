@@ -18,7 +18,11 @@ export class AdminAuthGuardService implements CanActivate {
 
     let user: User;
     this.user.user.subscribe(next => user = next).unsubscribe();
-    if (![UserPermission.ADMIN, UserPermission.COMMISSIONER].includes(user.id_permission)) {
+    if (![
+      UserPermission.ADMIN,
+      UserPermission.COMMISSIONER,
+      UserPermission.UPDATER,
+    ].includes(user.id_permission)) {
       this.router.navigate(['not-allowed']);
       return false;
     }

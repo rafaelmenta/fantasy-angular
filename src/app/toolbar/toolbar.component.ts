@@ -39,7 +39,11 @@ export class ToolbarComponent implements OnInit {
   }
 
   canSeeAdmin(user: User) {
-    return [UserPermission.ADMIN, UserPermission.COMMISSIONER].includes(user.id_permission);
+    return [
+      UserPermission.ADMIN,
+      UserPermission.COMMISSIONER,
+      UserPermission.UPDATER,
+    ].includes(user.id_permission);
   }
 
   onUserChange(user: User) {
