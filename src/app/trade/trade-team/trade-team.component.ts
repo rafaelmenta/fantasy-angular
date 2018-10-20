@@ -6,7 +6,10 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { TradePlayer } from '../../services/trade/trade.service';
 import { Pick } from '../../services/pick/pick.service';
 import { APP_CONFIG, AppConfig } from '../../app.config';
-import { BreakpointObserver } from '@angular/cdk/layout';
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
+
+const ALL_COLUMNS = ['select', 'name', 'p1', 'games', 'minutes', 'fpg', 'fpm', 'contract_salary', 'contract_years'];
+const MOBILE_COLUMNS = ['select', 'name', 'p1', 'fpg', 'fpm', 'contract_salary'];
 
 @Component({
   selector: 'app-trade-team',
@@ -21,7 +24,7 @@ export class TradeTeamComponent implements OnChanges, OnInit {
   players: Player[];
   picks: Pick[];
 
-  displayedColumns = ['select', 'name', 'p1', 'fpg', 'fpm', 'contract_salary', 'contract_years'];
+  displayedColumns = ALL_COLUMNS;
   pickColumns = ['select', 'logo', 'year', 'round', 'team'];
 
   dataSource = new MatTableDataSource<Player>();
@@ -74,6 +77,10 @@ export class TradeTeamComponent implements OnChanges, OnInit {
     this.picks = this.picks.concat(added).filter(pick => removed.indexOf(pick) < 0);
   }
 
+  onResize(res: BreakpointState) {
+    this.displayedColumns = res.matches ? MOBILE_COLUMNS : ALL_COLUMNS;
+  }
+
   constructor(
     @Inject(APP_CONFIG) private config: AppConfig,
     private breakpoint$: BreakpointObserver
@@ -96,6 +103,8 @@ export class TradeTeamComponent implements OnChanges, OnInit {
         picks: this.picks,
       });
     });
+
+    this.breakpoint$.observe(this.config.LARGE_MOBILE_QUERY).subscribe(this.onResize.bind(this));
   }
 
   ngOnChanges() {

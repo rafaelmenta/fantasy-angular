@@ -2,16 +2,12 @@
     flex-grow: 3;
 }
 
-.player-salary {
-    flex-grow: 2;
-}
-
 .player-photo {
     margin-right: 8px;
 }
 
 .player-checkbox {
-    max-width: 48px;
+    max-width: 28px;
 }
 
 .divider {
@@ -26,4 +22,18 @@ mat-footer-cell {
   color: #fff;
   display: flex;
   justify-content: space-between;
+}
+
+mat-cell {
+    font-size: 12px;
+}
+
+mat-header-cell:first-child,
+mat-cell:first-child {
+    padding-left: 0;
+}
+
+mat-header-cell:last-child,
+mat-cell:last-child {
+    padding-right: 0;
 }

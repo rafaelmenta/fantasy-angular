@@ -109,6 +109,7 @@ import { FreeAgencyListComponent } from './free-agents/free-agency-list/free-age
 import { AdminModule } from './admin/admin.module';
 import { AppRouting } from './app.routing';
 import { FreeAgencyPaginator } from './providers/free-agency-paginator';
+import { CurrencySuffixPipe } from './currency-suffix.pipe';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -182,6 +183,7 @@ registerLocaleData(localePt);
     LookupComponent,
     TeamPickerCardComponent,
     FreeAgencyListComponent,
+    CurrencySuffixPipe,
   ],
   imports: [
     BrowserModule,

@@ -32,6 +32,22 @@
     </mat-cell>
   </ng-container>
 
+  <!-- Games Column -->
+  <ng-container matColumnDef="games">
+    <mat-header-cell *matHeaderCellDef>J</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{element.stats && element.stats.length > 0 && element.stats[0].games || 0 }}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Minutes Column -->
+  <ng-container matColumnDef="minutes">
+    <mat-header-cell *matHeaderCellDef>Mins</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{element.stats && element.stats.length > 0 ? element.stats[0].minutes.toFixed(2) : 0.00 }}
+    </mat-cell>
+  </ng-container>
+
   <!-- P1 Column -->
   <ng-container matColumnDef="p1">
     <mat-header-cell *matHeaderCellDef> P1/P2 </mat-header-cell>
@@ -58,7 +74,7 @@
   <ng-container matColumnDef="contract_salary">
     <mat-header-cell *matHeaderCellDef class="player-salary">Salário</mat-header-cell>
     <mat-cell *matCellDef="let element" class="player-salary">
-      {{element.salary && element.salary.contract_salary | currency}}
+      {{element.salary && element.salary.contract_salary | currencySuffix:2}}
     </mat-cell>
     <mat-footer-cell *matFooterCellDef>
       <span>Total de salários:</span>
