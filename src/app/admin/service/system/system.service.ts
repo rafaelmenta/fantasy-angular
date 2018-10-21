@@ -87,6 +87,11 @@ export class SystemService {
     return this.http.post<{ openRound: boolean }>(url, {}).pipe(share());
   }
 
+  closeRound(round: AdminRound) {
+    const url = `${this.config.API_ENDPOINT}rounds/${round.id_round}/close`;
+    return this.http.post<{ closeRound: boolean }>(url, {}).pipe(share());
+  }
+
   constructor(
     @Inject(APP_CONFIG) private config: AppConfig,
     private http: HttpClient

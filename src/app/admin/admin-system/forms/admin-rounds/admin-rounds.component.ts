@@ -25,6 +25,15 @@ export class AdminRoundsComponent implements OnInit {
     });
   }
 
+  onClose(round: AdminRound) {
+    this.system.closeRound(round).subscribe(result => {
+      if (result.closeRound) {
+        round.processed = true;
+        this.snackbar.open('Rodada fechada', null, { duration: 3000 });
+      }
+    });
+  }
+
   ngOnInit() {
     this.rounds$ = this.system.rounds$;
   }
