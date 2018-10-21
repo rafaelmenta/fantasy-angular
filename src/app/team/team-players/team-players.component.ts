@@ -21,7 +21,10 @@ export class TeamPlayersComponent implements OnInit {
 
   getStat(player: Player, key: string) {
     if (player.stats && player.stats.length > 0) {
-      return player.stats[player.stats.length - 1][key].toFixed(2);
+      const stat = player.stats[player.stats.length - 1][key];
+      if (stat) {
+        return stat.toFixed(2);
+      }
     }
 
     return 0;
