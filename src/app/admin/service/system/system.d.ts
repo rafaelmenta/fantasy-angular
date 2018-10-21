@@ -12,6 +12,8 @@ export interface AdminRound {
   open_date: string;
   close_data: string;
   round_number: number;
+  processed: boolean;
+  opened: boolean;
 }
 
 export interface AdminSeason {

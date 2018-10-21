@@ -38,7 +38,7 @@
           <button mat-icon-button color="warn" (click)="onDelete(element)" [(disabled)]="element.processed">
             <mat-icon>lock</mat-icon>
           </button>
-          <button mat-icon-button color="primary" (click)="onDelete(element)" [(disabled)]="element.opened">
+          <button mat-icon-button color="primary" (click)="onOpen(element)" [(disabled)]="element.opened">
             <mat-icon>lock_open</mat-icon>
           </button>
         </mat-cell>

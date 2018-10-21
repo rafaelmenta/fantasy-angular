@@ -82,6 +82,11 @@ export class SystemService {
     return this.http.post<{ saveNbaPerformances: number[][] }>(url, {rounds, performances}).pipe(share());
   }
 
+  openRound(round: AdminRound) {
+    const url = `${this.config.API_ENDPOINT}rounds/${round.id_round}/open`;
+    return this.http.post<{ openRound: boolean }>(url, {}).pipe(share());
+  }
+
   constructor(
     @Inject(APP_CONFIG) private config: AppConfig,
     private http: HttpClient
