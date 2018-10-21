@@ -67,7 +67,7 @@ mat-footer-cell {
 }
 
 .footer-total {
-  flex: 13;
+  flex: 11;
   justify-content: flex-end;
 }
 

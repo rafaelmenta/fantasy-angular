@@ -12,7 +12,7 @@
           </span>
         </a>
         <span class="score mat-headline">
-          {{game.home_performance.fantasy_points}} × {{game.away_performance.fantasy_points}}
+          {{game.home_performance.fantasy_points +3}} × {{game.away_performance.fantasy_points -3}}
         </span>
         <a class="team-score-header link" [routerLink]="['/team', game.away_team.slug]">
           <span class="mat-title hide-mobile">
