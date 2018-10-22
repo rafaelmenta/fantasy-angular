@@ -27,6 +27,8 @@ export interface AdminGameNBA {
   gametime?: Moment;
   date?: string;
   time?: string;
+  isSyncing?: boolean;
+  box_done?: boolean;
   is_finished: boolean;
   external_id: string;
   round_home: AdminRound;

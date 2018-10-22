@@ -24,6 +24,10 @@ export class AdminTeamBoxscoreComponent implements OnInit {
   ngOnInit() {
     const isWinner = this.performances.filter(perf => perf.win_loss === 1);
     this.result = isWinner.length > 0 ? 1 : -1;
+
+    // Force initial run to avoid win_loss initially set as 0 from BE
+    this.onResultChange(this.result);
+
     this.performances = this.performances.sort((a, b) => compare(a.minutes, b.minutes, false));
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatSnackBar } from '@angular/material';
 import { SystemService } from '../../../service/system/system.service';
 import { AdminGameNBA } from '../../../service/system/system';
 
@@ -16,7 +16,18 @@ export class AdminActiveGamesComponent implements OnInit {
   dataSource = new MatTableDataSource<AdminGameNBA>();
   displayedColumns = ['home', 'away', 'rounds', 'date', 'boxDone', 'action'];
 
-  constructor(private system: SystemService) { }
+  constructor(private system: SystemService, private snackbar: MatSnackBar) { }
+
+  onSync(game: AdminGameNBA) {
+    game.isSyncing = true;
+    this.system.syncBoxscore(game).subscribe(res => {
+      if (res.saveNbaPerformances) {
+        game.box_done = true;
+        game.isSyncing = false;
+        this.snackbar.open('Box atualizado', null, {duration: 3000});
+      }
+    });
+  }
 
   ngOnInit() {
     this.system.getNbaGames(true).subscribe(games => {

@@ -44,6 +44,9 @@
       <ng-container matColumnDef="action">
         <mat-header-cell *matHeaderCellDef class="narrow">Boxscore</mat-header-cell>
         <mat-cell *matCellDef="let element" class="narrow">
+          <button mat-icon-button (click)="onSync(element)" [(disabled)]="element.isSyncing">
+            <mat-icon>sync</mat-icon>
+          </button>
           <a mat-icon-button color="primary" routerLink="./{{element.id_game_nba}}">
             <mat-icon>edit</mat-icon>
           </a>

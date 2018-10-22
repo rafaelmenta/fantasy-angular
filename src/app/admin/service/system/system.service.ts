@@ -92,6 +92,11 @@ export class SystemService {
     return this.http.post<{ closeRound: boolean }>(url, {}).pipe(share());
   }
 
+  syncBoxscore(game: AdminGameNBA) {
+    const url = `${this.config.API_ENDPOINT}nba/game/${game.id_game_nba}/parse/${game.external_id}`;
+    return this.http.post<{ saveNbaPerformances: number[][]}>(url, {}).pipe(share());
+  }
+
   constructor(
     @Inject(APP_CONFIG) private config: AppConfig,
     private http: HttpClient
