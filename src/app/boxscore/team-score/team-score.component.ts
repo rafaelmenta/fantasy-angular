@@ -38,7 +38,7 @@ export class TeamScoreComponent implements OnInit {
 
   footerColumns = ALL_FOOTER_STATS;
 
-  isValidGame = (index: number, stat: BoxscorePlayer) => stat.performance.minutes > 0;
+  isValidGame = (index: number, stat: BoxscorePlayer) => stat.performance && stat.performance.minutes > 0;
 
   validMinutes(player: BoxscorePlayer, position: string) {
     if (player.primary_position === position) {
@@ -59,7 +59,7 @@ export class TeamScoreComponent implements OnInit {
     private breakpoint$: BreakpointObserver) { }
 
   ngOnInit() {
-    this.datasource.data = this.players;
+    this.datasource.data = this.players.sort((a, b) => a.order < b.order ? -1 : 1);
     this.breakpoint$.observe(this.config.LARGE_MOBILE_QUERY).subscribe(res => {
       if (res.matches) {
         this.displayedColumns = [

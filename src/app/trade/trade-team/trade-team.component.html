@@ -44,7 +44,8 @@
   <ng-container matColumnDef="minutes">
     <mat-header-cell *matHeaderCellDef>Mins</mat-header-cell>
     <mat-cell *matCellDef="let element">
-      {{element.stats && element.stats.length > 0 ? element.stats[element.stats.length - 1].minutes.toFixed(2) : 0.00 }}
+      {{element.stats && element.stats.length > 0 && element.stats[element.stats.length - 1].minutes ?
+        element.stats[element.stats.length - 1].minutes.toFixed(2) : 0.00 }}
     </mat-cell>
   </ng-container>
 
@@ -58,7 +59,8 @@
   <ng-container matColumnDef="fpg">
     <mat-header-cell *matHeaderCellDef> FPG </mat-header-cell>
     <mat-cell *matCellDef="let element">
-      {{element.stats && element.stats.length > 0 ? element.stats[element.stats.length - 1].fantasy_points.toFixed(2) : 0 }}
+      {{element.stats && element.stats.length > 0 && element.stats[element.stats.length - 1].fantasy_points
+        ? element.stats[element.stats.length - 1].fantasy_points.toFixed(2) : 0 }}
     </mat-cell>
   </ng-container>
 
