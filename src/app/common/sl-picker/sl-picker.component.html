@@ -1,10 +1,6 @@
-<button mat-raised-button [matMenuTriggerFor]="menu" class="hide-mobile default-team" *ngIf="selectedTeam$ | async as team">
+<button mat-raised-button [matMenuTriggerFor]="menu" class="default-team" *ngIf="selectedTeam$ | async as team">
     <img class="player-avatar" src="https://static.draftbrasil.net/team/logo/{{team.id_sl}}.png" alt="">
     {{team.city}} {{team.nickname}}
-</button>
-
-<button mat-icon-button class="hide-desktop" [matMenuTriggerFor]="menu" *ngIf="selectedTeam$ | async as team">
-  <img class="player-avatar" src="https://static.draftbrasil.net/team/logo/{{team.id_sl}}.png" alt="">
 </button>
 
 <mat-menu #menu="matMenu">
