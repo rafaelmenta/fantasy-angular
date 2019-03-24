@@ -14,6 +14,13 @@ import { Pick } from './pick/pick.service';
 import { Division, FreeAgencyHistory } from '../../typings';
 import { ADD_FREE_AGENCY_HISTORY, AddFreeAgencyHistory } from '../store/free-agents-history.reducer';
 
+export interface BasicTeam {
+  id_sl: number;
+  city: string;
+  nickname: string;
+  slug: string;
+}
+
 export interface Team {
   team_overview: {
     id_sl: number;

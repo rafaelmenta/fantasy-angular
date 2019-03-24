@@ -111,6 +111,8 @@ import { AppRouting } from './app.routing';
 import { FreeAgencyPaginator } from './providers/free-agency-paginator';
 import { CurrencySuffixPipe } from './currency-suffix.pipe';
 
+import { SlPickerComponent} from './common/sl-picker/sl-picker.component';
+
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
@@ -184,6 +186,7 @@ registerLocaleData(localePt);
     TeamPickerCardComponent,
     FreeAgencyListComponent,
     CurrencySuffixPipe,
+    SlPickerComponent,
   ],
   imports: [
     BrowserModule,
