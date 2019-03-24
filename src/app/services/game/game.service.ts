@@ -6,6 +6,7 @@ import { map, share } from 'rxjs/operators';
 
 export enum GameType {
   OFFICIAL = 1,
+  PLAYOFFS = 2,
 }
 
 export interface Game {

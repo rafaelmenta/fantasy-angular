@@ -1,5 +1,6 @@
 <mat-toolbar color="accent">Calend&aacute;rio</mat-toolbar>
 <mat-tab-group>
   <mat-tab label="Time"><app-team-schedule [team]="team"></app-team-schedule></mat-tab>
+  <mat-tab label="Playoffs"><app-team-schedule [type]="2" [team]="team"></app-team-schedule></mat-tab>
   <mat-tab label="NBA"><app-nba-schedule></app-nba-schedule></mat-tab>
 </mat-tab-group>
