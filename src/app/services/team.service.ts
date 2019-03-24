@@ -122,6 +122,11 @@ export class TeamService {
     return this.http.get<{ team: { all_games: Game[]}}>(url).pipe(map(res => res.team.all_games));
   }
 
+  getTeamPlayoffsGames(id: number) {
+    const url = `${this.config.API_ENDPOINT}${this.resource}/${id}/playoffs`;
+    return this.http.get<{ team: { playoffs_games: Game[]}}>(url).pipe(map(res => res.team.playoffs_games));
+  }
+
   removePlayer(team: Team, player: Player) {
     const url = `${this.config.API_ENDPOINT}${this.resource}/${team.team_overview.id_sl}/roster/${player.id_player}`;
     const res = this.http.delete<{dumpPlayer: number}>(url).pipe(share());
