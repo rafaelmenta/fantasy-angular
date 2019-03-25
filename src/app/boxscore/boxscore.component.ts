@@ -3,7 +3,7 @@ import { GameService, Game } from '../services/game/game.service';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
-import { Team } from '../services/team.service';
+import { mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-boxscore',
@@ -22,10 +22,9 @@ export class BoxscoreComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle(`Superliga - Boxscore`);
-    this.route.paramMap.subscribe(map => {
-      const id = map.get('id');
-      this.game$ = this.gameService.getBoxscore(id);
-    });
+    this.game$ = this.route.paramMap.pipe(
+      mergeMap(paramMap => this.gameService.getBoxscore(paramMap.get('id'))),
+    );
   }
 
 }

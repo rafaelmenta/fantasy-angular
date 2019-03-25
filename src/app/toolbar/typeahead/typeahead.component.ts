@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { startWith, map, debounce, debounceTime, tap, switchMap } from 'rxjs/operators';
-import { UserService, User } from '../../services/user.service';
-import { TeamService, Team } from '../../services/team.service';
+import { startWith, map, debounceTime, tap, switchMap, filter, mergeMap, combineLatest } from 'rxjs/operators';
+import { UserService } from '../../services/user.service';
+import { TeamService } from '../../services/team.service';
 import { LeagueService } from '../../services/league/league.service';
-import { Player } from '../../services/player/player.service';
 import { MatAutocompleteSelectedEvent } from '@angular/material';
 import { Router } from '@angular/router';
 
@@ -57,25 +55,23 @@ export class TypeaheadComponent implements OnInit {
   }
 
   ngOnInit() {
-    let user: User;
-    this.userService.user.subscribe(u => user = u);
+    const team$ = this.userService.user.pipe(
+      filter(user => user !== undefined),
+      map(user => this.teamService.getDefaultTeam(user.teams)),
+    );
 
-    if (user) {
-      const defaultTeam = this.teamService.getDefaultTeam(user.teams);
-      const id = defaultTeam.team.division.conference.league.id_league;
-      this.autocompleteOptions$ = this.stateForm.get('stateGroup').valueChanges
-        .pipe(
-          startWith(''),
-          debounceTime(150),
-          switchMap(query => query ? this.leagueService.getSearch(id, query) : []),
-          map(res => {
-            return [
-              {letter: 'Jogadores', names: res.search_players, type: 'player'},
-              {letter: 'Equipes', names: res.search_teams, type: 'team'},
-            ];
-          })
-        );
-    }
-
+    this.autocompleteOptions$ = team$.pipe(
+      mergeMap(() => this.stateForm.get('stateGroup').valueChanges),
+      startWith(''),
+      debounceTime(150),
+      combineLatest(team$),
+      switchMap(combined => combined[0] ?
+        this.leagueService.getSearch(combined[1].team.division.conference.league.id_league, combined[0]) :
+        []),
+      map(res => [
+        { letter: 'Jogadores', names: res.search_players, type: 'player' },
+        { letter: 'Equipes', names: res.search_teams, type: 'team' },
+      ]),
+    );
   }
 }

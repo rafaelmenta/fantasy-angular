@@ -1,4 +1,4 @@
-<mat-nav-list (click)="sidenav.close()" *ngIf="user">
+<mat-nav-list (click)="sidenav.close()" *ngIf="user$ | async ">
   <a mat-list-item>
     <mat-icon mat-list-icon>menu</mat-icon>
     <!-- <h4 mat-line class="mat-title">Fechar</h4> -->

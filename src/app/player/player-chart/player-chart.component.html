@@ -1,6 +1,6 @@
 <mat-card>
   <h3 class="mat-title">Pontua&ccedil;&atilde;o</h3>
-  <div class="chart-grid">
+  <div class="chart-grid" *ngIf="combinedDatasource$ | async as combinedDatasource">
       <ngx-charts-line-chart
     [scheme]="colorScheme"
     [results]="combinedDatasource"

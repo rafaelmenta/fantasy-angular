@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User, UserService, UserTeam } from '../services/user.service';
-import { Team } from '../services/team.service';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { filter, tap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-index',
@@ -17,19 +17,20 @@ export class IndexComponent implements OnInit {
     return teams.find(team => team.default_team);
   }
 
-  constructor(private userService: UserService, private router: Router, private title: Title) {
-  }
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private title: Title
+  ) { }
 
   ngOnInit() {
     this.title.setTitle('Fantasy Superliga');
 
-    this.userService.user.subscribe(user => {
-      this.user = user;
-
-      if (user && user.teams) {
-        this.router.navigateByUrl('home', { skipLocationChange: true });
-      }
-    });
+    this.userService.user.pipe(
+      take(1),
+      filter(user => user !== undefined && user.teams !== undefined),
+      tap(() => this.router.navigateByUrl('home', {skipLocationChange: true})),
+    ).subscribe();
   }
 
 }

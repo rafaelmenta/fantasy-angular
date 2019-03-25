@@ -4,7 +4,7 @@ import { LeagueService } from '../../services/league/league.service';
 import { TeamService } from '../../services/team.service';
 import { Observable } from 'rxjs';
 import { Draft } from '../../services/draft/draft.service';
-import { map } from 'rxjs/operators';
+import { map, filter, mergeMap } from 'rxjs/operators';
 import { compare } from '../../../lib/utils';
 
 @Component({
@@ -27,19 +27,15 @@ export class DraftListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.user.subscribe(user => {
-      if (user) {
-        const team = this.teamService.getDefaultTeam(user.teams);
-        const id = team.team.division.conference.league.id_league;
-        this.drafts$ = this.leagueService.getDrafts(id).pipe(map(draft => {
-          return {
-            previous_drafts: draft.previous_drafts.sort((a, b) => compare(a.year_draft, b.year_draft, false)),
-            next_drafts: draft.next_drafts.sort((a, b) => compare(a.year_draft, b.year_draft, true)),
-          };
-        }));
-        // this.sortDraft();
-      }
-    });
+    this.drafts$ = this.userService.user.pipe(
+      filter(user => user !== undefined),
+      map(user => this.teamService.getDefaultTeam(user.teams)),
+      mergeMap(team => this.leagueService.getDrafts(team.team.division.conference.league.id_league)),
+      map(draft => ({
+        previous_drafts: draft.previous_drafts.sort((a, b) => compare(a.year_draft, b.year_draft, false)),
+        next_drafts: draft.next_drafts.sort((a, b) => compare(a.year_draft, b.year_draft, true)),
+      }))
+    );
   }
 
 }

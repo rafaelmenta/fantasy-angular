@@ -1,7 +1,7 @@
 <mat-card>
   <h3 class="mat-title">Pr&oacute;ximos jogos</h3>
 
-  <mat-table #table [dataSource]="datasource" matSort>
+  <mat-table #table [dataSource]="datasource" matSort *ngIf="nextGames$ | async">
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;" class="boxscore-row"></mat-row>
 

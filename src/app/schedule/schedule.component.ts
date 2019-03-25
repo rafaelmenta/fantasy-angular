@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService, User, UserTeam } from '../services/user.service';
-import { TeamService, Team } from '../services/team.service';
+import { UserService, UserTeam } from '../services/user.service';
+import { TeamService } from '../services/team.service';
 import { Title } from '@angular/platform-browser';
+import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-schedule',
@@ -10,7 +12,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class ScheduleComponent implements OnInit {
 
-  team: UserTeam;
+  team$: Observable<UserTeam>;
 
   constructor(
     private userService: UserService,
@@ -20,11 +22,9 @@ export class ScheduleComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle(`Superliga - Calendário`);
-    let user: User;
-    const user$ = this.userService.user.subscribe(u => user = u);
-
-    const defaultTeam = this.teamService.getDefaultTeam(user.teams);
-    this.team = defaultTeam;
+    this.team$ = this.userService.user.pipe(
+      filter(user => user !== undefined),
+      map(user => this.teamService.getDefaultTeam(user.teams))
+    );
   }
-
 }

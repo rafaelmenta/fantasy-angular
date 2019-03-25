@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { PlayerRoundPerformance, PlayerPerformances } from '../../services/player/player.service';
-import { Observable, merge } from 'rxjs';
-import { map, zip } from 'rxjs/operators';
+import { Component, Input, OnChanges } from '@angular/core';
+import { PlayerPerformances } from '../../services/player/player.service';
+import { Observable, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { RoundStat } from '../../services/stats/stats.service';
 
 interface LineChartEntry {
@@ -29,7 +29,7 @@ export class PlayerChartComponent implements OnChanges {
   avgDatasource: LineChartEntry;
   maxDatasource: LineChartEntry;
 
-  combinedDatasource: LineChartEntry[];
+  combinedDatasource$: Observable<LineChartEntry[]>;
 
   // Chart options
   showXAxis = true;
@@ -63,23 +63,24 @@ export class PlayerChartComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    this.roundAverages$.subscribe(stats => {
-      const averages = this.mapSeries(stats, 'fantasy_points');
-      const max = this.mapSeries(stats, 'max_fantasy_points');
-      this.avgDatasource = { name: 'Média da rodada', series: averages };
-      this.maxDatasource = { name: 'Melhor da rodada', series: max };
-    });
+    const max$ = this.roundAverages$.pipe(
+      map(stats => ({
+        name: 'Melhor da rodada',
+        series: this.mapSeries(stats, 'max_fantasy_points')
+      } as LineChartEntry))
+    );
 
-    this.performances$
-      .pipe(map<PlayerPerformances, LineChartEntry>(this.mapPlayer.bind(this)))
-      .subscribe(data => this.perfDatasource = data);
+    const avg$ = this.roundAverages$.pipe(
+      map(stats => ({
+        name: 'Média da rodada',
+        series: this.mapSeries(stats, 'fantasy_points')
+      } as LineChartEntry))
+    );
 
-    this.performances$
-      .pipe(zip(this.roundAverages$))
-      .subscribe(() => this.combinedDatasource = [
-        this.maxDatasource,
-        this.perfDatasource,
-        this.avgDatasource,
-      ]);
+    const perf$ = this.performances$.pipe(
+      map<PlayerPerformances, LineChartEntry>(this.mapPlayer.bind(this))
+    );
+
+    this.combinedDatasource$ = combineLatest(max$, avg$, perf$);
   }
 }
