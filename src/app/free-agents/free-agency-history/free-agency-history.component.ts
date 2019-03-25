@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService, UserTeam } from '../../services/user.service';
-import { Team, TeamService } from '../../services/team.service';
-import { Observable } from 'rxjs';
+import { UserService } from '../../services/user.service';
+import { TeamService } from '../../services/team.service';
+import { Observable, merge } from 'rxjs';
 import { LeagueService } from '../../services/league/league.service';
 import { FreeAgencyHistory } from '../../../typings';
+import { map, filter, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-free-agency-history',
@@ -12,7 +13,6 @@ import { FreeAgencyHistory } from '../../../typings';
 })
 export class FreeAgencyHistoryComponent implements OnInit {
 
-  defaultTeam: UserTeam;
   faHistory$: Observable<FreeAgencyHistory[]>;
 
   constructor(
@@ -22,15 +22,11 @@ export class FreeAgencyHistoryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.user.subscribe(user => {
-      if (user) {
-        this.defaultTeam = this.teamService.getDefaultTeam(user.teams);
-        const id = this.defaultTeam.team.division.conference.league.id_league;
-
-        this.faHistory$ = this.leagueService.getFreeAgentsHistory(id);
-      }
-    });
-
+    this.faHistory$ = this.userService.user.pipe(
+      filter(user => user !== undefined),
+      map(user => this.teamService.getDefaultTeam(user.teams)),
+      mergeMap(team => this.leagueService.getFreeAgentsHistory(team.team.division.conference.league.id_league)),
+    );
   }
 
 }

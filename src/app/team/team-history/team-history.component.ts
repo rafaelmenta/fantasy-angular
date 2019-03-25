@@ -5,8 +5,6 @@ import { Team, TeamService } from '../../services/team.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { MatTableDataSource } from '@angular/material';
-import { tap, map } from 'rxjs/operators';
-import { compare } from '../../../lib/utils';
 import { UserService } from '../../services/user.service';
 import { Title } from '@angular/platform-browser';
 

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="desktop-selector" *ngIf="!mobileBreakpoint">
-    <div class="teams-wrapper" *ngIf="teams; else loading">
+    <div class="teams-wrapper" *ngIf="teams$ | async as teams; else loading">
       <app-team-picker-card
         *ngFor="let team of teams"
         [team]="team"
@@ -9,7 +9,7 @@
   </div>
   <div class="mobile-selector" *ngIf="mobileBreakpoint">
       <mat-card>
-        <div class="mobile-teams-wrapper" *ngIf="teams; else loading">
+        <div class="mobile-teams-wrapper" *ngIf="teams$ | async as teams; else loading">
           <div *ngFor="let team of teams" class="team-card" (click)="selectTeam(team)">
             <img src="https://static.draftbrasil.net/team/logo/{{team.id_sl}}.png">
             <p class="mat-body-1">{{team.city}} {{team.nickname}}</p>
@@ -23,7 +23,7 @@
     <mat-card-title>Proposta</mat-card-title>
 
     <mat-card-content>
-      <div class="trade-teams" *ngIf="team">
+      <div class="trade-teams" *ngIf="team$ | async as team">
         <app-trade-team #sender [team]="team" (change)="updateTeam('sent', $event)"></app-trade-team>
         <div class="trading-team">
           <!-- Avoid the loading overlay on empty object. -->

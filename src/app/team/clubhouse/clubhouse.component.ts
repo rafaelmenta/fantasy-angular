@@ -7,7 +7,7 @@ import { UserService, User } from '../../services/user.service';
 import { Observable } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { map } from 'rxjs/operators';
+import { map, mergeMap, filter, tap } from 'rxjs/operators';
 import { APP_CONFIG, AppConfig } from '../../app.config';
 import { ClubhouseService } from '../../services/clubhouse/clubhouse.service';
 
@@ -23,14 +23,15 @@ export class ClubhouseComponent implements OnInit {
   isSmallScreen$: Observable<boolean>;
 
   loadTeam(id: number|string, useCache: boolean) {
-    this.team$ = this.teamService.getTeam(id, useCache);
-    this.team$.subscribe(team => {
-      if (team) {
-        this.clubhouse.teamSubject.next(team);
-        const title = `Superliga - ${team.team_overview.city} ${team.team_overview.nickname}`;
-        this.title.setTitle(title);
-      }
-    });
+    return this.teamService.getTeam(id, useCache).pipe(
+      tap(team => {
+        if (team) {
+          this.clubhouse.teamSubject.next(team);
+          const title = `Superliga - ${team.team_overview.city} ${team.team_overview.nickname}`;
+          this.title.setTitle(title);
+        }
+      })
+    );
   }
 
   ngOnInit() {
@@ -39,20 +40,26 @@ export class ClubhouseComponent implements OnInit {
 
     this.title.setTitle(`Superliga - Equipe`);
 
-    this.route.paramMap.subscribe(params => {
-      const id = params.get('id');
+    this.team$ = this.route.paramMap.pipe(
+      map(paramMap => paramMap.get('id')),
+      mergeMap(id => this.getTeam(id))
+    );
+  }
 
-      if (id) {
-        this.loadTeam(id, false);
-      } else {
-        this.userService.user.subscribe(user => {
-          if (user) {
-            const defaultTeam = this.teamService.getDefaultTeam(user.teams);
-            this.loadTeam(defaultTeam.id_sl, true);
-          }
-        });
-      }
-    });
+  private getTeam(id?: string) {
+    if (id) {
+      return this.loadTeam(id, false);
+    }
+
+    return this.getUserTeam();
+  }
+
+  private getUserTeam() {
+    return this.userService.user.pipe(
+      filter(user => user !== undefined),
+      map(user => this.teamService.getDefaultTeam(user.teams)),
+      mergeMap(team => this.loadTeam(team.id_sl, true)),
+    );
   }
 
   constructor(

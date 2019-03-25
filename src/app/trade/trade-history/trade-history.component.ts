@@ -4,6 +4,7 @@ import { TeamService } from '../../services/team.service';
 import { LeagueService } from '../../services/league/league.service';
 import { Observable } from 'rxjs';
 import { Trade } from '../../services/trade/trade.service';
+import { map, filter, mergeAll } from 'rxjs/operators';
 
 @Component({
   selector: 'app-trade-history',
@@ -21,14 +22,12 @@ export class TradeHistoryComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.user.subscribe(user => {
-      if (user) {
-        const defaultTeam = this.teamService.getDefaultTeam(user.teams);
-        const id = defaultTeam.team.division.conference.league.id_league;
-
-        this.trades$ = this.leagueService.getTradeHistory(id);
-      }
-    });
+    this.trades$ = this.userService.user.pipe(
+      filter(user => user !== undefined),
+      map(user => this.teamService.getDefaultTeam(user.teams)),
+      map(team => this.leagueService.getTradeHistory(team.team.division.conference.league.id_league)),
+      mergeAll(),
+    );
   }
 
 }

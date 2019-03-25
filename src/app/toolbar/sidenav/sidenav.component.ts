@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { UserService, User } from '../../services/user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-sidenav',
@@ -9,7 +10,7 @@ import { UserService, User } from '../../services/user.service';
 })
 export class SidenavComponent implements OnInit {
   @Input() sidenav: MatSidenav;
-  user: User;
+  user$: Observable<User>;
 
   constructor(private userService: UserService) { }
 
@@ -18,7 +19,7 @@ export class SidenavComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.user.subscribe(next => this.user = next);
+    this.user$ = this.userService.user;
   }
 
 }

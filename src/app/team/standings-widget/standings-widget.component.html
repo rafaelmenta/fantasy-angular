@@ -1,7 +1,9 @@
 <mat-card>
   <div class="standings" *ngIf="league$ | async; else loading">
-    <mat-card-title>Classifica&ccedil;&atilde;o <span class="mat-subheading-1"> / {{division.name}}</span></mat-card-title>
-    <mat-card-content>
+    <mat-card-title>Classifica&ccedil;&atilde;o
+      <span class="mat-subheading-1" *ngIf="division$ | async as division"> / {{division.name}}</span>
+    </mat-card-title>
+    <mat-card-content *ngIf="division$ | async as division">
       <app-team-ranking [teams]="division.teams" [highlightTeam]="team"></app-team-ranking>
     </mat-card-content>
   </div>

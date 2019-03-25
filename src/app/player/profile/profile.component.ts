@@ -4,6 +4,7 @@ import { PlayerService, Player, PlayerNextGame, PlayerPerformances } from '../..
 import { Observable } from 'rxjs';
 import { RoundStat, StatsService } from '../../services/stats/stats.service';
 import { Title } from '@angular/platform-browser';
+import { map, mergeMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -27,20 +28,16 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle(`Superliga - Jogador`);
-    this.route.paramMap.subscribe(map => {
 
-      const id = map.get('id');
-      if (id) {
-        this.player$ = this.playerService.getPlayer(id);
-        this.nextGames$ = this.playerService.getNextGames(id);
-        this.performances$ = this.playerService.getPerformances(id);
-        this.roundAverages$ = this.statsService.getRoundAverages();
+    const id$ = this.route.paramMap.pipe(map(paramMap => paramMap.get('id')));
 
-        this.player$.subscribe(player => {
-          this.title.setTitle(`Superliga - ${player.first_name} ${player.last_name}`);
-        });
-      }
-    });
+    this.player$ = id$.pipe(
+      mergeMap(id => this.playerService.getPlayer(id)),
+      tap(player => this.title.setTitle(`Superliga - ${player.first_name} ${player.last_name}`)),
+    );
+
+    this.nextGames$ = id$.pipe(mergeMap(id => this.playerService.getNextGames(id)));
+    this.performances$ = id$.pipe(mergeMap(id => this.playerService.getPerformances(id)));
+    this.roundAverages$ = this.statsService.getRoundAverages();
   }
-
 }
