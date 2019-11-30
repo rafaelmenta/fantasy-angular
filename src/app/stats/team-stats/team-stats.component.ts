@@ -3,7 +3,7 @@ import { UserService, User } from '../../services/user.service';
 import { TeamService, Team, StatsTeam } from '../../services/team.service';
 import { Observable } from 'rxjs';
 import { StatPlayer, Player } from '../../services/player/player.service';
-import { map } from 'rxjs/operators';
+import { map, filter, mergeMap } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -24,12 +24,12 @@ export class TeamStatsComponent implements OnInit {
   ngOnInit() {
     this.title.setTitle(`Superliga - Estatísticas da equipe`);
 
-    this.userService.user.subscribe(user => {
-      if (user) {
-        const defaultTeam = this.teamService.getDefaultTeam(user.teams);
-        this.players$ = this.teamService.getRosterStats(defaultTeam.id_sl).pipe(map(this.formatStats.bind(this)));
-      }
-    });
+    this.players$ = this.userService.user.pipe(
+      filter(user => user !== undefined),
+      map(user => this.teamService.getDefaultTeam(user.teams)),
+      mergeMap(team => this.teamService.getRosterStats(team.id_sl)),
+      map(stats => this.formatStats(stats))
+    );
   }
 
   formatPlayerStat(player: Player): StatPlayer {
