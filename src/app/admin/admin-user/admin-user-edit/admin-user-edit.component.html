@@ -1,0 +1,41 @@
+<mat-card *ngIf="user$ | async as user">
+  <mat-card-title>{{user.id_user ? 'Editar' : 'Criar'}} usuário</mat-card-title>
+  <mat-card-content>
+    <mat-form-field>
+      <input matInput [(ngModel)]="user.first_name" placeholder="Nome">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="user.last_name" placeholder="Sobrenome">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="user.login" placeholder="Login" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="user.nickname" placeholder="Apelido">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="user.email" placeholder="Email" autocomplete="off">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Permissão" [(ngModel)]="user.id_permission">
+        <mat-option>Selecione</mat-option>
+        <mat-option [value]="2">Comissário</mat-option>
+        <mat-option [value]="3">Atualizador</mat-option>
+        <mat-option [value]="4">Usuário</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-content>
+    <mat-form-field>
+      <input matInput type="password" [(ngModel)]="user.password" placeholder="Senha" autocomplete="off">
+      <mat-hint>Preencha a senha apenas se quiser alterá-la</mat-hint>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="password" [(ngModel)]="passwordCheck" placeholder="Confirmar senha">
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button color="warn" (click)="back()">Cancelar</button>
+    <button mat-button color="primary" (click)="save(user)" [disabled]="checkPassword(user)">Salvar</button>
+  </mat-card-actions>
+</mat-card>
