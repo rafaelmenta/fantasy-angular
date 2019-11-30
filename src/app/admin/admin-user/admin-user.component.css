@@ -1,0 +1,9 @@
+.add-user {
+  position: fixed;
+  bottom: 56px;
+  right: 56px;
+}
+
+router-outlet {
+  margin-bottom: 18px;
+}

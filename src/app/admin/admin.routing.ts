@@ -12,6 +12,8 @@ import { AdminActiveGamesComponent } from './admin-system/forms/admin-active-gam
 import { AdminGamePerformanceComponent } from './admin-system/forms/admin-game-performance/admin-game-performance.component';
 import { AdminSystemSummaryComponent } from './admin-system/forms/admin-system-summary/admin-system-summary.component';
 import { AdminSummaryComponent } from './admin-summary/admin-summary.component';
+import { AdminUserComponent } from './admin-user/admin-user.component';
+import { AdminUserEditComponent } from './admin-user/admin-user-edit/admin-user-edit.component';
 
 const routes: Routes = [
   {
@@ -27,6 +29,18 @@ const routes: Routes = [
     }, {
       path: 'team',
       component: AdminTeamComponent,
+    }, {
+      path: 'user',
+      children: [{
+        path: '',
+        component: AdminUserComponent,
+      }, {
+        path: 'edit',
+        redirectTo: 'edit/',
+      }, {
+        path: 'edit/:login',
+        component: AdminUserEditComponent,
+      }],
     }, {
       path: 'system',
       component: AdminSystemComponent,

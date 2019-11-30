@@ -1,0 +1,11 @@
+<mat-card>
+  <mat-card-title>Usuários</mat-card-title>
+  <mat-card-content>
+    <app-admin-user-list *ngIf="users$ | async as users" [users]="users"></app-admin-user-list>
+    <div class="add-user">
+      <button mat-fab (click)="newUser()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

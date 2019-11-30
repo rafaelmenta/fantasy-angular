@@ -31,6 +31,9 @@ import { AdminTeamBoxscoreComponent } from './admin-system/forms/admin-team-boxs
 import { LeagueConfigsComponent } from './admin-league/forms/league-configs/league-configs.component';
 import { AdminSystemSummaryComponent } from './admin-system/forms/admin-system-summary/admin-system-summary.component';
 import { AdminSummaryComponent } from './admin-summary/admin-summary.component';
+import { AdminUserComponent } from './admin-user/admin-user.component';
+import { AdminUserListComponent } from './admin-user/admin-user-list/admin-user-list.component';
+import { AdminUserEditComponent } from './admin-user/admin-user-edit/admin-user-edit.component';
 
 @NgModule({
   imports: [
@@ -89,6 +92,9 @@ import { AdminSummaryComponent } from './admin-summary/admin-summary.component';
     LeagueConfigsComponent,
     AdminSystemSummaryComponent,
     AdminSummaryComponent,
+    AdminUserComponent,
+    AdminUserListComponent,
+    AdminUserEditComponent,
   ]
 })
 export class AdminModule { }

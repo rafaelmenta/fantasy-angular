@@ -1,0 +1,43 @@
+<mat-table #table [dataSource]="dataSource">
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+  <!-- User column -->
+  <ng-container matColumnDef="login">
+    <mat-header-cell *matHeaderCellDef>Usuário</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      <a class="link" [routerLink]="['edit', element.login]">{{element.login}}</a>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Email column -->
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+  </ng-container>
+
+  <!-- Nickname column -->
+  <ng-container matColumnDef="nickname">
+    <mat-header-cell *matHeaderCellDef>Apelido</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.nickname}}</mat-cell>
+  </ng-container>
+
+  <!-- Teams column -->
+  <ng-container matColumnDef="teams">
+    <mat-header-cell *matHeaderCellDef>Equipes</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.teams.length}}</mat-cell>
+  </ng-container>
+
+  <!-- Remove column -->
+  <ng-container matColumnDef="remove">
+    <mat-header-cell *matHeaderCellDef class="narrow">Remover</mat-header-cell>
+    <mat-cell *matCellDef="let element" class="narrow">
+      <button
+        mat-icon-button color="warn"
+        (click)="remove(element)"
+        [disabled]="element.teams.length > 0">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+</mat-table>
