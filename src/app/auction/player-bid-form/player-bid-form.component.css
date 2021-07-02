@@ -1,0 +1,16 @@
+.form-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.salary {
+  flex: 1;
+  margin-right: 16px;
+}
+
+.years {
+  flex: 1;
+  margin-right: 8px;
+}

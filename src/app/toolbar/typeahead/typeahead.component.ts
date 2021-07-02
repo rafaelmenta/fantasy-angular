@@ -56,7 +56,7 @@ export class TypeaheadComponent implements OnInit {
 
   ngOnInit() {
     const team$ = this.userService.user.pipe(
-      filter(user => user !== undefined),
+      filter(user => !!user),
       map(user => this.teamService.getDefaultTeam(user.teams)),
     );
 

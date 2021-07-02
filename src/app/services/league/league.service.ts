@@ -16,6 +16,7 @@ import { Trade } from '../trade/trade.service';
 import { UPDATE_TRADE_HISTORY } from '../../store/trade-history.reducer';
 import { DraftOverview, Draft } from '../draft/draft.service';
 import { AdminLeagueConfig } from '../../admin/service/league/admin-league';
+import { Auction } from '../auction/auction.service';
 
 interface LeagueState {
   league: League;
@@ -146,6 +147,13 @@ export class LeagueService {
     const url = `${this.config.API_ENDPOINT}${this.resource}/${id}/drafts`;
     return this.http.get<{ league: { previous_drafts: Draft[], next_drafts: Draft[]}}>(url).pipe(
       map(res => res.league),
+      share());
+  }
+
+  getAuctions(id: number) {
+    const url = `${this.config.API_ENDPOINT}${this.resource}/${id}/auctions`;
+    return this.http.get<{ league_auctions: Auction[] }>(url).pipe(
+      map(res => res.league_auctions),
       share());
   }
 

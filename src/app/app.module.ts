@@ -9,7 +9,7 @@ import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { DragulaModule } from 'ng2-dragula';
-
+import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from "ng2-currency-mask";
 import { CalendarModule } from 'angular-calendar';
 
 import {  Angulartics2Module } from 'angulartics2';
@@ -112,6 +112,14 @@ import { FreeAgencyPaginator } from './providers/free-agency-paginator';
 import { CurrencySuffixPipe } from './currency-suffix.pipe';
 
 import { SlPickerComponent} from './common/sl-picker/sl-picker.component';
+import { AuctionComponent } from './auction/auction.component';
+import { AuctionListComponent } from './auction/auction-list/auction-list.component';
+import { AuctionPanelComponent } from './auction/auction-panel/auction-panel.component';
+import { CountdownComponent } from './common/countdown/countdown.component';
+import { AvailableAuctionPlayersComponent } from './auction/available-auction-players/available-auction-players.component';
+import { PlayerBidFormComponent } from './auction/player-bid-form/player-bid-form.component';
+
+import { AuctionInfoComponent } from './auction/auction-info/auction-info.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -187,6 +195,13 @@ registerLocaleData(localePt);
     FreeAgencyListComponent,
     CurrencySuffixPipe,
     SlPickerComponent,
+    AuctionComponent,
+    AuctionListComponent,
+    AuctionPanelComponent,
+    CountdownComponent,
+    AvailableAuctionPlayersComponent,
+    PlayerBidFormComponent,
+    AuctionInfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -222,6 +237,7 @@ registerLocaleData(localePt);
     MatCheckboxModule,
     MatPaginatorModule,
 
+    CurrencyMaskModule,
     MomentModule,
     DragulaModule,
     StoreModule.forRoot({
@@ -267,6 +283,15 @@ registerLocaleData(localePt);
     { provide: APP_CONFIG, useValue: AppConfig },
     JwtHelperService,
     { provide: MatPaginatorIntl, useClass: FreeAgencyPaginator },
+    { provide: CURRENCY_MASK_CONFIG, useValue: {
+      align: 'right',
+      allowNegative: false,
+      decimal: ',',
+      precision: 0,
+      prefix: '$ ',
+      suffix: '',
+      thousands: '.'
+    } as CurrencyMaskConfig},
   ],
   bootstrap: [AppComponent]
 })

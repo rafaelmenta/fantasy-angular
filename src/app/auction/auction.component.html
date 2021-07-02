@@ -1,0 +1,30 @@
+<mat-toolbar color="accent">Leilão</mat-toolbar>
+<div class="container" *ngIf="pageReady$ | async as page; else loading">
+  <div class="main-content" *ngIf="subObs | async as auc">
+      <app-auction-panel
+        [auction]="page.auctionInfo"
+        [bids]="auc.bids"
+        [cap]="auc.cap"
+        (playerBid)="sendTeamBid(page.auctionInfo.id_auction, $event)"
+        (refresh)="refreshData(page.auctionInfo)"></app-auction-panel>
+      <app-available-auction-players
+        *ngIf="isOpen(page.auctionInfo)"
+        [players]="auc.free_agents"
+        [bids]="auc.bids"
+        (playerBid)="sendTeamBid(page.auctionInfo.id_auction, $event)"></app-available-auction-players>
+  </div>
+  <div class="side-panel">
+    <app-auction-list [auctions]="page.auctions"></app-auction-list>
+    <mat-card>
+      <p class="finished">Leilão Finalizado</p>
+      <p class="waiting-restricted">Aguardando dono dos direitos</p>
+      <p class="last-hour">Última hora de leilão</p>
+      <p class="last-six">Últimas 6 horas de leilão</p>
+      <p class="open">Leilão aberto</p>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>

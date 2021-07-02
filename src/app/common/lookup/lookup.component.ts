@@ -10,6 +10,7 @@ import { Player } from '../../services/player/player.service';
 export class LookupComponent implements OnInit {
 
   @Input() element: Player | TeamLookup;
+  @Input() showAvatar = true;
 
   constructor() { }
 

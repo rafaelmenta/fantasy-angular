@@ -1,0 +1,22 @@
+<div class="form-group">
+  <mat-form-field class="salary">
+    <mat-label>Salário</mat-label>
+    <input matInput currencyMask name="salary" autocomplete="off" type="text" required [(ngModel)]="salary">
+    <button *ngIf="salary" matSuffix mat-icon-button aria-label="Limpar" (click)="salary='';">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-form-field class="years">
+    <mat-label>Anos</mat-label>
+    <input matInput autocomplete="off" name="years" type="number" min="1" max="10" required [(ngModel)]="years">
+    <button *ngIf="years" matSuffix mat-icon-button aria-label="Limpar" (click)="years='';">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <button mat-icon-button color="accent">
+    <mat-icon aria-label="Cancelar" (click)="resetForm(); closeForm();">close</mat-icon>
+  </button>
+  <button mat-icon-button color="primary">
+    <mat-icon aria-label="Confirmar" (click)="sendBid()">done</mat-icon>
+  </button>
+</div>

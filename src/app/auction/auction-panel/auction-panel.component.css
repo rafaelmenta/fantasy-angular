@@ -1,0 +1,160 @@
+.bids,
+.bid-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.bids > * {
+  margin: 0.25em 0;
+}
+
+.bid {
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 0;
+}
+
+.bids-header > *,
+.bid > * {
+  margin: 0 0.25em;
+}
+
+.bids-header {
+  display: flex;
+}
+
+.bids-header span {
+  flex: 1;
+  font-size:  14px;
+  color: rgb(0, 0, 0, 0.54);
+}
+
+.bid span {
+  flex: 1;
+}
+
+.bids .year {
+  width: 32px;
+  flex: unset;
+}
+
+.bids .deadline {
+  width: 60px;
+  flex: unset;
+}
+
+.bids .action {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.bids-header .action {
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container,
+.history-container {
+  align-items: center;
+  display: none;
+  color: #455a64;
+  font-size: 12px;
+  padding: 8px 32px;
+}
+
+.active {
+  background: #eceff1;
+}
+
+.container > .active {
+  display: block;
+}
+
+.history {
+  display: flex;
+}
+
+.history > *  {
+  margin-left: 8px;
+  line-height: 20px;
+}
+
+app-auction-info {
+  display: block;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}
+
+app-player-lookup,
+app-lookup,
+.bids-header .expand {
+  flex: 2;
+}
+
+:host ::ng-deep app-player-lookup .player-lookup {
+  justify-content: unset;
+}
+
+.finished,
+:host ::ng-deep app-lookup.finished div a,
+:host ::ng-deep app-player-lookup.finished div a {
+  color: #9b0000 !important;
+}
+
+.waiting-restricted,
+:host ::ng-deep app-lookup.waiting-restricted div a,
+:host ::ng-deep app-player-lookup.waiting-restricted div a {
+  color: #7200ca !important;
+}
+
+.last-hour,
+:host ::ng-deep app-lookup.last-hour div a,
+:host ::ng-deep app-player-lookup.last-hour div a {
+  color: #c67c00 !important;
+}
+
+.last-six,
+:host ::ng-deep app-lookup.last-six div a,
+:host ::ng-deep app-player-lookup.last-six div a {
+  color: #c7a500 !important;
+}
+
+.open,
+:host ::ng-deep app-lookup.open div a,
+:host ::ng-deep app-player-lookup.open div a {
+  color: #009624 !important;
+}
+
+:host ::ng-deep app-lookup.finished div a:hover,
+:host ::ng-deep app-player-lookup.finished div a:hover {
+  color: #dd2c00 !important;
+}
+
+:host ::ng-deep app-lookup.waiting-restricted div a:hover,
+:host ::ng-deep app-player-lookup.waiting-restricted div a:hover {
+  color: #6200ea !important;
+}
+
+:host ::ng-deep app-lookup.last-hour div a:hover,
+:host ::ng-deep app-player-lookup.last-hour div a:hover {
+  color: #ffab00 !important;
+}
+
+:host ::ng-deep app-lookup.last-six div a:hover,
+:host ::ng-deep app-player-lookup.last-six div a:hover {
+  color: #ffd600 !important;
+}
+
+:host ::ng-deep app-lookup.open div a:hover,
+:host ::ng-deep app-player-lookup.open div a:hover {
+  color: #00c853 !important;
+}
