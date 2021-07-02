@@ -1,0 +1,52 @@
+.info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background: #eceff1;
+  height: 16px;
+  color: #455a64;
+  width: 100%;
+  padding: 4px 4px;
+  font-size: 12px;
+  justify-content: space-between;
+}
+
+.info > *:last-child {
+  margin-right: 4px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.status,
+.control,
+.status-container {
+  display: flex;
+  align-items: center;
+}
+
+.control > * {
+  margin-right: 4px;
+}
+
+.info > *,
+.status > * {
+  margin-left: 8px;
+}
+
+.status-0 {
+  color: #f44336;
+}
+
+.status-1 {
+  color: #4caf50;
+}
+
+.available {
+  color: #4caf50;
+}
+
+.warning {
+  color: #c7a500;
+}

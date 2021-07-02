@@ -1,0 +1,46 @@
+.player-name {
+    flex-grow: 1;
+}
+
+.nba {
+  width: 60px;
+  flex: unset;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-header-cell {
+  font-size:  14px;
+  font-weight: normal;
+}
+
+mat-row {
+  padding: 4px 0;
+}
+
+app-player-bid-form {
+  flex: 1;
+}
+
+.action {
+  display: flex;
+  justify-content: flex-end;
+  width: 50px;
+  flex: unset;
+}
+
+.expand-row {
+  height: auto;
+  display: flex;
+}
+
+.mat-column-expandedDetail {
+  flex: 1;
+}
+
+.expanded-row {
+  overflow: hidden;
+  display: flex;
+}

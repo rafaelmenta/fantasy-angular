@@ -1,0 +1,27 @@
+<div class="info-container">
+  <div class="info">
+    <div class="status-container">Status:
+      <span class="status status-{{auction.status}}">
+        <mat-icon>
+          {{ auction.status === 0 ? 'close' :
+          auction.status === 1 ? 'fiber_manual_record' : 'check' }}
+        </mat-icon>
+        {{statusLabel}}
+      </span>
+    </div>
+    <span>Período: {{auction.date_started | date:'short'}} a {{auction.date_ended | date:'short'}}</span>
+    <span class="message" *ngIf="isOpen">Atualizando em <span class="bold">{{secondsToRefresh}}s</span>.</span>
+  </div>
+  <div class="info" *ngIf="isOpen">
+    <span>Salary cap: {{ cap.salary_cap | currencySuffix:0 }}</span>
+    <span>Salário roster: {{ cap.team_salaries | currency }}</span>
+    <span>Bids em aberto: {{ cap.open_bids | currency }}</span>
+    <span>Cap disponível:
+      <span
+        class="bold"
+        [class.available]="showAvailable"
+        [class.warning]="showWarning">{{ cap.salary_cap - cap.team_salaries - cap.open_bids | currency}}</span>
+    </span>
+  </div>
+</div>
+

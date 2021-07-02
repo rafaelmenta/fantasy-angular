@@ -1,5 +1,5 @@
 <div class="lookup">
-  <app-avatar [element]="element"></app-avatar>
+  <app-avatar *ngIf="showAvatar" [element]="element"></app-avatar>
 
   <a *ngIf="isPlayer" class="link" [routerLink]="['/player', element.player_slug]">
     {{element.first_name}} {{element.last_name}}

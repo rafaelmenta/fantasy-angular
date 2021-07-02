@@ -1,0 +1,12 @@
+<ng-container *ngIf="hours != null">
+  <div *ngIf="!finished">
+    <span class="hours">{{hours < 10 ? '0' + hours : hours}}</span>
+        <span class="separator">:</span>
+        <span class="minutes">{{minutes < 10 ? '0' + minutes : minutes}}</span>
+            <span class="separator">:</span>
+            <span class="seconds">{{seconds < 10 ? '0' + seconds : seconds}}</span>
+  </div>
+  <div *ngIf="finished">
+    <span class="finished">Finalizado</span>
+  </div>
+</ng-container>

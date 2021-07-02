@@ -28,7 +28,7 @@ export class IndexComponent implements OnInit {
 
     this.userService.user.pipe(
       take(1),
-      filter(user => user !== undefined && user.teams !== undefined),
+      filter(user => user && user.teams !== undefined),
       tap(() => this.router.navigateByUrl('home', {skipLocationChange: true})),
     ).subscribe();
   }

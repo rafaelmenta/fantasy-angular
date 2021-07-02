@@ -1,0 +1,50 @@
+<mat-card>
+  <h1 class="mat-headline">Bids</h1>
+  <app-auction-info [auction]="auction" [cap]="cap" (refresh)="refreshData()"></app-auction-info>
+  <div class="bids">
+    <div class="bids-header">
+      <span class="expand">Jogador</span>
+      <span class="expand">Equipe</span>
+      <span>Total</span>
+      <span>Salario</span>
+      <span class="year">Anos</span>
+      <span class="deadline">Deadline</span>
+      <span class="action">Ação</span>
+    </div>
+    <div *ngFor="let bid of currentBids" class="container" [class.active]="toggleFormValue === bid.id_bid || toggleHistoryValue === bid.id_bid">
+      <div [class]="'bid ' + getBidClass(bid)">
+        <app-player-lookup [class]="getBidClass(bid)" [player]="bid.player"></app-player-lookup>
+        <app-lookup [class]="getBidClass(bid)" [element]="bid.team"></app-lookup>
+        <span>{{bid.salary * bid.years | currencySuffix:2 }}</span>
+        <span>{{bid.salary | currencySuffix:2 }}</span>
+        <span class="year">{{bid.years}}</span>
+        <span class="deadline"><app-countdown [end]="bid.expiration"></app-countdown></span>
+        <span class="action">
+          <button mat-icon-button color="accent" *ngIf="!isExpired(bid)" (click)="toggleForm(bid)">
+            <mat-icon>assignment</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" (click)="toggleHistory(bid)">
+            <mat-icon>history</mat-icon>
+          </button>
+        </span>
+      </div>
+      <div class="form-container" [class.active]="toggleFormValue === bid.id_bid">
+        <app-player-bid-form
+          (close)="toggleForm(bid)"
+          (bid)="sendBid(bid, $event)"></app-player-bid-form>
+      </div>
+      <div class="history-container" [class.active]="toggleHistoryValue === bid.id_bid">
+        <ul>
+          <li *ngFor="let history of sortedHistory(bid.history)" class="history">
+            <span><app-lookup [element]="history.team" [showAvatar]="false"></app-lookup></span>
+            <span>{{(history.salary * history.years) | currencySuffix:2}}/{{history.years}}</span>
+            <span>({{history.salary | currency}})</span>
+            <span>{{history.bid_time | date:'short'}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- <h2 class="mat-body-2"></h2> -->
+  <h2 class="mat-subheading-2"></h2>
+</mat-card>

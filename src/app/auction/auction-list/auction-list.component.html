@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-title>Edições</mat-card-title>
+  <mat-card-content>
+    <mat-nav-list>
+      <a class="item-container" mat-list-item *ngFor="let auction of auctions" [routerLink]="['/auction', auction.id_auction]">
+        <div class="item">
+          <p><span class="date label">Status: </span> <span class="date">{{auction.status === 0 ? "FECHADO" : "ABERTO"}}</span></p>
+          <p><span class="date label">Início: </span> <span class="date">{{auction.date_started | date:'medium'}}</span></p>
+          <p><span class="date label">Fim: </span> <span class="date">{{auction.date_ended | date:'medium'}}</span></p>
+        </div>
+      </a>
+    </mat-nav-list>
+  </mat-card-content>
+</mat-card>

@@ -75,6 +75,12 @@ export interface StatsTeam {
   };
 }
 
+export interface SalaryCap {
+  salary_cap: number;
+  team_salaries: number;
+  open_bids: number;
+}
+
 interface TeamState {
   team: Team;
 }
@@ -178,7 +184,15 @@ export class TeamService {
 
   getTradeCount(teamId: number) {
     const url = `${this.config.API_ENDPOINT}${this.resource}/${teamId}/trade-count`;
-    return this.http.get<{team_trades: number}>(url).pipe(share());
+    return this.http.get<{ team_trades: number }>(url).pipe(share());
+  }
+
+  getSalaryCap(teamId: number) {
+    const url = `${this.config.API_ENDPOINT}${this.resource}/${teamId}/cap`;
+    return this.http.get<{ cap: SalaryCap }>(url).pipe(
+      map(res => res.cap),
+      share(),
+    );
   }
 
   addPlayer(team: UserTeam, player: Player) {

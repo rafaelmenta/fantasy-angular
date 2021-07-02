@@ -24,6 +24,7 @@ import { LoginComponent } from './login/login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { IndexComponent } from './index/index.component';
+import { AuctionComponent } from './auction/auction.component';
 
 const routes: Routes = [
   {
@@ -84,6 +85,24 @@ const routes: Routes = [
         pathMatch: 'full',
         canActivate: [AuthGuardService],
       },
+    ],
+  },
+  {
+    path: 'auction',
+    canActivate: [AuthGuardService],
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        component: AuctionComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: ':id',
+        pathMatch: 'full',
+        component: AuctionComponent,
+        canActivate: [AuthGuardService],
+      }
     ],
   },
   {
