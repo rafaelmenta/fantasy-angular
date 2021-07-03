@@ -9,7 +9,6 @@ import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { DragulaModule } from 'ng2-dragula';
-import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from "ng2-currency-mask";
 import { CalendarModule } from 'angular-calendar';
 
 import {  Angulartics2Module } from 'angulartics2';
@@ -120,6 +119,8 @@ import { AvailableAuctionPlayersComponent } from './auction/available-auction-pl
 import { PlayerBidFormComponent } from './auction/player-bid-form/player-bid-form.component';
 
 import { AuctionInfoComponent } from './auction/auction-info/auction-info.component';
+import { CurrencyMaskDirective } from './directives/mask/currency-mask.directive';
+import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from './directives/mask/currency-mask.config';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -202,6 +203,7 @@ registerLocaleData(localePt);
     AvailableAuctionPlayersComponent,
     PlayerBidFormComponent,
     AuctionInfoComponent,
+    CurrencyMaskDirective,
   ],
   imports: [
     BrowserModule,
@@ -236,8 +238,7 @@ registerLocaleData(localePt);
     MatSidenavModule,
     MatCheckboxModule,
     MatPaginatorModule,
-
-    CurrencyMaskModule,
+    // CurrencyMaskModule,
     MomentModule,
     DragulaModule,
     StoreModule.forRoot({
