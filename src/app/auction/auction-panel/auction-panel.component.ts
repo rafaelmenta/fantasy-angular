@@ -72,7 +72,7 @@ export class AuctionPanelComponent implements OnChanges {
 
   sortedHistory(history: PlayerBidHistory[]) {
     if (!history) { return []; }
-    return history.sort((a, b) => compare(a, b, false));
+    return history.sort((a, b) => compare(a.bid_time, b.bid_time, false));
   }
 
   private compareBidList (a: PlayerBid[], b: PlayerBid[]) {
