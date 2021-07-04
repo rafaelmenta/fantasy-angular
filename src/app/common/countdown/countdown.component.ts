@@ -7,7 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CountdownComponent implements OnInit {
 
-  @Input() end: Date;
+  @Input() end: number;
+
+  private endDate: Date;
 
   hours: number;
   minutes: number;
@@ -22,7 +24,7 @@ export class CountdownComponent implements OnInit {
 
   tick() {
     const now = new Date();
-    this.transform(this.end as any - (now as any));
+    this.transform(this.endDate as any - (now as any));
     if (this.finished) {
       clearInterval(this.intervalId);
     }
@@ -39,6 +41,7 @@ export class CountdownComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.endDate = new Date(Number(this.end));
     // Typescript tries to use NodeJS.Timer as the return type so hacking it via any.
     this.intervalId = setInterval(this.tick.bind(this), 1000) as any as number;
   }

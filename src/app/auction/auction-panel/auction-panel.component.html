@@ -1,6 +1,6 @@
 <mat-card>
   <h1 class="mat-headline">Bids</h1>
-  <app-auction-info [auction]="auction" [cap]="cap" (refresh)="refreshData()"></app-auction-info>
+  <app-auction-info [auction]="auction" [cap]="cap" [waiver]="waiver" (refresh)="refreshData()"></app-auction-info>
   <div class="bids">
     <div class="bids-header">
       <span class="expand">Jogador</span>
@@ -36,7 +36,7 @@
       <div class="history-container" [class.active]="toggleHistoryValue === bid.id_bid">
         <ul>
           <li *ngFor="let history of sortedHistory(bid.history)" class="history">
-            <span><app-lookup [element]="history.team" [showAvatar]="false"></app-lookup></span>
+            <span class="history-team"><app-lookup [element]="history.team" [showAvatar]="false"></app-lookup></span>
             <span>{{(history.salary * history.years) | currencySuffix:2}}/{{history.years}}</span>
             <span>({{history.salary | currency}})</span>
             <span>{{history.bid_time | date:'short'}}</span>

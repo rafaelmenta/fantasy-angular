@@ -5,6 +5,7 @@
         [auction]="page.auctionInfo"
         [bids]="auc.bids"
         [cap]="auc.cap"
+        [waiver]="auc.waiver"
         (playerBid)="sendTeamBid(page.auctionInfo.id_auction, $event)"
         (refresh)="refreshData(page.auctionInfo)"></app-auction-panel>
       <app-available-auction-players

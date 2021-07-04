@@ -23,5 +23,8 @@
         [class.warning]="showWarning">{{ cap.salary_cap - cap.team_salaries - cap.open_bids | currency}}</span>
     </span>
   </div>
+  <div class="info" *ngIf="isOpen">
+    <span>Waiver: {{waiver}}</span>
+  </div>
 </div>
 

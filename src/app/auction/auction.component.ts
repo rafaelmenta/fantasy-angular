@@ -9,7 +9,7 @@ import { isString } from 'util';
 import { Auction, AuctionService, AuctionStatus, PlayerBid } from '../services/auction/auction.service';
 import { LeagueService } from '../services/league/league.service';
 import { PlayerLookup } from '../services/player/player.service';
-import { SalaryCap, TeamService } from '../services/team.service';
+import { SalaryCap, TeamLookup, TeamService } from '../services/team.service';
 import { User, UserService, UserTeam } from '../services/user.service';
 import { AuctionPanelComponent } from './auction-panel/auction-panel.component';
 import { AvailableAuctionPlayersComponent } from './available-auction-players/available-auction-players.component';
@@ -30,11 +30,12 @@ export class AuctionComponent implements OnInit {
   selectedAuction$: Observable<{ bids: PlayerBid[]; free_agents: PlayerLookup[] }>;
   auctionInfo$: Observable<Auction>;
   auctions$: Observable<Auction[]>;
-  cap$: Observable<SalaryCap>;
+  cap$: Observable<{cap: SalaryCap, waiver: number}>;
   auctionSubject = new ReplaySubject<{
     bids: PlayerBid[];
     free_agents: PlayerLookup[];
     cap: SalaryCap;
+    waiver: number;
   }>();
 
   subObs = this.auctionSubject.asObservable();
@@ -97,18 +98,18 @@ export class AuctionComponent implements OnInit {
         selectedAuction,
         cap
       })),
-      tap(({selectedAuction, cap}) => this.auctionSubject.next({ ...selectedAuction, cap })),
+      tap(({selectedAuction, cap}) => this.auctionSubject.next({ ...selectedAuction, ...cap})),
       share(),
     );
   }
 
   refreshData(auction: Auction) {
-    const freshCap$ = this.teamService.getSalaryCap(206);
+    const freshCap$ = this.teamService.getSalaryCap(this.defaultTeam.id_sl);
     const freshPlayers$ = this.auctionService.getAuctionPlayers(auction.id_auction);
 
     combineLatest(freshCap$, freshPlayers$).pipe(
-      map(([cap, players]) => ({cap, players}))
-    ).subscribe(({cap, players}) => this.auctionSubject.next({...players, cap}));
+      map(([res, players]) => ({res, players}))
+    ).subscribe(({res, players}) => this.auctionSubject.next({...players, ...res}));
   }
 
   onUserLoad(user?: User) {
