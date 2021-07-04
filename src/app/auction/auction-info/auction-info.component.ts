@@ -13,6 +13,7 @@ export class AuctionInfoComponent implements OnInit {
 
   @Input() auction: Auction;
   @Input() cap: SalaryCap;
+  @Input() waiver: number;
   @Output() refresh = new EventEmitter();
 
   intervalOption = 30;

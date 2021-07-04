@@ -14,6 +14,7 @@ export class AuctionPanelComponent implements OnChanges {
   @Input() auction: Auction;
   @Input() bids: PlayerBid[];
   @Input() cap: SalaryCap;
+  @Input() waiver: number;
 
   currentBids: PlayerBid[];
 

@@ -56,6 +56,7 @@ export interface TeamLookup {
   secondary_color: string;
   slug: string;
   symbol: string;
+  waiver?: number;
 }
 
 export interface TeamPlayer {
@@ -189,8 +190,8 @@ export class TeamService {
 
   getSalaryCap(teamId: number) {
     const url = `${this.config.API_ENDPOINT}${this.resource}/${teamId}/cap`;
-    return this.http.get<{ cap: SalaryCap }>(url).pipe(
-      map(res => res.cap),
+    return this.http.get<{ cap: SalaryCap, team: TeamLookup  }>(url).pipe(
+      map(res => ({cap: res.cap, waiver: res.team.waiver})),
       share(),
     );
   }
