@@ -149,6 +149,9 @@ export class AuctionComponent implements OnInit {
       case 'NO_CAP_FOR_BID': message = 'Erro: Equipe não possui cap suficiente.'; break;
       case 'BID_IS_LOWER': message = 'Erro: O salário oferecido é menor que o bid atual.'; break;
       case 'BID_EXCEEDS_ROSTER': message = 'Erro: O limite de roster foi atingido.'; break;
+      case 'SALARY_LOWER_MIN_BID': message = 'Erro: Salário oferecido abaixo do mínimo.'; break;
+      case 'SALARY_HIGHER_MAX_BID': message = 'Erro: Salário oferecido acima do máximo.'; break;
+      case 'SALARY_NOT_IN_INCREMENTS': message = 'Erro: Salário oferecido com incremento incorreto.'; break;
       default: message = `Erro ao salvar bid: ${e} `;
     }
 
