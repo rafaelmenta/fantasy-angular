@@ -23,6 +23,12 @@
       <p class="last-six">Últimas 6 horas de leilão</p>
       <p class="open">Leilão aberto</p>
     </mat-card>
+    <mat-card class="rules">
+      <p>Lance mínimo: <span class="value">{{ page.rules['AUCTION_MIN_BID'] | currencySuffix:2 }}</span></p>
+      <p>Lance máximo: <span class="value">{{ page.rules['AUCTION_MAX_BID'] | currencySuffix:2 }}</span></p>
+      <p>Incremento entre lances: <span class="value">{{ page.rules['AUCTION_BID_INCREMENT'] | currencySuffix:2 }}</span></p>
+      <p>Tempo de leilão: <span class="value">{{ getTimeLabel(page.rules['AUCTION_BID_OFFSET_TIME']) }}</span></p>
+    </mat-card>
   </div>
 </div>
 

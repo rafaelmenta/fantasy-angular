@@ -39,6 +39,7 @@ export class AuctionComponent implements OnInit {
   }>();
 
   subObs = this.auctionSubject.asObservable();
+  rules$: Observable<Map<string, string>>;
 
   constructor(
     private userService: UserService,
@@ -89,14 +90,23 @@ export class AuctionComponent implements OnInit {
       share(),
     );
 
+    this.rules$ = this.auctionInfo$.pipe(
+      mergeMap(auction => this.auctionService.getAuctionRules(auction.id_auction)),
+      map(rules => rules.reduce((soFar, rule) => {
+        soFar[rule.id_config] = rule.config_value;
+        return soFar;
+      }, {} as Map<string, string>)),
+    );
+
     this.userService.user.subscribe(this.onUserLoad.bind(this));
 
-    this.pageReady$ = combineLatest(this.auctions$, this.auctionInfo$, this.selectedAuction$, this.cap$).pipe(
-      map(([auctions, auctionInfo, selectedAuction, cap]) => ({
+    this.pageReady$ = combineLatest(this.auctions$, this.auctionInfo$, this.selectedAuction$, this.cap$, this.rules$).pipe(
+      map(([auctions, auctionInfo, selectedAuction, cap, rules]) => ({
         auctions,
         auctionInfo,
         selectedAuction,
-        cap
+        cap,
+        rules,
       })),
       tap(({selectedAuction, cap}) => this.auctionSubject.next({ ...selectedAuction, ...cap})),
       share(),
@@ -170,6 +180,13 @@ export class AuctionComponent implements OnInit {
 
   isOpen(auction: Auction) {
     return auction.status === AuctionStatus.OPEN;
+  }
+
+  getTimeLabel(time: number) {
+    const hours = Math.floor(time / 60 / 60 / 1000);
+    const minutes = Math.floor((time - (hours * 60 * 60 * 1000)) / 60 / 1000);
+    const seconds = Math.floor((time - (hours * 60 * 60 * 1000) - (minutes * 60 * 1000)) / 1000);
+    return `${hours}:${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   }
 
 }

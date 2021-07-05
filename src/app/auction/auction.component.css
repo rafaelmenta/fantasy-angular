@@ -17,7 +17,6 @@
 
 app-auction-list {
   display: block;
-  margin-bottom: 16px;
 }
 
 
@@ -29,6 +28,23 @@ app-available-auction-players {
   display: block;
   flex: 1;
   min-width: 200px;
+}
+
+.side-panel > * {
+  margin-bottom: 16px;
+}
+
+.rules {
+  font-size: 12px;
+}
+
+.rules > p {
+  line-height: 18px;
+  color: #455a64;
+}
+
+.value {
+  font-weight: bold;
 }
 
 .finished {

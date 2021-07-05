@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { from, Observable, of, throwError } from 'rxjs';
 import { map, share } from 'rxjs/operators';
+import { AdminLeagueConfig } from 'src/app/admin/service/league/admin-league';
 import { AppConfig, APP_CONFIG } from 'src/app/app.config';
 import { isArray } from 'util';
 import { PlayerLookup } from '../player/player.service';
@@ -55,6 +56,13 @@ export class AuctionService {
     const url = `${this.config.API_ENDPOINT}${this.resource}/${id}/players`;
     return this.http.get<{ auction: { bids: PlayerBid[], league: { free_agents: PlayerLookup[] }} }>(url).pipe(
       map(res => ({bids: res.auction.bids, free_agents: res.auction.league.free_agents })),
+      share());
+  }
+
+  getAuctionRules(id: number) {
+    const url = `${this.config.API_ENDPOINT}${this.resource}/${id}/rules`;
+    return this.http.get<{ rules: AdminLeagueConfig[] }>(url).pipe(
+      map(res => res.rules),
       share());
   }
 
