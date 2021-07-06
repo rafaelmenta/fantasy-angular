@@ -34,13 +34,15 @@ import { AdminSummaryComponent } from './admin-summary/admin-summary.component';
 import { AdminUserComponent } from './admin-user/admin-user.component';
 import { AdminUserListComponent } from './admin-user/admin-user-list/admin-user-list.component';
 import { AdminUserEditComponent } from './admin-user/admin-user-edit/admin-user-edit.component';
+import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from '../directives/mask/currency-mask.config';
+import { MaskModule } from '../directives/mask/mask.module';
 
 @NgModule({
   imports: [
     AdminRoutesModule,
     CommonModule,
     FormsModule,
-
+    MaskModule,
     MatCardModule,
     MatToolbarModule,
     MatTabsModule,
@@ -95,6 +97,19 @@ import { AdminUserEditComponent } from './admin-user/admin-user-edit/admin-user-
     AdminUserComponent,
     AdminUserListComponent,
     AdminUserEditComponent,
+  ],
+  providers: [
+    {
+      provide: CURRENCY_MASK_CONFIG, useValue: {
+        align: 'right',
+        allowNegative: false,
+        decimal: ',',
+        precision: 0,
+        prefix: '$ ',
+        suffix: '',
+        thousands: '.'
+      } as CurrencyMaskConfig,
+    },
   ]
 })
 export class AdminModule { }

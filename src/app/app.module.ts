@@ -119,8 +119,9 @@ import { AvailableAuctionPlayersComponent } from './auction/available-auction-pl
 import { PlayerBidFormComponent } from './auction/player-bid-form/player-bid-form.component';
 
 import { AuctionInfoComponent } from './auction/auction-info/auction-info.component';
-import { CurrencyMaskDirective } from './directives/mask/currency-mask.directive';
+// import { CurrencyMaskDirective } from './directives/mask/currency-mask.directive';
 import { CurrencyMaskConfig, CURRENCY_MASK_CONFIG } from './directives/mask/currency-mask.config';
+import { MaskModule } from './directives/mask/mask.module';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -203,7 +204,6 @@ registerLocaleData(localePt);
     AvailableAuctionPlayersComponent,
     PlayerBidFormComponent,
     AuctionInfoComponent,
-    CurrencyMaskDirective,
   ],
   imports: [
     BrowserModule,
@@ -238,6 +238,7 @@ registerLocaleData(localePt);
     MatSidenavModule,
     MatCheckboxModule,
     MatPaginatorModule,
+    MaskModule,
     // CurrencyMaskModule,
     MomentModule,
     DragulaModule,
