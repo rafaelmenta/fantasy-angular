@@ -1,18 +1,29 @@
 <mat-card>
   <mat-card-title>Configurações</mat-card-title>
   <mat-card-content class="controls">
-    <ng-container *ngFor="let config of league.configs">
+    <ng-container *ngFor="let config of sortedConfigs(league.configs)">
       <ng-container *ngIf="isValid(config.id_config)" [ngSwitch]="getInputType(config.id_config)">
+        <div class="config-container">
+          <div class="description">
+            <span>{{getPlaceholder(config.id_config)}}</span>
+          </div>
+          <div class="control">
+            <mat-slide-toggle *ngSwitchCase="'boolean'" [(ngModel)]="config.config_value"></mat-slide-toggle>
 
-        <!-- case Boolean -->
-        <mat-slide-toggle *ngSwitchCase="'boolean'" [(ngModel)]="config.config_value">
-          {{getPlaceholder(config.id_config)}}
-        </mat-slide-toggle>
+            <mat-form-field *ngSwitchCase="'time'">
+              <input matInput placeholder="Valor" [value]="timeFromMilis(config.config_value)"
+                (change)="timeToMilis($event, config)">
+            </mat-form-field>
 
-        <!-- case Input -->
-        <mat-form-field *ngSwitchDefault>
-          <input  matInput type="number" [placeholder]="getPlaceholder(config.id_config)" [(ngModel)]="config.config_value">
-        </mat-form-field>
+            <mat-form-field *ngSwitchCase="'currency'">
+              <input matInput currencyMask placeholder="Valor" [(ngModel)]="config.config_value">
+            </mat-form-field>
+
+            <mat-form-field *ngSwitchDefault>
+              <input matInput type="number" placeholder="Valor" [(ngModel)]="config.config_value">
+            </mat-form-field>
+          </div>
+        </div>
       </ng-container>
     </ng-container>
   </mat-card-content>
