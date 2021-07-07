@@ -22,6 +22,7 @@ export class AuctionPanelComponent implements OnChanges {
   @Output() playerBid: EventEmitter<PlayerBid> = new EventEmitter();
   toggleHistoryValue: number | boolean;
   toggleFormValue: number | boolean;
+  showExpired: boolean;
 
   constructor() { }
 
