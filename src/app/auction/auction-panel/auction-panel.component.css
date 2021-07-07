@@ -71,6 +71,18 @@
   padding: 8px 32px;
 }
 
+.bid-toggle {
+  display: block;
+  cursor: pointer;
+  font-size: 12px;
+  margin-bottom: 8px;
+  color: #78909c;
+}
+
+.bid-toggle:hover {
+  color: #4b636e;
+}
+
 .active {
   background: #eceff1;
 }
