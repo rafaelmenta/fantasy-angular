@@ -113,8 +113,18 @@ app-auction-info {
 
 app-player-lookup,
 app-lookup,
+.teams,
 .bids-header .expand {
   flex: 2;
+}
+
+.teams {
+  display: flex;
+  flex-direction: column;
+}
+
+.teams > * {
+  margin-top: 8px;
 }
 
 :host ::ng-deep app-player-lookup .player-lookup {

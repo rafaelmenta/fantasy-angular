@@ -16,7 +16,11 @@
       <div  *ngIf="!isExpired(bid) || showExpired" class="container" [class.active]="toggleFormValue === bid.id_bid || toggleHistoryValue === bid.id_bid">
         <div [class]="'bid ' + getBidClass(bid)">
           <app-player-lookup [class]="getBidClass(bid)" [player]="bid.player"></app-player-lookup>
-          <app-lookup [class]="getBidClass(bid)" [element]="bid.team"></app-lookup>
+          <div class="teams">
+            <ng-container *ngFor="let similarBid of getSimilarBids(bid.history)">
+              <app-lookup [class]="getBidClass(similarBid)" [element]="similarBid.team"></app-lookup>
+            </ng-container>
+          </div>
           <span>{{bid.salary * bid.years | currencySuffix:2 }}</span>
           <span>{{bid.salary | currencySuffix:2 }}</span>
           <span class="year">{{bid.years}}</span>

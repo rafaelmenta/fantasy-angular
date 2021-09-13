@@ -97,6 +97,15 @@ export class AuctionPanelComponent implements OnChanges {
     return true;
   }
 
+  getSimilarBids(history: PlayerBidHistory[]) {
+    const sortedHistory = history.sort((a, b) => compare(a.salary * a.years, b.salary * b.years, false));
+    const highestBid = sortedHistory[0];
+    const equalBids = sortedHistory
+      .filter(his => his.salary * his.years === highestBid.salary * his.years)
+      .sort((a, b) => compare(a.team.waiver, b.team.waiver, true));
+    return equalBids;
+  }
+
   addBid(bid: PlayerBid) {
     this.currentBids.push(bid);
   }
