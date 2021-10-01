@@ -15,7 +15,17 @@
         (playerBid)="sendTeamBid(page.auctionInfo.id_auction, $event)"></app-available-auction-players>
   </div>
   <div class="side-panel">
-    <app-auction-list [auctions]="page.auctions"></app-auction-list>
+    <mat-card class="waivers">
+      <mat-card-title>Waivers</mat-card-title>
+      <ul class="waiver-list">
+        <li *ngFor="let waiver of page.waivers">
+          <span>#{{waiver.waiver}}</span>
+          <span>
+            <app-lookup [element]="waiver" [showAvatar]="false"></app-lookup>
+          </span>
+        </li>
+      </ul>
+    </mat-card>
     <mat-card>
       <p class="finished">Leilão Finalizado</p>
       <p class="waiting-restricted">Aguardando dono dos direitos</p>
@@ -29,6 +39,7 @@
       <p>Incremento entre lances: <span class="value">{{ page.rules['AUCTION_BID_INCREMENT'] | currencySuffix:2 }}</span></p>
       <p>Tempo de leilão: <span class="value">{{ getTimeLabel(page.rules['AUCTION_BID_OFFSET_TIME']) }}</span></p>
     </mat-card>
+    <app-auction-list [auctions]="page.auctions"></app-auction-list>
   </div>
 </div>
 
