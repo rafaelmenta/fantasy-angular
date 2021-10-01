@@ -61,8 +61,11 @@ export class AuctionService {
 
   getAuctionRules(id: number) {
     const url = `${this.config.API_ENDPOINT}${this.resource}/${id}/rules`;
-    return this.http.get<{ rules: AdminLeagueConfig[] }>(url).pipe(
-      map(res => res.rules),
+    return this.http.get<{ rules: AdminLeagueConfig[], auction: { league: { teams: TeamLookup[] }} }>(url).pipe(
+      map(res => ({
+        rules: res.rules,
+        waivers: res.auction.league.teams,
+      })),
       share());
   }
 

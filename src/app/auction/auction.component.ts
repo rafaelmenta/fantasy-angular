@@ -40,6 +40,7 @@ export class AuctionComponent implements OnInit {
 
   subObs = this.auctionSubject.asObservable();
   rules$: Observable<Map<string, string>>;
+  waivers$: Observable<TeamLookup[]>;
 
   constructor(
     private userService: UserService,
@@ -90,23 +91,32 @@ export class AuctionComponent implements OnInit {
       share(),
     );
 
-    this.rules$ = this.auctionInfo$.pipe(
+    const rulesResponse$ = this.auctionInfo$.pipe(
       mergeMap(auction => this.auctionService.getAuctionRules(auction.id_auction)),
-      map(rules => rules.reduce((soFar, rule) => {
+      share(),
+    );
+
+    this.rules$ = rulesResponse$.pipe(
+      map(res => res.rules.reduce((soFar, rule) => {
         soFar[rule.id_config] = rule.config_value;
         return soFar;
       }, {} as Map<string, string>)),
     );
 
+    this.waivers$ = rulesResponse$.pipe(
+      map(res => res.waivers.sort((a, b) => compare(a.waiver, b.waiver, true))),
+    );
+
     this.userService.user.subscribe(this.onUserLoad.bind(this));
 
-    this.pageReady$ = combineLatest(this.auctions$, this.auctionInfo$, this.selectedAuction$, this.cap$, this.rules$).pipe(
-      map(([auctions, auctionInfo, selectedAuction, cap, rules]) => ({
+    this.pageReady$ = combineLatest(this.auctions$, this.auctionInfo$, this.selectedAuction$, this.cap$, this.rules$, this.waivers$).pipe(
+      map(([auctions, auctionInfo, selectedAuction, cap, rules, waivers]) => ({
         auctions,
         auctionInfo,
         selectedAuction,
         cap,
         rules,
+        waivers,
       })),
       tap(({selectedAuction, cap}) => this.auctionSubject.next({ ...selectedAuction, ...cap})),
       share(),

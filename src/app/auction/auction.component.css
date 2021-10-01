@@ -87,3 +87,23 @@ app-available-auction-players {
     margin-right: 16px;
   }
 }
+
+.waiver-list {
+  font-size: 14px;
+}
+
+.waiver-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  color: #455a64;
+}
+
+.waiver-list li span:first-of-type {
+  width: 16px;
+  margin-right: 8px;
+}
+
+.waiver-list li span:last-of-type {
+  flex: 1;
+}
