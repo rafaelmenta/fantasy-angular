@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api-dev.draftbrasil.net/',
+  apiUrl: 'https://api.draftbrasil.net/',
 };
