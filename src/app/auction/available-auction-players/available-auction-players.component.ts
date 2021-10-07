@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { PlayerBid } from 'src/app/services/auction/auction.service';
 import { PlayerLookup } from 'src/app/services/player/player.service';
+import { FREE_AGENT_TEAM_ID } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-available-auction-players',
@@ -40,7 +41,60 @@ export class AvailableAuctionPlayersComponent implements OnInit {
 
   getAvailablePlayers() {
     const bidIds = this.bids.map(bid => bid.player.id_player);
-    return this.players.filter(player => !bidIds.includes(player.id_player) );
+    const sortedPlayers = this.players.sort((a, b) => {
+      if (a.id_nba < FREE_AGENT_TEAM_ID && b.id_nba < FREE_AGENT_TEAM_ID) {
+        if (a.id_nba < b.id_nba) {
+          return -1;
+        }
+
+        if (b.id_nba < a.id_nba) {
+          return 1;
+        }
+
+        if (a.first_name < b.first_name) {
+          return -1;
+        }
+
+        if (b.first_name < a.first_name) {
+          return 1;
+        }
+
+        if (a.last_name < b.last_name) {
+          return -1;
+        }
+
+        if (b.last_name < a.last_name) {
+          return 1;
+        }
+      }
+
+      if (a.id_nba === FREE_AGENT_TEAM_ID && b.id_nba < FREE_AGENT_TEAM_ID) {
+        return 1;
+      }
+
+      if (a.id_nba < FREE_AGENT_TEAM_ID && b.id_nba === FREE_AGENT_TEAM_ID) {
+        return -1;
+      }
+
+      if (a.first_name < b.first_name) {
+        return -1;
+      }
+
+      if (b.first_name < a.first_name) {
+        return 1;
+      }
+
+      if (a.last_name < b.last_name) {
+        return -1;
+      }
+
+      if (b.last_name < a.last_name) {
+        return 1;
+      }
+
+      return 0;
+    });
+    return sortedPlayers.filter(player => !bidIds.includes(player.id_player) );
   }
 
   playerFilterPredicate() {

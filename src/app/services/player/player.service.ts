@@ -89,6 +89,7 @@ export interface PlayerLookup {
   last_name: string;
   default_primary: string;
   default_secondary: string;
+  id_nba?: number;
 }
 
 @Injectable({

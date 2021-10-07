@@ -82,6 +82,8 @@ export interface SalaryCap {
   open_bids: number;
 }
 
+export const FREE_AGENT_TEAM_ID = 31;
+
 interface TeamState {
   team: Team;
 }
