@@ -40,7 +40,10 @@ export class AvailableAuctionPlayersComponent implements OnInit {
   }
 
   getAvailablePlayers() {
-    const bidIds = this.bids.map(bid => bid.player.id_player);
+    const bidIds = this.bids
+      .filter(bid => !bid.processed) // Players who were auctioned and dropped, returning to FA.
+      .map(bid => bid.player.id_player);
+
     const sortedPlayers = this.players.sort((a, b) => {
       if (a.id_nba < FREE_AGENT_TEAM_ID && b.id_nba < FREE_AGENT_TEAM_ID) {
         if (a.id_nba < b.id_nba) {
