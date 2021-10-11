@@ -1,6 +1,6 @@
 <div class="form-group">
   <mat-form-field class="salary">
-    <mat-label>Salário</mat-label>
+    <mat-label>Salário anual</mat-label>
     <input matInput currencyMask name="salary" autocomplete="off" type="text" required [(ngModel)]="salary">
     <button *ngIf="salary" matSuffix mat-icon-button aria-label="Limpar" (click)="salary='';">
       <mat-icon>close</mat-icon>
