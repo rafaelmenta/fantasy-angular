@@ -128,6 +128,7 @@ export class AvailableAuctionPlayersComponent implements OnInit {
       id_auction: null,
       team: null,
       expiration: null,
+      processed: false,
       history: [],
     };
 
