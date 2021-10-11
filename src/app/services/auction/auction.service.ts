@@ -24,6 +24,7 @@ export interface PlayerBid {
   team: TeamLookup;
   expiration: Date;
   history: PlayerBidHistory[];
+  processed: boolean;
 }
 
 export interface PlayerBidHistory {
